@@ -1,8 +1,11 @@
 import React from "react";
+
 import { NextPage } from "next";
 
+import { SignInTemplate } from "@/templates";
+
 const SignInPage: NextPage = () => {
-  return <div>SignInPage</div>;
+  return <SignInTemplate />;
 };
 
 export default SignInPage;

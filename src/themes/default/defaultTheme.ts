@@ -17,5 +17,10 @@ export const defaultTheme = extendTheme({
         maxWidth: "container.2xl",
       },
     },
+    Input: {
+      baseStyle: {
+        borderRadius: "sm",
+      },
+    },
   },
 });

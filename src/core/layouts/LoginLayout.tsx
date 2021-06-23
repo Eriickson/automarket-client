@@ -13,7 +13,7 @@ export const LoginLayout: FC = ({ children }) => {
         <Box bgColor="white" py="6" shadow="sm">
           <Container display="flex" alignItems="center" justifyContent="space-between">
             <Link href="/">
-              <Box cursor="pointer" >
+              <Box cursor="pointer">
                 <IconHome />
               </Box>
             </Link>
@@ -27,7 +27,7 @@ export const LoginLayout: FC = ({ children }) => {
             </Box>
           </Container>
         </Box>
-        <Container>{children}</Container>
+        <Container my="3">{children}</Container>
         <MainFooter />
       </Box>
     </TransitionPageFade>

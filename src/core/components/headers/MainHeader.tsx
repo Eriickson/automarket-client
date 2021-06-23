@@ -8,10 +8,10 @@ export const MainHeader = () => {
   return (
     <Box py="6" shadow="sm" borderBottomWidth="1px">
       <Container display="flex" alignItems="center" justifyContent="space-between">
-        {/* <Box w="56">
+        <Box w="56" display={["none", "block"]}>
           <AutomarketRDLogo />
-        </Box> */}
-        <Box w="10">
+        </Box>
+        <Box display={[null, "none"]} w="10">
           <AutomarketRDIsotipo />
         </Box>
         <Box display="flex" alignItems="center">

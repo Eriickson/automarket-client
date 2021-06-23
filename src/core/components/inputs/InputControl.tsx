@@ -1,66 +1,69 @@
-import React, { memo, FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 
-import { FormControl, FormLabel, FormHelperText, Input, InputProps, Text } from "@chakra-ui/react";
-import { Control, FieldValues, useController } from "react-hook-form";
+import { FormControl, FormLabel, FormHelperText, Input, InputProps, Text, Collapse } from "@chakra-ui/react";
+import { useFormContext } from "react-hook-form";
 
 interface InputControlProps {
   name: string;
   label?: string;
   isRequired?: boolean;
   inputProps?: InputProps;
-  control: Control<FieldValues>;
   defaultValue?: string | number;
 }
 
-export const InputControl: FC<InputControlProps> = memo(
-  ({ name, label, inputProps, isRequired, control, defaultValue }) => {
-    const { field } = useController({ name, control, defaultValue });
+export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, isRequired, defaultValue }) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
-    useEffect(() => {
-      console.log("Cambia aqui mismo");
-    }, [field]);
+  const isError = errors[name];
 
-    return (
-      <FormControl id="email" mb="3">
-        {label && (
-          <FormLabel display="flex" fontSize="sm" ml="1" mb="0">
-            {label}
-            {isRequired && (
-              <Text ml="0.5" fontWeight="medium" color="red.500" fontSize="lg" lineHeight="initial">
-                *
-              </Text>
-            )}
-          </FormLabel>
-        )}
-        <Input
-          {...inputProps}
-          colorScheme="red"
-          type="email"
-          shadow="sm"
-          rounded="sm"
-          px="3"
-          borderColor="red.500"
-          color="red.500"
-          bgColor="red.50"
-          _hover={{ borderColor: "red.400" }}
-          _focus={{ borderColor: "red.500", ring: "1px", ringColor: "red.500" }}
-          _disabled={{ bgColor: "gray.50", cursor: "not-allowed", _hover: { borderColor: "gray.200" } }}
-          _placeholder={{ color: "red.200" }}
-          {...field}
-        />
-        <FormHelperText>We'll never share your email.</FormHelperText>
-      </FormControl>
-    );
-  },
-);
+  console.log(errors);
 
-/* <Input
+  return (
+    <FormControl id="email" mb="3">
+      {label && (
+        <FormLabel display="flex" fontSize="sm" ml="1" mb="0">
+          {label}
+          {isRequired && (
+            <Text ml="0.5" fontWeight="medium" color="red.500" fontSize="lg" lineHeight="initial">
+              *
+            </Text>
+          )}
+        </FormLabel>
+      )}
+      <Input
         {...inputProps}
         colorScheme="red"
-        type="email"
+        // type="email"
         shadow="sm"
         rounded="sm"
         px="3"
-        _focus={{ borderColor: "pri.500", ring: "1px", ringColor: "pri.500" }}
+        borderColor={isError ? "red.500" : "gray.300"}
+        color={isError && "red.500"}
+        bgColor={isError && "red.50"}
+        _hover={{ borderColor: isError && "red.400" }}
+        _focus={{
+          borderColor: isError ? "red.500" : "pri.500",
+          ring: "1px",
+          ringColor: isError ? "red.500" : "pri.500",
+        }}
         _disabled={{ bgColor: "gray.50", cursor: "not-allowed", _hover: { borderColor: "gray.200" } }}
-      /> */
+        _placeholder={{ color: isError && "red.200" }}
+        {...register(name)}
+        defaultValue={defaultValue}
+      />
+      <Collapse in={Boolean(errors[name])} animateOpacity>
+        <FormHelperText color="red.500" mt="0.5">
+          {errors[name]?.message}
+        </FormHelperText>
+      </Collapse>
+      {/* {isError && (
+        <FormHelperText color="red.500" mt="0.5">
+          {errors[name].message}
+        </FormHelperText>
+      )} */}
+    </FormControl>
+  );
+};

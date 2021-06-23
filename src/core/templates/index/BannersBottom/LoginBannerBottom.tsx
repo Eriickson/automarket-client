@@ -5,7 +5,15 @@ import Link from "next/link";
 
 export const LoginBannerBottom = () => {
   return (
-    <Box bg="white" borderWidth="1px" borderColor="gray.100" shadow="sm" p="12">
+    <Box
+      bg="white"
+      borderWidth="1px"
+      borderColor="gray.100"
+      shadow="sm"
+      p="12"
+      borderTopWidth="2px"
+      borderTopColor="pri.500"
+    >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box>
           <Heading display="flex">

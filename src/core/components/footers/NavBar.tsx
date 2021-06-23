@@ -23,9 +23,15 @@ const Links = [
 
 export const NavBar = () => {
   return (
-    <Box display="flex" alignItems="center" height="full" justifyContent="center">
+    <Box
+      display="flex"
+      flexDirection={["column", "row"]}
+      alignItems={[null, null, "center"]}
+      height="full"
+      justifyContent="center"
+    >
       {Links.map((links, i) => (
-        <Box mx="5">
+        <Box mb={[2]} mx={[null, "5"]}>
           <Link key={i} href={links.href}>
             <Text color="gray.500" fontSize="lg" fontWeight="semibold">
               {links.label}

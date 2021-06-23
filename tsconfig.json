@@ -41,8 +41,9 @@
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
       "@/store": ["src/store"],
+      "@/assets": ["src/assets"],
+      "@/templates": ["src/core/templates"],
       "@/css/*": ["src/css/*"],
-      "@/templates": ["src/core/template"],
       "@/components": ["src/core/components"],
       "@/animations": ["src/core/animations"],
       "@/layouts": ["src/core/layouts"],

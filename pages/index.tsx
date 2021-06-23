@@ -1,9 +1,9 @@
 import React from "react";
 import { NextPage } from "next";
-import { Box } from "@chakra-ui/react";
+import { IndexTemplate } from "@/templates";
 
 const IndexPage: NextPage = () => {
-  return <Box bgColor="pri.500">Hola a todos</Box>;
+  return <IndexTemplate />;
 };
 
 export default IndexPage;

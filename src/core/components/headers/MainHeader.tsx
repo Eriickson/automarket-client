@@ -17,20 +17,20 @@ export const MainHeader = () => {
           <AutomarketRDIsotipo />
         </Box>
         <Box display="flex" alignItems="center">
-          <Button
-            colorScheme="pri"
-            variant="outline"
-            mr="2.5"
-            display={["none", null, "block"]}
-            onClick={() => signIn()}
-          >
-            Iniciar Sesión
-          </Button>
           <Link href="/login/signup">
             <Button colorScheme="pri" display={["none", "block"]}>
               Regístrate
             </Button>
           </Link>
+          <Button
+            colorScheme="pri"
+            variant="outline"
+            ml="2.5"
+            display={["none", null, "block"]}
+            onClick={() => signIn()}
+          >
+            Iniciar Sesión
+          </Button>
           <Avatar display="none" shadow="md" name="Kola Tioluwani" src="https://bit.ly/tioluwani-kolawole" />
           <Box ml="2.5" display={[null, null, "none"]} h="max-content">
             <MainMenu />

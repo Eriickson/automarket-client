@@ -8,7 +8,7 @@ export const MainLayout: FC = ({ children }) => {
     <TransitionPageFade>
       <Box>
         <MainHeader />
-        <Box bgColor="gray.50" minH="100vh">
+        <Box py="2" bgColor="gray.50" minH="100vh">
           <Container>{children}</Container>
         </Box>
         <MainFooter />

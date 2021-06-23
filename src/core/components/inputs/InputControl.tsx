@@ -1,7 +1,8 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 
-import { FormControl, FormLabel, FormHelperText, Input, InputProps, Text, Collapse } from "@chakra-ui/react";
+import { FormControl, FormHelperText, Input, InputProps, Collapse } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
+import { LabelInput } from "..";
 
 interface InputControlProps {
   name: string;
@@ -19,20 +20,9 @@ export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, i
 
   const isError = errors[name];
 
-  console.log(errors);
-
   return (
     <FormControl id="email" mb="3">
-      {label && (
-        <FormLabel display="flex" fontSize="sm" ml="1" mb="0">
-          {label}
-          {isRequired && (
-            <Text ml="0.5" fontWeight="medium" color="red.500" fontSize="lg" lineHeight="initial">
-              *
-            </Text>
-          )}
-        </FormLabel>
-      )}
+      {label && <LabelInput label={label} isRequired={isRequired} />}
       <Input
         {...inputProps}
         colorScheme="red"
@@ -42,7 +32,7 @@ export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, i
         px="3"
         borderColor={isError ? "red.500" : "gray.300"}
         color={isError && "red.500"}
-        bgColor={isError && "red.50"}
+        bgColor={isError ? "red.50" : "white"}
         _hover={{ borderColor: isError && "red.400" }}
         _focus={{
           borderColor: isError ? "red.500" : "pri.500",
@@ -59,11 +49,6 @@ export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, i
           {errors[name]?.message}
         </FormHelperText>
       </Collapse>
-      {/* {isError && (
-        <FormHelperText color="red.500" mt="0.5">
-          {errors[name].message}
-        </FormHelperText>
-      )} */}
     </FormControl>
   );
 };

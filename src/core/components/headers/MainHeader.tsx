@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Container, Avatar, Button } from "@chakra-ui/react";
-import { AutomarketRDLogo, AutomarketRDIsotipo } from "../../../assets";
+import { signIn, signOut } from "next-auth/client";
 import Link from "next/link";
+
+import { AutomarketRDLogo, AutomarketRDIsotipo } from "../../../assets";
 import { MainMenu } from "./MainMenu";
 
 export const MainHeader = () => {
@@ -15,11 +17,15 @@ export const MainHeader = () => {
           <AutomarketRDIsotipo />
         </Box>
         <Box display="flex" alignItems="center">
-          <Link href="/login/signin">
-            <Button colorScheme="pri" variant="outline" mr="2.5" display={["none", null, "block"]}>
-              Iniciar Sesión
-            </Button>
-          </Link>
+          <Button
+            colorScheme="pri"
+            variant="outline"
+            mr="2.5"
+            display={["none", null, "block"]}
+            onClick={() => signIn()}
+          >
+            Iniciar Sesión
+          </Button>
           <Link href="/login/signup">
             <Button colorScheme="pri" display={["none", "block"]}>
               Regístrate

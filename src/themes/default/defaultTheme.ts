@@ -5,6 +5,10 @@ export const defaultTheme = extendTheme({
   sizes,
   breakpoints,
   colors,
+  fonts: {
+    heading: "SFProDisplay",
+    body: "SFProDisplay",
+  },
   components: {
     Button: {
       baseStyle: {

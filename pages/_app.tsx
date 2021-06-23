@@ -1,10 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { defaultTheme } from "@/themes";
+import { defaultTheme, Global } from "@/themes";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={defaultTheme}>
+      <Global />
       <Component {...pageProps} />
     </ChakraProvider>
   );

@@ -1,15 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
+
+import { VStack } from "@chakra-ui/react";
 
 import { MainLayout } from "@/layouts";
 import { Searcher } from "./searcher/Searcher";
 import { LoginBannerBottom } from "./BannersBottom";
-import { VStack } from "@chakra-ui/react";
+import { RecientPosts } from "./recientPosts/RecientPosts";
 
-export const IndexTemplate = () => {
+export const IndexTemplate: FC = () => {
   return (
     <MainLayout>
       <VStack align="stretch">
         <Searcher />
+        <RecientPosts />
         <LoginBannerBottom />
       </VStack>
     </MainLayout>

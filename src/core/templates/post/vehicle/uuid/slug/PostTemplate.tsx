@@ -15,8 +15,6 @@ import {
   List,
   ListItem,
   ListIcon,
-  OrderedList,
-  UnorderedList,
   IconButton,
   Avatar,
 } from "@chakra-ui/react";
@@ -71,7 +69,7 @@ export const PostTemplate: FC = () => {
               </HStack>
             </PrimaryCard>
             <PrimaryCard notBorderTop>
-              <Heading size="md" mb="3">
+              <Heading mb="3" size="md">
                 Contactos
               </Heading>
               <List spacing={3}>
@@ -94,13 +92,13 @@ export const PostTemplate: FC = () => {
                 </ListItem>
                 <ListItem display="flex">
                   <IconButton
+                    aria-label="guardar publicación"
                     colorScheme="red"
+                    icon={<IconHeart />}
                     mr="2"
                     variant="outline"
-                    aria-label="guardar publicación"
-                    icon={<IconHeart />}
                   />
-                  <Button w="full" colorScheme="pri">
+                  <Button colorScheme="pri" w="full">
                     Contactar
                   </Button>
                 </ListItem>

@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 
 // Packages
 import ReactSelect from "react-select";
-import { Controller, useFormContext, FieldValues, Control, FieldError, DeepMap } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { css } from "@emotion/react";
 
 // My Elements
@@ -13,6 +13,8 @@ import { ErrorValidationForm } from "@/components";
 import { LabelInput } from "..";
 import { Box } from "@chakra-ui/react";
 
+
+/* eslint-disable-next-line */
 const cssStyle = (isError: any) => css`
   span + div {
     border: none;
@@ -101,29 +103,29 @@ export const Select: FC<SelectProps> = ({
     <div>
       {label && <LabelInput isRequired={isRequired} label={label} />}
       <Controller
-        name={name}
         control={control}
-        // defaultValue={defaultValue}
+        defaultValue={defaultValue}
+        name={name}
         render={({ field }) => (
           <Box
-            rounded="sm"
-            borderWidth="1px"
-            shadow="sm"
-            transition="200ms"
-            css={cssStyle(isError)}
             borderColor={isFocus ? "pri.500" : "gray.300"}
+            borderWidth="1px"
+            css={cssStyle(isError)}
             ring={isFocus ? "1px" : ""}
             ringColor={isFocus ? "pri.500" : ""}
+            rounded="sm"
+            shadow="sm"
+            transition="200ms"
           >
             <ReactSelect
               {...field}
               defaultValue={defaultValue}
-              options={options}
-              isLoading={isLoading}
               isDisabled={isDisabled}
-              placeholder={placeholder}
+              isLoading={isLoading}
               isSearchable={isSearchable}
               noOptionsMessage={() => "No hay opciones"}
+              options={options}
+              placeholder={placeholder}
               styles={{
                 option: (styles, { isFocused }) => ({
                   ...styles,
@@ -146,17 +148,17 @@ export const Select: FC<SelectProps> = ({
                   color: isDisabled ? "rgb(107, 114, 128)" : "",
                 }),
               }}
+              onBlur={() => setIsFocus(false)}
               onChange={value => {
                 field.onChange(value);
                 onChange && onChange(value);
               }}
               onFocus={() => setIsFocus(true)}
-              onBlur={() => setIsFocus(false)}
             />
           </Box>
         )}
       />
-      <ErrorValidationForm name={name} errors={generateError()} />
+      <ErrorValidationForm errors={generateError()} name={name} />
     </div>
   );
 };

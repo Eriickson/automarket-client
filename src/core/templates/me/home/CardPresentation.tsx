@@ -1,9 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
-import { Box, Button, Avatar, HStack, Heading } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading } from "@chakra-ui/react";
 import { SettingsMenu } from "./SettingsMenu";
+import { SelectProfileImage, SelectProfileImageProvider } from "@/components";
 
-export const CardPresentation = () => {
+export const CardPresentation: FC = () => {
   return (
     <>
       <Button colorScheme="sec" w="full">
@@ -21,16 +22,23 @@ export const CardPresentation = () => {
         justifyContent="space-between"
       >
         <HStack spacing="4" alignItems="center">
-          <Avatar bgColor="gray.300" borderWidth="2px" borderColor="pri.500" size="xl" rounded="sm" />
-          <Box h="full" display="flex" flexDirection="column" justifyContent="space-between">
-            <Heading size="md">Erickson Manuel Holguín</Heading>
-            <Heading color="gray.500" size="sm">
-              @erickson01d
-            </Heading>
-            <Button colorScheme="blue" mt="3">
-              Cambiar Imagen
-            </Button>
-          </Box>
+          {/* <Avatar bgColor="gray.300" borderWidth="2px" borderColor="pri.500" size="xl" rounded="sm" /> */}
+          <SelectProfileImageProvider>
+            <SelectProfileImage
+              buttonTopContent={
+                <Box mb="3">
+                  <Heading size="md">Erickson Manuel Holguín</Heading>
+                  <Heading color="gray.500" size="sm">
+                    @erickson01d
+                  </Heading>
+                </Box>
+              }
+              labelButton="Cambiar Imagen"
+              onChange={value => {
+                console.log(value);
+              }}
+            />
+          </SelectProfileImageProvider>
         </HStack>
         <SettingsMenu />
       </Box>

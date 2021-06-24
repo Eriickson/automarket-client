@@ -19,6 +19,7 @@
     "react/prop-types": "off",
     "no-console": "warn",
     "no-inner-declarations": "off",
+    "react-hooks/exhaustive-deps": "off",
     "react/jsx-sort-props": ["warn", {
       "callbacksLast": true,
       "shorthandFirst": true

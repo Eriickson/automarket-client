@@ -8,11 +8,11 @@ export const SettingsMenu = () => {
     <>
       <Menu placement="bottom-end">
         <MenuButton
-          as={IconButton}
           aria-label="Ajustes del perfil de usuario"
+          as={IconButton}
+          colorScheme="sec"
           icon={<SettingsIcon />}
           variant="outline"
-          colorScheme="sec"
         />
         <MenuList>
           <MenuItem icon={<LockIcon />}>Cambiar Contraseña</MenuItem>

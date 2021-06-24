@@ -3,13 +3,14 @@ import { ModalFooter, Button } from "@chakra-ui/react";
 import { useSelectProfileImage } from "./SelectProfileImageContext";
 
 export const ActionsBottom: FC = () => {
-  const { onClose, onReset, onSaveChange } = useSelectProfileImage();
+  const { isLoading, onClose, onReset, onSaveChange } = useSelectProfileImage();
 
   return (
-    <ModalFooter px="4" pt="0">
+    <ModalFooter pt="0" px="4">
       <Button
-        variant="ghost"
+        isDisabled={isLoading}
         mr={3}
+        variant="ghost"
         onClick={() => {
           onClose();
           setTimeout(() => {
@@ -19,7 +20,7 @@ export const ActionsBottom: FC = () => {
       >
         Cancelar
       </Button>
-      <Button colorScheme="success" onClick={onSaveChange}>
+      <Button colorScheme="success" isLoading={isLoading} loadingText="Guardando" onClick={onSaveChange}>
         Guardar Cambios
       </Button>
     </ModalFooter>

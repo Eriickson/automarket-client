@@ -27,5 +27,10 @@ export const defaultTheme = extendTheme({
         borderRadius: "sm",
       },
     },
+    Avatar: {
+      baseStyle: {
+        borderRadius: "sm",
+      },
+    },
   },
 });

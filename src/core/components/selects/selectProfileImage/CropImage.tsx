@@ -1,8 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
+
+// Packages
 import Cropper from "react-easy-crop";
+
 //Styles and Icons
 import styled from "@emotion/styled";
-import { useEffect } from "react";
+
+// My Components
 import { useSelectProfileImage } from "./SelectProfileImageContext";
 
 const WrapperCropperImageStyled = styled.div`
@@ -19,27 +23,22 @@ const WrapperCropperImageStyled = styled.div`
   .reactEasyCrop_CropArea {
     border: 2px solid #1e86ff;
   }
-  img {
-    transition: 500ms;
-  }
 `;
 
 export const CropImage = () => {
-  const { zoom, crop, rotation, fileSelected, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } =
+  const { zoom, crop, rotation, fileToEditing, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } =
     useSelectProfileImage();
-  const [src, setSrc] = useState("");
 
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
     const { width, height, x, y } = croppedAreaPixels;
     onCroppedAreaPixelsChange(width, height, x, y);
   }, []);
 
-
   return (
     <WrapperCropperImageStyled>
       <Cropper
         showGrid={false}
-        image={fileSelected.src}
+        image={fileToEditing.src}
         crop={crop}
         zoom={zoom}
         aspect={1 / 1}
@@ -48,7 +47,6 @@ export const CropImage = () => {
         onZoomChange={onZoomChange}
         rotation={rotation}
         zoomSpeed={0.5}
-        zoomWithScroll={false}
       />
     </WrapperCropperImageStyled>
   );

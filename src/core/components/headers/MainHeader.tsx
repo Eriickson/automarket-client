@@ -10,9 +10,11 @@ export const MainHeader = () => {
   return (
     <Box py={[4, 6]} shadow="sm" borderBottomWidth="1px">
       <Container display="flex" alignItems="center" justifyContent="space-between">
-        <Box w="56">
-          <AutomarketRDLogo />
-        </Box>
+        <Link href="/">
+          <Box cursor="pointer" w="56">
+            <AutomarketRDLogo />
+          </Box>
+        </Link>
         {/* <Box display={[null, "none"]} w="10">
           <AutomarketRDIsotipo />
         </Box> */}

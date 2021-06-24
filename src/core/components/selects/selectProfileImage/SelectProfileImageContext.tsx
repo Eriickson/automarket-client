@@ -1,12 +1,19 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React, { createContext, useState, useCallback, FC, useContext } from "react";
+import React, { createContext, useState, FC, useContext, ReactElement } from "react";
+import { compressImage, getCroppedImg } from "@/utils";
 
 interface ISelectProfileImageContext {
   crop: { x: number; y: number };
   zoom: number;
   rotation: number;
   isOpen: boolean;
+  isLoading: boolean;
+  fileToEditing: { file: File | null; src: string };
   fileSelected: { file: File | null; src: string };
+  croppedAreaPixels: { w: number; h: number; x: number; y: number };
+  labelButton: string;
+  buttonTopContent: ReactElement;
+  setButtonTopContent(buttonTopContent: any): void;
   onZoomChange(newZoom: number): void;
   onRotationChange(): void;
   onCroppedAreaPixelsChange(w: number, h: number, x: number, y: number): void;
@@ -16,6 +23,7 @@ interface ISelectProfileImageContext {
   onOpen(): void;
   onClose(): void;
   onSaveChange(): void;
+  setLabelButton(labelButton: string): void;
 }
 
 const SelectProfileImageContext = createContext<ISelectProfileImageContext | null>(
@@ -25,11 +33,19 @@ const SelectProfileImageContext = createContext<ISelectProfileImageContext | nul
 const SelectProfileImageProvider: FC = ({ children }) => {
   const [zoom, setZoom] = useState(1);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(false);
   const [rotation, setRotate] = useState(0);
+  const [labelButton, setLabelButton] = useState("Seleccionar");
+  const [buttonTopContent, setButtonTopContent] = useState<any>(null);
+  const [fileToEditing, setFileToEditing] = useState<{ file: File | null; src: string }>({
+    file: null,
+    src: "",
+  });
   const [fileSelected, setFileSelected] = useState<{ file: File | null; src: string }>({
     file: null,
     src: "",
   });
+
   const [croppedAreaPixels, setCroppedAreaPixels] = useState({ w: 0, h: 0, x: 0, y: 0 });
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -46,7 +62,8 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   }
 
   function onUploadFile(newFile: File) {
-    setFileSelected({ file: newFile, src: URL.createObjectURL(newFile) });
+    const payload = { file: newFile, src: URL.createObjectURL(newFile) };
+    setFileToEditing(payload);
     onOpen();
   }
 
@@ -55,17 +72,37 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   }
 
   function onReset() {
-    setZoom(1);
-    setCrop({ x: 0, y: 0 });
-    setFileSelected({ file: null, src: "" });
-    setRotate(0);
-    setCroppedAreaPixels({ w: 0, h: 0, x: 0, y: 0 });
+    setTimeout(() => {
+      setZoom(1);
+      setCrop({ x: 0, y: 0 });
+      setFileToEditing({ file: null, src: "" });
+      setRotate(0);
+      setCroppedAreaPixels({ w: 0, h: 0, x: 0, y: 0 });
+      setIsLoading(false);
+    }, 250);
   }
 
   async function onSaveChange() {
-    console.log({ croppedAreaPixels });
+    setIsLoading(true);
+    try {
+      let zipFile: File | null = null;
+      if (fileToEditing.file) {
+        zipFile = await compressImage(fileToEditing.file);
 
-    console.log("Guardando...");
+        const { blobUrl } = await getCroppedImg({
+          src: fileToEditing.src,
+          pixelCrop: croppedAreaPixels,
+          rotation,
+        });
+
+        setFileSelected({ src: blobUrl, file: zipFile });
+      }
+
+      onReset();
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -76,6 +113,12 @@ const SelectProfileImageProvider: FC = ({ children }) => {
         rotation,
         isOpen,
         fileSelected,
+        fileToEditing,
+        isLoading,
+        croppedAreaPixels,
+        labelButton,
+        buttonTopContent,
+        setLabelButton,
         onZoomChange,
         onChangeCrop,
         onRotationChange,
@@ -85,6 +128,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
         onOpen,
         onClose,
         onSaveChange,
+        setButtonTopContent,
       }}
     >
       {children}

@@ -1,38 +1,38 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, SimpleGrid, GridItem, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { InputControl, LabelInput, Select } from "@/components";
 
-export const EditProfileForm = () => {
+export const EditProfileForm: FC = () => {
   const methods = useForm();
   return (
     <FormProvider {...methods}>
-      <Box bg="white" borderWidth="1px" borderColor="gray.100" shadow="sm" p="5">
+      <Box bg="white" borderColor="gray.100" borderWidth="1px" p="5" shadow="sm">
         <SimpleGrid columns={[12]} gap={3}>
           <GridItem colSpan={[12, 6]}>
-            <InputControl isRequired label="Nombre" name="name" inputProps={{ placeholder: "Nombre" }} />
+            <InputControl isRequired inputProps={{ placeholder: "Nombre" }} label="Nombre" name="name" />
           </GridItem>
           <GridItem colSpan={[12, 6]}>
-            <InputControl isRequired label="Apellido" name="name" inputProps={{ placeholder: "Apellido" }} />
+            <InputControl isRequired inputProps={{ placeholder: "Apellido" }} label="Apellido" name="name" />
           </GridItem>
           <GridItem colSpan={[12, null, 4]}>
-            <Select isRequired label="Provincia" placeholder="Provincia" name="name" options={[]} />
+            <Select isRequired label="Provincia" name="name" options={[]} placeholder="Provincia" />
           </GridItem>
           <GridItem colSpan={[12, null, 4]}>
-            <Select isRequired label="Municipio" placeholder="Municipio" name="name" options={[]} />
+            <Select isRequired label="Municipio" name="name" options={[]} placeholder="Municipio" />
           </GridItem>
           <GridItem colSpan={[12, null, 4]}>
             <InputControl
               isRequired
+              inputProps={{ placeholder: "Fecha de Nacimiento", type: "date" }}
               label="Fecha de Nacimiento"
               name="name"
-              inputProps={{ placeholder: "Fecha de Nacimiento", type: "date" }}
             />
           </GridItem>
           <GridItem colSpan={[4]}>
-            <LabelInput label="Sexo" isRequired />
+            <LabelInput isRequired label="Sexo" />
             <RadioGroup defaultValue="2">
-              <Stack spacing={5} direction="row">
+              <Stack direction="row" spacing={5}>
                 <Radio size="lg" value="1">
                   Másculino
                 </Radio>

@@ -19,6 +19,7 @@
     "@hookform/resolvers": "^2.6.0",
     "@tabler/icons": "^1.41.2",
     "axios": "^0.21.1",
+    "compressorjs": "^1.0.7",
     "eslint-plugin-react": "^7.24.0",
     "framer-motion": "^4",
     "next": "11.0.1",

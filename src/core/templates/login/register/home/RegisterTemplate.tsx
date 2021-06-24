@@ -1,6 +1,7 @@
-import { LoginLayout } from "@/layouts";
-import React from "react";
+import React, { FC } from "react";
 
-export const RegisterTemplate = () => {
+import { LoginLayout } from "@/layouts";
+
+export const RegisterTemplate: FC = () => {
   return <LoginLayout>RegisterTemplate</LoginLayout>;
 };

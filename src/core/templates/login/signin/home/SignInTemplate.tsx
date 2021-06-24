@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Button, Box, Heading, FormControl, FormLabel, FormHelperText, Input, Text, Link } from "@chakra-ui/react";
+import { Box, Heading, Text, Link } from "@chakra-ui/react";
 import { getCsrfToken } from "next-auth/client";
 
 import { LoginLayout } from "@/layouts";

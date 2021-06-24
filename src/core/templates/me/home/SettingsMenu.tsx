@@ -1,17 +1,5 @@
 import React from "react";
-import {
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
-} from "@chakra-ui/react";
+import { IconButton, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 import { SettingsIcon, LockIcon, DeleteIcon, SmallCloseIcon } from "@chakra-ui/icons";
 

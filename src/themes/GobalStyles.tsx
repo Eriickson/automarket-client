@@ -1,3 +1,4 @@
+import React from "react";
 import { Global as EmotionGlobal, css } from "@emotion/react";
 
 export const Global = () => (

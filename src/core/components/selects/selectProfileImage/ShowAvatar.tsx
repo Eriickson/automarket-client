@@ -5,7 +5,7 @@ import { useSelectProfileImage } from "./SelectProfileImageContext";
 import { UploadButton } from "./UploadButton";
 
 export const ShowAvatar: FC = () => {
-  const { fileSelected, buttonTopContent } = useSelectProfileImage();
+  const { fileSelected } = useSelectProfileImage();
 
   return (
     <Box alignItems="center" display="flex">
@@ -14,11 +14,7 @@ export const ShowAvatar: FC = () => {
       ) : (
         <Avatar mr={5} rounded="sm" size="xl" />
       )}
-
-      <Box display="flex" flexDirection="column" h="full" justifyContent="space-between">
-        {buttonTopContent}
-        <UploadButton />
-      </Box>
+      <UploadButton />
     </Box>
   );
 };

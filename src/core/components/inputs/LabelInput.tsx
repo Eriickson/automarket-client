@@ -8,10 +8,10 @@ interface LabelInputProps {
 
 export const LabelInput: FC<LabelInputProps> = ({ label, isRequired }) => {
   return (
-    <FormLabel display="flex" fontSize="sm" ml="1" mb="0">
+    <FormLabel display="flex" fontSize="sm" mb="0" ml="1">
       {label}
       {isRequired && (
-        <Text ml="0.5" fontWeight="medium" color="red.500" fontSize="lg" lineHeight="initial">
+        <Text color="red.500" fontSize="lg" fontWeight="medium" lineHeight="initial" ml="0.5">
           *
         </Text>
       )}

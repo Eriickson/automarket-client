@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { FC, useCallback } from "react";
 
 // Packages
 import Cropper from "react-easy-crop";
@@ -25,7 +25,7 @@ const WrapperCropperImageStyled = styled.div`
   }
 `;
 
-export const CropImage = () => {
+export const CropImage: FC = () => {
   const { zoom, crop, rotation, fileToEditing, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } =
     useSelectProfileImage();
 
@@ -37,16 +37,16 @@ export const CropImage = () => {
   return (
     <WrapperCropperImageStyled>
       <Cropper
-        showGrid={false}
-        image={fileToEditing.src}
-        crop={crop}
-        zoom={zoom}
         aspect={1 / 1}
+        crop={crop}
+        image={fileToEditing.src}
+        rotation={rotation}
+        showGrid={false}
+        zoom={zoom}
+        zoomSpeed={0.5}
         onCropChange={onChangeCrop}
         onCropComplete={onCropComplete}
         onZoomChange={onZoomChange}
-        rotation={rotation}
-        zoomSpeed={0.5}
       />
     </WrapperCropperImageStyled>
   );

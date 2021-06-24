@@ -11,7 +11,7 @@ interface ErrorValidationFormProps {
 
 export const ErrorValidationForm: FC<ErrorValidationFormProps> = ({ errors, name }) => {
   return (
-    <Collapse in={Boolean(errors[name])} animateOpacity>
+    <Collapse animateOpacity in={Boolean(errors[name])}>
       <FormHelperText color="red.500" mt="0.5">
         {errors[name]?.message}
       </FormHelperText>

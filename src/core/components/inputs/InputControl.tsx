@@ -21,30 +21,29 @@ export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, i
   const isError = errors[name];
 
   return (
-    <FormControl id="email" mb="3">
-      {label && <LabelInput label={label} isRequired={isRequired} />}
+    <FormControl id={name} mb="3">
+      {label && <LabelInput isRequired={isRequired} label={label} />}
       <Input
         {...inputProps}
-        colorScheme="red"
-        // type="email"
-        shadow="sm"
-        rounded="sm"
-        px="3"
-        borderColor={isError ? "red.500" : "gray.300"}
-        color={isError && "red.500"}
-        bgColor={isError ? "red.50" : "white"}
-        _hover={{ borderColor: isError && "red.400" }}
+        _disabled={{ bgColor: "gray.50", cursor: "not-allowed", _hover: { borderColor: "gray.200" } }}
         _focus={{
           borderColor: isError ? "red.500" : "pri.500",
           ring: "1px",
           ringColor: isError ? "red.500" : "pri.500",
         }}
-        _disabled={{ bgColor: "gray.50", cursor: "not-allowed", _hover: { borderColor: "gray.200" } }}
+        _hover={{ borderColor: isError && "red.400" }}
         _placeholder={{ color: isError && "red.200" }}
+        bgColor={isError ? "red.50" : "white"}
+        borderColor={isError ? "red.500" : "gray.300"}
+        color={isError && "red.500"}
+        colorScheme="red"
+        px="3"
+        rounded="sm"
+        shadow="sm"
         {...register(name)}
         defaultValue={defaultValue}
       />
-      <Collapse in={Boolean(errors[name])} animateOpacity>
+      <Collapse animateOpacity in={Boolean(errors[name])}>
         <FormHelperText color="red.500" mt="0.5">
           {errors[name]?.message}
         </FormHelperText>

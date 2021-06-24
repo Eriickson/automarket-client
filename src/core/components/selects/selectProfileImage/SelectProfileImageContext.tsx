@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React, { createContext, useState, FC, useContext, ReactElement } from "react";
+import React, { createContext, useState, FC, useContext } from "react";
 import { compressImage, getCroppedImg } from "@/utils";
 
 interface ISelectProfileImageContext {
@@ -12,8 +12,6 @@ interface ISelectProfileImageContext {
   fileSelected: { file: File | null; src: string };
   croppedAreaPixels: { w: number; h: number; x: number; y: number };
   labelButton: string;
-  buttonTopContent: ReactElement;
-  setButtonTopContent(buttonTopContent: any): void;
   onZoomChange(newZoom: number): void;
   onRotationChange(): void;
   onCroppedAreaPixelsChange(w: number, h: number, x: number, y: number): void;
@@ -36,7 +34,6 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [rotation, setRotate] = useState(0);
   const [labelButton, setLabelButton] = useState("Seleccionar");
-  const [buttonTopContent, setButtonTopContent] = useState<any>(null);
   const [fileToEditing, setFileToEditing] = useState<{ file: File | null; src: string }>({
     file: null,
     src: "",
@@ -101,7 +98,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
       onReset();
       onClose();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 
@@ -117,7 +114,6 @@ const SelectProfileImageProvider: FC = ({ children }) => {
         isLoading,
         croppedAreaPixels,
         labelButton,
-        buttonTopContent,
         setLabelButton,
         onZoomChange,
         onChangeCrop,
@@ -128,7 +124,6 @@ const SelectProfileImageProvider: FC = ({ children }) => {
         onOpen,
         onClose,
         onSaveChange,
-        setButtonTopContent,
       }}
     >
       {children}

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { IconButton, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 import { SettingsIcon, LockIcon, DeleteIcon, SmallCloseIcon } from "@chakra-ui/icons";
 
-export const SettingsMenu = () => {
+export const SettingsMenu: FC = () => {
   return (
     <>
       <Menu placement="bottom-end">

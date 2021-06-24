@@ -1,7 +1,8 @@
-import React, { FC, useEffect, ReactElement } from "react";
+import React, { FC, useEffect } from "react";
 import { TransformImageModal } from "./TransformImageModal";
-import { ShowAvatar } from "./ShowAvatar";
+import { UploadButton } from "./UploadButton";
 import { useSelectProfileImage } from "./SelectProfileImageContext";
+import { Box, Avatar, Img } from "@chakra-ui/react";
 
 export type onChangeArgsPropType = {
   file: File;
@@ -12,21 +13,31 @@ export type onChangeArgsPropType = {
 
 interface SelectProfileImageProps {
   labelButton?: string;
-  buttonTopContent?: ReactElement;
+  showAvatar?: boolean;
   onChange(value: onChangeArgsPropType): void;
 }
 
-export const SelectProfileImage: FC<SelectProfileImageProps> = ({ labelButton, buttonTopContent, onChange }) => {
-  const { setLabelButton, setButtonTopContent } = useSelectProfileImage();
+export const SelectProfileImage: FC<SelectProfileImageProps> = ({ showAvatar, labelButton, onChange }) => {
+  const { fileSelected, setLabelButton } = useSelectProfileImage();
 
   useEffect(() => {
     labelButton && setLabelButton(labelButton);
-    setButtonTopContent(buttonTopContent);
   }, []);
 
   return (
     <>
-      <ShowAvatar />
+      <Box alignItems="center" display="flex">
+        {showAvatar && (
+          <>
+            {fileSelected.src ? (
+              <Img mr={5} rounded="sm" src={fileSelected.src} w="24" />
+            ) : (
+              <Avatar mr={5} rounded="sm" size="xl" />
+            )}
+          </>
+        )}
+        <UploadButton />
+      </Box>
       <TransformImageModal onChange={onChange} />
     </>
   );

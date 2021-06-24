@@ -13,7 +13,6 @@ import { ErrorValidationForm } from "@/components";
 import { LabelInput } from "..";
 import { Box } from "@chakra-ui/react";
 
-
 /* eslint-disable-next-line */
 const cssStyle = (isError: any) => css`
   span + div {
@@ -84,14 +83,6 @@ export const Select: FC<SelectProps> = ({
         bgColorItem: "#1e86ff",
         isDisabled,
       };
-
-  /* className={[
-              "duration-150",
-              isDisabled ? "cursor-not-allowed" : "cursor-pointer",
-              label && "mt-1",
-              hoverClasses,
-              isError.classes,
-            ].join(" ")} */
 
   function generateError() {
     if (errors?.[name]?.value) return { [name]: errors?.[name]?.value };

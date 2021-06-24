@@ -1,41 +1,27 @@
-import React from "react";
+import React, { FC } from "react";
 import { LoginLayout } from "@/layouts";
-import {
-  Button,
-  Box,
-  Heading,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
-  Text,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { SignUpForm } from "./SignUpForm";
 
-export const SignUpTemplate = () => {
+export const SignUpTemplate: FC = () => {
   return (
     <LoginLayout>
-      <Box p="8" borderWidth="1px" borderColor="gray.100" shadow="sm" bg="white" maxWidth="md" m="auto" mb="3">
-        <Heading as="h2" size="lg" fontWeight="medium" textAlign="center" mb="8">
-          Regístrate
-        </Heading>
-        <Box mb="5">
-          <FormControl id="email" mb="3">
-            <FormLabel>Email</FormLabel>
-            <Input colorScheme="red" type="email" rounded="sm" />
-            <FormHelperText>We'll never share your email.</FormHelperText>
-          </FormControl>
+      <Box bg="white" borderColor="gray.100" borderWidth="1px" m="auto" maxWidth="sm" mb="3" p="8" shadow="sm">
+        <Box>
+          <Heading as="h2" fontWeight="medium" mb="1.5" size="lg" textAlign="center">
+            Regístrate
+          </Heading>
+          <Text color="gray.500" fontSize="sm" lineHeight="normal" mb="8" textAlign="center" >
+            Se le enviará un mensaje a su correo electrónico para verificarlo y pueda crear su cuenta.
+          </Text>
         </Box>
-        <Button colorScheme="pri" w="full">
-          Iniciar Sesión
-        </Button>
+        <SignUpForm />
       </Box>
-      <Text textAlign="center" display="flex" justifyContent="center">
+      <Text display="flex" justifyContent="center" textAlign="center">
         Tienes cuenta?
         <NextLink href="signin">
-          <Link color="blue.500" ml="1" cursor="pointer">
+          <Link color="blue.500" cursor="pointer" ml="1">
             Inicia Sesión
           </Link>
         </NextLink>

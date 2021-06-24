@@ -6,9 +6,9 @@ import { TransitionPageFade } from "../animations";
 export const MainLayout: FC = ({ children }) => {
   return (
     <TransitionPageFade>
-      <Box minH="100vh" display="flex" flexDirection="column" justifyContent="space-between" >
+      <Box minH="100vh" display="flex" flexDirection="column" justifyContent="space-between">
         <MainHeader />
-        <Box flex="1" pt="2" pb="5" display="flex" alignItems="center" bgColor="gray.50">
+        <Box flex="1" pt="2" pb="5" display="flex" bgColor="gray.50">
           <Container>{children}</Container>
         </Box>
         <MainFooter />

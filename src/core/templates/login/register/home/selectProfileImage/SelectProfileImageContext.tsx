@@ -6,11 +6,13 @@ interface ISelectProfileImageContext {
   zoom: number;
   rotation: number;
   isOpen: boolean;
+  fileSelected: { file: File | null; src: string };
   onZoomChange(newZoom: number): void;
   onRotationChange(): void;
   onCroppedAreaPixelsChange(w: number, h: number, x: number, y: number): void;
   onChangeCrop(newCrop: { x: number; y: number }): void;
   onUploadFile(newFile: File): void;
+  onReset(): void;
   onOpen(): void;
   onClose(): void;
   onSaveChange(): void;
@@ -24,6 +26,10 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   const [zoom, setZoom] = useState(1);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotate] = useState(0);
+  const [fileSelected, setFileSelected] = useState<{ file: File | null; src: string }>({
+    file: null,
+    src: "",
+  });
   const [croppedAreaPixels, setCroppedAreaPixels] = useState({ w: 0, h: 0, x: 0, y: 0 });
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -40,7 +46,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   }
 
   function onUploadFile(newFile: File) {
-    console.log(newFile);
+    setFileSelected({ file: newFile, src: URL.createObjectURL(newFile) });
     onOpen();
   }
 
@@ -48,7 +54,17 @@ const SelectProfileImageProvider: FC = ({ children }) => {
     setCroppedAreaPixels({ w, h, x, y });
   }
 
+  function onReset() {
+    setZoom(1);
+    setCrop({ x: 0, y: 0 });
+    setFileSelected({ file: null, src: "" });
+    setRotate(0);
+    setCroppedAreaPixels({ w: 0, h: 0, x: 0, y: 0 });
+  }
+
   async function onSaveChange() {
+    console.log({ croppedAreaPixels });
+
     console.log("Guardando...");
   }
 
@@ -59,11 +75,13 @@ const SelectProfileImageProvider: FC = ({ children }) => {
         zoom,
         rotation,
         isOpen,
+        fileSelected,
         onZoomChange,
         onChangeCrop,
         onRotationChange,
         onUploadFile,
         onCroppedAreaPixelsChange,
+        onReset,
         onOpen,
         onClose,
         onSaveChange,

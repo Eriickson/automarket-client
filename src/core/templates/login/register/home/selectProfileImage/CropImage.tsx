@@ -25,7 +25,8 @@ const WrapperCropperImageStyled = styled.div`
 `;
 
 export const CropImage = () => {
-  const { zoom, crop, rotation, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } = useSelectProfileImage();
+  const { zoom, crop, rotation, fileSelected, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } =
+    useSelectProfileImage();
   const [src, setSrc] = useState("");
 
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
@@ -33,17 +34,12 @@ export const CropImage = () => {
     onCroppedAreaPixelsChange(width, height, x, y);
   }, []);
 
-  useEffect(() => {
-    setSrc(
-      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fG1hbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80",
-    );
-  }, []);
 
   return (
     <WrapperCropperImageStyled>
       <Cropper
         showGrid={false}
-        image={src}
+        image={fileSelected.src}
         crop={crop}
         zoom={zoom}
         aspect={1 / 1}

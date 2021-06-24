@@ -8,14 +8,14 @@ import { MainMenu } from "./MainMenu";
 
 export const MainHeader = () => {
   return (
-    <Box py="6" shadow="sm" borderBottomWidth="1px">
+    <Box py={[4, 6]} shadow="sm" borderBottomWidth="1px">
       <Container display="flex" alignItems="center" justifyContent="space-between">
-        <Box w="56" display={["none", "block"]}>
+        <Box w="56">
           <AutomarketRDLogo />
         </Box>
-        <Box display={[null, "none"]} w="10">
+        {/* <Box display={[null, "none"]} w="10">
           <AutomarketRDIsotipo />
-        </Box>
+        </Box> */}
         <Box display="flex" alignItems="center">
           <Link href="/login/signup">
             <Button colorScheme="pri" display={["none", "block"]}>

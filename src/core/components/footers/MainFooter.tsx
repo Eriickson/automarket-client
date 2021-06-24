@@ -8,11 +8,11 @@ import { LegalFooter } from "./LegalFooter";
 export const MainFooter = () => {
   return (
     <Box bg="white" py="8" shadow="sm" borderBottomWidth="1px">
-      <Container >
+      <Container>
         <SimpleGrid columns={12} gap={5} mb={[3.5]}>
           <GridItem colSpan={[6, null, 3]}>
-            <Box w="12">
-              <AutomarketRDIsotipo />
+            <Box w="48">
+              <AutomarketRDLogo />
             </Box>
           </GridItem>
           <GridItem display={["none", null, "block"]} colSpan={6}>

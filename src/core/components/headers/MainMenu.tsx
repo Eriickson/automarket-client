@@ -10,7 +10,6 @@ import {
   IconButton,
   useDisclosure,
   Button,
-  ScaleFade,
   Box,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -45,6 +44,7 @@ export const MainMenu = () => {
             <Box w="44">
               <AutomarketRDLogo />
             </Box>
+            <DrawerCloseButton />
           </DrawerHeader>
           <DrawerBody display="flex" flexDirection="column" justifyContent="center">
             <Link href="/login/signin">

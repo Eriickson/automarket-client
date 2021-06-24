@@ -19,6 +19,7 @@ export const defaultTheme = extendTheme({
     Container: {
       baseStyle: {
         maxWidth: "container.2xl",
+        px: ["2", "4"],
       },
     },
     Input: {

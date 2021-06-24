@@ -12,7 +12,7 @@ export const SettingsMenu = () => {
           aria-label="Ajustes del perfil de usuario"
           icon={<SettingsIcon />}
           variant="outline"
-          colorScheme="blue"
+          colorScheme="sec"
         />
         <MenuList>
           <MenuItem icon={<LockIcon />}>Cambiar Contraseña</MenuItem>

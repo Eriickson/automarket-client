@@ -6,7 +6,7 @@ import { SettingsMenu } from "./SettingsMenu";
 export const CardPresentation = () => {
   return (
     <>
-      <Button colorScheme="orange" w="full">
+      <Button colorScheme="sec" w="full">
         Crea tu agencia
       </Button>
       <Box

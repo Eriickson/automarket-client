@@ -52,7 +52,7 @@
       "@/utils": ["src/utils"],
       "@/hooks": ["src/hooks"],
       "@/graphql": ["src/graphql"],
-      "@/server": ["src/server"],
+      "@/servers": ["src/servers"],
       "@/auth": ["src/auth"],
       "@/shared": ["src/shared"],
       "@/config": ["src/config"],

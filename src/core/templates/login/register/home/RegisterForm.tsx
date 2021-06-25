@@ -44,17 +44,17 @@ export const RegisterForm: FC = () => {
                 <Select isRequired label="Municipio" name="municipality" options={[]} />
               </Box>
             </Box>
-            <InputControl isRequired inputProps={{ type: "date" }} label="Fecha de Nacimiento" name="lastname" />
+            <InputControl isRequired inputProps={{ type: "date" }} label="Fecha de Nacimiento" name="brithday" />
           </FormSession>
           <Divider my="5" />
           <FormSession
             subtitle="Completa los campos que se te muestran a continuación con tus datos."
             title="Datos de cuenta"
           >
-            <InputControl isRequired label="Nombre de usuario" name="name" />
-            <InputControl isRequired label="Correo electrónico" name="lastname" />
-            <InputControl isRequired label="Contraseña" name="lastname" />
-            <InputControl isRequired label="Confirma tu contraseña" name="lastname" />
+            <InputControl isRequired label="Nombre de usuario" name="username" />
+            <InputControl isRequired label="Correo electrónico" name="email" />
+            <InputControl isRequired label="Contraseña" name="password" />
+            <InputControl isRequired label="Confirma tu contraseña" name="confirmPassword" />
           </FormSession>
           <Box display="flex" justifyContent="flex-end" mt="3">
             <Button colorScheme="success">Crear cuenta</Button>

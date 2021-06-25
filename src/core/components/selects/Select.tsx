@@ -11,7 +11,7 @@ import { IOption } from "@/shared";
 // My Components
 import { ErrorValidationForm } from "@/components";
 import { LabelInput } from "..";
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 
 /* eslint-disable-next-line */
 const cssStyle = (isError: any) => css`
@@ -90,6 +90,8 @@ export const Select: FC<SelectProps> = ({
     return {};
   }
 
+  console.log(isFocus);
+
   return (
     <div>
       {label && <LabelInput isRequired={isRequired} label={label} />}
@@ -98,55 +100,70 @@ export const Select: FC<SelectProps> = ({
         defaultValue={defaultValue}
         name={name}
         render={({ field }) => (
-          <Box
-            borderColor={isFocus ? "pri.500" : "gray.300"}
-            borderWidth="1px"
-            css={cssStyle(isError)}
+          <Button
+            _focus={{
+              ring: "0",
+            }}
+            cursor="auto"
+            fontWeight="normal"
+            p="0"
             ring={isFocus ? "1px" : ""}
-            ringColor={isFocus ? "pri.500" : ""}
-            rounded="sm"
-            shadow="sm"
-            transition="200ms"
+            ringColor={
+              isFocus ? (errors?.[name] ? "danger.500" : "pri.500") : errors?.[name] ? "danger.500" : "gray.300"
+            }
+            variant="unstyled"
+            w="full"
           >
-            <ReactSelect
-              {...field}
-              defaultValue={defaultValue}
-              isDisabled={isDisabled}
-              isLoading={isLoading}
-              isSearchable={isSearchable}
-              noOptionsMessage={() => "No hay opciones"}
-              options={options}
-              placeholder={placeholder}
-              styles={{
-                option: (styles, { isFocused }) => ({
-                  ...styles,
-                  cursor: "pointer",
-                  backgroundColor: isFocused ? isError.bgColorItem : "",
-                  color: isFocused ? "white" : "",
-                }),
-                control: styles => ({
-                  ...styles,
-                  cursor: "pointer",
-                }),
-                menu: styles => ({
-                  ...styles,
-                  padding: 0,
-                  borderRadius: 0,
-                  border: isError.borderMenu,
-                }),
-                singleValue: style => ({
-                  ...style,
-                  color: isDisabled ? "rgb(107, 114, 128)" : "",
-                }),
-              }}
-              onBlur={() => setIsFocus(false)}
-              onChange={value => {
-                field.onChange(value);
-                onChange && onChange(value);
-              }}
-              onFocus={() => setIsFocus(true)}
-            />
-          </Box>
+            <Box
+              borderColor={
+                isFocus ? (errors?.[name] ? "danger.500" : "pri.500") : errors?.[name] ? "danger.500" : "gray.300"
+              }
+              borderWidth="1px"
+              css={cssStyle(isError)}
+              rounded="sm"
+              shadow="sm"
+              transition="200ms"
+            >
+              <ReactSelect
+                {...field}
+                defaultValue={defaultValue}
+                isDisabled={isDisabled}
+                isLoading={isLoading}
+                isSearchable={isSearchable}
+                noOptionsMessage={() => "No hay opciones"}
+                options={options}
+                placeholder={placeholder}
+                styles={{
+                  option: (styles, { isFocused }) => ({
+                    ...styles,
+                    cursor: "pointer",
+                    backgroundColor: isFocused ? isError.bgColorItem : "",
+                    color: isFocused ? "white" : "",
+                  }),
+                  control: styles => ({
+                    ...styles,
+                    cursor: "pointer",
+                  }),
+                  menu: styles => ({
+                    ...styles,
+                    padding: 0,
+                    borderRadius: 0,
+                    border: isError.borderMenu,
+                  }),
+                  singleValue: style => ({
+                    ...style,
+                    color: isDisabled ? "rgb(107, 114, 128)" : "",
+                  }),
+                }}
+                onBlur={() => setIsFocus(false)}
+                onChange={value => {
+                  field.onChange(value);
+                  onChange && onChange(value);
+                }}
+                onFocus={() => setIsFocus(true)}
+              />
+            </Box>
+          </Button>
         )}
       />
       <ErrorValidationForm errors={generateError()} name={name} />

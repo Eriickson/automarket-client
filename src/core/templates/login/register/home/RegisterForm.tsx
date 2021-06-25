@@ -7,13 +7,16 @@ import {
   SelectProfileImageProvider,
   LabelInput,
 } from "@/components";
-import { Box, Divider, Button } from "@chakra-ui/react";
+import { Box, Divider, Button, Tag, TagLabel, TagLeftIcon, VStack, Text } from "@chakra-ui/react";
 
 import { useForm, FormProvider } from "react-hook-form";
+import { useSelector } from "@/store";
 import { FormSession } from "./FormSession";
+import { IconInfoCircle } from "@tabler/icons";
 
 export const RegisterForm: FC = () => {
-  const methods = useForm();
+  const { email } = useSelector(({ login }) => login.register);
+  const methods = useForm({ defaultValues: { email } });
 
   return (
     <FormProvider {...methods}>
@@ -33,6 +36,21 @@ export const RegisterForm: FC = () => {
                   }}
                 />
               </SelectProfileImageProvider>
+              <VStack align="flex-start" mt="3">
+                <Tag colorScheme="info" >
+                  <TagLeftIcon as={IconInfoCircle} boxSize="1rem" color="info.500" />
+                  <TagLabel color="info.500" display="flex">
+                    Resolución mín.:
+                    <Text fontWeight="semibold" ml="1">500x500</Text>
+                  </TagLabel>
+                </Tag>
+                <Tag colorScheme="info">
+                  <TagLeftIcon as={IconInfoCircle} boxSize="1rem" color="info.500" />
+                  <TagLabel color="info.500" display="flex">
+                    Peso máx.: <Text fontWeight="semibold" ml="1">5mb</Text>
+                  </TagLabel>
+                </Tag>
+              </VStack>
             </Box>
             <InputControl isRequired inputProps={{ placeholder: "Nombre" }} label="Nombre" name="name" />
             <InputControl isRequired inputProps={{ placeholder: "Apellido" }} label="Apellido" name="lastname" />
@@ -64,7 +82,7 @@ export const RegisterForm: FC = () => {
             />
             <InputControl
               isRequired
-              inputProps={{ placeholder: "Correo electrónico" }}
+              inputProps={{ placeholder: "Correo electrónico", isDisabled: true }}
               label="Correo electrónico"
               name="email"
             />

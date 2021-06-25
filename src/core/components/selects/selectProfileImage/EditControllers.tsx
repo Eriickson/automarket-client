@@ -20,7 +20,7 @@ export const EditControllers: FC = () => {
         aria-label="Alejar imagen"
         icon={<ZoomOut size="1.25rem" />}
         size="sm"
-        onClick={() => zoom > 1 && onZoomChange(Number((zoom + -0.5).toFixed(2)))}
+        onClick={() => zoom > 1.2 && onZoomChange(Number((zoom + -0.5).toFixed(2)))}
       />
       <IconButton aria-label="Rotar imagen" icon={<RotateCw size="1.25rem" />} size="sm" onClick={onRotationChange} />
     </HStack>

@@ -28,7 +28,6 @@ export type RegisterUserOnSubmitFormType = {
 const schema = yup.object().shape({
   profilePicture: yup
     .object()
-    .required("Seleccione una imagen de perfil")
     .shape({
       file: yup.mixed<File>(),
       croppedArea: yup.object().shape({
@@ -38,38 +37,38 @@ const schema = yup.object().shape({
         h: yup.number(),
       }),
     }),
-  name: yup.string().required("Ingrese su nombre"),
-  lastname: yup.string().required("Ingrese su apellido"),
+  name: yup.string().required("Campo requerido"),
+  lastname: yup.string().required("Campo requerido"),
   province: yup
     .object()
     .shape({
-      label: yup.string().required("Seleccione una provincia"),
-      value: yup.string().required("Seleccione una provincia"),
+      label: yup.string().required("Campo requerido"),
+      value: yup.string().required("Campo requerido"),
     })
     .nullable(),
   municipality: yup
     .object()
     .shape({
-      label: yup.string().required("Seleccione un municipio"),
-      value: yup.string().required("Seleccione un municipio"),
+      label: yup.string().required("Campo requerido"),
+      value: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
-  birthday: yup.string().required("Ingrese tu fecha de nacimiento"),
+  birthday: yup.string().required("Campo requerido"),
   sex: yup.string().required("Ingrese su sexo"),
   username: yup
     .string()
-    .required("Ingrese un nombre de usuario")
+    .required("Campo requerido")
     .min(6, "Mínimo 6 caracteres")
     .max(20, "Máximo 20 caracteres"),
   password: yup
     .string()
-    .required("Ingrese una contraseña")
+    .required("Campo requerido")
     .min(8, "Mínimo 8 caracteres")
     .max(25, "Máximo 25 caracteres"),
   confirmPassword: yup
     .string()
-    .required("Confirma tu contraseña")
+    .required("Campo requerido")
     .oneOf([yup.ref("password"), null], "Las contraseñas no coinciden"),
 });
 

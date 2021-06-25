@@ -2,26 +2,35 @@ import React, { FC } from "react";
 
 import { Button, Box } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
+
+import { FormSignUpResolver, IFormSignUpOnSubmit } from "@/validations";
+
 import { InputControl } from "@/components";
 
-export const SignUpForm: FC = () => {
-  const methods = useForm();
+interface SignUpForm {
+  onSubmit(values: IFormSignUpOnSubmit): void;
+}
+
+export const SignUpForm: FC<SignUpForm> = ({ onSubmit }) => {
+  const methods = useForm({ resolver: FormSignUpResolver });
 
   return (
     <FormProvider {...methods}>
-      <Box>
-        <Box mb="5">
-          <InputControl
-            isRequired
-            inputProps={{ placeholder: "Correo electrónico" }}
-            label="Correo electrónico"
-            name="email"
-          />
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <Box>
+          <Box mb="5">
+            <InputControl
+              isRequired
+              inputProps={{ placeholder: "Correo electrónico" }}
+              label="Correo electrónico"
+              name="email"
+            />
+          </Box>
+          <Button colorScheme="pri" type="submit" w="full">
+            Registrarse
+          </Button>
         </Box>
-        <Button colorScheme="pri" w="full">
-          Registrarse
-        </Button>
-      </Box>
+      </form>
     </FormProvider>
   );
 };

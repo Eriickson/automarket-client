@@ -22,6 +22,7 @@
     "compressorjs": "^1.0.7",
     "eslint-plugin-react": "^7.24.0",
     "framer-motion": "^4",
+    "jsonwebtoken": "^8.5.1",
     "next": "11.0.1",
     "next-auth": "^3.23.2",
     "nprogress": "^0.2.0",
@@ -38,6 +39,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.2",
     "@types/nprogress": "^0.2.0",
     "@types/react": "17.0.11",
     "@types/react-select": "^4.0.16",

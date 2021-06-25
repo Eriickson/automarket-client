@@ -3,12 +3,17 @@ import { LoginLayout } from "@/layouts";
 import { Box, Heading, Text, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { SignUpForm } from "./SignUpForm";
+import { IFormSignUpOnSubmit } from "@/validations";
+import { api } from "@/utils";
 
 export const SignUpTemplate: FC = () => {
-
-
-  function onSubmit(values: any) {
-    console.log(values);
+  async function onSubmit(values: IFormSignUpOnSubmit) {
+    try {
+      const { data } = await api.post("/signup", values);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

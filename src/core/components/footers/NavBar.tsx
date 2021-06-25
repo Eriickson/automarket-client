@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -21,19 +21,19 @@ const Links = [
   },
 ];
 
-export const NavBar = () => {
+export const NavBar: FC = () => {
   return (
     <Box
+      alignItems={[null, null, "center"]}
       display="flex"
       flexDirection={["column", "row"]}
-      alignItems={[null, null, "center"]}
       height="full"
       justifyContent="center"
     >
       {Links.map((links, i) => (
-        <Box mb={[2]} mx={[null, "5"]}>
-          <Link key={i} href={links.href}>
-            <Text color="gray.500" fontSize="lg" fontWeight="semibold">
+        <Box key={i} mb={[2]} mx={[null, "5"]}>
+          <Link passHref href={links.href} key={i}>
+            <Text color="gray.500" cursor="pointer" fontSize="lg" fontWeight="semibold">
               {links.label}
             </Text>
           </Link>

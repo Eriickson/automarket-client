@@ -3,6 +3,8 @@ import Router from "next/router";
 
 import { ChakraProvider, StylesProvider } from "@chakra-ui/react";
 import { defaultTheme, Global } from "@/themes";
+import { UIContextProvider } from "@/context";
+import { MainProvider } from "@/providers";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 
 import { Provider as NextAuthProvider } from "next-auth/client";
@@ -28,7 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <NextAuthProvider session={pageProps.session}>
         <ChakraProvider resetCSS theme={defaultTheme}>
           <Global />
-          <Component {...pageProps} />
+          <UIContextProvider>
+            <MainProvider>
+              <Component {...pageProps} />
+            </MainProvider>
+          </UIContextProvider>
         </ChakraProvider>
       </NextAuthProvider>
     </StylesProvider>

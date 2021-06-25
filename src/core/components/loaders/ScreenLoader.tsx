@@ -4,7 +4,7 @@ import { SpinnerCircular } from "spinners-react";
 
 interface ScreenLoaderProps {
   isOpen: boolean;
-  msg?: string;
+  msg?: string | null;
   onClose(): void;
 }
 
@@ -21,7 +21,7 @@ export const ScreenLoader: FC<ScreenLoaderProps> = ({ isOpen, msg, onClose }) =>
         shadow="none"
       >
         <SpinnerCircular color="#1E86FF" size="25%" thickness={90} />
-        <Text color="gray.200" fontSize="2xl" mt="2">
+        <Text color="gray.200" fontSize="2xl" mt="3" userSelect="none">
           {msg ? msg : "cargando"}
         </Text>
       </ModalContent>

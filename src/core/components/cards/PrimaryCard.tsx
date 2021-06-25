@@ -10,12 +10,13 @@ export const PrimaryCard: FC<PrimaryCardProps> = ({ notBorderTop, children }) =>
   return (
     <Box
       bg="white"
-      borderWidth="1px"
       borderColor="gray.100"
-      shadow="sm"
-      p="4"
-      borderTopWidth={!notBorderTop ? "2px" : ""}
       borderTopColor={!notBorderTop ? "pri.500" : ""}
+      borderTopWidth={!notBorderTop ? "2px !important" : ""}
+      borderWidth="1px"
+      h="full"
+      p="4"
+      shadow="sm"
     >
       {children}
     </Box>

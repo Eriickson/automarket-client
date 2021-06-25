@@ -34,8 +34,8 @@ export const RegisterForm: FC = () => {
                 />
               </SelectProfileImageProvider>
             </Box>
-            <InputControl isRequired label="Nombre" name="name" />
-            <InputControl isRequired label="Apellido" name="lastname" />
+            <InputControl isRequired inputProps={{ placeholder: "Nombre" }} label="Nombre" name="name" />
+            <InputControl isRequired inputProps={{ placeholder: "Apellido" }} label="Apellido" name="lastname" />
             <Box display="flex" flexDirection={["column", null, "row"]}>
               <Box flex="1" mb={[2, null, 0]} mr={[null, null, 3.5]}>
                 <Select isRequired label="Provincia" name="province" options={[]} />
@@ -44,17 +44,37 @@ export const RegisterForm: FC = () => {
                 <Select isRequired label="Municipio" name="municipality" options={[]} />
               </Box>
             </Box>
-            <InputControl isRequired inputProps={{ type: "date" }} label="Fecha de Nacimiento" name="brithday" />
+            <InputControl
+              isRequired
+              inputProps={{ type: "date", placeholder: "Fecha de nacimiento" }}
+              label="Fecha de Nacimiento"
+              name="brithday"
+            />
           </FormSession>
           <Divider my="5" />
           <FormSession
             subtitle="Completa los campos que se te muestran a continuación con tus datos."
             title="Datos de cuenta"
           >
-            <InputControl isRequired label="Nombre de usuario" name="username" />
-            <InputControl isRequired label="Correo electrónico" name="email" />
-            <InputControl isRequired label="Contraseña" name="password" />
-            <InputControl isRequired label="Confirma tu contraseña" name="confirmPassword" />
+            <InputControl
+              isRequired
+              inputProps={{ placeholder: "Nombre de usuario" }}
+              label="Nombre de usuario"
+              name="username"
+            />
+            <InputControl
+              isRequired
+              inputProps={{ placeholder: "Correo electrónico" }}
+              label="Correo electrónico"
+              name="email"
+            />
+            <InputControl isRequired inputProps={{ placeholder: "Contraseña" }} label="Contraseña" name="password" />
+            <InputControl
+              isRequired
+              inputProps={{ placeholder: "Confirma tu contraseña" }}
+              label="Confirma tu contraseña"
+              name="confirmPassword"
+            />
           </FormSession>
           <Box display="flex" justifyContent="flex-end" mt="3">
             <Button colorScheme="success">Crear cuenta</Button>

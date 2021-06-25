@@ -46,6 +46,7 @@
       "@/css/*": ["src/css/*"],
       "@/components": ["src/core/components"],
       "@/animations": ["src/core/animations"],
+      "@/context": ["src/core/context"],
       "@/layouts": ["src/core/layouts"],
       "@/models": ["src/core/models"],
       "@/utils": ["src/utils"],

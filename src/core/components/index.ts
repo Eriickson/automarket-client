@@ -5,3 +5,4 @@ export * from "./selects";
 export * from "./cards";
 export * from "./loaders";
 export * from "./radio";
+export * from "./images";

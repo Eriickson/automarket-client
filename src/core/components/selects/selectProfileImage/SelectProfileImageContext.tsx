@@ -55,7 +55,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   }
 
   function onRotationChange() {
-    setRotate(rotation + 90);
+    rotation === 270 ? setRotate(0) : setRotate(rotation + 90);
   }
 
   function onUploadFile(newFile: File) {

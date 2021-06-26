@@ -58,8 +58,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
                   <SelectProfileImage
                     showAvatar
                     onChange={value => {
-                      console.log({ [value.rotation]: value.croppedAreaPixels });
-
                       methods.setValue("profilePicture", {
                         file: value.file,
                         croppedArea: value.croppedAreaPixels,

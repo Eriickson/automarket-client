@@ -15,9 +15,9 @@ export const MainProvider: FC = ({ children }) => {
 
   return (
     <ApolloProvider client={apolloClient}>
-        <ReduxProvider store={store}>
-          <UIProvider>{children}</UIProvider>
-        </ReduxProvider>
+      <ReduxProvider store={store}>
+        <UIProvider>{children}</UIProvider>
+      </ReduxProvider>
     </ApolloProvider>
   );
 };

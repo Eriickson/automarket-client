@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import NextImage, { ImageProps as ImagePropsNext } from "next/image";
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 
 const Container = styled.div`
   width: 100%;

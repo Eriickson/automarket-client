@@ -25,7 +25,19 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
   const { email } = useSelector(({ login }) => login.register);
   const { provinces, getProvincesFetch } = useGetProvinces();
   const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
-  const methods = useForm({ resolver: RegisterUserFormResolver, defaultValues: { email, sex: "M" } });
+  const methods = useForm<RegisterUserOnSubmitFormType>({
+    resolver: RegisterUserFormResolver,
+    defaultValues: {
+      email,
+      name: "Erickson Manuel",
+      lastname: "Holguín",
+      username: "test01d",
+      password: "123456789t",
+      confirmPassword: "123456789t",
+      birthday: "1999-03-11",
+      sex: "M",
+    },
+  });
 
   useEffect(() => {
     getProvincesFetch();
@@ -45,8 +57,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
                 <SelectProfileImageProvider>
                   <SelectProfileImage
                     showAvatar
-                    onChange={() => {
-                      // console.log(value);
+                    onChange={value => {
+                      console.log({ [value.rotation]: value.croppedAreaPixels });
+
+                      methods.setValue("profilePicture", {
+                        file: value.file,
+                        croppedArea: value.croppedAreaPixels,
+                        rotation: value.rotation,
+                      });
                     }}
                   />
                 </SelectProfileImageProvider>

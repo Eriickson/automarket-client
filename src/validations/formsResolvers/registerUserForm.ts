@@ -7,12 +7,13 @@ import { IOption } from "@/shared";
 export type RegisterUserOnSubmitFormType = {
   profilePicture: {
     file: File;
-    cropArea: {
+    croppedArea: {
       x: number;
       y: number;
       w: number;
       h: number;
     };
+    rotation: number;
   };
   name: string;
   lastname: string;
@@ -21,6 +22,7 @@ export type RegisterUserOnSubmitFormType = {
   birthday: string;
   sex: string;
   username: string;
+  email: string;
   password: string;
   confirmPassword: string;
 };

@@ -9,7 +9,7 @@ interface IUseApolloClient {
 }
 
 export const useApolloClient = (): IUseApolloClient => {
-  const link = ApolloLink.from([authLink(), /* errorLink, */ uploadLink]);
+  const link = ApolloLink.from([authLink(), errorLink, uploadLink]);
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),

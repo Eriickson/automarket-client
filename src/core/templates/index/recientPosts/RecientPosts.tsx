@@ -21,7 +21,7 @@ export const RecientPosts: FC = () => {
           <GridItem colSpan={2} key={i}>
             <Box>
               <Box borderWidth="2px" cursor="pointer" position="relative">
-                <Link passHref href="http://localhost:8080/post/vehicle/5784548/mi-carro-2020">
+                <Link passHref href="/post/vehicle/5784548/mi-carro-2020">
                   <Img src={vehicle} />
                 </Link>
               </Box>

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 8080",
+    "dev": "next dev -p 9000",
     "build": "next build",
     "export": "next export",
-    "start": "next start -p 8080",
+    "start": "next start -p 9000",
     "deploy": "npm run build && npm run export",
     "format": "prettier --write src/**/*.ts{,x} pages/**/*.ts{,x}",
     "eslint": "tsc --noEmit && eslint src/**/*.ts{,x} pages/**/*.ts{,x}"

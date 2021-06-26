@@ -1,7 +1,6 @@
 import { createUploadLink } from "apollo-upload-client";
 import fetch from "isomorphic-unfetch";
 import { envs } from "@/config";
-console.log(envs.SERVER_GRAPHQL);
 
 export default createUploadLink({
   uri: envs.SERVER_GRAPHQL,

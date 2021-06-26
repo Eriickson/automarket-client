@@ -22,7 +22,7 @@ export const EditControllers: FC = () => {
         size="sm"
         onClick={() => zoom > 1.2 && onZoomChange(Number((zoom + -0.5).toFixed(2)))}
       />
-      <IconButton aria-label="Rotar imagen" icon={<RotateCw size="1.25rem" />} size="sm" onClick={onRotationChange} />
+      {/* <IconButton aria-label="Rotar imagen" icon={<RotateCw size="1.25rem" />} size="sm" onClick={onRotationChange} /> */}
     </HStack>
   );
 };

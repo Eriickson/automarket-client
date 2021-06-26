@@ -15,6 +15,9 @@ import { Box, Button } from "@chakra-ui/react";
 
 /* eslint-disable-next-line */
 const cssStyle = (isError: any) => css`
+  * {
+    text-align: left;
+  }
   span + div {
     border: none;
     box-shadow: none !important;
@@ -89,8 +92,6 @@ export const Select: FC<SelectProps> = ({
     if (errors?.[name]?.type) return errors;
     return {};
   }
-
-  console.log(isFocus);
 
   return (
     <div>

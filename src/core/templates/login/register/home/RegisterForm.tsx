@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import {
   InputControl,
   PrimaryCard,
@@ -13,19 +13,27 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "@/store";
 import { FormSession } from "./FormSession";
 import { IconInfoCircle } from "@tabler/icons";
-import { RegisterUserFormResolver } from "@/validations";
+import { RegisterUserFormResolver, RegisterUserOnSubmitFormType } from "@/validations";
+import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
+import { RadioGroup } from "@/components";
 
-export const RegisterForm: FC = () => {
+interface RegisterFormProps {
+  onSubmit(values: RegisterUserOnSubmitFormType): void;
+}
+
+export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
   const { email } = useSelector(({ login }) => login.register);
-  const methods = useForm({ resolver: RegisterUserFormResolver, defaultValues: { email } });
+  const { provinces, getProvincesFetch } = useGetProvinces();
+  const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
+  const methods = useForm({ resolver: RegisterUserFormResolver, defaultValues: { email, sex: "M" } });
+
+  useEffect(() => {
+    getProvincesFetch();
+  }, []);
 
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(values => {
-          console.log(values);
-        })}
-      >
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <PrimaryCard>
           <Box maxW="lg" mx="auto">
             <FormSession
@@ -67,10 +75,16 @@ export const RegisterForm: FC = () => {
               <InputControl isRequired inputProps={{ placeholder: "Apellido" }} label="Apellido" name="lastname" />
               <Box display="flex" flexDirection={["column", null, "row"]}>
                 <Box flex="1" mb={[2, null, 0]} mr={[null, null, 3.5]}>
-                  <Select isRequired label="Provincia" name="province" options={[]} />
+                  <Select
+                    isRequired
+                    label="Provincia"
+                    name="province"
+                    options={provinces}
+                    onChange={({ value }) => getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) })}
+                  />
                 </Box>
                 <Box flex="1">
-                  <Select isRequired label="Municipio" name="municipality" options={[]} />
+                  <Select isRequired label="Municipio" name="municipality" options={municipalities} />
                 </Box>
               </Box>
               <InputControl
@@ -79,6 +93,18 @@ export const RegisterForm: FC = () => {
                 label="Fecha de Nacimiento"
                 name="birthday"
               />
+              <Box>
+                <LabelInput isRequired label="Sexo" />
+                <RadioGroup
+                  defaultChecked="F"
+                  name="sex"
+                  radioItems={[
+                    { label: "Másculino", value: "M" },
+                    { label: "Femenino", value: "F" },
+                  ]}
+                  size="lg"
+                />
+              </Box>
             </FormSession>
             <Divider my="5" />
             <FormSession

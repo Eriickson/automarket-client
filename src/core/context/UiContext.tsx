@@ -1,33 +1,32 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React, { createContext, useState, FC, useContext, useRef } from "react";
-
-interface IAlertDialogState {
-  title: string;
-  desc: string;
-  priBtnLabel: string;
-  secBtnLabel: string;
-  onClickPriBtn(): void;
-  onClickSecBtn(): void;
-}
+import React, { createContext, useState, FC, useContext, useRef, MutableRefObject } from "react";
+import { IAlertDialogOption } from "@/components";
 interface IUIContext {
   isLoadingScreenActive: boolean;
   msgLoadingScreen: string | null;
-  alertDialogState: IAlertDialogState;
   activateLoadingScreen(msg: string | null): void;
   closeLoadingScreen(): void;
-  toggleAlertDialog(options: IAlertDialogState): void;
+  // Alert Dialog
+  alertDialog: {
+    isOpen: boolean;
+    cancelRef: MutableRefObject<null>;
+    onOpen(option: IAlertDialogOption): void;
+    onClose(): void;
+    options: Partial<IAlertDialogOption>;
+  };
 }
 
 const UIContext = createContext<IUIContext | null>(null) as React.Context<IUIContext>;
 
 const UIContextProvider: FC = ({ children }) => {
+  // Loading Screen
   const [msgLoadingScreen, setMsgLoadingScreen] = useState<string | null>(null);
   const { isOpen: isLoadingScreenActive, onOpen, onClose } = useDisclosure();
 
   // AlertDialog
-  const [alertDialogState, setAlertDialogState] = useState<IAlertDialogState>();
-  const [isOpenAlertDialog, setIsOpenAlertDialog] = useState(false);
-  const cancelRef = useRef(null);
+  const [isOpenAlertDialog, setIsOpenAlertDialog] = useState<boolean>(false);
+  const [alertDialogOptions, setAlertDialogOptions] = useState<Partial<IAlertDialogOption>>({});
+  const cancelRefAlertDialog = useRef(null);
 
   function activateLoadingScreen(msg: string | null) {
     setMsgLoadingScreen(msg);
@@ -39,26 +38,32 @@ const UIContextProvider: FC = ({ children }) => {
     setMsgLoadingScreen(null);
   }
 
-  function toggleAlertDialog({
-    title,
-    desc,
-    priBtnLabel,
-    secBtnLabel,
-    onClickPriBtn,
-    onClickSecBtn,
-  }: IAlertDialogState) {
-    setAlertDialogState({ title, desc, priBtnLabel });
+  // Alert Dialog
+  function onOpenAlertDialog(option: IAlertDialogOption) {
+    setAlertDialogOptions(option);
+    setIsOpenAlertDialog(true);
+  }
+  function onCloseAlertDialog() {
+    setIsOpenAlertDialog(false);
   }
 
   return (
     <UIContext.Provider
       value={{
+        // Loading Screen
         isLoadingScreenActive,
         msgLoadingScreen,
-        alertDialogState,
         activateLoadingScreen,
         closeLoadingScreen,
-        toggleAlertDialog,
+
+        // Alert Dialog
+        alertDialog: {
+          isOpen: isOpenAlertDialog,
+          cancelRef: cancelRefAlertDialog,
+          onClose: onCloseAlertDialog,
+          onOpen: onOpenAlertDialog,
+          options: alertDialogOptions,
+        },
       }}
     >
       {children}

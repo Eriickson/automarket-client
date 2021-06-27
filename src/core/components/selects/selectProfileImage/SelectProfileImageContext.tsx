@@ -58,8 +58,10 @@ const SelectProfileImageProvider: FC = ({ children }) => {
     rotation === 270 ? setRotate(0) : setRotate(rotation + 90);
   }
 
-  function onUploadFile(newFile: File) {
-    const payload = { file: newFile, src: URL.createObjectURL(newFile) };
+  async function onUploadFile(newFile: File) {
+    const zipFile = await compressImage(newFile);
+    const payload = { file: zipFile, src: URL.createObjectURL(zipFile) };
+
     setFileToEditing(payload);
     onOpen();
   }
@@ -82,23 +84,19 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   async function onSaveChange() {
     setIsLoading(true);
     try {
-      let zipFile: File | null = null;
       if (fileToEditing.file) {
-        zipFile = await compressImage(fileToEditing.file);
-
         const { blobUrl } = await getCroppedImg({
           src: fileToEditing.src,
           pixelCrop: croppedAreaPixels,
           rotation,
         });
 
-        setFileSelected({ src: blobUrl, file: zipFile });
+        setFileSelected({ src: blobUrl, file: fileToEditing.file });
       }
 
       onReset();
       onClose();
     } catch (err) {
-      // console.log(err);
     }
   }
 

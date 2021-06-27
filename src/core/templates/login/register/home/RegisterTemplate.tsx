@@ -15,8 +15,9 @@ export const RegisterTemplate: FC = () => {
   const { registerUser, loading, error } = useRegisterUser();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
-    activateLoadingScreen("Creando cuenta");
+    // activateLoadingScreen("Creando cuenta");
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
+
     const newUser: RegisterUserVariables["user"] = {
       profilePicture: {
         croppedArea: profilePicture.croppedArea,
@@ -35,14 +36,15 @@ export const RegisterTemplate: FC = () => {
       password,
     };
 
-    console.log(newUser);
-
-    registerUser({
-      variables: {
-        user: newUser,
-      },
-    });
-    activateLoadingScreen;
+    try {
+      registerUser({
+        variables: {
+          user: newUser,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

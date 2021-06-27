@@ -6,7 +6,7 @@ import { useDropzone } from "react-dropzone";
 import { useSelectProfileImage } from "./SelectProfileImageContext";
 
 export const UploadButton: FC = () => {
-  const { labelButton, onUploadFile } = useSelectProfileImage();
+  const { isLoading, labelButton, onUploadFile } = useSelectProfileImage();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     onUploadFile(acceptedFiles[0]);
@@ -22,7 +22,7 @@ export const UploadButton: FC = () => {
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      <Button colorScheme="blue" w="full">
+      <Button colorScheme="blue" w="full" isLoading={isLoading} loadingText="Cargando">
         {labelButton}
       </Button>
     </div>

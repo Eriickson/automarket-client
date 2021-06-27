@@ -16,7 +16,8 @@ export type RoleType = "success" | "warning" | "danger" | "info";
 
 export interface IAlertDialogOption {
   title: string;
-  desc: string;
+  name: string;
+  desc: string | ReactElement;
   priBtnLabel: string;
   secBtnLabel?: string;
   role?: RoleType;
@@ -37,6 +38,7 @@ export const AlertDialog: FC<AlertDialogProps> = ({
   priBtnLabel,
   secBtnLabel,
   role = "success",
+  name,
   onClose,
   onClickPriBtn,
   onClickSecBtn,
@@ -80,8 +82,6 @@ export const AlertDialog: FC<AlertDialogProps> = ({
     },
   });
 
-  console.log(roleInternal[role].icon);
-
   return (
     <>
       <AlertDialogChakra
@@ -91,7 +91,7 @@ export const AlertDialog: FC<AlertDialogProps> = ({
         leastDestructiveRef={cancelRef}
         onClose={onClose}
         size="lg"
-        // closeOnOverlayClick={false}
+        closeOnOverlayClick={false}
       >
         <AlertDialogOverlay>
           <AlertDialogContent mx="1" rounded="sm">
@@ -110,13 +110,20 @@ export const AlertDialog: FC<AlertDialogProps> = ({
               {title}
             </AlertDialogHeader>
             <AlertDialogBody pt="0">{desc}</AlertDialogBody>
-            <AlertDialogFooter>
+            <AlertDialogFooter pt="0">
               {secBtnLabel && (
                 <Button variant="ghost" onClick={onClickSecBtn}>
                   {secBtnLabel}
                 </Button>
               )}
-              <Button colorScheme={String(roleInternal[role].colorPriButton)} autoFocus ml={3} onClick={onClickPriBtn}>
+              <Button
+                form={name}
+                colorScheme={String(roleInternal[role].colorPriButton)}
+                autoFocus
+                ml={3}
+                onClick={onClickPriBtn}
+                type="submit"
+              >
                 {priBtnLabel}
               </Button>
             </AlertDialogFooter>

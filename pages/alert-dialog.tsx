@@ -1,22 +1,25 @@
 import React from "react";
 import { MainLayout } from "@/layouts";
-import { Button } from "@chakra-ui/react";
 import { useUIContext } from "@/context";
+import { ConfirmPasswordModal } from "@/components";
+import { Button, Text } from "@chakra-ui/react";
 
 const AlertDialogPage = () => {
   const { alertDialog } = useUIContext();
 
   return (
     <MainLayout>
+      <ConfirmPasswordModal />
       <Button
         onClick={() =>
           alertDialog.onOpen({
-            title: "Credenciales incorrectas",
-            desc: "Asegúrese de que el nombre de usuario y la contraseña incluidos en la solicitud sean correctos.",
-            priBtnLabel: "Aceptar",
-            secBtnLabel: "Cancelar",
+            title: "Eliminar publicación",
+            desc: "Está seguro de que quiere eliminar esta publicación? esta acción no se podrá deshacer.",
+            priBtnLabel: "Si, eliminar",
+            secBtnLabel: "No, cancelar",
             onClickPriBtn: alertDialog.onClose,
-            role: "danger",
+            role: "warning",
+            name:   "",
           })
         }
       >
@@ -27,3 +30,17 @@ const AlertDialogPage = () => {
 };
 
 export default AlertDialogPage;
+/* <Button
+        onClick={() =>
+          alertDialog.onOpen({
+            title: "Eliminar publicación",
+            desc: "Está seguro de que quiere eliminar esta publicación? esta acción no se podrá deshacer.",
+            priBtnLabel: "Si, eliminar",
+            secBtnLabel: "No, cancelar",
+            onClickPriBtn: alertDialog.onClose,
+            role: "warning",
+          })
+        }
+      >
+        Click here!
+      </Button> */

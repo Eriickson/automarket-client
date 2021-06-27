@@ -7,3 +7,4 @@ export * from "./cards";
 export * from "./loaders";
 export * from "./radio";
 export * from "./images";
+export * from "./confirmPasswordModal";

@@ -6,3 +6,4 @@ export * from "./signUpForm";
 export * from "./ubicationNewAgencyForm";
 export * from "./newVehicleDataForm";
 export * from "./editAgencyForm";
+export * from "./confirmPasswordForm";

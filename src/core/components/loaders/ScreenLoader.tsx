@@ -10,7 +10,14 @@ interface ScreenLoaderProps {
 
 export const ScreenLoader: FC<ScreenLoaderProps> = ({ isOpen, msg, onClose }) => {
   return (
-    <Modal isCentered closeOnEsc={false} closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isCentered
+      closeOnEsc={false}
+      closeOnOverlayClick={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      scrollBehavior="outside"
+    >
       <ModalOverlay bgColor="rgba(0, 0, 0, 0.8) !important" />
       <ModalContent
         alignItems="center"

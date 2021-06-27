@@ -8,11 +8,14 @@ import { RegisterUserOnSubmitFormType } from "@/validations";
 
 import { useRegisterUser } from "@/graphql";
 import { RegisterUserVariables } from "src/graphql/gql/mutations";
+import { useUIContext } from "@/context";
 
 export const RegisterTemplate: FC = () => {
+  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
   const { registerUser, loading, error } = useRegisterUser();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
+    activateLoadingScreen("Creando cuenta");
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
     const newUser: RegisterUserVariables["user"] = {
       profilePicture: {
@@ -39,6 +42,7 @@ export const RegisterTemplate: FC = () => {
         user: newUser,
       },
     });
+    activateLoadingScreen;
   }
 
   return (

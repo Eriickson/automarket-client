@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 interface INewUser {
-  profilePicture: {
+  profilePicture?: {
     file: File;
     croppedArea: {
       w: number;

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import { Box, Button, HStack, Heading, Avatar } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, Img } from "@chakra-ui/react";
 import { SettingsMenu } from "./SettingsMenu";
-import { SelectProfileImage, SelectProfileImageProvider } from "@/components";
+import { SelectProfileImage, SelectProfileImageProvider, Image } from "@/components";
 
 export const CardPresentation: FC = () => {
   return (
@@ -22,7 +22,9 @@ export const CardPresentation: FC = () => {
         shadow="sm"
       >
         <HStack alignItems="center" spacing="4">
-          <Avatar bgColor="gray.300" borderWidth="2px" borderColor="pri.500" size="xl" rounded="sm" />
+          <Box w="28">
+            <Image alt="" src="http://localhost:7001/build/user/profile/resolution/Z.jpg" />
+          </Box>
           <SelectProfileImageProvider>
             <Box mb="3">
               <Heading size="md">Erickson Manuel Holguín</Heading>

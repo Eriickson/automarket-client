@@ -53,7 +53,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
               title="Datos Personales"
             >
               <Box>
-                <LabelInput isRequired label="Imagen de perfil" />
+                <LabelInput label="Imagen de perfil" />
                 <SelectProfileImageProvider>
                   <SelectProfileImage
                     showAvatar

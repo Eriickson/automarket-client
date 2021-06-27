@@ -28,7 +28,7 @@ export const ConfirmPasswordModal = () => {
             ),
             role: "success",
             priBtnLabel: "Validar",
-            secBtnLabel: "No, cancelar",
+            secBtnLabel: "Cancelar",
             onClickSecBtn() {
               alertDialog.onClose();
             },

@@ -21,7 +21,7 @@ const HANDLER_MUTATION_M = gql`
 `;
 
 const HandlerErrorPage = () => {
-  // const {} = useUIContext();
+  const { alertDialog, activateLoadingScreen, closeLoadingScreen } = useUIContext();
   const [handlerError, { data: dataQuery, loading: loadingQuery, error: errorQuery }] = useLazyQuery(HANDLER_ERROR_Q);
   const [handlerErrorMutation, { data: dataMutation, loading: loadingMutation, error: errorMutation }] =
     useMutation(HANDLER_MUTATION_M);
@@ -29,21 +29,43 @@ const HandlerErrorPage = () => {
   const toast = useToast();
 
   async function onClickQuery() {
-    handlerError({
-      variables: {
-        errorType: "Error aquí",
-      },
-    });
-  }
-  async function onClickMutation() {
     try {
-      await handlerErrorMutation({
+      handlerError({
         variables: {
           errorType: "Error aquí",
         },
       });
-      // alertDialogState();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function onClickMutation() {
+    activateLoadingScreen(null);
+    setTimeout(async () => {
+      try {
+        await handlerErrorMutation({
+          variables: {
+            errorType: "Error aquí",
+          },
+        });
+        // alertDialogState();
+      } catch (err) {
+        console.log(err);
+
+        const error = JSON.parse(err.message);
+        alertDialog.onOpen({
+          name: "error-apollo",
+          title: error.message,
+          desc: error.detail,
+          priBtnLabel: "Aceptar",
+          role: error.type,
+          onClickPriBtn() {
+            alertDialog.onClose();
+          },
+        });
+        closeLoadingScreen();
+      }
+    }, 3000);
   }
 
   useEffect(() => {
@@ -69,15 +91,12 @@ const HandlerErrorPage = () => {
     }
   }, [errorQuery]);
 
-  console.log(errorMutation?.message);
-
   return (
     <Box m="10">
       <Button mr="5" onClick={onClickQuery}>
         onClickQuery
       </Button>
       <Button onClick={onClickMutation}>onClickMutation</Button>
-      <AlertDialog />
     </Box>
   );
 };

@@ -12,7 +12,7 @@ import { useUIContext } from "@/context";
 import { useEffect } from "react";
 
 export const RegisterTemplate: FC = () => {
-  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
+  const { activateLoadingScreen, closeLoadingScreen, alertDialog } = useUIContext();
   const { registerUser, loading, error } = useRegisterUser();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
@@ -40,21 +40,25 @@ export const RegisterTemplate: FC = () => {
         },
       });
 
-    console.log(newUser);
-
     try {
-      registerUser({
+      await registerUser({
         variables: {
           user: newUser,
         },
       });
     } catch (err) {
       console.log(err);
+      const error = JSON.parse(err.message);
+      alertDialog.onOpen({
+        name: "error-register-user",
+        title: error.message,
+        desc: error.detail,
+        role: error.type,
+        priBtnLabel: "Aceptar",
+        onClickPriBtn: alertDialog.onClose,
+      });
     }
   }
-
-
-  console.log({ error });
 
   useEffect(() => (loading ? activateLoadingScreen("Creando cuenta") : closeLoadingScreen()), [loading]);
 

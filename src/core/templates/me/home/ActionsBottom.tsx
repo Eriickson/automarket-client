@@ -19,7 +19,9 @@ export const ActionsBottom: FC = () => {
             <Button colorScheme="danger" onClick={toggleEditing}>
               Cancelar
             </Button>
-            <Button colorScheme="success">Guardar</Button>
+            <Button colorScheme="success" form="form-edit-profile" type="submit">
+              Guardar
+            </Button>
           </HStack>
         </Fade>
       ) : (

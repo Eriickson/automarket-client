@@ -15,7 +15,7 @@ export interface EditProfileFormOnSubmit {
 
 const schema = yup.object().shape({
   name: yup.string().required("Campo requerido"),
-  lastanme: yup.string().required("Campo requerido"),
+  lastname: yup.string().required("Campo requerido"),
   province: yup
     .object()
     .shape({

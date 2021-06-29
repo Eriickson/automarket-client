@@ -12,17 +12,17 @@ interface RadioGroupProps {
   radioItems: IRadioItem[];
   size?: "sm" | "md" | "lg";
   direction?: "row" | "column";
-  defaultChecked?: string | number | boolean;
+  defaultValue?: string | number;
 }
 
-export const RadioGroup: FC<RadioGroupProps> = ({ name, size, direction = "row", defaultChecked, radioItems }) => {
+export const RadioGroup: FC<RadioGroupProps> = ({ name, size, direction = "row", defaultValue, radioItems }) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
       name={name}
       render={({ field }) => (
-        <RadioGroupChakra size={size} {...field}>
+        <RadioGroupChakra size={size} {...field} >
           <Stack direction={direction}>
             {radioItems.map((radioItem, i) => (
               <Radio size="lg" isDisabled={radioItem.isDisable} key={i} value={radioItem.value}>

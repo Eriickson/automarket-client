@@ -5,12 +5,28 @@ import NextLink from "next/link";
 import { SignUpForm } from "./SignUpForm";
 import { IFormSignUpOnSubmit } from "@/validations";
 import { api } from "@/utils";
+import { useUIContext } from "@/context";
+import Router from "next/router";
 
 export const SignUpTemplate: FC = () => {
+  const { activateLoadingScreen, closeLoadingScreen, alertDialog } = useUIContext();
+
   async function onSubmit(values: IFormSignUpOnSubmit) {
+    activateLoadingScreen(null);
     try {
       const { data } = await api.post("/signup", values);
       console.log(data);
+      alertDialog.onOpen({
+        title: "Mensaje enviado",
+        desc: "Por favor revisa tu bandeja de email, para que puedas confirmar tu cuenta",
+        name: "send-email-register",
+        priBtnLabel: "Volver a página de inicio",
+        onClickPriBtn: () => {
+          Router.push("/");
+          alertDialog.onClose();
+        },
+      });
+      closeLoadingScreen();
     } catch (err) {
       console.log(err);
     }

@@ -16,19 +16,19 @@ const vehiclesArray = [
 export const RecientPosts: FC = () => {
   return (
     <PrimaryCard>
-      <SimpleGrid columns={12} gap={3}>
+      <SimpleGrid columns={12} gap={[1, 2, 3]}>
         {[...vehiclesArray, ...vehiclesArray, ...vehiclesArray].map((vehicle, i) => (
-          <GridItem colSpan={2} key={i}>
+          <GridItem colSpan={[6, null, 4, 3, 2]} key={i}>
             <Box>
               <Box borderWidth="2px" cursor="pointer" position="relative">
                 <Link passHref href="/post/vehicle/5784548/mi-carro-2020">
                   <Img src={vehicle} />
                 </Link>
               </Box>
-              <Text fontWeight="semibold" lineHeight="normal">
+              <Text fontSize={["sm", null, "md"]} fontWeight="semibold" lineHeight="normal">
                 Toyota Corolla S - 2020
               </Text>
-              <Text color="green.600" fontWeight="semibold">
+              <Text color="green.600" fontSize={["xs", null, "md"]} fontWeight="semibold">
                 RD$ 25,000
               </Text>
             </Box>

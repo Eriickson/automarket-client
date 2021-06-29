@@ -3,9 +3,13 @@ import { Radio, Stack, RadioGroup as RadioGroupChakra } from "@chakra-ui/react";
 import { IOption } from "@/shared";
 import { useFormContext, Controller } from "react-hook-form";
 
+interface IRadioItem extends IOption {
+  isDisable?: boolean;
+}
+
 interface RadioGroupProps {
   name: string;
-  radioItems: IOption[];
+  radioItems: IRadioItem[];
   size?: "sm" | "md" | "lg";
   direction?: "row" | "column";
   defaultChecked?: string | number | boolean;
@@ -21,7 +25,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({ name, size, direction = "row",
         <RadioGroupChakra size={size} {...field}>
           <Stack direction={direction}>
             {radioItems.map((radioItem, i) => (
-              <Radio key={i} value={radioItem.value}>
+              <Radio size="lg" isDisabled={radioItem.isDisable} key={i} value={radioItem.value}>
                 {radioItem.label}
               </Radio>
             ))}

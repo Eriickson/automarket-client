@@ -8,3 +8,4 @@ export * from "./loaders";
 export * from "./radio";
 export * from "./images";
 export * from "./confirmPasswordModal";
+export * from "./wizard";

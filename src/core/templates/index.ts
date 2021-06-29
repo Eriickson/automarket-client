@@ -1,3 +1,5 @@
+export * from "./agency/new/home/NewAgencyTemplate";
+
 export * from "./index/IndexTemplate";
 
 export * from "./login/signin/home/SignInTemplate";

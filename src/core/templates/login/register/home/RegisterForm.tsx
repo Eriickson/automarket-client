@@ -112,7 +112,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
               <Box>
                 <LabelInput isRequired label="Sexo" />
                 <RadioGroup
-                  defaultChecked="F"
+                  defaultValue="F"
                   name="sex"
                   radioItems={[
                     { label: "Másculino", value: "M" },

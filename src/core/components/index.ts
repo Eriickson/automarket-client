@@ -9,3 +9,4 @@ export * from "./radio";
 export * from "./images";
 export * from "./confirmPasswordModal";
 export * from "./wizard";
+export * from "./alertApolloServerError";

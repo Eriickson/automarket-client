@@ -92,7 +92,6 @@ export const AlertDialog: FC<AlertDialogProps> = ({
         onClose={onClose}
         size="lg"
         closeOnOverlayClick={false}
-        
       >
         <AlertDialogOverlay bgColor="rgba(0, 0, 0, 0.8) !important">
           <AlertDialogContent mx="1" rounded="sm">

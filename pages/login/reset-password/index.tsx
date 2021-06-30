@@ -1,8 +1,10 @@
 import { NextPage } from "next";
 import React from "react";
 
+import { ResetPasswordTemplate } from "@/templates";
+
 const ResetPasswordPage: NextPage = () => {
-  return <div>reset-password</div>;
+  return <ResetPasswordTemplate />;
 };
 
 export default ResetPasswordPage;

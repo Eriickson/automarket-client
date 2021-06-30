@@ -16,16 +16,22 @@ export interface RegisterPageProps {
 
 export const registerServerSide: GetServerSideProps = async ctx => {
   const { token } = ctx.query;
+  console.log(token);
+  
   let email = "";
   if (!token) {
     redirectSSR(ctx);
   }
 
   try {
-    const payload = jwt.verify(String(token), envs.SECRECT_KEY_SIGNUP_TOKEN) as { email: string };
+    console.log(envs.SECRECT_KEY_SIGNUP_TOKEN);
+
+    const payload = jwt.verify(String(token), "SECRECT_KEY_SIGNUP_TOKEN") as { email: string };
 
     email = payload.email;
   } catch (err) {
+    console.log(err);
+    
     redirectSSR(ctx);
   }
 

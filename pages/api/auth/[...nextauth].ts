@@ -12,14 +12,15 @@ export default NextAuth({
     Providers.Credentials({
       name: "Credentials",
       async authorize(credentials: { identifier: string; password: string }) {
-        console.log({ credentials });
-
         const user: User = {
-          id: "id-001",
-          name: "Erickson Manuel Holguín",
-          email: "test@test.comssss",
-          image: "https://zone1-d9f7.kxcdn.com/wp-content/uploads/2013/12/person2-500x500.jpg",
+          _id: "user-id-001",
+          name: "Erickson Manuel",
+          lastname: "Holguín",
+          email: credentials.identifier,
+          username: "test@test.comssss",
+          profilePicture: "https://zone1-d9f7.kxcdn.com/wp-content/uploads/2013/12/person2-500x500.jpg",
         };
+
         return user;
 
         // throw `/login?error=${msgError}`;
@@ -36,28 +37,30 @@ export default NextAuth({
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 60 * 60 * 24, // 24 hours
   },
-  callbacks: {
-    jwt(token: JWT, user) {
-      token.edad = user?.edad;
-      token.sexo = user?.sexo;
-      token.image = user?.image;
+  // callbacks: {
+  //   jwt(token: JWT, user) {
+  //     console.log({ user });
 
-      console.log({ token });
+  //     token._id = user?._id;
+  //     token.name = user?.name;
+  //     token.lastname = user?.lastname;
+  //     token.email = user?.email;
+  //     token.username = user?.username;
+  //     token.profilePicture = user?.profilePicture;
+  //     console.log({ token });
 
-      return token;
-    },
-    async session(session) {
-      console.log({ session });
-
-      return {
-        expires: session.expires,
-        user: {
-          ...session.user,
-          name: "Erickson Manuel",
-          lastname: "Peña Holguín",
-          _id: "123456789",
-        },
-      };
-    },
-  },
+  //     return token;
+  //   },
+  //   async session(session, userOrToken) {
+  //     console.log({ session, userOrToken });
+  //     session.edad = 19;
+  //     return session;
+  //   },
+  // },
 });
+
+/* const response = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then(response => response.json())
+        .then(json => json);
+
+        console.log({response}); */

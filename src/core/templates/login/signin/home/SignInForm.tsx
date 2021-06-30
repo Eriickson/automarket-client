@@ -2,16 +2,16 @@ import React, { FC } from "react";
 
 import { Button, Box } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
-import * as yup from "yup";
+import { FormSignInResolver, IFormSignInOnSubmit } from "@/validations";
 
 import { InputControl } from "@/components";
 
 interface SignInFormProps {
-  onSubmit(values: any): void;
+  onSubmit(values: IFormSignInOnSubmit): void;
 }
 
 export const SignInForm: FC<SignInFormProps> = ({ onSubmit }) => {
-  const methods = useForm();
+  const methods = useForm({ resolver: FormSignInResolver });
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -19,16 +19,16 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit }) => {
           <InputControl
             label="Correo electrónico"
             inputProps={{ placeholder: "Correo electrónico" }}
-            name="email"
+            name="identifier"
             isRequired
-            // defaultValue="Erickson01d@gmail.com"
+            defaultValue="erickson01d@gmail.com"
           />
           <InputControl
-            label="Correo electrónico"
-            inputProps={{ placeholder: "Correo electrónico" }}
-            name="emailx"
+            label="Contraseña"
+            inputProps={{ placeholder: "Contraseña" }}
+            name="password"
             isRequired
-            // defaultValue="Erickson01d@gmail.com"
+            defaultValue="123456789e"
           />
         </Box>
         <Button type="submit" colorScheme="pri" w="full">

@@ -1,32 +1,15 @@
 import React, { FC } from "react";
 import { MainLayout } from "@/layouts";
-import { Wizard } from "@/components";
-import { DataAgencyStep } from "./steps/DataAgencyStep";
+import { Wizard, WizardProvider } from "@/components";
+import { DataAgencyStep } from "./wizard/steps/agencyData/DataAgencyStep";
+import { WizardNewAgency } from "./wizard/WizardNewAgency";
 
 export const NewAgencyTemplate: FC = () => {
   return (
     <MainLayout>
-      <Wizard
-        steps={[
-          {
-            title: "titulo aquí",
-            Component: <DataAgencyStep />,
-            nameForm: "name",
-          },
-          {
-            title: "titulo aquí",
-            Component: <DataAgencyStep />,
-            nameForm: "name",
-          },
-          {
-            title: "titulo aquí",
-            Component: <DataAgencyStep />,
-            nameForm: "name",
-          },
-        ]}
-        currentStep={1}
-        onPrevStep={() => {}}
-      />
+      <WizardProvider>
+        <WizardNewAgency />
+      </WizardProvider>
     </MainLayout>
   );
 };

@@ -13,18 +13,22 @@ export const MainHeader = () => {
       <Box py={[4, 6]} shadow="sm" borderBottomWidth="1px" bg="white">
         <Container display="flex" alignItems="center" justifyContent="space-between">
           <Link href="/">
-            <Box cursor="pointer" w="56">
-              <AutomarketRDLogo />
-            </Box>
+            <a>
+              <Box cursor="pointer" w="56">
+                <AutomarketRDLogo />
+              </Box>
+            </a>
           </Link>
           {/* <Box display={[null, "none"]} w="10">
           <AutomarketRDIsotipo />
         </Box> */}
           <Box display="flex" alignItems="center">
             <Link href="/login/signup">
-              <Button colorScheme="pri" display={["none", "block"]}>
-                Regístrate
-              </Button>
+              <a>
+                <Button colorScheme="pri" display={["none", "block"]}>
+                  Regístrate
+                </Button>
+              </a>
             </Link>
             <Button
               colorScheme="pri"

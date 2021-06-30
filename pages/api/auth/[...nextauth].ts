@@ -16,11 +16,9 @@ export default NextAuth({
 
         const user: User = {
           id: "id-001",
-          name: "Test Name",
+          name: "Erickson Manuel Holguín",
           email: "test@test.comssss",
           image: "https://zone1-d9f7.kxcdn.com/wp-content/uploads/2013/12/person2-500x500.jpg",
-          edad: "mis-19-añiodsadasds",
-          sexo: "Masculino",
         };
         return user;
 
@@ -55,8 +53,9 @@ export default NextAuth({
         expires: session.expires,
         user: {
           ...session.user,
-          edad: "esta es la edad del chico",
-          agency: "id-agency",
+          name: "Erickson Manuel",
+          lastname: "Peña Holguín",
+          _id: "123456789",
         },
       };
     },

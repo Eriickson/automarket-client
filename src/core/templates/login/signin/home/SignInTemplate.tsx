@@ -12,8 +12,6 @@ import { SignInForm } from "./SignInForm";
 export const SignInTemplate: FC = () => {
   const [session, loading] = useSession();
 
-  console.log({ session, loading });
-
   async function onSubmit(e: any) {
     e.preventDefault();
     const csrfToken = await getCsrfToken();

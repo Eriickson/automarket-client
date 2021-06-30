@@ -10,12 +10,28 @@ import { useRegisterUser } from "@/graphql";
 import { RegisterUserVariables } from "src/graphql/gql/mutations";
 import { useUIContext } from "@/context";
 import { useEffect } from "react";
+import { api } from "@/utils";
+import { getCsrfToken } from "next-auth/client";
 
 export const RegisterTemplate: FC = () => {
-  const { activateLoadingScreen, closeLoadingScreen, alertDialog } = useUIContext();
+  const { activateLoadingScreen, closeLoadingScreen, alertDialog, apolloServerError } = useUIContext();
   const { registerUser, loading, error } = useRegisterUser();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
+    const csrfToken = await getCsrfToken();
+    console.log("submit", csrfToken);
+
+    try {
+      const { data } = await api.post("/auth/callback/credentials", {
+        identifier: "mi-identifier",
+        password: "mi-password",
+        csrfToken,
+      });
+      console.log({ data });
+    } catch (err) {
+      console.log(err);
+    }
+    return;
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
 
     const newUser: RegisterUserVariables["user"] = {
@@ -41,21 +57,16 @@ export const RegisterTemplate: FC = () => {
       });
 
     try {
-      await registerUser({
+      const response = await registerUser({
         variables: {
           user: newUser,
         },
       });
+      console.log(response.data?.response);
     } catch (err) {
-      console.log(err);
-      const error = JSON.parse(err.message);
-      alertDialog.onOpen({
-        name: "error-register-user",
-        title: error.message,
-        desc: error.detail,
-        role: error.type,
+      apolloServerError.onOpen(err.message, {
         priBtnLabel: "Aceptar",
-        onClickPriBtn: alertDialog.onClose,
+        onClickPriBtn: apolloServerError.onClose,
       });
     }
   }

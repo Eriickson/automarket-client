@@ -17,7 +17,7 @@ export interface RegisterPageProps {
 export const registerServerSide: GetServerSideProps = async ctx => {
   const { token } = ctx.query;
   console.log(token);
-  
+
   let email = "";
   if (!token) {
     redirectSSR(ctx);
@@ -31,7 +31,6 @@ export const registerServerSide: GetServerSideProps = async ctx => {
     email = payload.email;
   } catch (err) {
     console.log(err);
-    
     redirectSSR(ctx);
   }
 

@@ -11,8 +11,10 @@ interface EditProfileFormProps {
 }
 
 export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
-  const { isEditing } = useSelector(({ profile }) => profile);
-  const methods = useForm<EditProfileFormOnSubmit>({ resolver: editProfileFormResolver });
+  const { isEditing, profileMe } = useSelector(({ profile }) => profile);
+  const methods = useForm<EditProfileFormOnSubmit>({
+    resolver: editProfileFormResolver,
+  });
 
   useEffect(() => {
     methods.reset({ sex: "F" });
@@ -29,6 +31,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 inputProps={{ placeholder: "Nombre", isDisabled: !isEditing }}
                 label="Nombre"
                 name="name"
+                defaultValue={profileMe.name}
               />
             </GridItem>
             <GridItem colSpan={[12, 6]}>
@@ -37,6 +40,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 inputProps={{ placeholder: "Apellido", isDisabled: !isEditing }}
                 label="Apellido"
                 name="lastname"
+                defaultValue={profileMe.lastname}
               />
             </GridItem>
             <GridItem colSpan={[12, null, 4]}>
@@ -46,6 +50,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 name="province"
                 options={[]}
                 placeholder="Provincia"
+                defaultValue={profileMe.direction.province}
                 isDisabled={!isEditing}
               />
             </GridItem>
@@ -56,6 +61,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 name="municipality"
                 options={[]}
                 placeholder="Municipio"
+                defaultValue={profileMe.direction.municipality}
                 isDisabled={!isEditing}
               />
             </GridItem>
@@ -65,13 +71,14 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 inputProps={{ placeholder: "Fecha de Nacimiento", type: "date", isDisabled: !isEditing }}
                 label="Fecha de Nacimiento"
                 name="birthday"
+                defaultValue={profileMe.birthday}
               />
             </GridItem>
             <GridItem colSpan={[4]}>
               <LabelInput isRequired label="Sexo" />
               <RadioGroup
                 name="sex"
-                defaultValue="F"
+                defaultValue={profileMe.sex}
                 radioItems={[
                   { label: "Masculino", value: "M", isDisable: !isEditing },
                   { label: "Femenino", value: "F", isDisable: !isEditing },

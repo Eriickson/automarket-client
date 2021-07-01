@@ -3,8 +3,11 @@ import React, { FC } from "react";
 import { Box, Button, HStack, Heading, Img } from "@chakra-ui/react";
 import { SettingsMenu } from "./SettingsMenu";
 import { SelectProfileImage, SelectProfileImageProvider, Image } from "@/components";
+import { useSelector } from "@/store";
 
 export const CardPresentation: FC = () => {
+  const { profileMe } = useSelector(({ profile }) => profile);
+
   return (
     <>
       <Button colorScheme="sec" w="full">
@@ -23,13 +26,15 @@ export const CardPresentation: FC = () => {
       >
         <HStack alignItems="center" spacing="4">
           <Box w="28">
-            <Image alt="" src="http://localhost:7001/build/user/profile/resolution/Z.jpg" />
+            <Image alt="" src={profileMe.profilePicture} />
           </Box>
           <SelectProfileImageProvider>
             <Box mb="3">
-              <Heading size="md">Erickson Manuel Holguín</Heading>
+              <Heading size="md">
+                {profileMe.name} {profileMe.lastname}
+              </Heading>
               <Heading color="gray.500" size="sm" mb="2.5">
-                @erickson01d
+                @{profileMe.username}
               </Heading>
               <SelectProfileImage
                 labelButton="Cambiar Imagen"

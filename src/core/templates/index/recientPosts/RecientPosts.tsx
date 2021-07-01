@@ -22,7 +22,9 @@ export const RecientPosts: FC = () => {
             <Box>
               <Box borderWidth="2px" cursor="pointer" position="relative">
                 <Link passHref href="/post/vehicle/5784548/mi-carro-2020">
-                  <Img src={vehicle} />
+                  <a>
+                    <Img src={vehicle} />
+                  </a>
                 </Link>
               </Box>
               <Text fontSize={["sm", null, "md"]} fontWeight="semibold" lineHeight="normal">

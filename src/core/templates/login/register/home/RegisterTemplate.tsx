@@ -19,19 +19,19 @@ export const RegisterTemplate: FC = () => {
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
     const csrfToken = await getCsrfToken();
-    console.log("submit", csrfToken);
+    // console.log("submit", csrfToken);
 
-    try {
-      const { data } = await api.post("/auth/callback/credentials", {
-        identifier: "mi-identifier",
-        password: "mi-password",
-        csrfToken,
-      });
-      console.log({ data });
-    } catch (err) {
-      console.log(err);
-    }
-    return;
+    // try {
+    //   const { data } = await api.post("/auth/callback/credentials", {
+    //     identifier: "mi-identifier",
+    //     password: "mi-password",
+    //     csrfToken,
+    //   });
+    //   console.log({ data });
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    // return;
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
 
     const newUser: RegisterUserVariables["user"] = {

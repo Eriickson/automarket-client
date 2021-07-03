@@ -31,8 +31,6 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
     getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
   }, []);
 
-  console.log(methods.formState.errors);
-
   return (
     <FormProvider {...methods}>
       <form id="form-edit-profile" onSubmit={methods.handleSubmit(onSubmit)}>

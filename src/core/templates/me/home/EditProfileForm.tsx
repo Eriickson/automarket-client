@@ -5,6 +5,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "@/store";
 import { editProfileFormResolver, EditProfileFormOnSubmit } from "@/validations";
 import { InputControl, LabelInput, Select, RadioGroup } from "@/components";
+import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
 
 interface EditProfileFormProps {
   onSubmit(values: EditProfileFormOnSubmit): void;
@@ -12,13 +13,25 @@ interface EditProfileFormProps {
 
 export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
   const { isEditing, profileMe } = useSelector(({ profile }) => profile);
+
+  const { provinces, getProvincesFetch } = useGetProvinces();
+  const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
+
   const methods = useForm<EditProfileFormOnSubmit>({
     resolver: editProfileFormResolver,
+    defaultValues: { province: profileMe.direction.province },
   });
 
   useEffect(() => {
-    methods.reset({ sex: "F" });
+    methods.reset({ sex: profileMe.sex });
   }, [isEditing]);
+
+  useEffect(() => {
+    getProvincesFetch();
+    getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
+  }, []);
+
+  console.log(methods.formState.errors);
 
   return (
     <FormProvider {...methods}>
@@ -48,7 +61,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 isRequired
                 label="Provincia"
                 name="province"
-                options={[]}
+                options={provinces}
                 placeholder="Provincia"
                 defaultValue={profileMe.direction.province}
                 isDisabled={!isEditing}
@@ -59,7 +72,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 isRequired
                 label="Municipio"
                 name="municipality"
-                options={[]}
+                options={municipalities}
                 placeholder="Municipio"
                 defaultValue={profileMe.direction.municipality}
                 isDisabled={!isEditing}

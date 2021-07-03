@@ -7,7 +7,7 @@ const WizardStep = () => {
   return (
     <MainLayout>
       <WizardProvider>
-        <Wizard />
+        <Wizard stepList={[]} />
       </WizardProvider>
     </MainLayout>
   );

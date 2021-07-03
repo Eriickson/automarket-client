@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // My Elements
-import { IOption } from "@/shared";
+import { IOption, SexEnum } from "@/shared";
 
 export interface EditProfileFormOnSubmit {
   name: string;
@@ -10,28 +10,28 @@ export interface EditProfileFormOnSubmit {
   province: IOption;
   municipality: IOption;
   birthday: string;
-  sex: string;
+  sex: SexEnum;
 }
 
 const schema = yup.object().shape({
   name: yup.string().required("Campo requerido"),
   lastname: yup.string().required("Campo requerido"),
-  province: yup
-    .object()
-    .shape({
-      label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
-    })
-    .nullable(),
-  municipality: yup
-    .object()
-    .shape({
-      label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
-    })
-    .nullable(),
+  // province: yup
+  //   .object()
+  //   .shape({
+  //     label: yup.string().required("Campo requerido"),
+  //     value: yup.string().required("Campo requerido"),
+  //   })
+  //   .nullable(),
+  // municipality: yup
+  //   .object()
+  //   .shape({
+  //     label: yup.string().required("Campo requerido"),
+  //     value: yup.string().required("Campo requerido"),
+  //   })
+  //   .nullable(),
   birthday: yup.string().required("Campo requerido"),
-  sex: yup.boolean().required("Campo requerido"),
+  sex: yup.string().required("Campo requerido"),
 });
 
 export const editProfileFormResolver = yupResolver(schema);

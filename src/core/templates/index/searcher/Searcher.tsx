@@ -7,7 +7,7 @@ export const Searcher = () => {
   const methods = useForm();
 
   return (
-    <PrimaryCard notBorderTop>
+    <PrimaryCard>
       <Heading color="sec.500" fontSize="xl" mb="3">
         Buscar Vehículo
       </Heading>

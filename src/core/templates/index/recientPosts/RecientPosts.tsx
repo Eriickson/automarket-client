@@ -15,7 +15,7 @@ const vehiclesArray = [
 
 export const RecientPosts: FC = () => {
   return (
-    <PrimaryCard>
+    <PrimaryCard notBorderTop>
       <SimpleGrid columns={12} gap={[1, 2, 3]}>
         {[...vehiclesArray, ...vehiclesArray, ...vehiclesArray].map((vehicle, i) => (
           <GridItem colSpan={[6, null, 4, 3, 2]} key={i}>

@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export type IConfirmOnSubmit = {
+export type IFormConfirmPasswordOnSubmit = {
   confirmPassword: string;
 };
 

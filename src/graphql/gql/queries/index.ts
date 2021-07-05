@@ -14,3 +14,4 @@ export * from "./GetTransmissions";
 export * from "./GetIncludes";
 export * from "./GetFeatures";
 export * from "./GetProfileMe";
+export * from "./VerifyUserPassword";

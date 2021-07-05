@@ -1,15 +1,30 @@
-import React from "react";
+import React, { FC, useEffect } from "react";
+
+// Packages
 import { Button, Text } from "@chakra-ui/react";
-import { useUIContext } from "@/context";
-import { InputControl } from "../inputs";
 import { FormProvider, useForm } from "react-hook-form";
-import { ConfirmPasswordResolver } from "@/validations";
+
+// My Components
 import { ErrorValidationForm } from "@/components";
+import { useUIContext } from "@/context";
+import { useVerifyUserPassword } from "@/graphql";
+import { IFormConfirmPasswordOnSubmit, ConfirmPasswordResolver } from "@/validations";
+import { InputControl } from "../inputs";
 
-interface ConfirmPasswordModal {}
+interface ConfirmPasswordModalProps {
+  labelButton: string;
+  hasSuccess(success: boolean | null): void;
+}
 
-export const ConfirmPasswordModal = () => {
+export const ConfirmPasswordModal: FC<ConfirmPasswordModalProps> = ({ labelButton, hasSuccess }) => {
   const { alertDialog } = useUIContext();
+
+  const Descripction = () => (
+    <>
+      <Text lineHeight="5">Debes validar tu identidad introduciendo tu contraseña antes de realizar esta acción</Text>
+      <ConfirmPasswordModalForm hasSuccess={hasSuccess} />
+    </>
+  );
 
   return (
     <>
@@ -18,14 +33,7 @@ export const ConfirmPasswordModal = () => {
           alertDialog.onOpen({
             title: "Eliminar publicación",
             name: "confirmPassword",
-            desc: (
-              <>
-                <Text lineHeight="5" mb="3">
-                  Debes validar tu identidad introduciendo tu contraseña antes de realizar esta acción
-                </Text>
-                <ConfirmPasswordModalForm />
-              </>
-            ),
+            desc: <Descripction />,
             role: "success",
             priBtnLabel: "Validar",
             secBtnLabel: "Cancelar",
@@ -36,23 +44,38 @@ export const ConfirmPasswordModal = () => {
           })
         }
       >
-        Click here!
+        {labelButton}
       </Button>
     </>
   );
 };
 
-export const ConfirmPasswordModalForm = () => {
+interface ConfirmPasswordModalFormProps {
+  hasSuccess(success: boolean | null): void;
+}
+
+export const ConfirmPasswordModalForm: FC<ConfirmPasswordModalFormProps> = ({ hasSuccess }) => {
+  const { verifyUserPasswordFetch, verified, loading } = useVerifyUserPassword();
+  const { alertDialog } = useUIContext();
   const methods = useForm({ resolver: ConfirmPasswordResolver });
+
+  async function onSubmit(values: IFormConfirmPasswordOnSubmit) {
+    verifyUserPasswordFetch({ password: values.confirmPassword });
+  }
+
+  useEffect(() => {
+    verified && alertDialog.onClose();
+    hasSuccess(verified);
+  }, [verified]);
 
   return (
     <FormProvider {...methods}>
-      <form
-        id="confirmPassword"
-        onSubmit={methods.handleSubmit(values => {
-          console.log(values);
-        })}
-      >
+      {verified === false && (
+        <Text my="3" color="danger.500" fontWeight="semibold" textAlign="center" p="0.1" bgColor="danger.100">
+          La contraseña es incorrecta
+        </Text>
+      )}
+      <form id="confirmPassword" onSubmit={methods.handleSubmit(onSubmit)}>
         <InputControl
           isRequired
           label="Confirma tu contraseña"

@@ -96,7 +96,6 @@ export const Select: FC<SelectProps> = ({
   }
 
   useEffect(() => {
-    console.log({ [name]: defaultValue });
     setValue(name, defaultValue);
   }, [defaultValue]);
 

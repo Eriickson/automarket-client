@@ -1,3 +1,4 @@
+import { ICroppedAreaPixels } from "@/shared";
 import { gql } from "@apollo/client";
 import { Picture } from "./registerUser";
 
@@ -13,7 +14,7 @@ export interface ChangeProfilePicturePayload {
 }
 
 export const CHANGE_PROFILE_PICTURE_M = gql`
-  mutation ChangeProfilePicture($password: String!, $newProfilePicture: Upload!) {
+  mutation ChangeProfilePicture($password: String!, $newProfilePicture: PictureInput!) {
     changeProfilePicture(password: $password, newProfilePicture: $newProfilePicture) {
       changed
     }

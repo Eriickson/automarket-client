@@ -17,11 +17,23 @@ export const CardPresentation: FC = () => {
   const { changeProfilePicture, loading } = useChangeProfilePicture();
 
   async function onChangeProfilePicture(newProfilePicture: onChangeArgsPropType) {
-    console.log(newProfilePicture);
+    const { file, rotation, croppedAreaPixels } = newProfilePicture;
 
     try {
-      // await changeProfilePicture({variables: {newProfilePicture}})
-    } catch (err) {}
+      const { data } = await changeProfilePicture({
+        variables: {
+          newProfilePicture: {
+            file,
+            croppedArea: croppedAreaPixels,
+            rotation,
+          },
+          password: "123456789t",
+        },
+      });
+      console.log({ data });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

@@ -11,16 +11,21 @@ import {
 } from "@/components";
 import { useChangeProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
+import { useUIContext } from "@/context";
+import { useRouter } from "next/router";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
   const { changeProfilePicture, loading } = useChangeProfilePicture();
+  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
+  const { reload } = useRouter();
 
   async function onChangeProfilePicture(newProfilePicture: onChangeArgsPropType) {
+    activateLoadingScreen("Cambiando imagen de perfil");
     const { file, rotation, croppedAreaPixels } = newProfilePicture;
 
     try {
-      const { data } = await changeProfilePicture({
+      await changeProfilePicture({
         variables: {
           newProfilePicture: {
             file,
@@ -30,9 +35,10 @@ export const CardPresentation: FC = () => {
           password: "123456789t",
         },
       });
-      console.log({ data });
+      reload();
     } catch (err) {
       console.log(err);
+      closeLoadingScreen();
     }
   }
 

@@ -6,46 +6,56 @@ import Headroom from "react-headroom";
 
 import { AutomarketRDLogo, AutomarketRDIsotipo } from "../../../assets";
 import { MainMenu } from "./MainMenu";
+import styled from "@emotion/styled";
+
+const StyledMainHeaderWrapper = styled.header`
+  width: 100%;
+  .headroom {
+    z-index: 30 !important;
+  }
+`;
 
 export const MainHeader = () => {
   return (
-    <Headroom>
-      <Box py={[4, 6]} shadow="sm" borderBottomWidth="1px" bg="white">
-        <Container display="flex" alignItems="center" justifyContent="space-between">
-          <Link href="/">
-            <a>
-              <Box cursor="pointer" w="56">
-                <AutomarketRDLogo />
-              </Box>
-            </a>
-          </Link>
-          {/* <Box display={[null, "none"]} w="10">
-          <AutomarketRDIsotipo />
-        </Box> */}
-          <Box display="flex" alignItems="center">
-            <Link href="/login/signup">
+    <StyledMainHeaderWrapper>
+      <Headroom>
+        <Box py={[4, 6]} shadow="sm" borderBottomWidth="1px" bg="white">
+          <Container display="flex" alignItems="center" justifyContent="space-between">
+            <Link href="/">
               <a>
-                <Button colorScheme="pri" display={["none", "block"]}>
-                  Regístrate
-                </Button>
+                <Box cursor="pointer" w="56">
+                  <AutomarketRDLogo />
+                </Box>
               </a>
             </Link>
-            <Button
-              colorScheme="pri"
-              variant="outline"
-              ml="2.5"
-              display={["none", null, "block"]}
-              onClick={() => signIn()}
-            >
-              Iniciar Sesión
-            </Button>
-            <Avatar display="none" shadow="md" name="Kola Tioluwani" src="https://bit.ly/tioluwani-kolawole" />
-            <Box ml="2.5" display={[null, null, "none"]} h="max-content">
-              <MainMenu />
+            {/* <Box display={[null, "none"]} w="10">
+          <AutomarketRDIsotipo />
+        </Box> */}
+            <Box display="flex" alignItems="center">
+              <Link href="/login/signup">
+                <a>
+                  <Button colorScheme="pri" display={["none", "block"]}>
+                    Regístrate
+                  </Button>
+                </a>
+              </Link>
+              <Button
+                colorScheme="pri"
+                variant="outline"
+                ml="2.5"
+                display={["none", null, "block"]}
+                onClick={() => signIn()}
+              >
+                Iniciar Sesión
+              </Button>
+              <Avatar display="none" shadow="md" name="Kola Tioluwani" src="https://bit.ly/tioluwani-kolawole" />
+              <Box ml="2.5" display={[null, null, "none"]} h="max-content">
+                <MainMenu />
+              </Box>
             </Box>
-          </Box>
-        </Container>
-      </Box>
-    </Headroom>
+          </Container>
+        </Box>
+      </Headroom>
+    </StyledMainHeaderWrapper>
   );
 };

@@ -15,10 +15,13 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { AutomarketRDLogo } from "../../../assets";
 import Link from "next/link";
+import { useWindowSize } from "@/hooks";
+
 
 export const MainMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef(null);
+  const { height } = useWindowSize();
 
   return (
     <>
@@ -39,7 +42,7 @@ export const MainMenu = () => {
         placement="right"
       >
         <DrawerOverlay />
-        <DrawerContent bg="gray.50">
+        <DrawerContent bg="gray.50" h={height}>
           <DrawerHeader bg="white" shadow="sm" borderBottomWidth="1px">
             <Box w="44">
               <AutomarketRDLogo />

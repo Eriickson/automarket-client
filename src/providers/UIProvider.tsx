@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useUIContext } from "@/context";
-import { ScreenLoader, AlertDialog, AlertApolloServerError } from "@/components";
+import { ScreenLoader, AlertDialog, AlertApolloServerError, ConfirmPasswordModal } from "@/components";
 
 export const UIProvider: FC = ({ children }) => {
   const { isLoadingScreenActive, closeLoadingScreen, msgLoadingScreen, alertDialog, apolloServerError } =
@@ -22,6 +22,7 @@ export const UIProvider: FC = ({ children }) => {
         cancelRef={apolloServerError.cancelRef}
         {...apolloServerError.options}
       />
+      {/* <ConfirmPasswordModal/> */}
     </>
   );
 };

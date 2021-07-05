@@ -9,7 +9,7 @@ const AlertDialogPage = () => {
 
   return (
     <MainLayout>
-      <ConfirmPasswordModal />
+      {/* <ConfirmPasswordModal /> */}
       <Button
         onClick={() =>
           alertDialog.onOpen({
@@ -19,7 +19,7 @@ const AlertDialogPage = () => {
             secBtnLabel: "No, cancelar",
             onClickPriBtn: alertDialog.onClose,
             role: "warning",
-            name:   "",
+            name: "",
           })
         }
       >

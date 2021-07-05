@@ -3,11 +3,12 @@ import { TransformImageModal } from "./TransformImageModal";
 import { UploadButton } from "./UploadButton";
 import { useSelectProfileImage } from "./SelectProfileImageContext";
 import { Box, Avatar, Img } from "@chakra-ui/react";
+import { ICroppedAreaPixels } from "@/shared";
 
 export type onChangeArgsPropType = {
   file: File;
   src: string;
-  croppedAreaPixels: { w: number; h: number; x: number; y: number };
+  croppedAreaPixels: ICroppedAreaPixels;
   rotation: number;
 };
 

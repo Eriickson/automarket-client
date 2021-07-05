@@ -1,12 +1,28 @@
 import React, { FC } from "react";
 
-import { Box, Button, HStack, Heading, Img } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading } from "@chakra-ui/react";
 import { SettingsMenu } from "./SettingsMenu";
-import { SelectProfileImage, SelectProfileImageProvider, Image } from "@/components";
+import {
+  SelectProfileImage,
+  SelectProfileImageProvider,
+  Image,
+  ConfirmPasswordModal,
+  onChangeArgsPropType,
+} from "@/components";
+import { useChangeProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
+  const { changeProfilePicture, loading } = useChangeProfilePicture();
+
+  async function onChangeProfilePicture(newProfilePicture: onChangeArgsPropType) {
+    console.log(newProfilePicture);
+
+    try {
+      // await changeProfilePicture({variables: {newProfilePicture}})
+    } catch (err) {}
+  }
 
   return (
     <>
@@ -36,12 +52,7 @@ export const CardPresentation: FC = () => {
               <Heading color="gray.500" size="sm" mb="2.5">
                 @{profileMe.username}
               </Heading>
-              <SelectProfileImage
-                labelButton="Cambiar Imagen"
-                onChange={() => {
-                  // console.log(value);
-                }}
-              />
+              <SelectProfileImage labelButton="Cambiar Imagen" onChange={onChangeProfilePicture} />
             </Box>
           </SelectProfileImageProvider>
         </HStack>

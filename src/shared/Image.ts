@@ -1,9 +1,9 @@
 export interface IGetCroppedImg {
   src: string;
-  pixelCrop: ISelectedImageArea;
+  pixelCrop: ICroppedAreaPixels;
   rotation?: number;
 }
-export interface ISelectedImageArea {
+export interface ICroppedAreaPixels {
   x: number;
   y: number;
   w: number;
@@ -11,7 +11,7 @@ export interface ISelectedImageArea {
 }
 export interface IFileAccepted {
   id: string;
-  croppedArea: ISelectedImageArea;
+  croppedArea: ICroppedAreaPixels;
   src: string;
   croppedImageSrc: string;
   file: File;

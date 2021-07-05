@@ -1,16 +1,14 @@
+import { ICroppedAreaPixels } from "@/shared";
 import { gql } from "@apollo/client";
 
+export interface Picture {
+  file: File;
+  croppedArea: ICroppedAreaPixels;
+  rotation: number;
+}
+
 interface INewUser {
-  profilePicture?: {
-    file: File;
-    croppedArea: {
-      w: number;
-      h: number;
-      x: number;
-      y: number;
-    };
-    rotation: number;
-  };
+  profilePicture?: Picture;
   name: string;
   lastname: string;
   birthday: string;

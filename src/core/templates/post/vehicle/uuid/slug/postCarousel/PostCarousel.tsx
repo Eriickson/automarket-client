@@ -44,8 +44,25 @@ export const PostCarousel: FC = () => {
           ))}
         </Swiper>
       </Box>
-      <Box bg="gray.900" px="1.5" py="3">
-        <Swiper watchSlidesProgress watchSlidesVisibility slidesPerView={5} spaceBetween={8} onSwiper={setThumbsSwiper}>
+      <Box bg="gray.900" px="1.5" py={[1, null, 3]}>
+        <Swiper
+          watchSlidesProgress
+          watchSlidesVisibility
+          slidesPerView={3}
+          slidesPerGroup={3}
+          loop={true}
+          loopFillGroupWithBlank={true}
+          breakpoints={{
+            645: {
+              slidesPerView: 4,
+            },
+            796: {
+              slidesPerView: 6,
+            },
+          }}
+          spaceBetween={8}
+          onSwiper={setThumbsSwiper}
+        >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => (
             <SwiperSlide key={item}>
               <Img

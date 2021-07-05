@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Heading, List, ListItem, ListIcon, GridItem } from "@chakra-ui/react";
+import { Heading, List, ListItem, ListIcon, GridItem, Text } from "@chakra-ui/react";
 
 import { PrimaryCard } from "@/components";
 
@@ -15,14 +15,22 @@ export const PanelListing: FC<PanelListingProps> = ({ title, listing }) => {
   return (
     <GridItem colSpan={[12, 12, 6]}>
       <PrimaryCard notBorderTop>
-        <Heading mb="3" size="md">
+        <Heading fontSize={["md", null, "lg"]} mb="3" size="md">
           {title}
         </Heading>
         <List display={["flex", null, "block"]} flexWrap="wrap" spacing={3}>
           {listing.map((item, i) => (
-            <ListItem pb="1.5" mt="0 !important" w={["50%", null, "full"]} fontWeight="medium" key={i}>
-              <ListIcon fontSize="xl" as={item.IconList} color="pri.600" />
-              {item.label}
+            <ListItem
+              display="flex"
+              pb="1.5"
+              alignItems="center"
+              mt="0 !important"
+              w={["50%", null, "full"]}
+              fontWeight="medium"
+              key={i}
+            >
+              <ListIcon fontSize={["lg", null, "xl"]} as={item.IconList} color="pri.600" />
+              <Text fontSize={["sm", null, "md"]}>{item.label}</Text>
             </ListItem>
           ))}
         </List>

@@ -7,7 +7,7 @@ import { PrimaryCard } from "@/components";
 export const DescriptiveInformationPanel: FC = () => {
   return (
     <PrimaryCard notBorderTop>
-      <Heading mb="3" size="md">
+      <Heading mb="3" fontSize={["md", null, "lg"]}>
         Información Descriptiva
       </Heading>
       <SimpleGrid columns={12} gap={3}>

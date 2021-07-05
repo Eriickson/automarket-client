@@ -5,21 +5,16 @@ import { VStack } from "@chakra-ui/react";
 
 // My Components
 import { MainLayout } from "@/layouts";
-import { EditProfileForm } from "./EditProfileForm";
+import { EditProfile } from "./EditProfile";
 import { CardPresentation } from "./CardPresentation";
 import { ActionsBottom } from "./ActionsBottom";
-import { EditProfileFormOnSubmit } from "@/validations";
 
 export const MeTemplate: FC = () => {
-  async function onSubmit(values: EditProfileFormOnSubmit) {
-    console.log(values);
-  }
-
   return (
     <MainLayout>
       <VStack align="stretch">
         <CardPresentation />
-        <EditProfileForm onSubmit={onSubmit} />
+        <EditProfile  />
         <ActionsBottom />
       </VStack>
     </MainLayout>

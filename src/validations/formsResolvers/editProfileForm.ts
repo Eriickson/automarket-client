@@ -8,7 +8,7 @@ export interface EditProfileFormOnSubmit {
   name: string;
   lastname: string;
   province: IOption;
-  municipality: IOption;
+  municipality: IOption | null;
   birthday: string;
   sex: SexEnum;
 }

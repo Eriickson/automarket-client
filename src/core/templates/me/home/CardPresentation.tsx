@@ -64,7 +64,7 @@ export const CardPresentation: FC = () => {
           </Box>
           <SelectProfileImageProvider>
             <Box mb="3">
-              <Heading size="md">
+              <Heading fontSize={[null, null, "md"]}>
                 {profileMe.name} {profileMe.lastname}
               </Heading>
               <Heading color="gray.500" size="sm" mb="2.5">

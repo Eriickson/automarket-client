@@ -63,6 +63,10 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 placeholder="Provincia"
                 defaultValue={profileMe.direction.province}
                 isDisabled={!isEditing}
+                onChange={({ value }) => {
+                  methods.setValue("municipality", null);
+                  getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
+                }}
               />
             </GridItem>
             <GridItem colSpan={[12, null, 4]}>

@@ -17,19 +17,22 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
   const { provinces, getProvincesFetch } = useGetProvinces();
   const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
 
-  const methods = useForm<EditProfileFormOnSubmit>({
-    resolver: editProfileFormResolver,
-    defaultValues: { province: profileMe.direction.province },
-  });
+  const methods = useForm<EditProfileFormOnSubmit>();
 
   useEffect(() => {
-    methods.reset({ sex: profileMe.sex });
+    methods.reset({
+      province: profileMe.direction.province,
+      municipality: profileMe.direction.municipality,
+      sex: profileMe.sex,
+    });
+    getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
   }, [isEditing]);
 
   useEffect(() => {
     getProvincesFetch();
-    getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
-  }, []);
+    profileMe.direction.province &&
+      getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
+  }, [profileMe.direction.province]);
 
   return (
     <FormProvider {...methods}>
@@ -61,7 +64,6 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 name="province"
                 options={provinces}
                 placeholder="Provincia"
-                defaultValue={profileMe.direction.province}
                 isDisabled={!isEditing}
                 onChange={({ value }) => {
                   methods.setValue("municipality", null);

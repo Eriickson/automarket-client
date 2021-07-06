@@ -4,14 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Box, Button } from "@chakra-ui/react";
 import { IOption } from "@/shared";
+import { useAction, useSelector } from "@/store";
 
 const SelectPage = () => {
-  const [defaultValue, setDefaultValue] = useState<IOption>();
+  const { setExampleSelect } = useAction();
+  const { exampeSelect } = useSelector(store => store.agency);
   const methods = useForm();
 
 
   useEffect(() => {
-    setDefaultValue({ value: "3", label: "example3" });
+    setExampleSelect({ value: "3", label: "example3" });
   }, []);
 
   return (
@@ -25,8 +27,8 @@ const SelectPage = () => {
           >
             <InputControl name="input" inputProps={{ placeholder: "Seleccionar..." }} />
             <Select
-              name="select"
-              defaultValue={defaultValue}
+              name="example-select"
+              defaultValue={exampeSelect}
               options={[
                 { value: "1", label: "example1" },
                 { value: "2", label: "example2" },

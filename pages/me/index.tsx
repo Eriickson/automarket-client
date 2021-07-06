@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import { MeTemplate } from "@/templates";
 import { MePageProps } from "@/servers";
@@ -7,7 +7,9 @@ import { useAction } from "@/store";
 const MePage: FC<MePageProps> = ({ profileMe }) => {
   const { setProfileMe } = useAction();
 
-  setProfileMe(profileMe);
+  useEffect(() => {
+    setProfileMe(profileMe);
+  }, []);
 
   return <MeTemplate />;
 };

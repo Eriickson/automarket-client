@@ -16,6 +16,7 @@ export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, i
   const {
     register,
     formState: { errors },
+    getValues,
   } = useFormContext();
 
   const isError = errors[name];

@@ -59,9 +59,7 @@ export const CardPresentation: FC = () => {
         shadow="sm"
       >
         <HStack alignItems="center" spacing="4">
-          <Box w="28">
-            <Image alt="" src={profileMe.profilePicture} />
-          </Box>
+          <Box w="28">{/* <Image alt="" src={profileMe.profilePicture} /> */}</Box>
           <SelectProfileImageProvider>
             <Box mb="3">
               <Heading fontSize={[null, null, "md"]}>

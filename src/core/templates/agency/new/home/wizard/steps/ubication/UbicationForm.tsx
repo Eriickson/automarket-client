@@ -1,21 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { Box, SimpleGrid, GridItem } from "@chakra-ui/react";
 
 import { Select, FormWizardProvider, InputControl } from "@/components";
 import { useGetProvinces, useGetMunicipalitiesByProvinceId, useGetSectorsByMunicipalityId } from "@/graphql";
-import { useEffect } from "react";
 
+import { NewAgencyUbicationResolver, NewVehicleDataFormOnSubmit } from "@/validations";
 interface UbicationFormProps {
-  onSubmit(values: any): void;
+  onSubmit(values: NewVehicleDataFormOnSubmit): void;
 }
 
 export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
   const { provinces, getProvincesFetch } = useGetProvinces();
   const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
   const { sectors, getSectorsByMunicipalityIdFetch } = useGetSectorsByMunicipalityId();
-  const methods = useForm();
+  const methods = useForm({ resolver: NewAgencyUbicationResolver });
 
   useEffect(() => {
     getProvincesFetch();

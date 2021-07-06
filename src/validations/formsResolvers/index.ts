@@ -7,3 +7,5 @@ export * from "./ubicationNewAgencyForm";
 export * from "./newVehicleDataForm";
 export * from "./editAgencyForm";
 export * from "./confirmPasswordForm";
+export * from "./newAgencyDataForm";
+export * from "./newAgencyUbication";

@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 
 import { Box } from "@chakra-ui/react";
 
+import { useSelector } from "@/store";
+
 import {
   FormWizardProvider,
   InputControl,
@@ -12,12 +14,17 @@ import {
   LabelInput,
 } from "@/components";
 
+import { NewAgencyDataResolver, INewAgencyDataFormOnSubmit } from "@/validations";
+
 interface NewAgencyDataFormProps {
-  onSubmit(values: any): void;
+  onSubmit(values: INewAgencyDataFormOnSubmit): void;
 }
 
 export const NewAgencyDataForm: FC<NewAgencyDataFormProps> = ({ onSubmit }) => {
-  const methods = useForm();
+  const { agencyData } = useSelector(({ agency }) => agency.new);
+  const methods = useForm({
+    resolver: NewAgencyDataResolver,
+  });
 
   return (
     <FormWizardProvider methods={methods} onSubmit={onSubmit}>
@@ -34,16 +41,16 @@ export const NewAgencyDataForm: FC<NewAgencyDataFormProps> = ({ onSubmit }) => {
             />
           </SelectProfileImageProvider>
         </Box>
-        <InputControl isRequired label="Nombre de la agencía" name="name" />
-        <InputControl isRequired label="Eslogan" name="slogan" />
+        <InputControl isRequired label="Nombre de la agencía" name="name" defaultValue={agencyData?.name} />
+        <InputControl isRequired label="Eslogan" name="slogan" defaultValue={agencyData?.slogan} />
         <RadioGroup
           isRequired
           label="Tipo de agencia"
-          name="isProfesional"
-          defaultValue="professional"
+          name="isProfessional"
+          defaultValue={agencyData?.isProfessional ? agencyData?.isProfessional : true}
           radioItems={[
-            { label: "Profesional", value: "professional" },
-            { label: "Personal", value: "personal" },
+            { label: "Profesional", value: true },
+            { label: "Personal", value: false },
           ]}
         />
         {/* <RadioGroup

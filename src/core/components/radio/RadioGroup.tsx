@@ -3,6 +3,7 @@ import { Radio, Stack, RadioGroup as RadioGroupChakra, FormControl } from "@chak
 import { IOption } from "@/shared";
 import { LabelInput } from "@/components";
 import { useFormContext, Controller } from "react-hook-form";
+import { useEffect } from "react";
 
 interface IRadioItem extends IOption {
   isDisable?: boolean;
@@ -15,7 +16,7 @@ interface RadioGroupProps {
   radioItems: IRadioItem[];
   size?: "sm" | "md" | "lg";
   direction?: "row" | "column";
-  defaultValue?: string | number;
+  defaultValue?: string | number | boolean;
 }
 
 export const RadioGroup: FC<RadioGroupProps> = ({
@@ -27,7 +28,12 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   defaultValue,
   radioItems,
 }) => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+
+  useEffect(() => {
+    setValue(name, String(defaultValue));
+  }, [defaultValue]);
+
   return (
     <Controller
       control={control}
@@ -35,10 +41,10 @@ export const RadioGroup: FC<RadioGroupProps> = ({
       render={({ field }) => (
         <FormControl mb="3">
           {label && <LabelInput isRequired={isRequired} label={label} />}
-          <RadioGroupChakra defaultValue={defaultValue} size={size} {...field}>
+          <RadioGroupChakra defaultValue={String(defaultValue)} size={size} {...field}>
             <Stack direction={direction}>
               {radioItems.map((radioItem, i) => (
-                <Radio size="lg" isDisabled={radioItem.isDisable} key={i} value={radioItem.value}>
+                <Radio size="lg" isDisabled={radioItem.isDisable} key={i} value={String(radioItem.value)}>
                   {radioItem.label}
                 </Radio>
               ))}

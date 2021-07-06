@@ -6,7 +6,25 @@ interface InitialState {
   profileMe: IUser;
 }
 
-const initialState = {} as InitialState;
+const initialState = {
+  profileMe: {
+    profilePicture: "",
+    name: "",
+    lastname: "",
+    birthday: "",
+    username: "",
+    direction: {
+      province: {
+        label: "",
+        value: "",
+      },
+      municipality: {
+        label: "",
+        value: "",
+      },
+    },
+  },
+} as InitialState;
 
 const profileReducer = createSlice({
   name: "profile",

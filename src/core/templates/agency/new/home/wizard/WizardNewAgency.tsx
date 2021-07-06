@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { Wizard, IWizardStep } from "@/components";
-import { DataAgencyStep, UbicationStep, ContactsStep, VerifyStep } from "./steps";
+import { NewAgencyDataStep, UbicationStep, ContactsStep, VerifyStep } from "./steps";
 import { IconFileText, IconMapPin, IconPhoneCall, IconShieldCheck } from "@tabler/icons";
 
 export const WizardNewAgency = () => {
@@ -12,7 +12,7 @@ export const WizardNewAgency = () => {
       desc: "Agrega los datos principales que identifiquen y que hagan única a tu agencia entre las demás.",
       title: "Datos de la agencia",
       Icon: <IconFileText />,
-      Component: <DataAgencyStep />,
+      Component: <NewAgencyDataStep />,
     },
     {
       label: "Ubicación",

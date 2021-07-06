@@ -1,8 +1,8 @@
 import React from "react";
 import { useWizard } from "@/components";
-import { DataAgencyForm } from "./DataAgencyForm";
+import { NewAgencyDataForm } from "./NewAgencyDataForm";
 
-export const DataAgencyStep = () => {
+export const NewAgencyDataStep = () => {
   const { nextStep } = useWizard();
 
   async function onSubmit(values: any) {
@@ -10,5 +10,5 @@ export const DataAgencyStep = () => {
     nextStep();
   }
 
-  return <DataAgencyForm onSubmit={onSubmit} />;
+  return <NewAgencyDataForm onSubmit={onSubmit} />;
 };

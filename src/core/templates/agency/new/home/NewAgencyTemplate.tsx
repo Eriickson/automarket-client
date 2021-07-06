@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { MainLayout } from "@/layouts";
-import { Wizard, WizardProvider } from "@/components";
-import { DataAgencyStep } from "./wizard/steps/agencyData/DataAgencyStep";
+import { WizardProvider } from "@/components";
 import { WizardNewAgency } from "./wizard/WizardNewAgency";
 
 export const NewAgencyTemplate: FC = () => {

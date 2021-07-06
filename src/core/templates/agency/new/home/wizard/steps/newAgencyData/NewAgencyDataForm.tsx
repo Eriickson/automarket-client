@@ -12,11 +12,11 @@ import {
   LabelInput,
 } from "@/components";
 
-interface DataAgencyFormProps {
+interface NewAgencyDataFormProps {
   onSubmit(values: any): void;
 }
 
-export const DataAgencyForm: FC<DataAgencyFormProps> = ({ onSubmit }) => {
+export const NewAgencyDataForm: FC<NewAgencyDataFormProps> = ({ onSubmit }) => {
   const methods = useForm();
 
   return (

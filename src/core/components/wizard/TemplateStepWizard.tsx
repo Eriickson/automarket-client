@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 // My Components
 import { PrimaryCard } from "..";
+import { FormWizardProvider } from "./FormWizardProvider";
 
 // Types and Interfaces
 export interface TemplateStepWizardProps {
@@ -42,29 +43,6 @@ export const TemplateStepWizard: React.FC<TemplateStepWizardProps> = ({ children
         </Box>
         <>{children}</>
       </PrimaryCard>
-      {/* <Card notBorderTop>
-        <div className="flex justify-end">
-          <div className="flex">
-            {!start && (
-              <button
-                className="mr-3 btn icon outline pri left"
-                onClick={() => disptach(publicationActions.prevStepWizard())}
-              >
-                <ChevronLeft className="w-5 h-5" />
-                Anterior
-              </button>
-            )}
-            <button
-              form="formulario"
-              className="btn pri icon right"
-              // disabled={!stepComponents[currentStep].completed}
-            >
-              {end ? "Publicar" : "Siguiente"}
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </Card> */}
     </>
   );
 };

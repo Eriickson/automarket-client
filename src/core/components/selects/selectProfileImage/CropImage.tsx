@@ -26,7 +26,7 @@ const WrapperCropperImageStyled = styled.div`
 `;
 
 export const CropImage: FC = () => {
-  const { zoom, crop, rotation, fileToEditing, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } =
+  const { zoom, crop, rotation, aspectRatio, fileToEditing, onZoomChange, onChangeCrop, onCroppedAreaPixelsChange } =
     useSelectProfileImage();
 
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
@@ -37,7 +37,7 @@ export const CropImage: FC = () => {
   return (
     <WrapperCropperImageStyled>
       <Cropper
-        aspect={1 / 1}
+        aspect={aspectRatio}
         crop={crop}
         image={fileToEditing.src}
         rotation={rotation}

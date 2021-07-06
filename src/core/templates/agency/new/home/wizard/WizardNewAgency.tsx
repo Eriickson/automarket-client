@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
-import { Wizard, IWizardStep, useWizard } from "@/components";
-import { DataAgencyStep, UbicationStep } from "./steps";
+import { Wizard, IWizardStep } from "@/components";
+import { DataAgencyStep, UbicationStep, ContactsStep, VerifyStep } from "./steps";
 import { IconFileText, IconMapPin, IconPhoneCall, IconShieldCheck } from "@tabler/icons";
 
 export const WizardNewAgency = () => {
@@ -28,7 +28,7 @@ export const WizardNewAgency = () => {
       desc: "Agrega las diferentes vías en que un cliente se puede comunicar con el personal de la agencia.",
       title: "Vías de comunicación",
       Icon: <IconPhoneCall />,
-      Component: <UbicationStep />,
+      Component: <ContactsStep />,
     },
     {
       label: "Verificar",
@@ -36,7 +36,7 @@ export const WizardNewAgency = () => {
       desc: "Para finalizar, revisa que los datos agregados en los pasos anteriores estén correctos.",
       title: "Verificar información",
       Icon: <IconShieldCheck />,
-      Component: <UbicationStep />,
+      Component: <VerifyStep />,
     },
   ]);
 

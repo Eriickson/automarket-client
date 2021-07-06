@@ -12,6 +12,7 @@ interface ISelectProfileImageContext {
   fileSelected: { file: File | null; src: string };
   croppedAreaPixels: { w: number; h: number; x: number; y: number };
   labelButton: string;
+  aspectRatio: number;
   onZoomChange(newZoom: number): void;
   onRotationChange(): void;
   onCroppedAreaPixelsChange(w: number, h: number, x: number, y: number): void;
@@ -22,6 +23,7 @@ interface ISelectProfileImageContext {
   onClose(): void;
   onSaveChange(): void;
   setLabelButton(labelButton: string): void;
+  setAspectRatio(aspectRatio: number): void;
 }
 
 const SelectProfileImageContext = createContext<ISelectProfileImageContext | null>(
@@ -34,6 +36,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [rotation, setRotate] = useState(0);
   const [labelButton, setLabelButton] = useState("Seleccionar");
+  const [aspectRatio, setAspectRatio] = useState(1 / 1);
   const [fileToEditing, setFileToEditing] = useState<{ file: File | null; src: string }>({
     file: null,
     src: "",
@@ -96,8 +99,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
 
       onReset();
       onClose();
-    } catch (err) {
-    }
+    } catch (err) {}
   }
 
   return (
@@ -112,6 +114,8 @@ const SelectProfileImageProvider: FC = ({ children }) => {
         isLoading,
         croppedAreaPixels,
         labelButton,
+        aspectRatio,
+        setAspectRatio,
         setLabelButton,
         onZoomChange,
         onChangeCrop,

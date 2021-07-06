@@ -1,8 +1,13 @@
 import React, { FC } from "react";
 
-import { PrimaryCard } from "@/components";
-import { Box, Text, GridItem, Img, SimpleGrid } from "@chakra-ui/react";
+// NextJS
 import Link from "next/link";
+
+// Packages
+import { Box, Text, GridItem, Img, SimpleGrid } from "@chakra-ui/react";
+
+// My Components
+import { PrimaryCard } from "@/components";
 
 const vehiclesArray = [
   "https://i.pinimg.com/originals/8e/6f/1c/8e6f1ccc03d808ac32758d7c26ca9802.jpg",

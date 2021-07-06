@@ -1,9 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
+// NextJS
 import Link from "next/link";
 
-export const LoginBannerBottom = () => {
+// Packages
+import { Box, Heading, Text, Button } from "@chakra-ui/react";
+
+export const LoginBannerBottom: FC = () => {
   return (
     <Box
       bg="white"

@@ -1,7 +1,11 @@
 import React from "react";
-import { PrimaryCard, Select } from "@/components";
+
+// Packages
 import { Button, GridItem, SimpleGrid, Heading } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
+
+// My Components
+import { PrimaryCard, Select } from "@/components";
 
 export const Searcher = () => {
   const methods = useForm();

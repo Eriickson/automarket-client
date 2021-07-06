@@ -1,7 +1,9 @@
 import React, { FC } from "react";
 
+// Packages
 import { VStack } from "@chakra-ui/react";
 
+// My Components
 import { MainLayout } from "@/layouts";
 import { Searcher } from "./searcher/Searcher";
 import { LoginBannerBottom } from "./BannersBottom";

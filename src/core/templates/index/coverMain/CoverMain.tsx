@@ -1,4 +1,6 @@
 import React from "react";
+
+// Packages
 import { Box, Img } from "@chakra-ui/react";
 
 export const CoverMain = () => {

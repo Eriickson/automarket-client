@@ -11,3 +11,4 @@ export * from "./confirmPasswordModal";
 export * from "./wizard";
 export * from "./alertApolloServerError";
 export * from "./seo";
+export * from "./range";

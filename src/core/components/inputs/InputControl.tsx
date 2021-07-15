@@ -50,6 +50,7 @@ export const InputControl: FC<InputControlProps> = ({
         rounded="sm"
         size={size}
         shadow="sm"
+        isDisabled
         {...register(name)}
         defaultValue={defaultValue}
       />

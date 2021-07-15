@@ -10,9 +10,17 @@ interface InputControlProps {
   isRequired?: boolean;
   inputProps?: InputProps;
   defaultValue?: string | number;
+  size?: "sm" | "md" | "lg";
 }
 
-export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, isRequired, defaultValue }) => {
+export const InputControl: FC<InputControlProps> = ({
+  name,
+  label,
+  inputProps,
+  isRequired,
+  defaultValue,
+  size = "md",
+}) => {
   const {
     register,
     formState: { errors },
@@ -40,6 +48,7 @@ export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, i
         colorScheme="red"
         px="3"
         rounded="sm"
+        size={size}
         shadow="sm"
         {...register(name)}
         defaultValue={defaultValue}

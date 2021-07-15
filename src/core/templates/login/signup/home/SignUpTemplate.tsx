@@ -45,9 +45,9 @@ export const SignUpTemplate: FC = () => {
 
   return (
     <LoginLayout>
-      <Box bg="white" borderColor="gray.100" borderWidth="1px" m="auto" maxWidth="sm" mb="3" p="8" shadow="sm">
+      <Box bg="white" borderColor="gray.100" borderWidth="1px" m="auto" maxWidth="md" mb="3" p="8" shadow="sm">
         <Box>
-          <Heading as="h2" fontWeight="medium" mb="1.5" size="lg" textAlign="center">
+          <Heading as="h2" fontWeight="medium" mb="1.5" size="xl" textAlign="center">
             Regístrate
           </Heading>
           <Text color="gray.500" fontSize="sm" lineHeight="normal" mb="8" textAlign="center">

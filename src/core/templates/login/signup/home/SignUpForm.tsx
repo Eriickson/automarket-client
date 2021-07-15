@@ -24,9 +24,10 @@ export const SignUpForm: FC<SignUpForm> = ({ onSubmit }) => {
               inputProps={{ placeholder: "Correo electrónico" }}
               label="Correo electrónico"
               name="email"
+              size="lg"
             />
           </Box>
-          <Button colorScheme="pri" type="submit" w="full">
+          <Button colorScheme="pri" type="submit" w="full" size="lg">
             Registrarse
           </Button>
         </Box>

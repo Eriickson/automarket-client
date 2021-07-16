@@ -27,7 +27,7 @@ export const SignUpForm: FC<SignUpForm> = ({ onSubmit }) => {
               size="lg"
             />
           </Box>
-          <Button colorScheme="pri" type="submit" w="full" size="lg">
+          <Button colorScheme="pri" size="lg" type="submit" w="full">
             Registrarse
           </Button>
         </Box>

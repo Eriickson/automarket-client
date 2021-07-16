@@ -1,24 +1,29 @@
-import React from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import { Box, Container, Text } from "@chakra-ui/react";
 
-export const LegalFooter = () => {
+export const LegalFooter: FC = () => {
   return (
-    <Container display="flex" flexDirection={["column-reverse", null, "row"]} justifyContent="space-between">
-      <Text color="gray.500" fontWeight="semibold" fontSize={["sm"]} lineHeight="4" textAlign="center">
+    <Container
+      alignItems="center"
+      display="flex"
+      flexDirection={["column-reverse", null, "row"]}
+      justifyContent="space-between"
+    >
+      <Text color="gray.500" fontSize={["sm"]} fontWeight="semibold" lineHeight="4" textAlign="center">
         &copy; {new Date().getFullYear()} Automarket RD, Todos los derechos reservados.
       </Text>
-      <Box display="flex" justifyContent="center" alignItems="center" color="gray.500">
-        <Link href="">
-          <Text cursor="pointer" fontWeight="semibold" _hover={{ color: "pri.400", textDecor: "underline" }}>
+      <Box alignItems="center" color="gray.500" display="flex" justifyContent="center">
+        <Link href="/">
+          <Text _hover={{ color: "pri.400", textDecor: "underline" }} cursor="pointer" fontWeight="semibold">
             Términos y condiciones
           </Text>
         </Link>
-        <Text fontSize="xl" userSelect="none" mx="3">
+        <Text fontSize="xl" mx="3" userSelect="none">
           •
         </Text>
         <Link href="">
-          <Text cursor="pointer" fontWeight="semibold" _hover={{ color: "pri.400", textDecor: "underline" }}>
+          <Text _hover={{ color: "pri.400", textDecor: "underline" }} cursor="pointer" fontWeight="semibold">
             Políticas de privacidad
           </Text>
         </Link>

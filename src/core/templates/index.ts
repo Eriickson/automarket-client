@@ -10,6 +10,7 @@ export * from "./login/register/home/RegisterTemplate";
 export * from "./login/reset-password/home/ResetPasswordTemplate";
 
 export * from "./post/vehicle/uuid/slug/PostTemplate";
+export * from "./post/vehicle/new/home/NewVehicleTemplate";
 export * from "./post/vehicle/uuid/edit/home/VehicleEditTemplate";
 
 export * from "./me/home/MeTemplate";

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Heading, Text, HStack, Divider, Box } from "@chakra-ui/react";
+import { Heading, Text, HStack, Divider, Box, Tag } from "@chakra-ui/react";
 
 import { IconClock, IconMapPin } from "@tabler/icons";
 
@@ -27,12 +27,20 @@ export const InfoPanel: FC = () => {
       <Divider my="2" />
       <Box flex="2">
         <Heading fontSize={["md", null, "lg"]}>Vendo Toyota Corolla Recien importado</Heading>
+        <HStack flexWrap="wrap" mb="2" mt="1">
+          <Tag mb="1">Nuevo</Tag>
+          <Tag mb="1">Recién importado</Tag>
+          <Tag mb="1">Nuevo</Tag>
+          <Tag mb="1">Recién importado</Tag>
+          <Tag mb="1">Nuevo</Tag>
+        </HStack>
         <Text fontSize={["sm", null, "md"]} maxW="3xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, odit cum! Repellendus dignissimos dolores quo
           blanditiis, atque aut placeat commodi labore debitis voluptatibus harum iusto sequi expedita ut, architecto
           possimus.
         </Text>
       </Box>
+      <Divider my="2" />
     </PrimaryCard>
   );
 };

@@ -5,7 +5,9 @@ import { IconMarquee2, IconCircleCheck, IconCirclePlus, IconStars } from "@table
 import { MainLayout } from "@/layouts";
 import { GridItem, Img, SimpleGrid, VStack } from "@chakra-ui/react";
 import { PostCarousel } from "./postCarousel/PostCarousel";
-import { AgencyPanel,  InfoPanel, DescriptiveInformationPanel, PanelListing } from "./panels";
+import { AgencyPanel, InfoPanel, DescriptiveInformationPanel, PanelListing } from "./panels";
+import { MorePost } from "./morePost/MorePost";
+import StickyBox from "react-sticky-box";
 
 export const PostTemplate: FC = () => {
   return (
@@ -57,23 +59,28 @@ export const PostTemplate: FC = () => {
           </VStack>
         </GridItem>
         <GridItem colSpan={[12, null, null, 4]}>
-          <VStack align="inherit">
-            <AgencyPanel />
-            <SimpleGrid columns={12} gap={2} >
-              <GridItem colSpan={6} >
-                <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-              </GridItem>
-              <GridItem colSpan={6} >
-                <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-              </GridItem>
-              <GridItem colSpan={6} >
-                <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-              </GridItem>
-              <GridItem colSpan={6} >
-                <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-              </GridItem>
-            </SimpleGrid>
-          </VStack>
+          <StickyBox offsetTop={20} offsetBottom={20}>
+            <VStack align="inherit">
+              <AgencyPanel />
+              <SimpleGrid columns={12} gap={2}>
+                <GridItem colSpan={6}>
+                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
+                </GridItem>
+                <GridItem colSpan={6}>
+                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
+                </GridItem>
+                <GridItem colSpan={6}>
+                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
+                </GridItem>
+                <GridItem colSpan={6}>
+                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
+                </GridItem>
+              </SimpleGrid>
+            </VStack>
+          </StickyBox>
+        </GridItem>
+        <GridItem colSpan={12}>
+          <MorePost />
         </GridItem>
       </SimpleGrid>
     </MainLayout>

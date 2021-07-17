@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Thumbs, Pagination, EffectCoverflow } from "swiper/core";
-import { Box, Img } from "@chakra-ui/react";
+import { Box, Img, Tag } from "@chakra-ui/react";
 
 SwiperCore.use([Thumbs, Navigation, EffectCoverflow, Pagination]);
 
@@ -11,7 +11,7 @@ export const PostCarousel: FC = () => {
 
   return (
     <Box bg="white" shadow="sm">
-      <Box mb="2">
+      <Box mb="2" position="relative">
         <Swiper
           centeredSlides
           grabCursor
@@ -43,15 +43,23 @@ export const PostCarousel: FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <Tag
+          bgColor="gray.600"
+          color="white"
+          zIndex="10"
+          size="lg"
+          fontWeight="semibold"
+          position="absolute"
+          bottom="3"
+          left="3"
+        >
+          9/10
+        </Tag>
       </Box>
       <Box bg="gray.900" px="1.5" py={[1, null, 3]}>
         <Swiper
           watchSlidesProgress
           watchSlidesVisibility
-          slidesPerView={3}
-          slidesPerGroup={3}
-          loop={true}
-          loopFillGroupWithBlank={true}
           breakpoints={{
             645: {
               slidesPerView: 4,
@@ -60,6 +68,10 @@ export const PostCarousel: FC = () => {
               slidesPerView: 6,
             },
           }}
+          loop={true}
+          loopFillGroupWithBlank={true}
+          slidesPerGroup={3}
+          slidesPerView={3}
           spaceBetween={8}
           onSwiper={setThumbsSwiper}
         >

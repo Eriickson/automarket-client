@@ -13,6 +13,7 @@ import { useChangeProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
 import { useUIContext } from "@/context";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
@@ -44,9 +45,13 @@ export const CardPresentation: FC = () => {
 
   return (
     <>
-      <Button colorScheme="sec" w="full">
-        Crea tu agencia
-      </Button>
+      <Link href="/agency/new">
+        <a>
+          <Button colorScheme="sec" w="full">
+            Crea tu agencia
+          </Button>
+        </a>
+      </Link>
       <Box
         bg="white"
         borderColor="gray.100"

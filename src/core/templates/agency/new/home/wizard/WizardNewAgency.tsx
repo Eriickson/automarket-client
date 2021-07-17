@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { Wizard, IWizardStep } from "@/components";
 import { NewAgencyDataStep, UbicationStep, ContactsStep, VerifyStep } from "./steps";
 import { IconFileText, IconMapPin, IconPhoneCall, IconShieldCheck } from "@tabler/icons";
 
-export const WizardNewAgency = () => {
+export const WizardNewAgency: FC = () => {
   const [stepList] = useState<IWizardStep[]>([
     {
       label: "Datos",

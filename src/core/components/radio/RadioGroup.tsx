@@ -39,12 +39,12 @@ export const RadioGroup: FC<RadioGroupProps> = ({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormControl mb="3">
+        <FormControl w="max-content">
           {label && <LabelInput isRequired={isRequired} label={label} />}
           <RadioGroupChakra defaultValue={String(defaultValue)} size={size} {...field}>
             <Stack direction={direction}>
               {radioItems.map((radioItem, i) => (
-                <Radio size="lg" isDisabled={radioItem.isDisable} key={i} value={String(radioItem.value)}>
+                <Radio isDisabled={radioItem.isDisable} key={i} size={size} value={String(radioItem.value)}>
                   {radioItem.label}
                 </Radio>
               ))}

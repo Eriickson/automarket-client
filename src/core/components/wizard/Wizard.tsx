@@ -1,21 +1,12 @@
 import React, { FC, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
-import {
-  IconClipboardCheck,
-  IconClipboardList,
-  IconListCheck,
-  IconPhone,
-  IconPhoto,
-  IconShieldCheck,
-} from "@tabler/icons";
+
 import { StepIndicatorSm } from "./StepIndicatorSm";
 import { StepIndicator } from "./StepIndicator";
 import { WizardAction } from "./WizardAction";
 import { useWizard } from "./WizardContext";
-import { StepExample } from "./StepExample";
 import { ContainerWizard } from "./ContainerWizard";
 import { IWizardStep } from "./types";
-import {} from "react";
 
 interface WizardProps {
   stepList: IWizardStep[];

@@ -13,7 +13,7 @@ export const ActionsBottom: FC = () => {
       {isEditing ? (
         <Fade in={true}>
           <HStack>
-            <Button type="reset" colorScheme="danger" onClick={toggleMyAgencyUbicationEdit}>
+            <Button colorScheme="danger" type="reset" onClick={toggleMyAgencyUbicationEdit}>
               Cancelar
             </Button>
             <Button colorScheme="success" form="me-agency-ubication-edit-form" type="submit">

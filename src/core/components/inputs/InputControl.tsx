@@ -35,6 +35,7 @@ export const InputControl: FC<InputControlProps> = ({
     <FormControl id={name} mb="3">
       {label && <LabelInput isRequired={isRequired} label={label} />}
       <Input
+        placeholder="Escribe algo..."
         {...inputProps}
         _disabled={{ bgColor: "gray.50", cursor: "not-allowed", _hover: { borderColor: "gray.200" } }}
         _focus={{
@@ -48,13 +49,13 @@ export const InputControl: FC<InputControlProps> = ({
         borderColor={isError ? "red.500" : "gray.300"}
         color={isError && "red.500"}
         colorScheme="red"
+        isDisabled={isDisabled}
         px="3"
         rounded="sm"
         size={size}
-        shadow="sm"
-        isDisabled={isDisabled}
         {...register(name)}
         defaultValue={defaultValue}
+        shadow="sm"
       />
       <Collapse animateOpacity in={Boolean(errors[name])}>
         <FormHelperText color="red.500" mt="0.5">

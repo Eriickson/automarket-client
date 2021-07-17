@@ -1,8 +1,13 @@
 import React from "react";
 import { NextPage } from "next";
 import { NewVehicleTemplate } from "@/templates";
+import { NewVehicleProps } from "@/servers";
+import { useAction } from "@/store";
 
-const NewPostPage: NextPage = () => {
+const NewVehiclePage: NextPage<NewVehicleProps> = ({ information }) => {
+  const { setNewVehicleInitialState } = useAction();
+  setNewVehicleInitialState({ information });
+
   return (
     <div>
       <NewVehicleTemplate />
@@ -10,4 +15,5 @@ const NewPostPage: NextPage = () => {
   );
 };
 
-export default NewPostPage;
+export { newVehicleServerSide as getServerSideProps } from "@/servers";
+export default NewVehiclePage;

@@ -3,9 +3,10 @@ import { GET_MODELS_BY_BRAND_ID_Q, IGetModelsByBrandIdPayload, IGetModelsByBrand
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 export const useGetModelsByBrandId = () => {
-  const [query, { data, loading, error }] = useLazyQuery<IGetModelsByBrandIdPayload, IGetModelsByBrandIdVariables>(
-    GET_MODELS_BY_BRAND_ID_Q,
-  );
+  const [query, { data, loading: loadingModels, error }] = useLazyQuery<
+    IGetModelsByBrandIdPayload,
+    IGetModelsByBrandIdVariables
+  >(GET_MODELS_BY_BRAND_ID_Q);
 
   function getModelsByBrandIdFetch(variables: IGetModelsByBrandIdVariables) {
     query({ variables });
@@ -14,7 +15,7 @@ export const useGetModelsByBrandId = () => {
   return {
     getModelsByBrandIdFetch,
     models: data ? data.getModelsByBrandId.models : [],
-    loading,
+    loadingModels,
     error,
   };
 };

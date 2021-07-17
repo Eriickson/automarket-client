@@ -7,6 +7,7 @@ import { WizardAction } from "./WizardAction";
 import { useWizard } from "./WizardContext";
 import { ContainerWizard } from "./ContainerWizard";
 import { IWizardStep } from "./types";
+import {} from "react";
 
 interface WizardProps {
   stepList: IWizardStep[];

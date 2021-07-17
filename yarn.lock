@@ -2645,6 +2645,11 @@ graceful-fs@^4.1.2:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==
 
+graphql-combine-query@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/graphql-combine-query/-/graphql-combine-query-1.2.3.tgz#3e4810bf0c900b7bb23e90b045144d9fac7be0cc"
+  integrity sha512-VIY9PsJW8Kw1ZRljAxKgmfnv9EtsYbQklko9wJ/1Sq34Knc2sL9PkjLNlG6B9VsENF/JqGwQj70HMTDQ6Oodmg==
+
 graphql-tag@^2.12.0:
   version "2.12.5"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.5.tgz#5cff974a67b417747d05c8d9f5f3cb4495d0db8f"

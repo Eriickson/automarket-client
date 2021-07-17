@@ -17,5 +17,3 @@ export const GET_VEHICLE_CATEGORIES_Q = gql`
     }
   }
 `;
-
-/* getVehicleCategories */

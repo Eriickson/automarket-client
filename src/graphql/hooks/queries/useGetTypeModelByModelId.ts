@@ -3,7 +3,7 @@ import { GET_TYPE_MODEL_BY_MODEL_ID, IGetTypeModelByModelIdPayload, IGetTypeMode
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 export const useGetTypeModelByModelId = () => {
-  const [query, { data, loading, error }] = useLazyQuery<
+  const [query, { data, loading: loadingTypeModels, error }] = useLazyQuery<
     IGetTypeModelByModelIdPayload,
     IGetTypeModelByModelIdVariables
   >(GET_TYPE_MODEL_BY_MODEL_ID);
@@ -15,7 +15,7 @@ export const useGetTypeModelByModelId = () => {
   return {
     getTypeModelByModelId,
     typeModels: data ? data.getTypeModelByModelId.typesModel : [],
-    loading,
+    loadingTypeModels,
     error,
   };
 };

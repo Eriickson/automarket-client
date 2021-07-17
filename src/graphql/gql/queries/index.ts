@@ -5,7 +5,7 @@ export * from "./GetProvinces";
 export * from "./GetMunicipalitiesByProvinceId";
 export * from "./GetSectorsByMunicipalityId";
 export * from "./GetTypeModelByModelId";
-export * from "./GetCategories";
+export * from "./GetVehicleCategories";
 export * from "./GetColors";
 export * from "./GetConditions";
 export * from "./GetFuels";

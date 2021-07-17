@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { IOption } from "@/shared";
 
-export interface IGetGetFuelsPayload {
+export interface IGetFuelsPayload {
   getFuels: {
     fuels: IOption[];
   };

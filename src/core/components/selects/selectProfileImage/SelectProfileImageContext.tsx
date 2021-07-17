@@ -99,7 +99,9 @@ const SelectProfileImageProvider: FC = ({ children }) => {
 
       onReset();
       onClose();
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

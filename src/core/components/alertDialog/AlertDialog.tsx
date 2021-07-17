@@ -21,6 +21,7 @@ export interface IAlertDialogOption {
   priBtnLabel: string;
   secBtnLabel?: string;
   role?: RoleType;
+  closeOnOverlayClick?: boolean;
   onClickPriBtn(): void;
   onClickSecBtn?(): void;
 }
@@ -39,6 +40,7 @@ export const AlertDialog: FC<AlertDialogProps> = ({
   secBtnLabel,
   role = "success",
   name,
+  closeOnOverlayClick,
   onClose,
   onClickPriBtn,
   onClickSecBtn,
@@ -86,24 +88,24 @@ export const AlertDialog: FC<AlertDialogProps> = ({
     <>
       <AlertDialogChakra
         isCentered
-        motionPreset="slideInBottom"
+        closeOnOverlayClick={closeOnOverlayClick}
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        motionPreset="slideInBottom"
         size="lg"
-        closeOnOverlayClick={false}
+        onClose={onClose}
       >
         <AlertDialogOverlay bgColor="rgba(0, 0, 0, 0.8) !important">
           <AlertDialogContent mx="1" rounded="sm">
-            <AlertDialogHeader display="flex" alignItems="center" fontWeight="bold">
+            <AlertDialogHeader alignItems="center" display="flex" fontWeight="bold">
               <Box
-                w="8"
-                h="8"
-                mr="2"
-                display="flex"
-                bgColor={String(roleInternal[role].bgIcon)}
                 alignItems="center"
+                bgColor={String(roleInternal[role].bgIcon)}
+                display="flex"
+                h="8"
                 justifyContent="center"
+                mr="2"
+                w="8"
               >
                 {roleInternal[role].icon}
               </Box>
@@ -117,12 +119,12 @@ export const AlertDialog: FC<AlertDialogProps> = ({
                 </Button>
               )}
               <Button
-                form={name}
-                colorScheme={String(roleInternal[role].colorPriButton)}
                 autoFocus
+                colorScheme={String(roleInternal[role].colorPriButton)}
+                form={name}
                 ml={3}
-                onClick={onClickPriBtn}
                 type="submit"
+                onClick={onClickPriBtn}
               >
                 {priBtnLabel}
               </Button>

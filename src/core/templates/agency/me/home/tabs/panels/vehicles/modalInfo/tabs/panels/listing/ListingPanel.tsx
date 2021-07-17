@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box } from "@chakra-ui/react";
+import { Listing } from "@/components";
+import { IconMarquee2 } from "@tabler/icons";
 
 export const ListingPanel: FC = () => {
   return (
@@ -9,31 +11,40 @@ export const ListingPanel: FC = () => {
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left">
-                Section 1 title
+                Accesorios
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
+            <Listing
+              listing={[
+                { IconList: IconMarquee2, label: "Nuevo" },
+                { IconList: IconMarquee2, label: "Recien importado" },
+                { IconList: IconMarquee2, label: "Aire Acondicionador" },
+                { IconList: IconMarquee2, label: "No se Moja" },
+              ]}
+            />
           </AccordionPanel>
         </AccordionItem>
-
         <AccordionItem>
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left">
-                Section 2 title
+                Características
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
+            <Listing
+              listing={[
+                { IconList: IconMarquee2, label: "Nuevo" },
+                { IconList: IconMarquee2, label: "Recien importado" },
+                { IconList: IconMarquee2, label: "Aire Acondicionador" },
+                { IconList: IconMarquee2, label: "No se Moja" },
+              ]}
+            />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

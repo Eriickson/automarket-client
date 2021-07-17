@@ -1,4 +1,5 @@
 export * from "./agency/new/home/NewAgencyTemplate";
+export * from "./agency/uuid/slug/home/AgencyTemplate";
 
 export * from "./index/IndexTemplate";
 

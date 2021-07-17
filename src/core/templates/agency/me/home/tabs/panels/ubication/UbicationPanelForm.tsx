@@ -29,7 +29,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
     <FormProvider {...methods}>
       <form id="me-agency-ubication-edit-form" onSubmit={methods.handleSubmit(onSubmit)}>
         <SimpleGrid columns={12} gap={3}>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={[12, null, 4]}>
             <Select
               isRequired
               isDisabled={!isEditing}
@@ -40,7 +40,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
               onChange={({ value }) => getMunicipalitiesByProvinceIdFetch({ provinceId: value.toString() })}
             />
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={[12, null, 4]}>
             <Select
               isRequired
               isDisabled={!isEditing}
@@ -51,7 +51,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
               onChange={({ value }) => getSectorsByMunicipalityIdFetch({ municipalityId: value.toString() })}
             />
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={[12, null, 4]}>
             <Select
               isRequired
               isDisabled={!isEditing}

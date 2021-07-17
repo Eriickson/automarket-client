@@ -1,17 +1,15 @@
 import React, { FC, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from "@chakra-ui/react";
-import { lazy } from "react";
-import { PrimaryCard } from "@/components";
 import { IconCar, IconHome, IconMapPin, IconPhone } from "@tabler/icons";
 import { HomePanel, VehiclesPanel, ContactsPanel, UbicationPanel } from "./panels";
 
 export const MyAgencyTabs: FC = () => {
   const [tabs] = useState([
-    {
-      title: "Inicio",
-      Icon: <IconHome />,
-      Component: HomePanel,
-    },
+    // {
+    //   title: "Inicio",
+    //   Icon: <IconHome />,
+    //   Component: HomePanel,
+    // },
     {
       title: "Vehículos",
       Icon: <IconCar />,

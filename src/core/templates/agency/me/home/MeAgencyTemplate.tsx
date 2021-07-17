@@ -8,7 +8,7 @@ export const MeAgencyTemplate: FC = () => {
   return (
     <MainLayout>
       <SimpleGrid columns={12} gap={3}>
-        <GridItem colSpan={3}>
+        <GridItem colSpan={[12, null, 3]}>
           <VStack alignItems="stretch">
             <Img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Aspect-ratio-4x3.svg/1280px-Aspect-ratio-4x3.svg.png" />
             <PrimaryCard notBorderTop>
@@ -24,7 +24,7 @@ export const MeAgencyTemplate: FC = () => {
             </PrimaryCard>
           </VStack>
         </GridItem>
-        <GridItem colSpan={9}>
+        <GridItem colSpan={[12, null, 9]}>
           <MyAgencyTabs />
         </GridItem>
       </SimpleGrid>

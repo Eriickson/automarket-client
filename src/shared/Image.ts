@@ -20,5 +20,4 @@ export interface IFileAccepted {
   croppedImageSrc: string;
   file: File;
   rotation?: number;
-  isCover?: boolean;
 }

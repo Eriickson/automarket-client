@@ -5,8 +5,8 @@ import { NewVehicleProps } from "@/servers";
 import { useAction } from "@/store";
 
 const NewVehiclePage: NextPage<NewVehicleProps> = ({ information }) => {
-  const { setNewVehicleInitialState } = useAction();
-  setNewVehicleInitialState({ information });
+  // const { setNewVehicleInitialState } = useAction();
+  // setNewVehicleInitialState({ information });
 
   return (
     <div>
@@ -15,5 +15,5 @@ const NewVehiclePage: NextPage<NewVehicleProps> = ({ information }) => {
   );
 };
 
-export { newVehicleServerSide as getServerSideProps } from "@/servers";
+// export { newVehicleServerSide as getServerSideProps } from "@/servers";
 export default NewVehiclePage;

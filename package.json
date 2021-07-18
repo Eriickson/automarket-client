@@ -51,6 +51,7 @@
     "sass": "^1.35.1",
     "spinners-react": "^1.0.4",
     "swiper": "^6.7.1",
+    "uuid": "^8.3.2",
     "ws": "^7.5.0",
     "yup": "^0.32.9"
   },
@@ -64,6 +65,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-select": "^4.0.16",
     "@types/redux-logger": "^3.0.8",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1",

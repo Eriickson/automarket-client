@@ -1,4 +1,4 @@
-import { IOption } from "@/shared";
+import { IFileAccepted, IOption } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInformationStep {
@@ -16,8 +16,13 @@ interface IListing {
   features: IOption;
 }
 
+interface IImagesStep {
+  images: IFileAccepted[];
+}
+
 interface IStep {
   information: IInformationStep;
+  images: IImagesStep;
   // listing: IListing;
 }
 
@@ -25,7 +30,11 @@ interface InitialState {
   steps: IStep;
 }
 
-const initialState = {} as InitialState;
+const initialState = {
+  steps: {
+    images: {},
+  },
+} as InitialState;
 
 const newVehicle = createSlice({
   name: "newVehicle",
@@ -34,8 +43,16 @@ const newVehicle = createSlice({
     setNewVehicleInitialState(state, action: PayloadAction<IStep>) {
       state.steps = action.payload;
     },
+    setNewVehicle(state, actions: PayloadAction<IFileAccepted[]>) {
+      state.steps?.images?.images
+        ? (state.steps.images.images = [...state.steps.images.images, ...actions.payload])
+        : (state.steps.images.images = actions.payload);
+    },
+    newVehicleRemoveImage(state, actions: PayloadAction<string>) {
+      state.steps.images.images = state.steps.images.images.filter(({ id }) => actions.payload !== id);
+    },
   },
 });
 
-export const { setNewVehicleInitialState } = newVehicle.actions;
+export const { setNewVehicleInitialState, setNewVehicle, newVehicleRemoveImage } = newVehicle.actions;
 export default newVehicle.reducer;

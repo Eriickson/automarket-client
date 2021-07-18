@@ -1,7 +1,8 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, useToast } from "@chakra-ui/react";
 import React, { createContext, useState, FC, useContext, useRef, MutableRefObject } from "react";
-import { IAlertDialogOption } from "@/components";
+import { IAlertDialogOption, IToastOptions, Toast } from "@/components";
 import { IApolloServerError } from "@/shared";
+
 interface IUIContext {
   isLoadingScreenActive: boolean;
   msgLoadingScreen: string | null;
@@ -21,6 +22,10 @@ interface IUIContext {
     cancelRef: MutableRefObject<null>;
     onOpen(err: string, option: Omit<IAlertDialogOption, "title" | "name" | "desc" | "role">): void;
     onClose(): void;
+  };
+  toast: {
+    showToast(options: IToastOptions): void;
+    options: IToastOptions;
   };
 }
 
@@ -46,6 +51,10 @@ const UIContextProvider: FC = ({ children }) => {
   } = useDisclosure();
   const [apolloServerErrorOption, setApolloServerErrorOption] = useState<Partial<IApolloServerError>>({});
   const cancelRefAlertApolloServerError = useRef(null);
+
+  // Toast
+  const [toastOptions, setToastOptions] = useState<IToastOptions>({ title: "", desc: "" });
+  const toast = useToast();
 
   function activateLoadingScreen(msg: string | null) {
     setMsgLoadingScreen(msg);
@@ -82,6 +91,12 @@ const UIContextProvider: FC = ({ children }) => {
     onCloseApolloServerError();
   }
 
+  // Toast
+  function showToast(options: IToastOptions) {
+    setToastOptions(options);
+    toast({ render: Toast });
+  }
+
   return (
     <UIContext.Provider
       value={{
@@ -107,6 +122,10 @@ const UIContextProvider: FC = ({ children }) => {
           options: apolloServerErrorOption,
           onOpen: onOpenAlertApolloServerError,
           onClose: onCloseAlertApolloServerError,
+        },
+        toast: {
+          showToast,
+          options: toastOptions,
         },
       }}
     >

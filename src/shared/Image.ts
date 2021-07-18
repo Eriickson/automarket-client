@@ -3,6 +3,10 @@ export interface IGetCroppedImg {
   pixelCrop: ICroppedAreaPixels;
   rotation?: number;
 }
+export interface IFile {
+  file: File;
+  src: string;
+}
 export interface ICroppedAreaPixels {
   x: number;
   y: number;

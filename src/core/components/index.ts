@@ -13,3 +13,4 @@ export * from "./alertApolloServerError";
 export * from "./seo";
 export * from "./range";
 export * from "./listing";
+export * from "./uploadZone";

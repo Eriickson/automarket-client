@@ -1,36 +1,41 @@
-import React, { Fragment } from "react";
-import { Box, Button, Text, IconButton, Divider } from "@chakra-ui/react";
+import React, { FC, Fragment } from "react";
+
+// Packages
+import { Box, Text, IconButton } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
+
+// My Components
 import { useWizard } from "./WizardContext";
 
-export const StepIndicator = () => {
+export const StepIndicator: FC = () => {
   const { currentStep, stepList } = useWizard();
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box alignItems="center" display="flex" justifyContent="space-between">
       {stepList.map((item, i) => {
         return (
           <Fragment key={i}>
             {i !== 0 && (
               <>
                 <Box
+                  borderColor={i === currentStep + 1 ? "pri.500" : currentStep + 1 > i ? "success.500" : "gray.200"}
+                  borderWidth="1px"
                   flex="1"
                   opacity="1"
-                  borderWidth="1px"
-                  borderColor={i === currentStep + 1 ? "pri.500" : currentStep + 1 > i ? "success.500" : "gray.200"}
                 />
                 <Box
+                  borderColor={i < currentStep + 1 ? "success.500" : "gray.200"}
+                  borderWidth="1px"
                   flex="1"
                   opacity="1"
-                  borderWidth="1px"
-                  borderColor={i < currentStep + 1 ? "success.500" : "gray.200"}
                 />
               </>
             )}
             <Box mx="2" position="relative">
               <IconButton
                 aria-label="example"
-                p="1"
+                borderWidth="2px"
+                colorScheme={currentStep > i ? "success" : currentStep === i ? "pri" : "gray"}
                 icon={
                   <>
                     {currentStep > i ? (
@@ -40,19 +45,18 @@ export const StepIndicator = () => {
                     )}
                   </>
                 }
+                p="1"
                 rounded="full"
                 size="lg"
-                colorScheme={currentStep > i ? "success" : currentStep === i ? "pri" : "gray"}
                 variant={currentStep >= i ? "solid" : "outline"}
-                borderWidth="2px"
               />
               <Text
                 display={["none", null, null, "block"]}
-                w="max-content"
                 fontWeight="semibold"
+                left={stepList.length - 1 !== i ? "0" : ""}
                 position="absolute"
                 right="0"
-                left={stepList.length - 1 !== i ? "0" : ""}
+                w="max-content"
               >
                 {item.label}
               </Text>

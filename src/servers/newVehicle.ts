@@ -92,6 +92,10 @@ export const newVehicleServerSide: GetServerSideProps = async () => {
         transmissions: getTransmissions.transmissions,
       },
     };
+
+    console.log(props.information.brands);
+
+
     return {
       props,
     };

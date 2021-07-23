@@ -3,13 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInformationStep {
   brands: IOption[];
-  vehicleCategories: IOption[];
-  fuels: IOption[];
-  transmissions: IOption[];
-  tractions: IOption[];
-  // cylinders: IOption;
   conditions: IOption[];
+  vehicleCategories: IOption[];
   colors: IOption[];
+  fuels: IOption[];
+  tractions: IOption[];
+  transmissions: IOption[];
 }
 
 interface IListing {
@@ -40,8 +39,8 @@ const newVehicle = createSlice({
   name: "newVehicle",
   initialState,
   reducers: {
-    setNewVehicleInitialState(state, action: PayloadAction<IStep>) {
-      state.steps = action.payload;
+    setNewVehicleInitialState(state, action: PayloadAction<IInformationStep>) {
+      state.steps.information = action.payload;
     },
     setNewVehicle(state, actions: PayloadAction<IGeneratedFile[]>) {
       state.steps?.images?.images

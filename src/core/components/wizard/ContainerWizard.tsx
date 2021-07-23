@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box } from "@chakra-ui/react";
 import { TemplateStepWizard } from "./TemplateStepWizard";
 import { useWizard } from "./WizardContext";
 import { Fade } from "@chakra-ui/react";
 
-export const ContainerWizard = () => {
+export const ContainerWizard: FC = () => {
   const { stepList, currentStep } = useWizard();
 
   return (
@@ -13,7 +13,7 @@ export const ContainerWizard = () => {
         (step, i) =>
           currentStep === i && (
             <Fade in={true}>
-              <TemplateStepWizard title={step.title} desc={step.desc}>
+              <TemplateStepWizard desc={step.desc} title={step.title}>
                 {step.Component}
               </TemplateStepWizard>
             </Fade>

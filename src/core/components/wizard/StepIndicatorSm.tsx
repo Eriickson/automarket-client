@@ -1,26 +1,25 @@
-import React from "react";
+import React, { FC } from "react";
 import { useWizard } from "./WizardContext";
-import { Box, Heading, Text, IconButton, Divider } from "@chakra-ui/react";
-import { CheckIcon } from "@chakra-ui/icons";
+import { Box, Heading, Text, IconButton } from "@chakra-ui/react";
 
-export const StepIndicatorSm = () => {
+export const StepIndicatorSm: FC = () => {
   const { currentStep, stepList } = useWizard();
 
   return (
     <Box>
-      <Box display="flex" alignItems="center" mb="3">
+      <Box alignItems="center" display="flex" mb="3">
         <IconButton
           aria-label="example"
-          p="1"
+          borderWidth="2px"
+          colorScheme="pri"
           icon={stepList[currentStep]?.Icon}
+          mr="3"
+          p="1"
           rounded="full"
           size="lg"
-          colorScheme="pri"
-          borderWidth="2px"
-          mr="3"
         />
         <Box>
-          <Text lineHeight="normal" display="flex" fontSize="sm" color="gray.500" fontWeight="semibold">
+          <Text color="gray.500" display="flex" fontSize="sm" fontWeight="semibold" lineHeight="normal">
             <Text color="pri.600" mr="1">
               Paso {currentStep + 1}
             </Text>
@@ -33,18 +32,14 @@ export const StepIndicatorSm = () => {
       </Box>
       <Box display="flex">
         <Box
+          borderColor="pri.600"
+          borderTopWidth="3px"
           height="0"
           opacity="1"
-          borderTopWidth="3px"
-          borderColor="pri.600"
           transition="200ms"
           w={`${((currentStep + 1) * 100) / stepList.length}%`}
-          // style={{
-          //   border: "2px solid green",
-          //   width: "10%",
-          // }}
         />
-        {stepList.length - 1 > currentStep && <Box height="0" borderTopWidth="3px" borderColor="gray.200" flex="1" />}
+        {stepList.length - 1 > currentStep && <Box borderColor="gray.200" borderTopWidth="3px" flex="1" height="0" />}
       </Box>
     </Box>
   );

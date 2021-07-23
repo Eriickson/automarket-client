@@ -51,8 +51,12 @@ const newVehicle = createSlice({
     newVehicleRemoveImage(state, actions: PayloadAction<string>) {
       state.steps.images.images = state.steps.images.images.filter(({ id }) => actions.payload !== id);
     },
+    newVehiclesResetImages(state) {
+      state.steps.images.images = [];
+    },
   },
 });
 
-export const { setNewVehicleInitialState, setNewVehicle, newVehicleRemoveImage } = newVehicle.actions;
+export const { setNewVehicleInitialState, setNewVehicle, newVehiclesResetImages, newVehicleRemoveImage } =
+  newVehicle.actions;
 export default newVehicle.reducer;

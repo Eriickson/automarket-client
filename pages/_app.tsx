@@ -24,6 +24,8 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 
+import "react-medium-image-zoom/dist/styles.css";
+
 import "rc-slider/assets/index.css";
 
 function MyApp({ Component, pageProps }: AppProps) {

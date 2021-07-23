@@ -1,18 +1,26 @@
-import { Box, Button, GridItem, HStack, IconButton, Img, SimpleGrid } from "@chakra-ui/react";
+import React, { FC } from "react";
+
+// Packages
+import { Box, GridItem, HStack, IconButton, Img, SimpleGrid } from "@chakra-ui/react";
 import { IconTrash } from "@tabler/icons";
-import React, { FC, useState } from "react";
+import Zoom from "react-medium-image-zoom";
+
+// My Elements
+import { useSelector, useAction } from "@/store";
+
+// My Components
 import { EditImageModal } from "./editModal/EditImageModal";
 import { ResetImages } from "./ResetImages";
 import { UploadImages } from "./uploadImages/UploadImages";
 import { ViewImageModal } from "./viewModal/ViewImageModal";
-import { useSelector, useAction } from "@/store";
+import { UploadZone } from "./UploadZone";
 
 export const GalleryImages: FC = () => {
   const { newVehicleRemoveImage } = useAction();
   const { images } = useSelector(({ newVehicle }) => newVehicle.steps.images);
   return (
     <Box>
-      <Box bg="gray.200" boxShadow="inner" mb="4" p="2">
+      <Box bg="gray.200" boxShadow="inner" mb="4" minH="52" p="2" pos="relative">
         <SimpleGrid columns={[12, null, null, null, 10]} gap={2}>
           {images?.map((image, i) => (
             <GridItem colSpan={[6, null, 4, 3, 2]} key={i}>
@@ -25,18 +33,15 @@ export const GalleryImages: FC = () => {
                 overflow="hidden"
                 position="relative"
               >
-                <Img
-                  filter="blur(5px)"
-                  h="full"
-                  src={`${image.croppedImageSrc}`}
-                  transform="scale(1.1)"
-                  userSelect="none"
-                />
+                {" "}
+                <Img filter="blur(5px)" h="full" src={`${image.src}`} transform="scale(1.1)" userSelect="none" />
                 <Box alignItems="center" display="flex" inset="0" pos="absolute">
-                  <Img src={`${image.croppedImageSrc}`} />
+                  <Zoom>
+                    <Img src={`${image.src}`} />
+                  </Zoom>
                 </Box>
                 <HStack position="absolute" right="2" top="2">
-                  <EditImageModal />
+                  <EditImageModal src={image.src} />
                   <IconButton
                     aria-label=""
                     colorScheme="danger"
@@ -49,12 +54,15 @@ export const GalleryImages: FC = () => {
             </GridItem>
           ))}
         </SimpleGrid>
+        {!images?.length && <UploadZone />}
       </Box>
-      <HStack>
-        <ResetImages />
-        <ViewImageModal />
-        <UploadImages />
-      </HStack>
+      {Boolean(images?.length) && (
+        <HStack>
+          <ResetImages />
+          <ViewImageModal />
+          <UploadImages />
+        </HStack>
+      )}
     </Box>
   );
 };

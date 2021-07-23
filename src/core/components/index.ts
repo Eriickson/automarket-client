@@ -15,3 +15,4 @@ export * from "./range";
 export * from "./listing";
 export * from "./uploadZone";
 export * from "./toast";
+export * from "./cropImage";

@@ -1,8 +1,11 @@
 import { useUIContext } from "@/context";
+import { useAction } from "@/store";
 import { Button } from "@chakra-ui/react";
 import React, { FC } from "react";
 
 export const ResetImages: FC = () => {
+  const { newVehiclesResetImages } = useAction();
+
   const { alertDialog } = useUIContext();
 
   function onReset() {
@@ -14,7 +17,8 @@ export const ResetImages: FC = () => {
       priBtnLabel: "Restablecer",
       secBtnLabel: "Cancelar",
       onClickPriBtn: () => {
-        console.log("Hola");
+        newVehiclesResetImages();
+        alertDialog.onClose();
       },
       onClickSecBtn: alertDialog.onClose,
     });

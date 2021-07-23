@@ -12,9 +12,10 @@ interface IUIContext {
   alertDialog: {
     isOpen: boolean;
     cancelRef: MutableRefObject<null>;
+    options: Partial<IAlertDialogOption>;
+    // closeByClickPriButton: boolean
     onOpen(option: IAlertDialogOption): void;
     onClose(): void;
-    options: Partial<IAlertDialogOption>;
   };
   apolloServerError: {
     hasError: boolean;

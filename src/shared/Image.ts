@@ -21,3 +21,10 @@ export interface IFileAccepted {
   file: File;
   rotation?: number;
 }
+
+export interface IFlip {
+  vertical: boolean;
+  horizontal: boolean;
+}
+
+export type AspectRatioType = "16:9" | "4:3" | "1:1";

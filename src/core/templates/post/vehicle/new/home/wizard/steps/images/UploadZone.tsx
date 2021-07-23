@@ -2,7 +2,28 @@ import { Box, GridItem, HStack, IconButton, Img, SimpleGrid } from "@chakra-ui/r
 import { IconEdit, IconTrash } from "@tabler/icons";
 import React, { useState } from "react";
 import { FC } from "react";
+import { UploadZone as UploadZoneComponent } from "@/components";
+import { IFileAccepted } from "@/shared";
+import { useAction } from "@/store";
 
 export const UploadZone: FC = () => {
-  return <p>Hola</p>;
+  const { setNewVehicle } = useAction();
+
+  async function handleFiles(acceptedFiles: IFileAccepted[]) {
+    setNewVehicle(acceptedFiles);
+  }
+
+  return (
+    <Box>
+      <UploadZoneComponent
+        btn={() => (
+          <Box m="3" p="3" border="2px" position="absolute" inset="0" borderStyle="dashed">
+            Hola
+          </Box>
+        )}
+        dropZoneOptions={{ multiple: true }}
+        handleMultipleFiles={handleFiles}
+      />
+    </Box>
+  );
 };

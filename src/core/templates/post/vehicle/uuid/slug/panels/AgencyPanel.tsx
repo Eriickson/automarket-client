@@ -2,7 +2,6 @@ import React, { FC } from "react";
 
 import { Text, VStack, Box, Avatar, HStack, Tag } from "@chakra-ui/react";
 
-
 import { PrimaryCard } from "@/components";
 import { ModalContactAgency } from "./ModalContactAgency";
 import { IconMap, IconMapPin, IconStar } from "@tabler/icons";
@@ -20,7 +19,7 @@ export const AgencyPanel: FC = () => {
             Los más confiados en el negocio
           </Text>
         </Box>
-        <HStack spacing={4} >
+        <HStack spacing={4}>
           <Box display="flex" alignItems="center">
             <Tag bgColor="pri.500" color="white" mr="1">
               596
@@ -43,7 +42,9 @@ export const AgencyPanel: FC = () => {
           </Box>
           <Box display="flex" alignItems="center">
             <IconMapPin />
-            <Text color="gray.700" fontWeight="semibold">Puñal, Santiago</Text>
+            <Text color="gray.700" fontWeight="semibold">
+              Puñal, Santiago
+            </Text>
           </Box>
         </HStack>
         <Text fontSize="sm" lineHeight="normal">

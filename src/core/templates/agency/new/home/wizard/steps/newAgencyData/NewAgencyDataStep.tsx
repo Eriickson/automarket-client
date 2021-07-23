@@ -14,4 +14,4 @@ export const NewAgencyDataStep = () => {
   }
 
   return <NewAgencyDataForm onSubmit={onSubmit} />;
-};;
+};

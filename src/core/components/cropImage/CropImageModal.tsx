@@ -14,7 +14,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { CropImageComponent } from "./CropImageComponent";
-import { AspectRatioType, ICroppedAreaPixels, IFlip } from "@/shared";
+import { AspectRatioType, ICropArea, IGeneratedFile, IFlip } from "@/shared";
 import { CropImageActions } from "./CropImageActions";
 import { getCroppedImg } from "@/utils";
 
@@ -24,19 +24,20 @@ interface CropImageModalProps {
   isOpen: boolean;
   src: string;
   options?: Partial<IOptions>;
+  onSave(newData: Partial<Omit<IGeneratedFile, "file" | "id">>): void;
   onClose(): void;
 }
 
-export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, onClose }) => {
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<ICroppedAreaPixels>({ w: 0, h: 0, y: 0, x: 0 });
+export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, options, onClose }) => {
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<ICropArea>({ w: 0, h: 0, y: 0, x: 0 });
   const [aspectRatio, setAspectRatio] = useState<number>(4 / 3);
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
-  const [flip, setFlip] = useState<IFlip>({ horizontal: false, vertical: false });
+  const [flip, setFlip] = useState<IFlip>({ h: false, v: false });
   const [isLoading, setIsLoading] = useState(false);
   const [aspectRatioString, setAspectRatioString] = useState<AspectRatioType>("4:3");
 
-  async function onSave() {
+  async function onGenerate() {
     setIsLoading(true);
     const { blobUrl } = await getCroppedImg({
       src: src,
@@ -45,11 +46,20 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
       flip,
     });
 
-    console.log(blobUrl);
+    const newData = {
+      src: blobUrl,
+      croppedAreaPixels,
+      rotation,
+      flip,
+    };
+
+    onSave(newData);
+
     setIsLoading(false);
+    onClose();
   }
 
-  async function onChange(values: ICroppedAreaPixels) {
+  async function onChange(values: ICropArea) {
     setCroppedAreaPixels(values);
   }
 
@@ -71,8 +81,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
   }
 
   function onChangeFlip(orientation: "HORIZONTAL" | "VERTICAL") {
-    const newFlip: IFlip =
-      orientation === "HORIZONTAL" ? { ...flip, horizontal: !flip.horizontal } : { ...flip, vertical: !flip.vertical };
+    const newFlip: IFlip = orientation === "HORIZONTAL" ? { ...flip, h: !flip.h } : { ...flip, v: !flip.v };
     setFlip(newFlip);
   }
 
@@ -92,7 +101,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
             onChange={onChange}
             onZoomChange={onZoomChange}
           />
-          <Tag fontWeight="semibold" mt="1">
+          <Tag mr="1" fontWeight="semibold" mt="1">
             X: {croppedAreaPixels.x}
             <Box mx="1"></Box>
             Y: {croppedAreaPixels.y}
@@ -104,10 +113,9 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
           <Tag fontWeight="semibold" mt="1">
             Dimensión: {aspectRatioString}
             <Box mx="1"></Box>
-            Zoom: {((zoom / 3) * 100).toFixed(0)}%<Box mx="1"></Box>
-            Rotación: {rotation}
-            <Box mx="1"></Box>
-            Vuelta: {Number(flip.horizontal)}, {Number(flip.vertical)}
+            Zoom: {((zoom - 1 / 1) * 100).toFixed(0)}%<Box mx="1"></Box>
+            Rotación: {rotation}°<Box mx="1"></Box>
+            Vuelta: {Number(flip.h)}, {Number(flip.v)}
             <Box mx="1"></Box>
           </Tag>
         </ModalBody>
@@ -131,7 +139,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
             <Button colorScheme="danger" mr={3} variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme="success" isLoading={isLoading} loadingText="Guardando Cambios" onClick={onSave}>
+            <Button colorScheme="success" isLoading={isLoading} loadingText="Guardando Cambios" onClick={onGenerate}>
               Guardar Cambios
             </Button>
           </HStack>

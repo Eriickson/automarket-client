@@ -1,6 +1,6 @@
-import { ICroppedAreaPixels } from "@/shared";
+import { ICropArea } from "@/shared";
 
-export const projectCropAreaPixelsOnOriginalImage = (mediaSize: any, croppedAreaPixels: ICroppedAreaPixels, angle: number) => {
+export const projectCropAreaPixelsOnOriginalImage = (mediaSize: any, croppedAreaPixels: ICropArea, angle: number) => {
   if (angle === 90 || angle === 270) {
     const offset = ((mediaSize.naturalWidth - mediaSize.naturalHeight) / 2) ^ 0; // round towards zero
 
@@ -11,8 +11,8 @@ export const projectCropAreaPixelsOnOriginalImage = (mediaSize: any, croppedArea
   const imageW = mediaSize.naturalWidth;
   const imageH = mediaSize.naturalHeight;
 
-  let cropAreaX = croppedAreaPixels.x;
-  let cropAreaY = croppedAreaPixels.y;
+  const cropAreaX = croppedAreaPixels.x;
+  const cropAreaY = croppedAreaPixels.y;
 
   const cropAreaW = croppedAreaPixels.w;
   const cropAreaH = croppedAreaPixels.h;
@@ -58,7 +58,7 @@ export const projectCropAreaPixelsOnOriginalImage = (mediaSize: any, croppedArea
   return { left: ax, top: ay, right: bx, bottom: by };
 };
 
-export const fixCroppedAreaPixels = (mediaSize: any, croppedAreaPixels: ICroppedAreaPixels, angle: number) => {
+export const fixCroppedAreaPixels = (mediaSize: any, croppedAreaPixels: ICropArea, angle: number) => {
   if (angle === 90 || angle === 270) {
     const offset = ((mediaSize.naturalWidth - mediaSize.naturalHeight) / 2) ^ 0; // round towards zero
 

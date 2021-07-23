@@ -1,3 +1,4 @@
+import { IGeneratedFile } from "@/shared";
 import React, { FC } from "react";
 
 //Styles and Icons
@@ -8,15 +9,23 @@ import { IOptions } from "./types";
 interface CropImageProps {
   name: string;
   isOpen: boolean;
-  src: string;
+  image: IGeneratedFile;
   options?: Partial<IOptions>;
   onClose(): void;
+  onSave(newData: Partial<Omit<IGeneratedFile, "file">>): void;
 }
 
-export const CropImage: FC<CropImageProps> = ({ src, isOpen, options, onClose }) => {
+export const CropImage: FC<CropImageProps> = ({ image, onSave, isOpen, options, onClose }) => {
   return (
     <>
-      <CropImageModal isOpen={isOpen} name="edit" options={options} src={src} onClose={onClose} />
+      <CropImageModal
+        isOpen={isOpen}
+        name="edit"
+        options={options}
+        src={image.croppedImageSrc}
+        onClose={onClose}
+        onSave={onSave}
+      />
     </>
   );
 };

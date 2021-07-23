@@ -1,10 +1,10 @@
-import { ICroppedAreaPixels } from "@/shared";
+import { ICropArea } from "@/shared";
 import { gql } from "@apollo/client";
 
 export interface Picture {
   id?: string;
   file: File;
-  croppedArea: ICroppedAreaPixels;
+  croppedArea: ICropArea;
   rotation: number;
 }
 

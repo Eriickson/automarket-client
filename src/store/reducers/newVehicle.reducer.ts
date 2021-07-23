@@ -1,4 +1,4 @@
-import { IFileAccepted, IOption } from "@/shared";
+import { IGeneratedFile, IOption } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInformationStep {
@@ -17,7 +17,7 @@ interface IListing {
 }
 
 interface IImagesStep {
-  images: IFileAccepted[];
+  images: IGeneratedFile[];
 }
 
 interface IStep {
@@ -43,7 +43,7 @@ const newVehicle = createSlice({
     setNewVehicleInitialState(state, action: PayloadAction<IStep>) {
       state.steps = action.payload;
     },
-    setNewVehicle(state, actions: PayloadAction<IFileAccepted[]>) {
+    setNewVehicle(state, actions: PayloadAction<IGeneratedFile[]>) {
       state.steps?.images?.images
         ? (state.steps.images.images = [...state.steps.images.images, ...actions.payload])
         : (state.steps.images.images = actions.payload);
@@ -54,9 +54,20 @@ const newVehicle = createSlice({
     newVehiclesResetImages(state) {
       state.steps.images.images = [];
     },
+    newVehicleUpdateImage(state, { payload }: PayloadAction<IGeneratedFile>) {
+      const newImages = state.steps.images.images.map(image => (image.id === payload.id ? payload : image));
+      console.log(newImages);
+
+      state.steps.images.images = newImages;
+    },
   },
 });
 
-export const { setNewVehicleInitialState, setNewVehicle, newVehiclesResetImages, newVehicleRemoveImage } =
-  newVehicle.actions;
+export const {
+  setNewVehicleInitialState,
+  setNewVehicle,
+  newVehicleUpdateImage,
+  newVehiclesResetImages,
+  newVehicleRemoveImage,
+} = newVehicle.actions;
 export default newVehicle.reducer;

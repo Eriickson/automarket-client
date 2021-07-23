@@ -11,7 +11,6 @@ const SelectPage = () => {
   const { exampeSelect } = useSelector(store => store.agency);
   const methods = useForm();
 
-
   useEffect(() => {
     setExampleSelect({ value: "3", label: "example3" });
   }, []);

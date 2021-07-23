@@ -33,15 +33,35 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
       {actionSelected === null ? (
         <>
           {options?.showBtnAspectRatio && (
-            <Button onClick={() => setActionSelected("ASPECT-RATIO")}>Dimencionar</Button>
+            <Button size="sm" onClick={() => setActionSelected("ASPECT-RATIO")}>
+              Dimencionar
+            </Button>
           )}
-          {options?.showBtnZoom && <Button onClick={() => setActionSelected("ZOOM")}>Zoom</Button>}
-          {options?.showBtnRotation && <Button onClick={() => setActionSelected("ROTATE")}>Rotar</Button>}
-          {options?.showBtnFlip && <Button onClick={() => setActionSelected("FLIP")}>Voltear</Button>}
+          {options?.showBtnZoom && (
+            <Button size="sm" onClick={() => setActionSelected("ZOOM")}>
+              Zoom
+            </Button>
+          )}
+          {options?.showBtnRotation && (
+            <Button size="sm" onClick={() => setActionSelected("ROTATE")}>
+              Rotar
+            </Button>
+          )}
+          {options?.showBtnFlip && (
+            <Button size="sm" onClick={() => setActionSelected("FLIP")}>
+              Voltear
+            </Button>
+          )}
         </>
       ) : (
         <>
-          <Button colorScheme="info" leftIcon={<IconChevronLeft />} pl="1" onClick={() => setActionSelected(null)}>
+          <Button
+            colorScheme="info"
+            leftIcon={<IconChevronLeft />}
+            pl="1"
+            size="sm"
+            onClick={() => setActionSelected(null)}
+          >
             Volver
           </Button>
           <HStack>
@@ -49,14 +69,16 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
               <>
                 <IconButton
                   aria-label="Rotar hacia la derecha"
-                  icon={<RotateCcw />}
+                  icon={<RotateCw size="1.25rem" />}
+                  size="sm"
                   onClick={() => {
                     rotation === 270 ? onRotationChange(0) : onRotationChange(rotation + 90);
                   }}
                 />
                 <IconButton
                   aria-label="Rotar hacia la izquierda"
-                  icon={<RotateCw />}
+                  icon={<RotateCcw size="1.25rem" />}
+                  size="sm"
                   onClick={() => {
                     rotation === 0 ? onRotationChange(270) : onRotationChange(rotation - 90);
                   }}
@@ -64,13 +86,13 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
               </>
             ) : actionSelected === "ASPECT-RATIO" ? (
               <>
-                <Button px="2" onClick={() => onAspectRatioChange("16:9")}>
+                <Button px="2" size="sm" onClick={() => onAspectRatioChange("16:9")}>
                   16:9
                 </Button>
-                <Button px="2" onClick={() => onAspectRatioChange("4:3")}>
+                <Button px="2" size="sm" onClick={() => onAspectRatioChange("4:3")}>
                   4:3
                 </Button>
-                <Button px="2" onClick={() => onAspectRatioChange("1:1")}>
+                <Button px="2" size="sm" onClick={() => onAspectRatioChange("1:1")}>
                   1:1
                 </Button>
               </>
@@ -78,12 +100,14 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
               <>
                 <IconButton
                   aria-label="acercar"
-                  icon={<IconFlipVertical />}
+                  icon={<IconFlipVertical size="1.25rem" />}
+                  size="sm"
                   onClick={() => onChangeFlip("HORIZONTAL")}
                 />
                 <IconButton
                   aria-label="acercar"
-                  icon={<IconFlipHorizontal />}
+                  icon={<IconFlipHorizontal size="1.25rem" />}
+                  size="sm"
                   onClick={() => onChangeFlip("VERTICAL")}
                 />
               </>
@@ -92,12 +116,14 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
                 <>
                   <IconButton
                     aria-label="acercar"
-                    icon={<ZoomIn />}
+                    icon={<ZoomIn size="1.25rem" />}
+                    size="sm"
                     onClick={() => zoom < 3 && onZoomChange(Number((zoom + 0.2).toFixed(2)))}
                   />
                   <IconButton
                     aria-label="acercar"
-                    icon={<ZoomOut />}
+                    icon={<ZoomOut size="1.25rem" />}
+                    size="sm"
                     onClick={() => zoom > 1.2 && onZoomChange(Number((zoom + -0.2).toFixed(2)))}
                   />
                 </>

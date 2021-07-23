@@ -1,11 +1,11 @@
-import { UploadZone } from "@/components";
+import { UploadFiles } from "@/components";
 import { Box, Button } from "@chakra-ui/react";
 import React, { FC } from "react";
 
 const UploadZonePage: FC = () => {
   return (
     <Box>
-      <UploadZone
+      <UploadFiles
         btn={({ isLoading }) => <Button isLoading={isLoading}>Abrir</Button>}
         dropZoneOptions={{
           multiple: true,

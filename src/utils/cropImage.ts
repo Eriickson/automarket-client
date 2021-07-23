@@ -22,7 +22,7 @@ export async function getCroppedImg({
   src,
   rotation = 0,
   pixelCrop,
-  flip = { horizontal: false, vertical: false },
+  flip = { h: false, v: false },
 }: IGetCroppedImg): Promise<getCroppedImgReturn> {
   const image = await createImage(src);
   const canvas = document.createElement("canvas");
@@ -42,7 +42,7 @@ export async function getCroppedImg({
   // translate canvas context to a central location on image to allow rotating around the center.
   ctx.translate(safeArea / 2, safeArea / 2);
   ctx.rotate(getRadianAngle(rotation));
-  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
+  ctx.scale(flip.h ? -1 : 1, flip.v ? -1 : 1);
   ctx.translate(-safeArea / 2, -safeArea / 2);
 
   // draw rotated image and store data.

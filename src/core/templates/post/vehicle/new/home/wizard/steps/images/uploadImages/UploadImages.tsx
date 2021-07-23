@@ -1,19 +1,25 @@
-import { Button } from "@chakra-ui/react";
 import React, { FC } from "react";
-import { UploadZone } from "@/components";
+
+// Packages
+import { Button } from "@chakra-ui/react";
+
+// My Elements
 import { useAction } from "@/store";
-import { IFileAccepted } from "@/shared";
+import { IGeneratedFile } from "@/shared";
+
+// My Components
+import { UploadFiles } from "@/components";
 
 export const UploadImages: FC = () => {
   const { setNewVehicle } = useAction();
 
-  async function handleFiles(acceptedFiles: IFileAccepted[]) {
+  async function handleFiles(acceptedFiles: IGeneratedFile[]) {
     setNewVehicle(acceptedFiles);
   }
 
   return (
     <div>
-      <UploadZone
+      <UploadFiles
         btn={({ isLoading }) => (
           <Button colorScheme="success" isLoading={isLoading} loadingText={isLoading ? "Agregando..." : ""}>
             Agregar

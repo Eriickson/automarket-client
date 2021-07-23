@@ -9,7 +9,6 @@ const RegisterPage: NextPage<RegisterPageProps> = ({ email }) => {
   const { setEmailNewUser } = useAction();
   setEmailNewUser(email);
 
-
   return <RegisterTemplate />;
 };
 

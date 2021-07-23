@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 // Packages
 import { Box, GridItem, HStack, IconButton, Img, SimpleGrid } from "@chakra-ui/react";
@@ -18,6 +18,11 @@ import { UploadZone } from "./UploadZone";
 export const GalleryImages: FC = () => {
   const { newVehicleRemoveImage } = useAction();
   const { images } = useSelector(({ newVehicle }) => newVehicle.steps.images);
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
   return (
     <Box>
       <Box bg="gray.200" boxShadow="inner" mb="4" p="2" pos="relative">
@@ -41,7 +46,7 @@ export const GalleryImages: FC = () => {
                   </Zoom>
                 </Box>
                 <HStack position="absolute" right="2" top="2">
-                  <EditImageModal src={image.src} />
+                  <EditImageModal image={image} />
                   <IconButton
                     aria-label=""
                     colorScheme="danger"

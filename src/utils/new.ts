@@ -1,4 +1,4 @@
-import { ICroppedAreaPixels } from "@/shared";
+import { ICropArea } from "@/shared";
 
 function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
@@ -18,7 +18,7 @@ export const createImage = (url: string): Promise<HTMLImageElement> =>
  */
 export default async function getCroppedImg(
   imageSrc: string,
-  pixelCrop: ICroppedAreaPixels,
+  pixelCrop: ICropArea,
   rotation = 0,
   flip = { horizontal: false, vertical: false },
 ): Promise<string | null> {

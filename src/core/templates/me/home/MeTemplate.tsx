@@ -14,7 +14,7 @@ export const MeTemplate: FC = () => {
     <MainLayout>
       <VStack align="stretch">
         <CardPresentation />
-        <EditProfile  />
+        <EditProfile />
         <ActionsBottom />
       </VStack>
     </MainLayout>

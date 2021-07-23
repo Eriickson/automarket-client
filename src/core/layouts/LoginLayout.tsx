@@ -12,7 +12,7 @@ export const LoginLayout: FC = ({ children }) => {
     <TransitionPageFade>
       <Box bgColor="gray.50" minH="100vh" display="flex" flexDirection="column" justifyContent="space-between">
         <Headroom>
-          <Box bgColor="white" py="6" shadow="sm" borderBottomWidth="1px" borderBottomColor="gray.100" >
+          <Box bgColor="white" py="6" shadow="sm" borderBottomWidth="1px" borderBottomColor="gray.100">
             <Container display="flex" alignItems="center" justifyContent="space-between">
               <Link href="/">
                 <Box cursor="pointer">

@@ -17,7 +17,6 @@ import { AutomarketRDLogo } from "../../../assets";
 import Link from "next/link";
 import { useWindowSize } from "@/hooks";
 
-
 export const MainMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef(null);

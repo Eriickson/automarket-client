@@ -1,6 +1,7 @@
 export interface IGetCroppedImg {
   src: string;
   pixelCrop: ICroppedAreaPixels;
+  flip?: IFlip;
   rotation?: number;
 }
 export interface IFile {

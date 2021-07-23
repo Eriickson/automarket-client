@@ -20,7 +20,7 @@ export const GalleryImages: FC = () => {
   const { images } = useSelector(({ newVehicle }) => newVehicle.steps.images);
   return (
     <Box>
-      <Box bg="gray.200" boxShadow="inner" mb="4" minH="52" p="2" pos="relative">
+      <Box bg="gray.200" boxShadow="inner" mb="4" p="2" pos="relative">
         <SimpleGrid columns={[12, null, null, null, 10]} gap={2}>
           {images?.map((image, i) => (
             <GridItem colSpan={[6, null, 4, 3, 2]} key={i}>

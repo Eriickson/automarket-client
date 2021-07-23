@@ -10,6 +10,8 @@ import {
   ModalCloseButton,
   Button,
   HStack,
+  Tag,
+  Box,
 } from "@chakra-ui/react";
 import { CropImageComponent } from "./CropImageComponent";
 import { AspectRatioType, ICroppedAreaPixels, IFlip } from "@/shared";
@@ -32,6 +34,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
   const [zoom, setZoom] = useState(1);
   const [flip, setFlip] = useState<IFlip>({ horizontal: false, vertical: false });
   const [isLoading, setIsLoading] = useState(false);
+  const [aspectRatioString, setAspectRatioString] = useState<AspectRatioType>("4:3");
 
   async function onSave() {
     setIsLoading(true);
@@ -39,6 +42,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
       src: src,
       pixelCrop: croppedAreaPixels,
       rotation,
+      flip,
     });
 
     console.log(blobUrl);
@@ -54,6 +58,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
   }
 
   function onAspectRatioChange(newAspectRatio: AspectRatioType) {
+    setAspectRatioString(newAspectRatio);
     const aspectRatios: Record<AspectRatioType, number> = {
       "16:9": 16 / 9,
       "1:1": 1 / 1,
@@ -87,6 +92,24 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
             onChange={onChange}
             onZoomChange={onZoomChange}
           />
+          <Tag fontWeight="semibold" mt="1">
+            X: {croppedAreaPixels.x}
+            <Box mx="1"></Box>
+            Y: {croppedAreaPixels.y}
+            <Box mx="1"></Box>
+            W: {croppedAreaPixels.w}
+            <Box mx="1"></Box>
+            H: {croppedAreaPixels.h}
+          </Tag>
+          <Tag fontWeight="semibold" mt="1">
+            Dimensión: {aspectRatioString}
+            <Box mx="1"></Box>
+            Zoom: {((zoom / 3) * 100).toFixed(0)}%<Box mx="1"></Box>
+            Rotación: {rotation}
+            <Box mx="1"></Box>
+            Vuelta: {Number(flip.horizontal)}, {Number(flip.vertical)}
+            <Box mx="1"></Box>
+          </Tag>
         </ModalBody>
 
         <ModalFooter
@@ -96,19 +119,19 @@ export const CropImageModal: FC<CropImageModalProps> = ({ src, isOpen, options, 
         >
           <CropImageActions
             flip={flip}
+            options={options}
             rotation={rotation}
             zoom={zoom}
             onAspectRatioChange={onAspectRatioChange}
             onChangeFlip={onChangeFlip}
             onRotationChange={onRotationChange}
             onZoomChange={onZoomChange}
-            options={options}
           />
           <HStack>
             <Button colorScheme="danger" mr={3} variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
-            <Button isLoading={isLoading} loadingText="Guardando Cambios" colorScheme="success" onClick={onSave}>
+            <Button colorScheme="success" isLoading={isLoading} loadingText="Guardando Cambios" onClick={onSave}>
               Guardar Cambios
             </Button>
           </HStack>

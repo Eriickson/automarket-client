@@ -1,14 +1,13 @@
 import { IGetCroppedImg } from "@/shared";
 
-const createImage = (url: string): Promise<HTMLImageElement> => {
-  return new Promise<HTMLImageElement>((resolve, reject) => {
+const createImage = (url: string): Promise<HTMLImageElement> =>
+  new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
     image.addEventListener("load", () => resolve(image));
     image.addEventListener("error", error => reject(error));
     image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues on CodeSandbox
     image.src = url;
   });
-};
 
 function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
@@ -19,7 +18,12 @@ interface getCroppedImgReturn {
   base64Url: string;
 }
 
-export async function getCroppedImg({ src, rotation = 0, pixelCrop }: IGetCroppedImg): Promise<getCroppedImgReturn> {
+export async function getCroppedImg({
+  src,
+  rotation = 0,
+  pixelCrop,
+  flip = { horizontal: false, vertical: false },
+}: IGetCroppedImg): Promise<getCroppedImgReturn> {
   const image = await createImage(src);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -38,6 +42,7 @@ export async function getCroppedImg({ src, rotation = 0, pixelCrop }: IGetCroppe
   // translate canvas context to a central location on image to allow rotating around the center.
   ctx.translate(safeArea / 2, safeArea / 2);
   ctx.rotate(getRadianAngle(rotation));
+  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
   ctx.translate(-safeArea / 2, -safeArea / 2);
 
   // draw rotated image and store data.
@@ -51,8 +56,10 @@ export async function getCroppedImg({ src, rotation = 0, pixelCrop }: IGetCroppe
   // paste generated rotate image with correct offsets for x,y crop values.
   ctx.putImageData(
     data,
-    Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
-    Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
+    0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x,
+    0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y,
+    // Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
+    // Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
   );
   // As Base64 string
   const base64Url = canvas.toDataURL("image/jpeg");

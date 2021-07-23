@@ -64,9 +64,15 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
               </>
             ) : actionSelected === "ASPECT-RATIO" ? (
               <>
-                <Button onClick={() => onAspectRatioChange("16:9")}>16:9</Button>
-                <Button onClick={() => onAspectRatioChange("4:3")}>4:3</Button>
-                <Button onClick={() => onAspectRatioChange("1:1")}>1:1</Button>
+                <Button px="2" onClick={() => onAspectRatioChange("16:9")}>
+                  16:9
+                </Button>
+                <Button px="2" onClick={() => onAspectRatioChange("4:3")}>
+                  4:3
+                </Button>
+                <Button px="2" onClick={() => onAspectRatioChange("1:1")}>
+                  1:1
+                </Button>
               </>
             ) : actionSelected === "FLIP" ? (
               <>

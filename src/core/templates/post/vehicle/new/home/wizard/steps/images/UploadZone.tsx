@@ -17,7 +17,7 @@ export const UploadZone: FC = () => {
     <Box>
       <UploadZoneComponent
         btn={() => (
-          <Box m="3" p="3" border="2px" position="absolute" inset="0" borderStyle="dashed">
+          <Box m="3" minH="52" p="3" border="2px" inset="0" borderStyle="dashed">
             Hola
           </Box>
         )}

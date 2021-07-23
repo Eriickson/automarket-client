@@ -33,9 +33,11 @@ export const StepIndicator: FC = () => {
             )}
             <Box mx="2" position="relative">
               <IconButton
+                _focus={{ ring: 0 }}
                 aria-label="example"
                 borderWidth="2px"
                 colorScheme={currentStep > i ? "success" : currentStep === i ? "pri" : "gray"}
+                cursor="not-allowed"
                 icon={
                   <>
                     {currentStep > i ? (

@@ -17,3 +17,4 @@ export * from "./uploadZone";
 export * from "./toast";
 export * from "./cropImage";
 export * from "./breadcrumb";
+export * from "./avatar";

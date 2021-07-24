@@ -24,7 +24,7 @@ export const CropImage: FC<CropImageProps> = ({ image, onSave, isOpen, options, 
         isOpen={isOpen}
         name="edit"
         options={options}
-        src={image.src}
+        src={image.originalSrc}
         onClose={onClose}
         onSave={onSave}
       />

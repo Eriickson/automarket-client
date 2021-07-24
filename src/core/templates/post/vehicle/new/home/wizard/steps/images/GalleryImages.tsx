@@ -41,13 +41,13 @@ export const GalleryImages: FC = () => {
                 <Img
                   filter="blur(5px)"
                   h="full"
-                  src={`${image.croppedImageSrc}`}
+                  src={`${image.src}`}
                   transform="scale(1.1)"
                   userSelect="none"
                 />
                 <Box alignItems="center" display="flex" inset="0" pos="absolute">
                   <Zoom>
-                    <Img src={`${image.croppedImageSrc}`} />
+                    <Img src={`${image.src}`} />
                   </Zoom>
                 </Box>
                 <HStack position="absolute" right="2" top="2">

@@ -1,6 +1,6 @@
-import { UploadFiles, CropImage } from "@/components";
+import { Avatar, UploadFiles, CropImage } from "@/components";
 import { IGeneratedFile } from "@/shared";
-import { Avatar, Box, Button, Img, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Img, useDisclosure } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 
 export const SelectProfileImage: FC = () => {
@@ -9,7 +9,7 @@ export const SelectProfileImage: FC = () => {
 
   return (
     <Box>
-      <Avatar mb={3} rounded="sm" size="2xl" src={imageSelected?.croppedImageSrc} />
+      <Avatar src={imageSelected?.src} />
       <UploadFiles
         btn={({ isLoading }) => <Button isLoading={isLoading}>Seleccionar Imagen de perfil</Button>}
         handleOnlyOneFile={file => {

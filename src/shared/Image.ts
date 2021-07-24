@@ -1,6 +1,6 @@
 export interface IGetCroppedImg {
   src: string;
-  pixelCrop: ICropArea;
+  cropArea: ICropArea;
   flip?: IFlip;
   rotation?: number;
 }
@@ -17,12 +17,13 @@ export interface ICropArea {
 }
 export interface IGeneratedFile {
   id: string;
-  croppedArea: ICropArea;
+  originalSrc: string;
   src: string;
-  croppedImageSrc: string;
   file: File;
+  point: IPoint;
   rotation: number;
   flip: IFlip;
+  cropArea: ICropArea;
 }
 
 export interface IFlip {

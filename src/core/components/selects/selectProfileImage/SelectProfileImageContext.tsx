@@ -90,7 +90,7 @@ const SelectProfileImageProvider: FC = ({ children }) => {
       if (fileToEditing.file) {
         const { blobUrl } = await getCroppedImg({
           src: fileToEditing.src,
-          pixelCrop: croppedAreaPixels,
+          cropArea: croppedAreaPixels,
           rotation,
         });
 

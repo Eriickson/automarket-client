@@ -30,7 +30,7 @@ export const useWindowSize = (): IUserWindowSize => {
       handleResize();
 
       // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
     }
   }, []); // Empty array ensures that effect is only run on mount
   return { width: parseInt(String(windowSize?.width)), height: parseInt(String(windowSize?.height)) };

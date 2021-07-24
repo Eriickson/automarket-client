@@ -50,7 +50,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({
     setIsLoading(true);
     const { blobUrl } = await getCroppedImg({
       src: src,
-      pixelCrop: croppedAreaPixels,
+      cropArea: croppedAreaPixels,
       rotation,
       flip,
     });

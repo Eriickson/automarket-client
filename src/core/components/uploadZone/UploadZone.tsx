@@ -32,16 +32,17 @@ export const UploadFiles: FC<UploadFilesProps> = ({
     const zipFile = await compressImage(file);
     const src = URL.createObjectURL(zipFile);
     const pixelCrop = await generateCroppedArea(src);
-    const { blobUrl } = await getCroppedImg({ pixelCrop, src });
+    const { blobUrl } = await getCroppedImg({ cropArea: pixelCrop, src });
 
     return {
-      croppedArea: pixelCrop,
-      croppedImageSrc: blobUrl,
-      file,
       id: uuid(),
-      src,
+      originalSrc: src,
+      src: blobUrl,
+      file,
+      point: { x: 0, y: 0 },
       rotation: 0,
       flip: { h: false, v: false },
+      cropArea: pixelCrop,
     };
   }
 

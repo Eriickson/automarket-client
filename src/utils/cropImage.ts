@@ -21,7 +21,7 @@ interface getCroppedImgReturn {
 export async function getCroppedImg({
   src,
   rotation = 0,
-  pixelCrop,
+  cropArea,
   flip = { h: false, v: false },
 }: IGetCroppedImg): Promise<getCroppedImgReturn> {
   const image = await createImage(src);
@@ -50,16 +50,16 @@ export async function getCroppedImg({
   const data = ctx.getImageData(0, 0, safeArea, safeArea);
 
   // set canvas width to final desired crop size - this will clear existing context
-  canvas.width = pixelCrop.w;
-  canvas.height = pixelCrop.h;
+  canvas.width = cropArea.w;
+  canvas.height = cropArea.h;
 
   // paste generated rotate image with correct offsets for x,y crop values.
   ctx.putImageData(
     data,
-    0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x,
-    0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y,
-    // Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
-    // Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
+    0 - safeArea / 2 + image.width * 0.5 - cropArea.x,
+    0 - safeArea / 2 + image.height * 0.5 - cropArea.y,
+    // Math.round(0 - safeArea / 2 + image.width * 0.5 - cropArea.x),
+    // Math.round(0 - safeArea / 2 + image.height * 0.5 - cropArea.y),
   );
   // As Base64 string
   const base64Url = canvas.toDataURL("image/jpeg");

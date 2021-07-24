@@ -1,12 +1,14 @@
-import React, { FC } from "react";
-import { Radio, Stack, RadioGroup as RadioGroupChakra, FormControl } from "@chakra-ui/react";
+import React, { FC, ReactElement } from "react";
+import { Radio, Stack, Text, RadioGroup as RadioGroupChakra, FormControl } from "@chakra-ui/react";
 import { IOption } from "@/shared";
 import { LabelInput } from "@/components";
 import { useFormContext, Controller } from "react-hook-form";
 import { useEffect } from "react";
 
-interface IRadioItem extends IOption {
+interface IRadioItem {
   isDisable?: boolean;
+  label: string | ReactElement;
+  value: string | number | boolean;
 }
 
 interface RadioGroupProps {
@@ -45,7 +47,9 @@ export const RadioGroup: FC<RadioGroupProps> = ({
             <Stack direction={direction}>
               {radioItems.map((radioItem, i) => (
                 <Radio isDisabled={radioItem.isDisable} key={i} size={size} value={String(radioItem.value)}>
-                  {radioItem.label}
+                  <Text cursor="pointer" fontWeight="medium">
+                    {radioItem.label}
+                  </Text>
                 </Radio>
               ))}
             </Stack>

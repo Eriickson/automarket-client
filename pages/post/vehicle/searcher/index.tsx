@@ -1,7 +1,12 @@
 import React, { FC } from "react";
+import { SearcherVehicleTemplate } from "@/templates";
 
 const SearcherVehicle: FC = () => {
-  return <div>SearcherVehicle</div>;
+  return (
+    <div>
+      <SearcherVehicleTemplate />
+    </div>
+  );
 };
 
 export default SearcherVehicle;

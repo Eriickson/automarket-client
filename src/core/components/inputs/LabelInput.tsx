@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
 import { FormLabel, Text } from "@chakra-ui/react";
 
 interface LabelInputProps {
-  label: string;
+  label: string | ReactElement;
   isRequired?: boolean;
 }
 

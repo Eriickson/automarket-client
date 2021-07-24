@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Slider, { Range as RangeComponent } from "rc-slider";
 import { Badge, Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import numeral from "numeral";
 import { useFormContext, Controller } from "react-hook-form";
 import { LabelInput } from "../inputs";
 
@@ -48,6 +49,7 @@ interface RangeProps {
   min: number;
   max: number;
   step: number;
+  format?: string;
   defaultValue?: number[];
   multiple?: boolean;
   isDisabled?: boolean;
@@ -62,6 +64,7 @@ export const Range: FC<RangeProps> = ({
   step,
   multiple,
   defaultValue,
+  format = "0",
   isDisabled,
   label,
   isRequired,
@@ -79,7 +82,9 @@ export const Range: FC<RangeProps> = ({
                 {label}
                 <Badge ml="2">
                   {multiple
-                    ? `${watch(name) ? watch(name)[0] : min} - ${watch(name) ? watch(name)[1] : max}`
+                    ? `${numeral(watch(name) ? watch(name)[0] : min).format(format)} - ${numeral(
+                        watch(name) ? watch(name)[1] : max,
+                      ).format(format)}`
                     : watch(name)[0]}
                 </Badge>
               </>

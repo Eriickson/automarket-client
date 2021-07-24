@@ -1,14 +1,17 @@
 import React, { FC } from "react";
-import { Avatar as ChakraAvatar } from "@chakra-ui/react";
+import { Avatar as ChakraAvatar, AvatarProps as ChakraAvatarProps } from "@chakra-ui/react";
+import styled from "@emotion/styled";
 
-interface AvatarProps {
-  src?: string;
-}
+const WraperAvatarStyled = styled.div`
+  img {
+    border-radius: 0.25rem;
+  }
+`;
 
-export const Avatar: FC<AvatarProps> = ({ src }) => {
+export const Avatar: FC<ChakraAvatarProps> = props => {
   return (
-    <div>
-      <ChakraAvatar src={src} mb={3} rounded="sm" size="2xl" />
-    </div>
+    <WraperAvatarStyled>
+      <ChakraAvatar rounded="sm" {...props} />
+    </WraperAvatarStyled>
   );
 };

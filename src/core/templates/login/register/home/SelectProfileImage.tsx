@@ -1,36 +1,36 @@
 import { Avatar, UploadFiles, CropImage } from "@/components";
 import { IGeneratedFile } from "@/shared";
-import { Box, Button, Img, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 
 export const SelectProfileImage: FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [imageSelected, setImageSelected] = useState<IGeneratedFile | undefined>();
-
+  const [imageToCrop, setImageToCrop] = useState<IGeneratedFile | undefined>();
   return (
     <Box>
-      <Avatar src={imageSelected?.src} />
+      <Avatar mb="2" size="xl" src={imageSelected?.src} />
       <UploadFiles
-        btn={({ isLoading }) => <Button isLoading={isLoading}>Seleccionar Imagen de perfil</Button>}
+        btn={({ isLoading }) => <Button isLoading={isLoading}>Seleccionar Imagen</Button>}
         handleOnlyOneFile={file => {
-          setImageSelected(file);
+          setImageToCrop(file);
           onOpen();
         }}
       />
-      {imageSelected && (
+      {imageToCrop && (
         <CropImage
-          image={imageSelected}
+          aspectRatio="1:1"
+          image={imageToCrop}
           isOpen={isOpen}
           name="select-profile-image"
-          onClose={onClose}
-          aspectRatio="1:1"
           options={{
             showBtnFlip: true,
             showBtnRotation: true,
             showBtnZoom: true,
           }}
+          onClose={onClose}
           onSave={newImage => {
-            setImageSelected({ ...imageSelected, ...newImage });
+            setImageSelected({ ...imageToCrop, ...newImage });
           }}
         />
       )}

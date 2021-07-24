@@ -12,6 +12,7 @@ interface InputControlProps {
   defaultValue?: string | number;
   size?: "sm" | "md" | "lg";
   isDisabled?: boolean;
+  noMarginBottom?: boolean;
 }
 
 export const InputControl: FC<InputControlProps> = ({
@@ -21,18 +22,18 @@ export const InputControl: FC<InputControlProps> = ({
   isRequired,
   isDisabled,
   defaultValue,
+  noMarginBottom,
   size = "md",
 }) => {
   const {
     register,
     formState: { errors },
-    getValues,
   } = useFormContext();
 
   const isError = errors[name];
 
   return (
-    <FormControl id={name} mb="3">
+    <FormControl id={name} mb={noMarginBottom ? "0" : "3"}>
       {label && <LabelInput isRequired={isRequired} label={label} />}
       <Input
         placeholder="Escribe algo..."

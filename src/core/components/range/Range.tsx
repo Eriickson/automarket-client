@@ -1,8 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Slider, { Range as RangeComponent } from "rc-slider";
 import { Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useFormContext, Controller } from "react-hook-form";
+import { LabelInput } from "../inputs";
 
 const StyledRangeWraper = styled.div`
   flex: 1;
@@ -50,41 +51,60 @@ interface RangeProps {
   defaultValue?: number[];
   multiple?: boolean;
   isDisabled?: boolean;
+  label?: string;
+  isRequired?: boolean;
 }
 
-export const Range: FC<RangeProps> = ({ name, min, max, step, multiple, defaultValue, isDisabled }) => {
+export const Range: FC<RangeProps> = ({
+  name,
+  min,
+  max,
+  step,
+  multiple,
+  defaultValue,
+  isDisabled,
+  label,
+  isRequired,
+}) => {
   const { control } = useFormContext();
 
   return (
-    <Box display="flex" h="40px">
-      <StyledRangeWraper>
-        <Controller
-          name={name}
-          control={control}
-          defaultValue={defaultValue ? defaultValue : multiple ? [min, max] : max}
-          render={({ field }) =>
-            multiple ? (
-              <RangeComponent
-                {...field}
-                min={min}
-                max={max}
-                step={step}
-                defaultValue={defaultValue ? defaultValue : [min, max]}
-                disabled={isDisabled}
-              />
-            ) : (
-              <Slider
-                {...field}
-                min={min}
-                max={max}
-                step={step}
-                defaultValue={defaultValue ? defaultValue.pop() : max}
-                disabled={isDisabled}
-              />
-            )
-          }
-        />
-      </StyledRangeWraper>
+    <Box>
+      {label && (
+        <Box mb="1">
+          <LabelInput isRequired={isRequired} label={label} />
+        </Box>
+      )}
+      <Box display="flex" h="40px" px="2.5">
+        <StyledRangeWraper>
+          <Controller
+            control={control}
+            defaultValue={defaultValue ? defaultValue : multiple ? [min, max] : max}
+            name={name}
+            render={({ field }) =>
+              multiple ? (
+                <RangeComponent
+                  {...field}
+                  defaultValue={defaultValue ? defaultValue : [min, max]}
+                  disabled={isDisabled}
+                  max={max}
+                  min={min}
+                  step={step}
+                />
+              ) : (
+                <Slider
+                  {...field}
+                  defaultValue={defaultValue ? defaultValue.pop() : max}
+                  disabled={isDisabled}
+                  max={max}
+                  min={min}
+                  step={step}
+                />
+              )
+            }
+          />
+        </StyledRangeWraper>
+      </Box>
     </Box>
   );
 };

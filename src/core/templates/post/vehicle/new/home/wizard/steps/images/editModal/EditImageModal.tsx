@@ -13,12 +13,18 @@ export const EditImageModal: FC<EditImageModalProps> = ({ image }) => {
   const { newVehicleUpdateImage } = useAction();
   return (
     <>
-      <IconButton aria-label="" colorScheme="pri" icon={<IconEdit size="1.25rem" />} size="sm" onClick={onOpen} />
+      <IconButton
+        aria-label="abrir editor de imagen"
+        colorScheme="pri"
+        icon={<IconEdit size="1.25rem" />}
+        size="sm"
+        onClick={onOpen}
+      />
       <CropImage
+        image={image}
         isOpen={isOpen}
         name="edit"
         options={{ showBtnZoom: true, showBtnAspectRatio: true, showBtnFlip: true, showBtnRotation: true }}
-        image={image}
         onClose={onClose}
         onSave={data => newVehicleUpdateImage({ ...image, ...data })}
       />

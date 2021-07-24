@@ -7,7 +7,7 @@ export const ListingStep: FC = () => {
   const { nextStep } = useWizard();
   function onSubmit(values: Record<string, string[]>) {
     console.log(values);
-    // nextStep();
+    nextStep();
   }
 
   return (

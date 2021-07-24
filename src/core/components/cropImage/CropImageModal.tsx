@@ -101,7 +101,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, o
             onChange={onChange}
             onZoomChange={onZoomChange}
           />
-          <Tag mr="1" fontWeight="semibold" mt="1">
+          <Tag fontWeight="semibold" mr="1" mt="1">
             X: {croppedAreaPixels.x}
             <Box mx="1"></Box>
             Y: {croppedAreaPixels.y}

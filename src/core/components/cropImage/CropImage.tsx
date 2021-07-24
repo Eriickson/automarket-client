@@ -18,14 +18,7 @@ interface CropImageProps {
 export const CropImage: FC<CropImageProps> = ({ image, onSave, isOpen, options, onClose }) => {
   return (
     <>
-      <CropImageModal
-        isOpen={isOpen}
-        name="edit"
-        options={options}
-        src={image.croppedImageSrc}
-        onClose={onClose}
-        onSave={onSave}
-      />
+      <CropImageModal isOpen={isOpen} name="edit" options={options} src={image.src} onClose={onClose} onSave={onSave} />
     </>
   );
 };

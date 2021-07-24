@@ -35,23 +35,26 @@ export const ListingStepForm: FC<ListingStepFormProps> = ({ onSubmit }) => {
         <SimpleGrid columns={12} gap={8}>
           {formPanels?.map((panel, i) => (
             <GridItem colSpan={[12, null, null, 6]} key={i}>
-              <Box border="1px solid" borderColor="gray.200" h="full" pb="3" pt="1" px={[1, null, 3]} rounded="sm">
+              <Box
+                borderColor="gray.200"
+                borderWidth={[0, null, 1]}
+                h="full"
+                pb="3"
+                pt="1"
+                px={[0, null, 3]}
+                rounded="sm"
+              >
                 <Text bg="white" fontWeight="semibold" mt="-4" px="1" w="max-content">
                   <Badge>
                     {panel.title} ({methods.watch(panel.name)?.length || 0}/{panel.items.length}){" "}
                   </Badge>
                 </Text>
-                <Box ml="3" mt="3">
+                <Box ml={[0, null, "3"]} mt="3">
                   <CheckboxGroup colorScheme="pri" defaultValue={panel?.defaultValues}>
                     <SimpleGrid columns={12} rowGap={2}>
                       {panel.items.map((item, i) => (
                         <GridItem colSpan={[6, null, 4, 6, 4]} key={i}>
-                          <Checkbox
-                            alignItems="flex-start"
-                            fontWeight="medium"
-                            {...methods.register(panel.name)}
-                            value={String(item.value)}
-                          >
+                          <Checkbox fontWeight="medium" {...methods.register(panel.name)} value={String(item.value)}>
                             {item.label}
                           </Checkbox>
                         </GridItem>

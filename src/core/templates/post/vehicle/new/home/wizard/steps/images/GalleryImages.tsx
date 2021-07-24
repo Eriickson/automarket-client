@@ -38,11 +38,16 @@ export const GalleryImages: FC = () => {
                 overflow="hidden"
                 position="relative"
               >
-                {" "}
-                <Img filter="blur(5px)" h="full" src={`${image.src}`} transform="scale(1.1)" userSelect="none" />
+                <Img
+                  filter="blur(5px)"
+                  h="full"
+                  src={`${image.croppedImageSrc}`}
+                  transform="scale(1.1)"
+                  userSelect="none"
+                />
                 <Box alignItems="center" display="flex" inset="0" pos="absolute">
                   <Zoom>
-                    <Img src={`${image.src}`} />
+                    <Img src={`${image.croppedImageSrc}`} />
                   </Zoom>
                 </Box>
                 <HStack position="absolute" right="2" top="2">

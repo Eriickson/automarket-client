@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import Slider, { Range as RangeComponent } from "rc-slider";
-import { Box } from "@chakra-ui/react";
+import { Badge, Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useFormContext, Controller } from "react-hook-form";
 import { LabelInput } from "../inputs";
@@ -66,13 +66,25 @@ export const Range: FC<RangeProps> = ({
   label,
   isRequired,
 }) => {
-  const { control } = useFormContext();
+  const { control, watch } = useFormContext();
 
   return (
     <Box>
       {label && (
         <Box mb="1">
-          <LabelInput isRequired={isRequired} label={label} />
+          <LabelInput
+            isRequired={isRequired}
+            label={
+              <>
+                {label}
+                <Badge ml="2">
+                  {multiple
+                    ? `${watch(name) ? watch(name)[0] : min} - ${watch(name) ? watch(name)[1] : max}`
+                    : watch(name)[0]}
+                </Badge>
+              </>
+            }
+          />
         </Box>
       )}
       <Box display="flex" h="40px" px="2.5">

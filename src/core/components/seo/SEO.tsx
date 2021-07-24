@@ -10,8 +10,8 @@ interface SEOProps {
 export const SEO: FC<SEOProps> = ({ title, desc, children }) => {
   return (
     <>
-      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      <NextSeo title={title} description={desc} />
+      <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+      <NextSeo description={desc} title={title} />
       {children}
     </>
   );

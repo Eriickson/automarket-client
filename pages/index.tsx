@@ -9,7 +9,7 @@ import { SEO } from "@/components";
 
 const IndexPage: NextPage = () => {
   return (
-    <SEO title="Inicio" desc="Automarket RD">
+    <SEO desc="Automarket RD" title="Inicio">
       <IndexTemplate />
     </SEO>
   );

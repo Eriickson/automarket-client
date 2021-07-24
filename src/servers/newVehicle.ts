@@ -10,6 +10,7 @@ import {
   IGetColorsPayload,
   IGetConditionsPayload,
   IGetFeaturesPayload,
+  IGetIncludesPayload,
   IGetFuelsPayload,
   IGetTractionsPayload,
   IGetTransmissionsPayload,
@@ -19,6 +20,7 @@ import { IGetVersionsPayload } from "src/graphql/gql/queries/GetVersions";
 
 export interface NewVehicleProps {
   information: {
+    accesories: IOption[];
     brands: IOption[];
     conditions: IOption[];
     vehicleCategories: IOption[];
@@ -26,6 +28,8 @@ export interface NewVehicleProps {
     fuels: IOption[];
     tractions: IOption[];
     transmissions: IOption[];
+    features: IOption[];
+    includes: IOption[];
   };
 }
 
@@ -36,6 +40,7 @@ export const newVehicleServerSide: GetServerSideProps = async () => {
     GET_FEATURES_Q,
     GET_BRANDS_Q,
     GET_CONDITIONS_Q,
+    GET_INCLUDES_Q,
     GET_VEHICLE_CATEGORIES_Q,
     GET_COLORS_Q,
     GET_FUELS_Q,
@@ -51,21 +56,23 @@ export const newVehicleServerSide: GetServerSideProps = async () => {
     .add(GET_VEHICLE_CATEGORIES_Q)
     .add(GET_COLORS_Q)
     .add(GET_FUELS_Q)
+    .add(GET_INCLUDES_Q)
     .add(GET_TRACTIONS_Q)
     .add(GET_TRANSMISSIONS_Q);
 
   try {
     const {
       data: {
-        // getAccesories,
+        getAccesories,
         getBrands,
         getColors,
         getConditions,
-        // getFeatures,
+        getFeatures,
         getFuels,
         getTractions,
         getTransmissions,
         getVehicleCategories,
+        getIncludes,
       },
     } = await client.query<
       IGetAccesoriesPayload &
@@ -76,13 +83,14 @@ export const newVehicleServerSide: GetServerSideProps = async () => {
         IGetVehicleCategoriesPayload &
         IGetColorsPayload &
         IGetFuelsPayload &
+        IGetIncludesPayload &
         IGetTractionsPayload &
         IGetTransmissionsPayload
     >({ query: DOCUMENT });
 
     const props: NewVehicleProps = {
       information: {
-        // accesories: getAccesories.accesories,
+        accesories: getAccesories.accesories,
         brands: getBrands.brands,
         conditions: getConditions.conditions,
         vehicleCategories: getVehicleCategories.vehicleCategories,
@@ -90,11 +98,10 @@ export const newVehicleServerSide: GetServerSideProps = async () => {
         fuels: getFuels.fuels,
         tractions: getTractions.tractions,
         transmissions: getTransmissions.transmissions,
+        features: getFeatures.features,
+        includes: getIncludes.includes,
       },
     };
-
-    console.log(props.information.brands);
-
 
     return {
       props,

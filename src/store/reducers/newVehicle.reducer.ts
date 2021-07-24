@@ -2,6 +2,7 @@ import { IGeneratedFile, IOption } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInformationStep {
+  accesories: IOption[];
   brands: IOption[];
   conditions: IOption[];
   vehicleCategories: IOption[];
@@ -9,6 +10,8 @@ interface IInformationStep {
   fuels: IOption[];
   tractions: IOption[];
   transmissions: IOption[];
+  features: IOption[];
+  includes: IOption[];
 }
 
 interface IListing {

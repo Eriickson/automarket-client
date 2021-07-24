@@ -33,7 +33,11 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
                 label="Marca"
                 name="brand"
                 options={brands}
-                onChange={({ value }) => getModelsByBrandIdFetch({ brandId: value.toString() })}
+                onChange={({ value }) => {
+                  methods.setValue("model", null);
+                  methods.setValue("typeModel", null);
+                  getModelsByBrandIdFetch({ brandId: value.toString() });
+                }}
               />
             </GridItem>
             <GridItem colSpan={[12, null, 6]}>
@@ -48,7 +52,7 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
             </GridItem>
             <GridItem colSpan={[12, null, 6]}>
               <Select
-                isDisabled={!typeModels.length}
+                isDisabled={!typeModels.length || !methods.getValues("model")}
                 isLoading={loadingTypeModels}
                 label="Tipo"
                 name="typeModel"

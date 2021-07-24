@@ -11,6 +11,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Home } from "react-feather";
 import styled from "@emotion/styled";
 import { IconChevronLeft } from "@tabler/icons";
+import { IBreadcrumb } from "@/shared";
 
 const WraperBreadcrumbStyled = styled.div`
   ol.chakra-breadcrumb__list {
@@ -18,7 +19,11 @@ const WraperBreadcrumbStyled = styled.div`
   }
 `;
 
-export const Breadcrumb: FC = () => {
+interface BreadcrumbProps {
+  items: IBreadcrumb[];
+}
+
+export const Breadcrumb: FC<BreadcrumbProps> = ({ items }) => {
   return (
     <WraperBreadcrumbStyled>
       <Container alignItems="center" display="flex">
@@ -32,24 +37,11 @@ export const Breadcrumb: FC = () => {
               <Home height="1.25rem" width="1.25rem" />
             </BreadcrumbLink>
           </BreadcrumbItem>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">About</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href="#">Contact</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">About</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href="#">Contact</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">About</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href="#">Contact</BreadcrumbLink>
-          </BreadcrumbItem>
+          {items.map((item, i) => (
+            <BreadcrumbItem isCurrentPage={item.isCurrentPage} key={i}>
+              <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+            </BreadcrumbItem>
+          ))}
         </ChakraBreadcrumb>
       </Container>
     </WraperBreadcrumbStyled>

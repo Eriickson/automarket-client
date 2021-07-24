@@ -1,5 +1,5 @@
 import { WebSocketLink } from "@apollo/client/link/ws";
-import * as ws from "ws";
+// import * as ws from "ws";
 
 const wsLink = new WebSocketLink({
   uri: String(process.env.WS_GRAPHQL_SERVER),
@@ -7,7 +7,7 @@ const wsLink = new WebSocketLink({
     reconnect: true,
     timeout: 60000,
   },
-  webSocketImpl: ws,
+  // webSocketImpl: ws,
 });
 
 export default wsLink;

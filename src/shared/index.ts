@@ -5,3 +5,4 @@ export * from "./IApolloServerError";
 export * from "./Direction";
 export * from "./User";
 export * from "./Tabs";
+export * from "./Breadcrumb";

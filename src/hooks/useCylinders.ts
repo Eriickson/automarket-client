@@ -1,4 +1,4 @@
-import { IOption } from "@/models";
+import { IOption } from "@/shared";
 import { useState } from "react";
 
 export function useCylinders(): { cylinders: IOption[] } {

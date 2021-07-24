@@ -7,8 +7,8 @@ import Headroom from "react-headroom";
 import { AutomarketRDLogo } from "../../../assets";
 import { MainMenu } from "./MainMenu";
 import styled from "@emotion/styled";
-import { IconChevronRight, IconHome } from "@tabler/icons";
-import { Breadcrumb } from "./Breadcrumb";
+import { Breadcrumb } from "..";
+import { useUIContext } from "@/context";
 
 const StyledMainHeaderWrapper = styled.header`
   width: 100%;
@@ -33,10 +33,12 @@ const NavBarItems = [
 ];
 
 export const MainHeader: FC = () => {
+  const { breadcrumb } = useUIContext();
+
   return (
     <StyledMainHeaderWrapper>
       <Headroom>
-        <Box bg="white" borderBottomWidth="1px" pt={[4, 6]} pb="1.5" shadow="sm">
+        <Box bg="white" borderBottomWidth="1px" pb={breadcrumb.show ? 1.5 : [4, 6]} pt={[4, 6]} shadow="sm">
           <Container alignItems="center" display="flex" justifyContent="space-between">
             <Link href="/">
               <a>
@@ -86,8 +88,12 @@ export const MainHeader: FC = () => {
               </Box>
             </Box>
           </Container>
-          <Divider mt="6" mb="1" />
-          <Breadcrumb />
+          {breadcrumb.show && (
+            <>
+              <Divider mb="1" mt="6" />
+              <Breadcrumb items={breadcrumb.items} />
+            </>
+          )}
         </Box>
       </Headroom>
     </StyledMainHeaderWrapper>

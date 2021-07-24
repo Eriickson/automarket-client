@@ -7,7 +7,7 @@ export const Seacher: FC = () => {
   return (
     <PrimaryCard>
       <FormProvider {...methods}>
-        <InputControl noMarginBottom name="Nombre de la Agencía" inputProps={{ placeholder: "Nombre de la agencía" }} />
+        <InputControl noMarginBottom inputProps={{ placeholder: "Nombre de la agencía" }} name="Nombre de la Agencía" />
       </FormProvider>
     </PrimaryCard>
   );

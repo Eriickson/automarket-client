@@ -14,7 +14,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { CropImageComponent } from "./CropImageComponent";
-import { AspectRatioType, ICropArea, IGeneratedFile, IFlip, IPoint } from "@/shared";
+import { AspectRatioType, ICropArea, IGeneratedImage, IFlip, IPoint } from "@/shared";
 import { CropImageActions } from "./CropImageActions";
 import { getCroppedImg } from "@/utils";
 
@@ -22,22 +22,22 @@ import { IOptions } from "./types";
 interface CropImageModalProps {
   name: string;
   isOpen: boolean;
-  src: string;
+  image: IGeneratedImage;
   options?: Partial<IOptions>;
   aspectRatioValue: AspectRatioType;
-  onSave(newData: Partial<Omit<IGeneratedFile, "file" | "id">>): void;
+  onSave(newData: Partial<Omit<IGeneratedImage, "file" | "id">>): void;
   onClose(): void;
 }
 
 export const CropImageModal: FC<CropImageModalProps> = ({
   onSave,
   aspectRatioValue,
-  src,
+  image,
   isOpen,
   options,
   onClose,
 }) => {
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<ICropArea>({ w: 0, h: 0, y: 0, x: 0 });
+  const [croppedArea, setCroppedArea] = useState<ICropArea>({ w: 0, h: 0, y: 0, x: 0 });
   const [aspectRatio, setAspectRatio] = useState<number>(4 / 3);
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -49,27 +49,31 @@ export const CropImageModal: FC<CropImageModalProps> = ({
   async function onGenerate() {
     setIsLoading(true);
     const { blobUrl } = await getCroppedImg({
-      src: src,
-      cropArea: croppedAreaPixels,
+      src: image.src,
+      cropArea: croppedArea,
       rotation,
       flip,
     });
+    setIsLoading(false);
 
-    const newData = {
+    const newData: IGeneratedImage = {
+      ...image,
+      aspectRatio: aspectRatioString,
       src: blobUrl,
-      croppedAreaPixels,
+      point: crop,
+      zoom,
+      cropArea: croppedArea,
       rotation,
       flip,
     };
 
     onSave(newData);
-    setIsLoading(false);
     onReset();
     onClose();
   }
 
   async function onChange(values: ICropArea) {
-    setCroppedAreaPixels(values);
+    setCroppedArea(values);
   }
 
   function onZoomChange(newZoom: number) {
@@ -100,7 +104,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({
       setCrop({ x: 0, y: 0 });
       // setFileToEditing({ file: null, src: "" });
       setRotation(0);
-      setCroppedAreaPixels({ w: 0, h: 0, x: 0, y: 0 });
+      setCroppedArea({ w: 0, h: 0, x: 0, y: 0 });
       setIsLoading(false);
     }, 250);
   }
@@ -111,6 +115,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({
       "1:1": 1 / 1,
       "4:3": 4 / 3,
     };
+    setAspectRatioString(aspectRatioValue);
     setAspectRatio(aspectRatios[aspectRatioValue]);
   }, []);
 
@@ -126,20 +131,20 @@ export const CropImageModal: FC<CropImageModalProps> = ({
             crop={crop}
             flip={flip}
             rotation={rotation}
-            src={src}
+            src={image.src}
             zoom={zoom}
             onChange={onChange}
             onCrop={setCrop}
             onZoomChange={onZoomChange}
           />
           <Tag fontWeight="semibold" mr="1" mt="1">
-            X: {croppedAreaPixels.x}
+            X: {croppedArea.x}
             <Box mx="1"></Box>
-            Y: {croppedAreaPixels.y}
+            Y: {croppedArea.y}
             <Box mx="1"></Box>
-            W: {croppedAreaPixels.w}
+            W: {croppedArea.w}
             <Box mx="1"></Box>
-            H: {croppedAreaPixels.h}
+            H: {croppedArea.h}
           </Tag>
           <Tag fontWeight="semibold" mt="1">
             Dimensión: {aspectRatioString}

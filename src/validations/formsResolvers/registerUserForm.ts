@@ -7,7 +7,7 @@ import { IOption } from "@/shared";
 export type RegisterUserOnSubmitFormType = {
   profilePicture: {
     file: File;
-    croppedArea: {
+    cropArea: {
       x: number;
       y: number;
       w: number;
@@ -30,7 +30,7 @@ export type RegisterUserOnSubmitFormType = {
 const schema = yup.object().shape({
   profilePicture: yup.object().shape({
     file: yup.mixed<File>(),
-    croppedArea: yup.object().shape({
+    cropArea: yup.object().shape({
       x: yup.number(),
       y: yup.number(),
       w: yup.number(),

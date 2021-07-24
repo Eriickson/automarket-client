@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 // My Elements
 import { compressImage, generateCroppedArea, getCroppedImg } from "@/utils";
-import { IGeneratedFile } from "@/shared";
+import { IGeneratedImage } from "@/shared";
 
 interface IBtn extends Omit<DropzoneState, "getRootProps" | "getInputProps"> {
   isLoading: boolean;
@@ -16,8 +16,8 @@ interface IBtn extends Omit<DropzoneState, "getRootProps" | "getInputProps"> {
 interface UploadFilesProps {
   btn({ isLoading }: IBtn): React.ReactElement;
   dropZoneOptions?: Pick<DropzoneOptions, "multiple" | "accept" | "maxFiles">;
-  handleOnlyOneFile?(file: IGeneratedFile): void;
-  handleMultipleFiles?(files: IGeneratedFile[]): void;
+  handleOnlyOneFile?(file: IGeneratedImage): void;
+  handleMultipleFiles?(files: IGeneratedImage[]): void;
 }
 
 export const UploadFiles: FC<UploadFilesProps> = ({
@@ -28,7 +28,7 @@ export const UploadFiles: FC<UploadFilesProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  async function generateAcceptedFile({ file }: { file: File }): Promise<IGeneratedFile> {
+  async function generateAcceptedFile({ file }: { file: File }): Promise<IGeneratedImage> {
     const zipFile = await compressImage(file);
     const src = URL.createObjectURL(zipFile);
     const pixelCrop = await generateCroppedArea(src);
@@ -43,16 +43,18 @@ export const UploadFiles: FC<UploadFilesProps> = ({
       rotation: 0,
       flip: { h: false, v: false },
       cropArea: pixelCrop,
+      zoom: 1,
+      aspectRatio: "4:3",
     };
   }
 
   async function handleFiles(files: File[]) {
-    const zipFiles: IGeneratedFile[] = await Promise.all(files.map(async file => generateAcceptedFile({ file })));
+    const zipFiles: IGeneratedImage[] = await Promise.all(files.map(async file => generateAcceptedFile({ file })));
     handleMultipleFiles && handleMultipleFiles(zipFiles);
   }
 
   async function handeFile(file: File) {
-    const zipFile: IGeneratedFile = await generateAcceptedFile({ file });
+    const zipFile: IGeneratedImage = await generateAcceptedFile({ file });
     handleOnlyOneFile && handleOnlyOneFile(zipFile);
   }
 

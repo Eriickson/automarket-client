@@ -47,14 +47,7 @@ export const RegisterTemplate: FC = () => {
       password,
     };
 
-    profilePicture.file &&
-      Object.assign(newUser, {
-        profilePicture: {
-          croppedArea: profilePicture.croppedArea,
-          file: profilePicture.file,
-          rotation: profilePicture.rotation,
-        },
-      });
+    profilePicture.file && Object.assign(newUser, { profilePicture });
 
     console.log(newUser);
 
@@ -65,7 +58,6 @@ export const RegisterTemplate: FC = () => {
           user: newUser,
         },
       });
-      console.log(response.data?.response);
     } catch (err) {
       apolloServerError.onOpen(err.message, {
         priBtnLabel: "Aceptar",

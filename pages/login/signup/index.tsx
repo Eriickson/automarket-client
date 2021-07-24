@@ -7,7 +7,7 @@ import { SEO } from "@/components";
 
 const SignUpPage: NextPage = () => {
   return (
-    <SEO desc="Automarket RD" title="Crea tu cuenta">
+    <SEO desc="Automarket RD" title="Regístrate">
       <SignUpTemplate />
     </SEO>
   );

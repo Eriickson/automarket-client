@@ -15,15 +15,17 @@ export interface ICropArea {
   w: number;
   h: number;
 }
-export interface IGeneratedFile {
+export interface IGeneratedImage {
   id: string;
   originalSrc: string;
   src: string;
   file: File;
   point: IPoint;
   rotation: number;
+  zoom: number;
   flip: IFlip;
   cropArea: ICropArea;
+  aspectRatio: AspectRatioType;
 }
 
 export interface IFlip {

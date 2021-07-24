@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { Box, Button, Divider, Text } from "@chakra-ui/react";
 
 // My Elements
-import { IGeneratedFile } from "@/shared";
+import { IGeneratedImage } from "@/shared";
 import { useAction } from "@/store";
 
 // My Components
@@ -14,7 +14,7 @@ import { IconCirclePlus, IconPhoto } from "@tabler/icons";
 export const UploadZone: FC = () => {
   const { setNewVehicle } = useAction();
 
-  async function handleFiles(acceptedFiles: IGeneratedFile[]) {
+  async function handleFiles(acceptedFiles: IGeneratedImage[]) {
     setNewVehicle(acceptedFiles);
   }
 

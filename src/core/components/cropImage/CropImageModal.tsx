@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 import {
   Modal,
@@ -14,7 +14,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { CropImageComponent } from "./CropImageComponent";
-import { AspectRatioType, ICropArea, IGeneratedFile, IFlip } from "@/shared";
+import { AspectRatioType, ICropArea, IGeneratedFile, IFlip, IPoint } from "@/shared";
 import { CropImageActions } from "./CropImageActions";
 import { getCroppedImg } from "@/utils";
 
@@ -24,11 +24,19 @@ interface CropImageModalProps {
   isOpen: boolean;
   src: string;
   options?: Partial<IOptions>;
+  aspectRatioValue: AspectRatioType;
   onSave(newData: Partial<Omit<IGeneratedFile, "file" | "id">>): void;
   onClose(): void;
 }
 
-export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, options, onClose }) => {
+export const CropImageModal: FC<CropImageModalProps> = ({
+  onSave,
+  aspectRatioValue,
+  src,
+  isOpen,
+  options,
+  onClose,
+}) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<ICropArea>({ w: 0, h: 0, y: 0, x: 0 });
   const [aspectRatio, setAspectRatio] = useState<number>(4 / 3);
   const [rotation, setRotation] = useState(0);
@@ -36,6 +44,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, o
   const [flip, setFlip] = useState<IFlip>({ h: false, v: false });
   const [isLoading, setIsLoading] = useState(false);
   const [aspectRatioString, setAspectRatioString] = useState<AspectRatioType>("4:3");
+  const [crop, setCrop] = useState<IPoint>({ x: 0, y: 0 });
 
   async function onGenerate() {
     setIsLoading(true);
@@ -54,8 +63,8 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, o
     };
 
     onSave(newData);
-
     setIsLoading(false);
+    onReset();
     onClose();
   }
 
@@ -85,6 +94,26 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, o
     setFlip(newFlip);
   }
 
+  function onReset() {
+    setTimeout(() => {
+      setZoom(1);
+      setCrop({ x: 0, y: 0 });
+      // setFileToEditing({ file: null, src: "" });
+      setRotation(0);
+      setCroppedAreaPixels({ w: 0, h: 0, x: 0, y: 0 });
+      setIsLoading(false);
+    }, 250);
+  }
+
+  useEffect(() => {
+    const aspectRatios: Record<AspectRatioType, number> = {
+      "16:9": 16 / 9,
+      "1:1": 1 / 1,
+      "4:3": 4 / 3,
+    };
+    setAspectRatio(aspectRatios[aspectRatioValue]);
+  }, []);
+
   return (
     <Modal isCentered isOpen={isOpen} motionPreset="slideInBottom" size="4xl" onClose={onClose}>
       <ModalOverlay />
@@ -94,11 +123,13 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, o
         <ModalBody>
           <CropImageComponent
             aspectRatio={aspectRatio}
+            crop={crop}
             flip={flip}
             rotation={rotation}
             src={src}
             zoom={zoom}
             onChange={onChange}
+            onCrop={setCrop}
             onZoomChange={onZoomChange}
           />
           <Tag fontWeight="semibold" mr="1" mt="1">
@@ -136,7 +167,15 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, src, isOpen, o
             onZoomChange={onZoomChange}
           />
           <HStack>
-            <Button colorScheme="danger" mr={3} variant="ghost" onClick={onClose}>
+            <Button
+              colorScheme="danger"
+              mr={3}
+              variant="ghost"
+              onClick={() => {
+                onClose();
+                onReset();
+              }}
+            >
               Cancelar
             </Button>
             <Button colorScheme="success" isLoading={isLoading} loadingText="Guardando Cambios" onClick={onGenerate}>

@@ -4,6 +4,11 @@ export interface IGetCroppedImg {
   flip?: IFlip;
   rotation?: number;
 }
+
+export interface IPoint {
+  x: number;
+  y: number;
+}
 export interface ICropArea {
   x: number;
   y: number;

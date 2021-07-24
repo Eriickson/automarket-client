@@ -1,4 +1,4 @@
-import { IGeneratedFile } from "@/shared";
+import { AspectRatioType, IGeneratedFile } from "@/shared";
 import React, { FC } from "react";
 
 //Styles and Icons
@@ -11,14 +11,23 @@ interface CropImageProps {
   isOpen: boolean;
   image: IGeneratedFile;
   options?: Partial<IOptions>;
+  aspectRatio?: AspectRatioType;
   onClose(): void;
   onSave(newData: Partial<Omit<IGeneratedFile, "file">>): void;
 }
 
-export const CropImage: FC<CropImageProps> = ({ image, onSave, isOpen, options, onClose }) => {
+export const CropImage: FC<CropImageProps> = ({ image, onSave, isOpen, options, onClose, aspectRatio = "4:3" }) => {
   return (
     <>
-      <CropImageModal isOpen={isOpen} name="edit" options={options} src={image.src} onClose={onClose} onSave={onSave} />
+      <CropImageModal
+        aspectRatioValue={aspectRatio}
+        isOpen={isOpen}
+        name="edit"
+        options={options}
+        src={image.src}
+        onClose={onClose}
+        onSave={onSave}
+      />
     </>
   );
 };

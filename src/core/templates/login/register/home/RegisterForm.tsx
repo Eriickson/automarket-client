@@ -1,12 +1,5 @@
 import React, { FC, useEffect } from "react";
-import {
-  InputControl,
-  PrimaryCard,
-  Select,
-  SelectProfileImage,
-  SelectProfileImageProvider,
-  LabelInput,
-} from "@/components";
+import { InputControl, PrimaryCard, Select, LabelInput } from "@/components";
 import { Box, Divider, Button, Tag, TagLabel, TagLeftIcon, VStack, Text } from "@chakra-ui/react";
 
 import { useForm, FormProvider } from "react-hook-form";
@@ -16,6 +9,7 @@ import { IconInfoCircle } from "@tabler/icons";
 import { RegisterUserFormResolver, RegisterUserOnSubmitFormType } from "@/validations";
 import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
 import { RadioGroup } from "@/components";
+import { SelectProfileImage } from "./SelectProfileImage";
 
 interface RegisterFormProps {
   onSubmit(values: RegisterUserOnSubmitFormType): void;
@@ -54,7 +48,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
             >
               <Box>
                 <LabelInput label="Imagen de perfil" />
-                <SelectProfileImageProvider>
+                <SelectProfileImage />
+                {/* <SelectProfileImageProvider>
                   <SelectProfileImage
                     showAvatar
                     onChange={value => {
@@ -65,7 +60,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
                       });
                     }}
                   />
-                </SelectProfileImageProvider>
+                </SelectProfileImageProvider> */}
                 <VStack align="flex-start" mt="3">
                   <Tag colorScheme="info">
                     <TagLeftIcon as={IconInfoCircle} boxSize="1rem" color="info.500" />
@@ -96,7 +91,10 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
                     label="Provincia"
                     name="province"
                     options={provinces}
-                    onChange={({ value }) => getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) })}
+                    onChange={({ value }) => {
+                      methods.setValue("municipality", { label: "Seleccionar...", value: "" });
+                      getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
+                    }}
                   />
                 </Box>
                 <Box flex="1">

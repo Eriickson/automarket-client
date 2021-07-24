@@ -56,6 +56,9 @@ export const RegisterTemplate: FC = () => {
         },
       });
 
+    console.log(newUser);
+
+    return;
     try {
       const response = await registerUser({
         variables: {

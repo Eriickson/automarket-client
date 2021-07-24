@@ -5,7 +5,7 @@ import Cropper from "react-easy-crop";
 
 //Styles and Icons
 import styled from "@emotion/styled";
-import { ICropArea, IFlip } from "@/shared";
+import { ICropArea, IFlip, IPoint } from "@/shared";
 
 const WrapperCropperImageStyled = styled.div`
   position: relative;
@@ -29,6 +29,8 @@ interface CropImageComponentProps {
   rotation: number;
   zoom: number;
   flip: IFlip;
+  crop: IPoint;
+  onCrop(location: IPoint): void;
   onChange(newValues: ICropArea): void;
   onZoomChange(newZoom: number): void;
 }
@@ -39,11 +41,11 @@ export const CropImageComponent: FC<CropImageComponentProps> = ({
   zoom,
   flip,
   src,
+  crop,
   onZoomChange,
   onChange,
+  onCrop,
 }) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
     const { width, height, x, y } = croppedAreaPixels;
     onChange({ w: width, h: height, x, y });
@@ -67,7 +69,7 @@ export const CropImageComponent: FC<CropImageComponentProps> = ({
         ].join(" ")}
         zoom={zoom}
         zoomSpeed={0.5}
-        onCropChange={setCrop}
+        onCropChange={onCrop}
         onCropComplete={onCropComplete}
         onZoomChange={onZoomChange}
       />

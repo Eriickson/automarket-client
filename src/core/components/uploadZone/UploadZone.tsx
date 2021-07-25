@@ -7,7 +7,8 @@ import { v4 as uuid } from "uuid";
 
 // My Elements
 import { compressImage, generateCroppedArea, getCroppedImg } from "@/utils";
-import { IGeneratedImage } from "@/shared";
+import { IGeneratedImage, AspectRatioType } from "@/shared";
+import { ASPECT_RATIO } from "@/constants";
 
 interface IBtn extends Omit<DropzoneState, "getRootProps" | "getInputProps"> {
   isLoading: boolean;
@@ -16,12 +17,14 @@ interface IBtn extends Omit<DropzoneState, "getRootProps" | "getInputProps"> {
 interface UploadFilesProps {
   btn({ isLoading }: IBtn): React.ReactElement;
   dropZoneOptions?: Pick<DropzoneOptions, "multiple" | "accept" | "maxFiles">;
+  aspectRatio?: AspectRatioType;
   handleOnlyOneFile?(file: IGeneratedImage): void;
   handleMultipleFiles?(files: IGeneratedImage[]): void;
 }
 
 export const UploadFiles: FC<UploadFilesProps> = ({
   dropZoneOptions = { accept: ["image/jpeg", "image/png"], maxSize: 26214400, multiple: false },
+  aspectRatio = "4:3",
   btn,
   handleOnlyOneFile,
   handleMultipleFiles,
@@ -31,7 +34,7 @@ export const UploadFiles: FC<UploadFilesProps> = ({
   async function generateAcceptedFile({ file }: { file: File }): Promise<IGeneratedImage> {
     const zipFile = await compressImage(file);
     const src = URL.createObjectURL(zipFile);
-    const pixelCrop = await generateCroppedArea(src);
+    const pixelCrop = await generateCroppedArea(src, ASPECT_RATIO[aspectRatio]);
     const { blobUrl } = await getCroppedImg({ cropArea: pixelCrop, src });
 
     return {

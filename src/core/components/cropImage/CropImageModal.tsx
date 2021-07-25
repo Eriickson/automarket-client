@@ -17,6 +17,7 @@ import { CropImageComponent } from "./CropImageComponent";
 import { AspectRatioType, ICropArea, IGeneratedImage, IFlip, IPoint } from "@/shared";
 import { CropImageActions } from "./CropImageActions";
 import { getCroppedImg } from "@/utils";
+import { ASPECT_RATIO } from "@/constants";
 
 import { IOptions } from "./types";
 interface CropImageModalProps {
@@ -82,12 +83,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({
 
   function onAspectRatioChange(newAspectRatio: AspectRatioType) {
     setAspectRatioString(newAspectRatio);
-    const aspectRatios: Record<AspectRatioType, number> = {
-      "16:9": 16 / 9,
-      "1:1": 1 / 1,
-      "4:3": 4 / 3,
-    };
-    setAspectRatio(aspectRatios[newAspectRatio]);
+    setAspectRatio(ASPECT_RATIO[newAspectRatio]);
   }
   function onRotationChange(newRotation: number) {
     setRotation(newRotation);
@@ -110,13 +106,8 @@ export const CropImageModal: FC<CropImageModalProps> = ({
   }
 
   useEffect(() => {
-    const aspectRatios: Record<AspectRatioType, number> = {
-      "16:9": 16 / 9,
-      "1:1": 1 / 1,
-      "4:3": 4 / 3,
-    };
     setAspectRatioString(aspectRatioValue);
-    setAspectRatio(aspectRatios[aspectRatioValue]);
+    setAspectRatio(ASPECT_RATIO[aspectRatioValue]);
   }, []);
 
   return (

@@ -14,6 +14,7 @@ export const SelectProfileImage: FC = () => {
     <Box>
       <Avatar mb="2" size="xl" src={imageSelected?.src} />
       <UploadFiles
+        aspectRatio="1:1"
         btn={({ isLoading }) => <Button isLoading={isLoading}>Seleccionar Imagen</Button>}
         handleOnlyOneFile={file => {
           setImageToCrop(file);

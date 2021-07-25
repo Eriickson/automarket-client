@@ -4,7 +4,7 @@ import { ICropArea } from "@/shared";
  * @url - Source of the image to use
  * @aspectRatio - The aspect ratio to apply
  */
-export function generateCroppedArea(url: string, aspectRatio: number = 4 / 3): Promise<ICropArea> {
+export function generateCroppedArea(url: string, aspectRatio: number): Promise<ICropArea> {
   return new Promise(resolve => {
     // this image will hold our source image data
     const inputImage = new Image();

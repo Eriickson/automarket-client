@@ -27,7 +27,7 @@ export const SelectProfileImage: FC = () => {
           name="profilePicture"
           render={({ field }) => (
             <CropImage
-              aspectRatio="1:1"
+              defaultValue={{ aspectRatio: "1:1" }}
               image={imageToCrop}
               isOpen={isOpen}
               name="select-profile-image"

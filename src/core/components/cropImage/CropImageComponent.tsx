@@ -5,7 +5,8 @@ import Cropper from "react-easy-crop";
 
 //Styles and Icons
 import styled from "@emotion/styled";
-import { ICropArea, IFlip, IPoint } from "@/shared";
+import { AspectRatioType, ICropArea, IFlip, IPoint } from "@/shared";
+import { ASPECT_RATIO } from "@/constants";
 
 const WrapperCropperImageStyled = styled.div`
   position: relative;
@@ -24,7 +25,7 @@ const WrapperCropperImageStyled = styled.div`
 `;
 
 interface CropImageComponentProps {
-  aspectRatio: number;
+  aspectRatio: AspectRatioType;
   src: string;
   rotation: number;
   zoom: number;
@@ -54,7 +55,7 @@ export const CropImageComponent: FC<CropImageComponentProps> = ({
   return (
     <WrapperCropperImageStyled>
       <Cropper
-        aspect={aspectRatio}
+        aspect={ASPECT_RATIO[aspectRatio]}
         crop={crop}
         image={src}
         maxZoom={2}

@@ -10,7 +10,6 @@ interface InputControlProps {
   isRequired?: boolean;
   inputProps?: InputProps;
   defaultValue?: string | number;
-  size?: "sm" | "md" | "lg";
   isDisabled?: boolean;
   noMarginBottom?: boolean;
 }
@@ -23,7 +22,6 @@ export const InputControl: FC<InputControlProps> = ({
   isDisabled,
   defaultValue,
   noMarginBottom,
-  size = "md",
 }) => {
   const {
     register,
@@ -53,7 +51,6 @@ export const InputControl: FC<InputControlProps> = ({
         isDisabled={isDisabled}
         px="3"
         rounded="sm"
-        size={size}
         {...register(name)}
         defaultValue={defaultValue}
         shadow="sm"

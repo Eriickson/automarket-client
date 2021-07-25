@@ -21,10 +21,9 @@ export const SignUpForm: FC<SignUpForm> = ({ onSubmit }) => {
           <Box mb="5">
             <InputControl
               isRequired
-              inputProps={{ placeholder: "Correo electrónico" }}
+              inputProps={{ placeholder: "Correo electrónico", size: "lg" }}
               label="Correo electrónico"
               name="email"
-              size="lg"
             />
           </Box>
           <Button colorScheme="pri" size="lg" type="submit" w="full">

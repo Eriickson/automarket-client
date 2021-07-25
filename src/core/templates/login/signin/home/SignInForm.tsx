@@ -17,21 +17,21 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit }) => {
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Box mb="5">
           <InputControl
-            label="Correo electrónico"
-            inputProps={{ placeholder: "Correo electrónico" }}
-            name="identifier"
             isRequired
             defaultValue="erickson01d@gmail.com"
+            inputProps={{ placeholder: "Correo electrónico", size: "lg" }}
+            label="Correo electrónico"
+            name="identifier"
           />
           <InputControl
-            label="Contraseña"
-            inputProps={{ placeholder: "Contraseña" }}
-            name="password"
             isRequired
             defaultValue="123456789e"
+            inputProps={{ placeholder: "Contraseña", size: "lg" }}
+            label="Contraseña"
+            name="password"
           />
         </Box>
-        <Button type="submit" colorScheme="pri" w="full">
+        <Button colorScheme="pri" size="lg" type="submit" w="full">
           Iniciar Sesión
         </Button>
       </form>

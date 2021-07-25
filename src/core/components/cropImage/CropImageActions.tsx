@@ -102,13 +102,17 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
                   aria-label="acercar"
                   icon={<IconFlipVertical size="1.25rem" />}
                   size="sm"
-                  onClick={() => onChangeFlip("HORIZONTAL")}
+                  onClick={() =>
+                    rotation === 90 || rotation === 270 ? onChangeFlip("VERTICAL") : onChangeFlip("HORIZONTAL")
+                  }
                 />
                 <IconButton
                   aria-label="acercar"
                   icon={<IconFlipHorizontal size="1.25rem" />}
                   size="sm"
-                  onClick={() => onChangeFlip("VERTICAL")}
+                  onClick={() =>
+                    rotation === 90 || rotation === 270 ? onChangeFlip("HORIZONTAL") : onChangeFlip("VERTICAL")
+                  }
                 />
               </>
             ) : (

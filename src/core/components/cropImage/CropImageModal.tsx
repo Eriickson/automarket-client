@@ -66,6 +66,8 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, defaultValue, 
       flip,
     };
 
+    console.log(newData);
+
     onSave(newData);
     onReset();
     onClose();

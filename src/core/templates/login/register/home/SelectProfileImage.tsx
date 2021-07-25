@@ -39,6 +39,7 @@ export const SelectProfileImage: FC = () => {
               onClose={onClose}
               onSave={newImage => {
                 const image = { ...imageToCrop, ...newImage };
+                console.log(image);
                 field.onChange(image);
                 setImageSelected(image);
               }}

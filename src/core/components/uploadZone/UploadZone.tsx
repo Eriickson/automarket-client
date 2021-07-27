@@ -72,7 +72,7 @@ export const UploadFiles: FC<UploadFilesProps> = ({
   const { getRootProps, getInputProps, ...dropzoneState } = useDropzone({ onDrop, ...dropZoneOptions });
 
   return (
-    <Box {...getRootProps()}>
+    <Box maxW="max-content" {...getRootProps()}>
       <input {...getInputProps()} />
       {btn({ isLoading, ...dropzoneState })}
     </Box>

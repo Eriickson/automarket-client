@@ -1,16 +1,21 @@
-import React from "react";
-import { useWizard } from "@/components";
-import { NewAgencyDataForm } from "./NewAgencyDataForm";
+import React, { FC } from "react";
+
+// My Elements
 import { INewAgencyDataFormOnSubmit } from "@/validations";
 import { useAction } from "@/store";
 
-export const NewAgencyDataStep = () => {
+// My Components
+import { useWizard } from "@/components";
+import { NewAgencyDataForm } from "./NewAgencyDataForm";
+
+export const NewAgencyDataStep: FC = () => {
   const { setNewAgencyInfo } = useAction();
   const { nextStep } = useWizard();
 
   async function onSubmit(values: INewAgencyDataFormOnSubmit) {
+    console.log(values);
     // setNewAgencyInfo({ agencyData: values });
-    nextStep();
+    // nextStep();
   }
 
   return <NewAgencyDataForm onSubmit={onSubmit} />;

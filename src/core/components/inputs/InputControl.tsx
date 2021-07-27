@@ -1,7 +1,10 @@
 import React, { FC } from "react";
 
+// Packages
 import { FormControl, FormHelperText, Input, InputProps, Collapse } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
+
+// My Components
 import { LabelInput } from "..";
 
 interface InputControlProps {
@@ -14,15 +17,7 @@ interface InputControlProps {
   noMarginBottom?: boolean;
 }
 
-export const InputControl: FC<InputControlProps> = ({
-  name,
-  label,
-  inputProps,
-  isRequired,
-  isDisabled,
-  defaultValue,
-  noMarginBottom,
-}) => {
+export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, isRequired, isDisabled, defaultValue }) => {
   const {
     register,
     formState: { errors },
@@ -31,7 +26,7 @@ export const InputControl: FC<InputControlProps> = ({
   const isError = errors[name];
 
   return (
-    <FormControl id={name} mb={noMarginBottom ? "0" : "3"}>
+    <FormControl id={name}>
       {label && <LabelInput isRequired={isRequired} label={label} />}
       <Input
         placeholder="Escribe algo..."

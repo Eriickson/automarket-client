@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
+// Packages
 import { FormHelperText, Collapse } from "@chakra-ui/react";
-
 import { DeepMap, FieldError, FieldValues } from "react-hook-form";
 
 interface ErrorValidationFormProps {

@@ -11,6 +11,7 @@ const schema = yup.object().shape({
   name: yup.string().required("Campo requerido").min(6, "Mín. 6 caracteres"),
   slogan: yup.string().required("Campo requerido").min(6, "Mín. 6 caracteres"),
   isProfessional: yup.boolean().required("Campo requerido"),
+  logo: yup.object().required("Campo requerido"),
 });
 
 export const NewAgencyDataResolver = yupResolver(schema);

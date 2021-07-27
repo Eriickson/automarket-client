@@ -2,19 +2,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 // My Elements
-import { IOption } from "@/shared";
+import { IOption, IGeneratedImage } from "@/shared";
 
 export type RegisterUserOnSubmitFormType = {
-  profilePicture: {
-    file: File;
-    cropArea: {
-      x: number;
-      y: number;
-      w: number;
-      h: number;
-    };
-    rotation: number;
-  };
+  profilePicture: IGeneratedImage;
   name: string;
   lastname: string;
   province: IOption;

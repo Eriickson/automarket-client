@@ -6,9 +6,10 @@ import { FormProvider } from "react-hook-form";
 import { useSelector } from "@/store";
 import { useGetModelsByBrandId, useGetTypeModelByModelId } from "@/graphql";
 import { useCylinders, useYear } from "@/hooks";
+import { newVehicleInformationFormResolver, NewVehicleInformationFormOnSubmit } from "@/validations";
 
 interface InformationStepFormProps {
-  onSubmit(values: any): void;
+  onSubmit(values: NewVehicleInformationFormOnSubmit): void;
 }
 
 export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) => {
@@ -20,7 +21,7 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
   const { cylinders } = useCylinders();
   const { years } = useYear();
 
-  const methods = useForm();
+  const methods = useForm({ resolver: newVehicleInformationFormResolver });
 
   return (
     <FormProvider {...methods}>

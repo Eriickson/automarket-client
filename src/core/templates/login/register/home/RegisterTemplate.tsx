@@ -33,7 +33,7 @@ export const RegisterTemplate: FC = () => {
     // }
     // return;
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
-
+    const { aspectRatio, cropArea, file, flip, id, point, rotation, zoom } = profilePicture;
     const newUser: RegisterUserVariables["user"] = {
       name,
       lastname,
@@ -47,11 +47,11 @@ export const RegisterTemplate: FC = () => {
       password,
     };
 
-    profilePicture.file && Object.assign(newUser, { profilePicture });
+    profilePicture.file &&
+      Object.assign(newUser, { profilePicture: { aspectRatio, cropArea, file, flip, id, point, rotation, zoom } });
 
     console.log(newUser);
 
-    return;
     try {
       const response = await registerUser({
         variables: {
@@ -59,10 +59,11 @@ export const RegisterTemplate: FC = () => {
         },
       });
     } catch (err) {
-      apolloServerError.onOpen(err.message, {
-        priBtnLabel: "Aceptar",
-        onClickPriBtn: apolloServerError.onClose,
-      });
+      console.log(err);
+      // apolloServerError.onOpen(err.message, {
+      //   priBtnLabel: "Aceptar",
+      //   onClickPriBtn: apolloServerError.onClose,
+      // });
     }
   }
 

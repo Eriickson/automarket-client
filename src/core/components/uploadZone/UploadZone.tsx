@@ -6,7 +6,7 @@ import { DropzoneOptions, DropzoneState, useDropzone } from "react-dropzone";
 import { v4 as uuid } from "uuid";
 
 // My Elements
-import { compressImage, generateCroppedArea, getCroppedImg } from "@/utils";
+import { compressImage, generateCroppedArea, getCroppedImg, generateFileByUrlBlob } from "@/utils";
 import { IGeneratedImage, AspectRatioType } from "@/shared";
 import { ASPECT_RATIO } from "@/constants";
 
@@ -36,18 +36,20 @@ export const UploadFiles: FC<UploadFilesProps> = ({
     const src = URL.createObjectURL(zipFile);
     const pixelCrop = await generateCroppedArea(src, ASPECT_RATIO[aspectRatio]);
     const { blobUrl } = await getCroppedImg({ cropArea: pixelCrop, src });
+    const fileCreated = await generateFileByUrlBlob({ blobUrl, originalFile: file });
 
     return {
       id: uuid(),
       originalSrc: src,
       src: blobUrl,
-      file,
+      originalFile: file,
       point: { x: 0, y: 0 },
       rotation: 0,
       flip: { h: false, v: false },
       cropArea: pixelCrop,
       zoom: 1,
       aspectRatio: "4:3",
+      file: fileCreated,
     };
   }
 

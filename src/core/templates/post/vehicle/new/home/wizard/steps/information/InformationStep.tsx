@@ -6,6 +6,8 @@ export const InformationStep: FC = () => {
   const { nextStep } = useWizard();
 
   function onSubmit(values: any) {
+
+    return;
     nextStep();
   }
 

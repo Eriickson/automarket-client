@@ -1,66 +1,73 @@
-import NextAuth, { User } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import moment from "moment";
+import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+
+type SignInType = {
+  identifier: string;
+  password: string;
+};
 
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     Providers.GitHub({
       clientId: "Iv1.82b8c7d8151f46df",
-      clientSecret: "c4c0a75474db6b4ddb0d84908f40a5fb6ee7d944",
+      clientSecret: "2c2c8a10fa99d16fb4b28fc301d4f5c24297e84e",
     }),
     Providers.Credentials({
       name: "Credentials",
-      async authorize(credentials: { identifier: string; password: string }) {
-        const user: User = {
-          _id: "user-id-001",
-          name: "Erickson Manuel",
-          lastname: "Holguín",
-          email: credentials.identifier,
-          username: "test@test.comssss",
-          profilePicture: "https://zone1-d9f7.kxcdn.com/wp-content/uploads/2013/12/person2-500x500.jpg",
+      async authorize(credentials: SignInType) {
+        // Add logic here to look up the user from the credentials supplied
+        const { identifier, password } = credentials;
+
+        const user = {
+          user: { id: 1, identifier: "erickson01d@gmail.com", password: "123456789e" },
+          agency: {
+            id: "f93cc98f-0d0e-47f8-a9c5-ac381393305a",
+            name: "Agencia de carros",
+            image: "image-de-la-agencia",
+          },
+          expireToken: moment().add(15, "minutes").format(),
         };
 
-        return user;
-
-        // throw `/login?error=${msgError}`;
+        if (user.user.identifier === identifier && user.user.password === password) {
+          // Any object returned will be saved in `user` property of the JWT
+          return user;
+        } else {
+          // If you return null or false then the credentials will be rejected
+          // You can also Reject this callback with an Error or with a URL:
+          // throw new Error('error message') // Redirect to error page
+          // throw '/path/to/redirect'        // Redirect to a URL
+          throw new Error("No inició Sesión");
+        }
       },
     }),
   ],
-  database: "mongodb://localhost:27017/mydb",
   pages: {
     signIn: "/login/signin",
-    error: "/login/error",
   },
   session: {
     jwt: true,
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 60 * 60 * 24, // 24 hours
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 60,
   },
-  // callbacks: {
-  //   jwt(token: JWT, user) {
-  //     console.log({ user });
+  callbacks: {
+    async jwt(token: any, user) {
+      user && (token.user = user);
+      const now = moment(moment().format());
+      const exp = moment(moment(token.user.expireToken).format());
+      const diff = exp.diff(now) / 1000 / 60;
+      if (diff < 0) {
+        console.log("El token está vencido");
+      } else {
+        console.log("El token no se ha vencido");
+      }
 
-  //     token._id = user?._id;
-  //     token.name = user?.name;
-  //     token.lastname = user?.lastname;
-  //     token.email = user?.email;
-  //     token.username = user?.username;
-  //     token.profilePicture = user?.profilePicture;
-  //     console.log({ token });
-
-  //     return token;
-  //   },
-  //   async session(session, userOrToken) {
-  //     console.log({ session, userOrToken });
-  //     session.edad = 19;
-  //     return session;
-  //   },
-  // },
+      return Promise.resolve(token);
+    },
+    async session(session: any, token) {
+      session.user = token.user;
+      return Promise.resolve(session);
+    },
+  },
 });
-
-/* const response = await fetch("https://jsonplaceholder.typicode.com/todos/1")
-        .then(response => response.json())
-        .then(json => json);
-
-        console.log({response}); */

@@ -13,10 +13,11 @@ export const SignInTemplate: FC = () => {
   async function onSubmit(values: IFormSignInOnSubmit) {
     const csrfToken = await getCsrfToken();
     try {
-      const response = await axios.post("/api/auth/callback/credentials", {
+      const { data } = await axios.post("/api/auth/callback/credentials", {
         ...values,
         csrfToken,
       });
+      console.log(data);
     } catch (err) {
       console.log(err);
     }

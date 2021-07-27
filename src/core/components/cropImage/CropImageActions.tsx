@@ -11,11 +11,12 @@ interface CropImageActionsProps {
   zoom: number;
   rotation: number;
   flip: IFlip;
+  options?: Partial<IOptions>;
   onRotationChange(newRotation: number): void;
   onZoomChange(newZoom: number): void;
   onChangeFlip(newFlip: "HORIZONTAL" | "VERTICAL"): void;
   onAspectRatioChange(newAspectRatio: AspectRatioType): void;
-  options?: Partial<IOptions>;
+  onReset(): void;
 }
 export const CropImageActions: FC<CropImageActionsProps> = ({
   options,
@@ -25,6 +26,7 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
   onRotationChange,
   onZoomChange,
   onChangeFlip,
+  onReset,
 }) => {
   const [actionSelected, setActionSelected] = useState<ActionsType | null>(null);
 
@@ -136,6 +138,15 @@ export const CropImageActions: FC<CropImageActionsProps> = ({
           </HStack>
         </>
       )}
+      <Button
+        colorScheme="danger"
+        variant="ghost"
+        onClick={() => {
+          onReset();
+        }}
+      >
+        Restablecer
+      </Button>
     </HStack>
   );
 };

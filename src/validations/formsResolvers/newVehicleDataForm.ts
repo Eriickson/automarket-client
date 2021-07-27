@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 // My Elements
 import { IOption } from "@/shared";
 
-export interface NewVehicleDataFormOnSubmit {
+export interface NewVehicleInformationFormOnSubmit {
   brand: IOption;
   model: IOption;
   typeModel: IOption;
@@ -33,7 +33,7 @@ const schema = yup.object().shape({
       label: yup.string().required("Campo requerido"),
       value: yup.string().required("Campo requerido"),
     })
-    .required()
+    .required("Campo requerido")
     .nullable(),
   model: yup
     .object()
@@ -151,4 +151,4 @@ const schema = yup.object().shape({
     .transform((v, o) => (o === "" ? null : v)),
 });
 
-export const newVehicleDataFormResolver = yupResolver(schema);
+export const newVehicleInformationFormResolver = yupResolver(schema);

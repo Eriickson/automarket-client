@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 
+// Packages
 import {
   Modal,
   ModalOverlay,
@@ -13,10 +14,14 @@ import {
   Tag,
   Box,
 } from "@chakra-ui/react";
-import { CropImageComponent } from "./CropImageComponent";
+
+// My Elements
 import { AspectRatioType, ICropArea, IGeneratedImage, IFlip, IPoint } from "@/shared";
+import { getCroppedImg, generateFileByUrlBlob } from "@/utils";
+
+// My Components
 import { CropImageActions } from "./CropImageActions";
-import { getCroppedImg } from "@/utils";
+import { CropImageComponent } from "./CropImageComponent";
 
 import { IOptions } from "./types";
 interface CropImageModalProps {
@@ -54,20 +59,19 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, defaultValue, 
       flip,
     });
     setIsLoading(false);
+    const newFileGenerated = await generateFileByUrlBlob({ blobUrl, originalFile: image.file });
 
     const newData: IGeneratedImage = {
       ...image,
-      aspectRatio: aspectRatio,
+      aspectRatio,
       src: blobUrl,
       point: crop,
       zoom,
       cropArea: croppedArea,
       rotation,
       flip,
+      file: newFileGenerated,
     };
-
-    console.log(newData);
-
     onSave(newData);
     onReset();
     onClose();
@@ -98,7 +102,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, defaultValue, 
       setZoom(1);
       setCrop({ x: 0, y: 0 });
       setRotation(0);
-      setCroppedArea({ w: 0, h: 0, x: 0, y: 0 });
+      setCroppedArea(image.cropArea);
       setIsLoading(false);
       setFlip({ h: false, v: false });
     }, 250);
@@ -110,7 +114,7 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, defaultValue, 
     defaultValue?.zoom && setZoom(defaultValue.zoom);
     defaultValue?.rotation && setRotation(defaultValue.rotation);
     defaultValue?.flip && setFlip(defaultValue.flip);
-  }, []);
+  }, [image]);
 
   return (
     <Modal isCentered isOpen={isOpen} motionPreset="slideInBottom" size="4xl" onClose={onClose}>
@@ -161,13 +165,13 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, defaultValue, 
             zoom={zoom}
             onAspectRatioChange={onAspectRatioChange}
             onChangeFlip={onChangeFlip}
+            onReset={onReset}
             onRotationChange={onRotationChange}
             onZoomChange={onZoomChange}
           />
           <HStack>
             <Button
               colorScheme="danger"
-              mr={3}
               variant="ghost"
               onClick={() => {
                 onClose();

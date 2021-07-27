@@ -20,6 +20,7 @@ export interface IGeneratedImage {
   originalSrc: string;
   src: string;
   file: File;
+  originalFile: File;
   point: IPoint;
   rotation: number;
   zoom: number;

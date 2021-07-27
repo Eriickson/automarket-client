@@ -14,7 +14,7 @@ interface IAuth {
 }
 
 export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthParams): Promise<IAuth> {
-  let isAuth: boolean = false;
+  let isAuth = false;
   let session: ISession;
   try {
     session = (await getSession(ctx)) as unknown as ISession;

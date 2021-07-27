@@ -33,7 +33,7 @@ export const RegisterTemplate: FC = () => {
     // }
     // return;
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
-    const { aspectRatio, cropArea, file, flip, id, point, rotation, zoom } = profilePicture;
+    const { aspectRatio, cropArea, file, flip, id, point, originalFile, rotation, zoom } = profilePicture;
     const newUser: RegisterUserVariables["user"] = {
       name,
       lastname,
@@ -48,7 +48,9 @@ export const RegisterTemplate: FC = () => {
     };
 
     profilePicture.file &&
-      Object.assign(newUser, { profilePicture: { aspectRatio, cropArea, file, flip, id, point, rotation, zoom } });
+      Object.assign(newUser, {
+        profilePicture: { aspectRatio, cropArea, file, flip, id, point, rotation, zoom, originalFile },
+      });
 
     console.log(newUser);
 

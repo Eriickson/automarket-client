@@ -3,7 +3,6 @@ import { IGeneratedImage } from "@/shared";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { saveAs } from "file-saver";
 
 export const SelectProfileImage: FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -18,7 +17,6 @@ export const SelectProfileImage: FC = () => {
         aspectRatio="1:1"
         btn={({ isLoading }) => <Button isLoading={isLoading}>Seleccionar Imagen</Button>}
         handleOnlyOneFile={file => {
-          saveAs(file.file, file.file.name);
           setImageToCrop(file);
           onOpen();
         }}

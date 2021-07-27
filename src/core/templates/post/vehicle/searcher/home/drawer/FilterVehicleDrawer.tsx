@@ -33,7 +33,7 @@ export const FilterVehicleDrawer: FC = () => {
         <DrawerContent px="0">
           <DrawerCloseButton />
           <DrawerHeader>Create your account</DrawerHeader>
-          <DrawerBody>
+          <DrawerBody px="0">
             <SeacherVehicleAccordion />
           </DrawerBody>
           <DrawerFooter>

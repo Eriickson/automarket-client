@@ -1,6 +1,6 @@
 import { PrimaryCard } from "@/components";
 import { MainLayout } from "@/layouts";
-import { GridItem, Img, SimpleGrid, VStack, Text, Box, Heading } from "@chakra-ui/react";
+import { GridItem, Img, SimpleGrid, VStack, Text, Box, Heading, Button } from "@chakra-ui/react";
 import React, { FC } from "react";
 import { MyAgencyTabs } from "./tabs/MyAgencyTabs";
 
@@ -10,7 +10,7 @@ export const MeAgencyTemplate: FC = () => {
       <SimpleGrid columns={12} gap={3}>
         <GridItem colSpan={[12, null, 3]}>
           <VStack alignItems="stretch">
-            <Img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Aspect-ratio-4x3.svg/1280px-Aspect-ratio-4x3.svg.png" />
+            <Img shadow="sm" src="https://upload.wikimedia.org/wikipedia/en/6/68/TLS_Agency_logo.jpg" />
             <PrimaryCard notBorderTop>
               <Box lineHeight="normal">
                 <Text fontSize="2xl" fontWeight="semibold">

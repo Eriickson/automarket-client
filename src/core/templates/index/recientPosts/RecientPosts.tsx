@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import Link from "next/link";
 
 // Packages
-import { Box, Text, GridItem, Img, SimpleGrid } from "@chakra-ui/react";
+import { Box, Text, GridItem, Img, SimpleGrid, Link as ChakraLink, Badge, Flex, Avatar, Heading } from "@chakra-ui/react";
 
 // My Components
 import { PrimaryCard } from "@/components";
@@ -20,11 +20,52 @@ const vehiclesArray = [
 
 export const RecientPosts: FC = () => {
   return (
-    <PrimaryCard notBorderTop>
+    <>
       <SimpleGrid columns={12} gap={[1, 2, 3]}>
         {[...vehiclesArray, ...vehiclesArray, ...vehiclesArray].map((vehicle, i) => (
           <GridItem colSpan={[6, null, 4, 3, 2]} key={i}>
-            <Box>
+            <Box bgColor="white" shadow="sm">
+              <Link href="/post/vehicle/5784548/mi-carro-2020">
+                <a>
+                  <ChakraLink>
+                    <Box pos="relative">
+                      <Badge
+                        bg="blackAlpha.700"
+                        bottom="0"
+                        color="white"
+                        fontSize="sm"
+                        fontWeight="semibold"
+                        pos="absolute"
+                        right="0"
+                      >
+                        RD$ 250,000
+                      </Badge>
+
+                      <Img src={vehicle} />
+                    </Box>
+                    <Box p="2">
+                      <Flex>
+                        <Avatar size="sm" src="https://bit.ly/sage-adebayo" />
+                        <Box fontSize={["xs", null, "sm"]} fontWeight="semibold" ml="3">
+                          Mercedes Benz GML 2595 Coupé - 2020
+                          <Badge colorScheme="green" mb="1" ml="1">
+                            New
+                          </Badge>
+                        </Box>
+                      </Flex>
+                      <Box display="flex" justifyContent="space-between"></Box>
+                    </Box>
+                  </ChakraLink>
+                </a>
+              </Link>
+            </Box>
+          </GridItem>
+        ))}
+      </SimpleGrid>
+    </>
+  );
+};
+/*  <Box>
               <Box borderWidth="2px" cursor="pointer" position="relative">
                 <Link passHref href="/post/vehicle/5784548/mi-carro-2020">
                   <a>
@@ -38,10 +79,4 @@ export const RecientPosts: FC = () => {
               <Text color="green.600" fontSize={["xs", null, "md"]} fontWeight="semibold">
                 RD$ 25,000
               </Text>
-            </Box>
-          </GridItem>
-        ))}
-      </SimpleGrid>
-    </PrimaryCard>
-  );
-};
+            </Box> */

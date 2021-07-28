@@ -50,12 +50,12 @@ export const SearcherVehicleTemplate: FC = () => {
                     <Box pos="relative">
                       <Badge
                         bg="blackAlpha.700"
-                        color="white"
-                        pos="absolute"
                         bottom="0"
-                        right="0"
+                        color="white"
                         fontSize="sm"
                         fontWeight="semibold"
+                        pos="absolute"
+                        right="0"
                       >
                         RD$ 250,000
                       </Badge>
@@ -67,7 +67,7 @@ export const SearcherVehicleTemplate: FC = () => {
                         <Avatar size="sm" src="https://bit.ly/sage-adebayo" />
                         <Box fontSize={["xs", null, "sm"]} fontWeight="semibold" ml="3">
                           Mercedes Benz GML 2595 Coupé - 2020
-                          <Badge mb="1" ml="1" colorScheme="green">
+                          <Badge colorScheme="green" mb="1" ml="1">
                             New
                           </Badge>
                         </Box>

@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from "@chakra-ui/react";
-import { IconCar, IconHome, IconMapPin, IconPhone } from "@tabler/icons";
-import { HomePanel, VehiclesPanel, ContactsPanel, UbicationPanel } from "./panels";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Text, Box, HStack, IconButton } from "@chakra-ui/react";
+import { IconCar, IconHome, IconPlus, IconMapPin, IconPhone } from "@tabler/icons";
+import { VehiclesPanel, ContactsPanel, UbicationPanel } from "./panels";
 
 export const MyAgencyTabs: FC = () => {
   const [tabs] = useState([
@@ -29,28 +29,33 @@ export const MyAgencyTabs: FC = () => {
 
   return (
     <Tabs>
-      <TabList>
-        {tabs.map((tab, i) => (
-          <Tab
-            px="6"
-            alignItems="center"
-            fontWeight="semibold"
-            _selected={{
-              borderColor: "pri.500",
-              bgColor: "pri.100",
-              color: "pri.600",
-            }}
-            _focus={{ ring: 0 }}
-            key={i}
-          >
-            {tab.Icon}
-            <Text ml="2">{tab.title}</Text>
-          </Tab>
-        ))}
-      </TabList>
+      <HStack>
+        <Box bg="white" flex="1">
+          <TabList>
+            {tabs.map((tab, i) => (
+              <Tab
+                _focus={{ ring: 0 }}
+                _selected={{
+                  borderColor: "pri.500",
+                  bgColor: "pri.100",
+                  color: "pri.600",
+                }}
+                alignItems="center"
+                fontWeight="semibold"
+                key={i}
+                px="6"
+              >
+                {tab.Icon}
+                <Text ml="2">{tab.title}</Text>
+              </Tab>
+            ))}
+          </TabList>
+        </Box>
+        <IconButton aria-label="ejemplo" colorScheme="pri" icon={<IconPlus />} />
+      </HStack>
       <TabPanels px="0">
         {tabs.map((tab, i) => (
-          <TabPanel px="0" key={i}>
+          <TabPanel key={i} px="0">
             <tab.Component />
           </TabPanel>
         ))}

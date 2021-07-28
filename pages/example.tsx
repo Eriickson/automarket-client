@@ -15,8 +15,8 @@ const RangePage = () => {
     <MainLayout>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Range multiple name="range" min={0} max={1000} step={1} defaultValue={[15, 300]} />
-          <Range multiple name="range" min={0} max={1000} step={1} defaultValue={[15, 300]} isDisabled />
+          <Range multiple min={0} name="range" max={1000} step={1} defaultValue={[15, 300]} />
+          <Range multiple min={0} name="range" max={1000} step={1} defaultValue={[15, 300]} isDisabled />
           <InputControl name="example" />
           <Button type="submit">Enviar</Button>
         </form>

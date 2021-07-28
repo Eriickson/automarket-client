@@ -1,19 +1,14 @@
 import React, { FC } from "react";
 
-import { Box, Button, HStack, Heading } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, Img, Flex } from "@chakra-ui/react";
 import { SettingsMenu } from "./SettingsMenu";
-import {
-  SelectProfileImage,
-  SelectProfileImageProvider,
-  Image,
-  ConfirmPasswordModal,
-  onChangeArgsPropType,
-} from "@/components";
+import { UploadFiles, onChangeArgsPropType, PrimaryCard } from "@/components";
 import { useChangeProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
 import { useUIContext } from "@/context";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { EditProfilePicture } from "./EditProfilePicture";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
@@ -52,33 +47,29 @@ export const CardPresentation: FC = () => {
           </Button>
         </a>
       </Link>
-      <Box
-        bg="white"
-        borderColor="gray.100"
-        borderTopColor="pri.500"
-        borderTopWidth="2px"
-        borderWidth="1px"
-        display="flex"
-        justifyContent="space-between"
-        p="5"
-        shadow="sm"
-      >
-        <HStack alignItems="center" spacing="4">
-          <Box w="28">{/* <Image alt="" src={profileMe.profilePicture} /> */}</Box>
-          <SelectProfileImageProvider>
-            <Box mb="3">
-              <Heading fontSize={[null, null, "md"]}>
-                {profileMe.name} {profileMe.lastname}
-              </Heading>
-              <Heading color="gray.500" size="sm" mb="2.5">
-                @{profileMe.username}
-              </Heading>
-              <SelectProfileImage labelButton="Cambiar Imagen" onChange={onChangeProfilePicture} />
+      <PrimaryCard>
+        <HStack alignItems="flex-start" spacing="4">
+          <Flex flex="1" >
+            <Img
+              mr="4"
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+              w="36"
+            />
+            <Box>
+              <Box mb="3">
+                <Text fontSize="xl" fontWeight="semibold" lineHeight="none">
+                  Erickson Manuel Holguín
+                </Text>
+                <Text fontWeight="medium">@Erickson01d</Text>
+              </Box>
+              <EditProfilePicture />
             </Box>
-          </SelectProfileImageProvider>
+          </Flex>
+          <SettingsMenu />
         </HStack>
-        <SettingsMenu />
-      </Box>
+      </PrimaryCard>
     </>
   );
 };
+
+/*   */

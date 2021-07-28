@@ -18,3 +18,4 @@ export * from "./toast";
 export * from "./cropImage";
 export * from "./breadcrumb";
 export * from "./avatar";
+export * from "./agency";

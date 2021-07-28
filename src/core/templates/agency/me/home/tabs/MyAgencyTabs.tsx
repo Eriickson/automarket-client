@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Text, Box, HStack, IconButton } from "@chakra-ui/react";
 import { IconCar, IconHome, IconPlus, IconMapPin, IconPhone } from "@tabler/icons";
 import { VehiclesPanel, ContactsPanel, UbicationPanel } from "./panels";
+import { MenuNew } from "../menu/MenuNew";
 
 export const MyAgencyTabs: FC = () => {
   const [tabs] = useState([
@@ -51,7 +52,7 @@ export const MyAgencyTabs: FC = () => {
             ))}
           </TabList>
         </Box>
-        <IconButton aria-label="ejemplo" colorScheme="pri" icon={<IconPlus />} />
+        <MenuNew />
       </HStack>
       <TabPanels px="0">
         {tabs.map((tab, i) => (

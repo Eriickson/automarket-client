@@ -1,7 +1,26 @@
 import React, { FC } from "react";
 
 // Packages
-import { Box, HStack, Textarea, Tag, TagLabel, TagCloseButton, Button } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Textarea,
+  Text,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  Button,
+  Table,
+  Thead,
+  Th,
+  Tr,
+  Td,
+  Tbody,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  VStack,
+} from "@chakra-ui/react";
 import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 
 // My Components
@@ -18,46 +37,127 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
   return (
     <FormProvider {...methods}>
       <form id="form-publication-step" onSubmit={methods.handleSubmit(onSubmit)}>
-        <InputControl label="título" name="title" />
-        <Box mb="2">
-          <LabelInput label="Descripción" />
-          <Textarea _focus={{ borderWidth: "2px", borderColor: "pri.500" }} minH="32" rounded="sm" shadow="sm" />
-        </Box>
-
-        <Box>
-          <LabelInput label={`Etiquetas (${fields.length}/10)`} />
-          <HStack alignItems="flex-start" flexWrap="wrap" mb="2">
-            {fields.map((field, i) => (
-              <Tag key={field.id} mb="2" w="max-content">
-                <TagLabel
-                  cursor="pointer"
-                  onClick={() => {
-                    methods.setValue("tag", Object.values(field)[1]);
-                    remove(i);
-                    methods.setFocus("tag");
-                  }}
-                >
-                  {Object.values(field)[1]}
-                </TagLabel>
-                <TagCloseButton onClick={() => remove(i)} />
-              </Tag>
-            ))}
-          </HStack>
-          <HStack>
-            <InputControl noMarginBottom isDisabled={fields.length == 10} name="tag" />
-            <Button
-              isDisabled={fields.length == 10}
-              onClick={() => {
-                if (methods.getValues("tag").length < 5) return;
-                append({ tag: methods.getValues("tag") });
-                methods.setValue("tag", null);
-                methods.setFocus("tag");
-              }}
-            >
-              Agregar
-            </Button>
-          </HStack>
-        </Box>
+        <VStack alignItems="stretch" spacing="3">
+          <InputControl label="título" name="title" />
+          <Box>
+            <LabelInput label="Descripción" />
+            <Textarea
+              _focus={{ borderWidth: "2px", borderColor: "pri.500" }}
+              minH="32"
+              px="3"
+              placeholder="Escribe algo..."
+              rounded="sm"
+              shadow="sm"
+            />
+          </Box>
+          <Box>
+            <LabelInput label={`Etiquetas (${fields.length}/10)`} />
+            <HStack alignItems="flex-start" flexWrap="wrap" mb="2">
+              {fields.map((field, i) => (
+                <Tag key={field.id} mb="2" w="max-content">
+                  <TagLabel
+                    cursor="pointer"
+                    onClick={() => {
+                      methods.setValue("tag", Object.values(field)[1]);
+                      remove(i);
+                      methods.setFocus("tag");
+                    }}
+                  >
+                    {Object.values(field)[1]}
+                  </TagLabel>
+                  <TagCloseButton onClick={() => remove(i)} />
+                </Tag>
+              ))}
+            </HStack>
+            <HStack>
+              <InputControl noMarginBottom isDisabled={fields.length == 10} name="tag" />
+              <Button
+                isDisabled={fields.length == 10}
+                onClick={() => {
+                  if (methods.getValues("tag").length < 5) return;
+                  append({ tag: methods.getValues("tag") });
+                  methods.setValue("tag", null);
+                  methods.setFocus("tag");
+                }}
+              >
+                Agregar
+              </Button>
+            </HStack>
+          </Box>
+          <Box>
+            <LabelInput label="Disponibilidad" />
+            <Box overflow="auto" mt="2">
+              <RadioGroup>
+                <Table size="sm">
+                  <Thead>
+                    <Tr>
+                      <Th overflow="hidden">Sucursal</Th>
+                      <Th overflow="hidden">Disponibilidad</Th>
+                      <Th overflow="hidden">Almacenado</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>
+                        <Text w="max-content">Puñal/Santiago (SEDE)</Text>
+                      </Td>
+                      <Td>
+                        <Checkbox size="lg" mx="auto" />
+                      </Td>
+                      <Td>
+                        <Radio name="storaged" value="1" size="lg" mx="auto" />
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <Text w="max-content">Hato Mayor/Santiago</Text>
+                      </Td>
+                      <Td>
+                        <Checkbox size="lg" mx="auto" />
+                      </Td>
+                      <Td>
+                        <Radio name="storaged" value="2" size="lg" mx="auto" />
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
+                      </Td>
+                      <Td>
+                        <Checkbox size="lg" mx="auto" />
+                      </Td>
+                      <Td>
+                        <Radio name="storaged" value="3" size="lg" mx="auto" />
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
+                      </Td>
+                      <Td>
+                        <Checkbox size="lg" mx="auto" />
+                      </Td>
+                      <Td>
+                        <Radio name="storaged" value="4" size="lg" mx="auto" />
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
+                      </Td>
+                      <Td>
+                        <Checkbox size="lg" mx="auto" />
+                      </Td>
+                      <Td>
+                        <Radio name="storaged" value="5" size="lg" mx="auto" />
+                      </Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </RadioGroup>
+            </Box>
+          </Box>
+        </VStack>
       </form>
     </FormProvider>
   );

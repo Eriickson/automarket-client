@@ -5,3 +5,4 @@ export * from "./api";
 export * from "./redirectSSR";
 export * from "./projectCropAreaPixelsOnOriginalImage";
 export * from "./generateFileByUrlBlob";
+export * from "./capitalizeString";

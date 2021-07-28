@@ -1,7 +1,13 @@
 import React, { FC } from "react";
-import { IconButton, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
-import { SettingsIcon, LockIcon, DeleteIcon, SmallCloseIcon } from "@chakra-ui/icons";
+// Packages
+import { IconButton, Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import { SettingsIcon } from "@chakra-ui/icons";
+
+// My Components
+import { DisableAccount } from "./DisableAccount";
+import { DeleteAccount } from "./DeleteAccount";
+import { ChangePassword } from "./ChangePassword";
 
 export const SettingsMenu: FC = () => {
   return (
@@ -15,9 +21,9 @@ export const SettingsMenu: FC = () => {
           variant="outline"
         />
         <MenuList>
-          <MenuItem icon={<LockIcon />}>Cambiar Contraseña</MenuItem>
-          <MenuItem icon={<SmallCloseIcon />}>Desactivar Cuenta</MenuItem>
-          <MenuItem icon={<DeleteIcon />}>Eliminar Cuenta</MenuItem>
+          <ChangePassword />
+          <DisableAccount />
+          <DeleteAccount />
         </MenuList>
       </Menu>
     </>

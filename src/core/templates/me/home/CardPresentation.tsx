@@ -1,14 +1,21 @@
 import React, { FC } from "react";
 
-import { Box, Button, HStack, Text, Img, Flex } from "@chakra-ui/react";
-import { SettingsMenu } from "./SettingsMenu";
-import { UploadFiles, onChangeArgsPropType, PrimaryCard } from "@/components";
-import { useChangeProfilePicture } from "@/graphql";
-import { useSelector } from "@/store";
-import { useUIContext } from "@/context";
+// NextJS
 import { useRouter } from "next/router";
 import Link from "next/link";
+
+// Packages
+import { Box, Button, HStack, Text, Img, Flex } from "@chakra-ui/react";
+
+// My Elements
+import { useUIContext } from "@/context";
+import { useChangeProfilePicture } from "@/graphql";
+import { useSelector } from "@/store";
+
+// My Components
+import { onChangeArgsPropType, PrimaryCard } from "@/components";
 import { EditProfilePicture } from "./EditProfilePicture";
+import { SettingsMenu } from "./settings/SettingsMenu";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
@@ -49,7 +56,7 @@ export const CardPresentation: FC = () => {
       </Link>
       <PrimaryCard>
         <HStack alignItems="flex-start" spacing="4">
-          <Flex flex="1" >
+          <Flex flex="1">
             <Img
               mr="4"
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"

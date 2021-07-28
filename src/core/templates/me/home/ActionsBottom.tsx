@@ -16,11 +16,11 @@ export const ActionsBottom: FC = () => {
       {isEditing ? (
         <Fade in={true}>
           <HStack>
-            <Button colorScheme="danger" onClick={toggleEditing}>
+            <Button variant="outline" onClick={toggleEditing}>
               Cancelar
             </Button>
             <Button colorScheme="success" form="form-edit-profile" type="submit">
-              Guardar
+              Guardar Cambios
             </Button>
           </HStack>
         </Fade>

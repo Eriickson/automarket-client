@@ -33,9 +33,11 @@ export const NavBar: FC = () => {
       {Links.map((links, i) => (
         <Box key={i} mb={[2]} mx={[null, "5"]}>
           <Link passHref href={links.href} key={i}>
-            <Text color="gray.500" cursor="pointer" fontSize="lg" fontWeight="semibold">
-              {links.label}
-            </Text>
+            <a>
+              <Text color="gray.500" cursor="pointer" fontSize="lg" fontWeight="semibold">
+                {links.label}
+              </Text>
+            </a>
           </Link>
         </Box>
       ))}

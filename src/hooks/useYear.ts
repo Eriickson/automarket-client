@@ -1,6 +1,6 @@
 import { IOption } from "@/shared";
 
-export const useYear = (minYear?: number): { years: IOption[]; yearsBetween: IOption[] } => {
+export const useYear = (minYear = 1960): { years: IOption[]; yearsBetween: IOption[] } => {
   let years: IOption[] = [];
   let yearsBetween: IOption[] = [];
 

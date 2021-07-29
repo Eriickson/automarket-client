@@ -58,7 +58,7 @@ export const ContactUsForm: FC = () => {
           </Box>
           <Flex justifyContent="flex-end">
             <Button colorScheme="pri" type="submit">
-              Sí, Enviar
+              Enviar
             </Button>
           </Flex>
         </VStack>

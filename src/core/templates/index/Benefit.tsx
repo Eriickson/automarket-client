@@ -19,9 +19,9 @@ const Benefit: React.FC = () => {
           </Text>{" "}
           tu vehículo
         </Text>
-        <Text lineHeight="none" mx="auto" maxW="lg" color="gray.500">
+        <Text color="gray.400" fontWeight="medium" lineHeight="none" maxW="xl" mx="auto">
           Entérate de algunas de las ventajas que nuestra página tiene para ofrecerte a ti y a tu agencía, entre las
-          cuales están:
+          cuales están
         </Text>
       </Box>
       <div className="mt-6 md:mt-10">
@@ -29,6 +29,7 @@ const Benefit: React.FC = () => {
           <Swiper
             loop
             loopFillGroupWithBlank
+            style={{ zIndex: 0 }}
             autoplay={{
               delay: 5000,
             }}

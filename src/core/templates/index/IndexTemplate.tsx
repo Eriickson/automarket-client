@@ -9,6 +9,7 @@ import { Searcher } from "./searcher/Searcher";
 import { LoginBannerBottom } from "./BannersBottom";
 import { RecientPosts } from "./recientPosts/RecientPosts";
 import { CoverMain } from "./coverMain/CoverMain";
+import Benefit from "./Benefit";
 
 export const IndexTemplate: FC = () => {
   return (
@@ -16,6 +17,7 @@ export const IndexTemplate: FC = () => {
       <VStack align="stretch">
         <CoverMain />
         <Searcher />
+        <Benefit />
         <RecientPosts />
         <LoginBannerBottom />
       </VStack>

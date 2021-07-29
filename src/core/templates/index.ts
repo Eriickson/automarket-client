@@ -1,7 +1,10 @@
+export * from "./aboutUs/contacts/home/ContactUsTemplate";
+export * from "./aboutUs/faq/home/FaqTemplate";
+
 export * from "./agency/new/home/NewAgencyTemplate";
 export * from "./agency/uuid/slug/home/AgencyTemplate";
 export * from "./agency/me/home/MeAgencyTemplate";
-export * from "./agency/all/home/AllAgenciesTemplate";
+export * from "./agency/seacher/home/SeacherAgenciesTemplate";
 
 export * from "./index/IndexTemplate";
 

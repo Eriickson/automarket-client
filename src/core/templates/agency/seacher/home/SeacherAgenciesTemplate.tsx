@@ -18,7 +18,7 @@ import { PrimaryCard } from "@/components";
 import { Seacher } from "./Seacher";
 import { IconCar, IconDeviceFloppy, IconStars } from "@tabler/icons";
 
-export const AllAgenciesTemplate: FC = () => {
+export const SeacherAgenciesTemplate: FC = () => {
   return (
     <MainLayout>
       <VStack alignItems="stretch">

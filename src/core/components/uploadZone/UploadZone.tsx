@@ -9,6 +9,7 @@ import { v4 as uuid } from "uuid";
 import { compressImage, generateCroppedArea, getCroppedImg, generateFileByUrlBlob } from "@/utils";
 import { IGeneratedImage, AspectRatioType } from "@/shared";
 import { ASPECT_RATIO } from "@/constants";
+import { useUIContext } from "@/context";
 
 interface IBtn extends Omit<DropzoneState, "getRootProps" | "getInputProps"> {
   isLoading: boolean;
@@ -30,6 +31,7 @@ export const UploadFiles: FC<UploadFilesProps> = ({
   handleMultipleFiles,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { alertDialog } = useUIContext();
 
   async function generateAcceptedFile({ file }: { file: File }): Promise<IGeneratedImage> {
     const zipFile = await compressImage(file);
@@ -42,7 +44,7 @@ export const UploadFiles: FC<UploadFilesProps> = ({
       id: uuid(),
       originalSrc: src,
       src: blobUrl,
-      originalFile: file,
+      originalFile: zipFile,
       point: { x: 0, y: 0 },
       rotation: 0,
       flip: { h: false, v: false },
@@ -54,22 +56,45 @@ export const UploadFiles: FC<UploadFilesProps> = ({
   }
 
   async function handleFiles(files: File[]) {
+    setIsLoading(true);
     const zipFiles: IGeneratedImage[] = await Promise.all(files.map(async file => generateAcceptedFile({ file })));
     handleMultipleFiles && handleMultipleFiles(zipFiles);
+    setIsLoading(false);
   }
 
   async function handeFile(file: File) {
+    setIsLoading(true);
     const zipFile: IGeneratedImage = await generateAcceptedFile({ file });
     handleOnlyOneFile && handleOnlyOneFile(zipFile);
+    setIsLoading(false);
   }
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    setIsLoading(true);
     dropZoneOptions?.multiple ? await handleFiles(acceptedFiles) : await handeFile(acceptedFiles[0]);
-    setIsLoading(false);
   }, []);
+  const { getRootProps, getInputProps, ...dropzoneState } = useDropzone({
+    onDrop,
 
-  const { getRootProps, getInputProps, ...dropzoneState } = useDropzone({ onDrop, ...dropZoneOptions });
+    onDropRejected: options => {
+      alertDialog.onOpen({
+        title: "Cantidad máxima excedida",
+        desc: `El número de archivos seleccionado (${options.length}) supera la cantidad máxima permitida (${dropZoneOptions.maxFiles}), Solo se tomarán en cuenta los últimos ${dropZoneOptions.maxFiles} archivos.`,
+        name: "error-upload-zone",
+        role: "warning",
+        priBtnLabel: "Aceptar",
+        onClickPriBtn: () => {
+          const files = options
+            .slice(Math.max(options.length - Number(dropZoneOptions.maxFiles), 1))
+            .map(fileRejection => fileRejection.file);
+
+          handleFiles(files);
+          alertDialog.onClose();
+        },
+      });
+      console.log();
+    },
+    ...dropZoneOptions,
+  });
 
   return (
     <Box maxW="max-content" {...getRootProps()}>

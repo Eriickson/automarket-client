@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
-import { AllAgenciesTemplate } from "@/templates";
+import { SeacherAgenciesTemplate } from "@/templates";
 
 const AllAgencies: FC = () => {
-  return <AllAgenciesTemplate />;
+  return <SeacherAgenciesTemplate />;
 };
 
 export default AllAgencies;

@@ -27,7 +27,7 @@ const NavBarItems = [
     label: "Buscar",
   },
   {
-    url: "/agency/all",
+    url: "/agency/searcher",
     label: "Agencías",
   },
 ];

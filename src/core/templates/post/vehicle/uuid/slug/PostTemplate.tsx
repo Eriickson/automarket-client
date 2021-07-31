@@ -59,24 +59,8 @@ export const PostTemplate: FC = () => {
           </VStack>
         </GridItem>
         <GridItem colSpan={[12, null, null, 4]}>
-          <StickyBox offsetTop={20} offsetBottom={20}>
-            <VStack align="inherit">
-              <AgencyPanel />
-              <SimpleGrid columns={12} gap={2}>
-                <GridItem colSpan={6}>
-                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-                </GridItem>
-                <GridItem colSpan={6}>
-                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-                </GridItem>
-                <GridItem colSpan={6}>
-                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-                </GridItem>
-                <GridItem colSpan={6}>
-                  <Img src="https://eskipaper.com/images/mercedesbenz-car-white-1.jpg" />
-                </GridItem>
-              </SimpleGrid>
-            </VStack>
+          <StickyBox offsetBottom={20} offsetTop={20}>
+            <VStack align="inherit"></VStack>
           </StickyBox>
         </GridItem>
         <GridItem colSpan={12}>

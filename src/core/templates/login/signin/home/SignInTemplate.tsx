@@ -24,7 +24,7 @@ export const SignInTemplate: FC = () => {
   }
 
   return (
-    <NewLoginLayout>
+    <NewLoginLayout title="Iniciar Sesión">
       <SignInForm onSubmit={onSubmit} />
     </NewLoginLayout>
   );

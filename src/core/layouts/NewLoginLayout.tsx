@@ -1,14 +1,24 @@
-import { AutomarketRDIsotipo, AutomarketRDLogo } from "@/assets";
-import { Text, Box, Button, Divider } from "@chakra-ui/react";
 import React, { FC, ReactElement } from "react";
+
+// NextJS
+import Link from "next/link";
+
+// Packages
+import { Text, Box, Button, Divider } from "@chakra-ui/react";
+
+// My Elements
+import { AutomarketRDIsotipo, AutomarketRDLogo } from "@/assets";
+
+// My Components
 import { LegalFooter } from "../components/footers/LegalFooter";
 import { AsideLeft } from "../templates/login/signup/home/AsideLeft";
 
 interface NewLoginLayoutProps {
+  title: string;
   ButtonRight?: ReactElement;
 }
 
-export const NewLoginLayout: FC<NewLoginLayoutProps> = ({ children }) => {
+export const NewLoginLayout: FC<NewLoginLayoutProps> = ({ title, children }) => {
   return (
     <Box bg={["pri.500", null, "gray.100"]} display="flex" flexDir="column" minHeight="100vh">
       <Box alignItems="stretch" display="flex" flex="1">
@@ -47,11 +57,15 @@ export const NewLoginLayout: FC<NewLoginLayoutProps> = ({ children }) => {
             </Text>
             <Box bgColor={["white", null, "transparent"]} rounded="md">
               <Box display={["block", null, "none"]} mx="auto" py="4" w={[12]}>
-                <AutomarketRDIsotipo />
+                <Link href="/">
+                  <a>
+                    <AutomarketRDIsotipo />
+                  </a>
+                </Link>
               </Box>
               <Divider />
-              <Text fontSize="2xl" fontWeight="bold" mt="5" textAlign="center">
-                Iniciar Sesión
+              <Text display={[null, null, "block"]} fontSize="2xl" fontWeight="bold" mt="5" textAlign="center">
+                {title}
               </Text>
               <Box p="5">{children}</Box>
             </Box>

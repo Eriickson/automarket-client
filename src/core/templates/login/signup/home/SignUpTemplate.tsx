@@ -47,7 +47,7 @@ export const SignUpTemplate: FC = () => {
   }
 
   return (
-    <NewLoginLayout>
+    <NewLoginLayout title="Regístrate">
       <SignUpForm onSubmit={onSubmit} />
     </NewLoginLayout>
   );

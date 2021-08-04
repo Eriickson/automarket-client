@@ -65,9 +65,9 @@ export const CardPresentation: FC = () => {
             <Box>
               <Box mb="3">
                 <Text fontSize="xl" fontWeight="semibold" lineHeight="none">
-                  Erickson Manuel Holguín
+                  {profileMe.name} {profileMe.lastname}
                 </Text>
-                <Text fontWeight="medium">@Erickson01d</Text>
+                <Text fontWeight="medium">@{profileMe.username}</Text>
               </Box>
               <EditProfilePicture />
             </Box>

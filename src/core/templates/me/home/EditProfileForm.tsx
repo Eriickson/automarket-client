@@ -3,7 +3,7 @@ import { Box, SimpleGrid, GridItem } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { useSelector } from "@/store";
-import { editProfileFormResolver, EditProfileFormOnSubmit } from "@/validations";
+import { EditProfileFormOnSubmit } from "@/validations";
 import { InputControl, LabelInput, Select, RadioGroup } from "@/components";
 import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
 
@@ -42,29 +42,31 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
             <GridItem colSpan={[12, 6]}>
               <InputControl
                 isRequired
+                defaultValue={profileMe.name}
                 inputProps={{ placeholder: "Nombre", isDisabled: !isEditing }}
+                isDisabled={!isEditing}
                 label="Nombre"
                 name="name"
-                defaultValue={profileMe.name}
               />
             </GridItem>
             <GridItem colSpan={[12, 6]}>
               <InputControl
                 isRequired
+                defaultValue={profileMe.lastname}
                 inputProps={{ placeholder: "Apellido", isDisabled: !isEditing }}
+                isDisabled={!isEditing}
                 label="Apellido"
                 name="lastname"
-                defaultValue={profileMe.lastname}
               />
             </GridItem>
             <GridItem colSpan={[12, null, 4]}>
               <Select
                 isRequired
+                isDisabled={!isEditing}
                 label="Provincia"
                 name="province"
                 options={provinces}
                 placeholder="Provincia"
-                isDisabled={!isEditing}
                 onChange={({ value }) => {
                   methods.setValue("municipality", null);
                   getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
@@ -74,28 +76,29 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
             <GridItem colSpan={[12, null, 4]}>
               <Select
                 isRequired
+                defaultValue={profileMe.direction.municipality}
+                isDisabled={!isEditing}
                 label="Municipio"
                 name="municipality"
                 options={municipalities}
                 placeholder="Municipio"
-                defaultValue={profileMe.direction.municipality}
-                isDisabled={!isEditing}
               />
             </GridItem>
             <GridItem colSpan={[12, null, 4]}>
               <InputControl
                 isRequired
+                defaultValue={profileMe.birthday}
                 inputProps={{ placeholder: "Fecha de Nacimiento", type: "date", isDisabled: !isEditing }}
+                isDisabled={!isEditing}
                 label="Fecha de Nacimiento"
                 name="birthday"
-                defaultValue={profileMe.birthday}
               />
             </GridItem>
             <GridItem colSpan={[4]}>
               <LabelInput isRequired label="Sexo" />
               <RadioGroup
-                name="sex"
                 defaultValue={profileMe.sex}
+                name="sex"
                 radioItems={[
                   { label: "Masculino", value: "M", isDisable: !isEditing },
                   { label: "Femenino", value: "F", isDisable: !isEditing },

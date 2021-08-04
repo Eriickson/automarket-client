@@ -13,7 +13,7 @@ import { EditProfileFormOnSubmit } from "@/validations";
 import { EditProfileForm } from "./EditProfileForm";
 
 export const EditProfile = () => {
-  let { profileMe } = useSelector(({ profile }) => profile);
+  const { profileMe } = useSelector(({ profile }) => profile);
   const { reload } = useRouter();
   const { updateUserProfile } = useUpdateUserProfile();
   const { activateLoadingScreen } = useUIContext();

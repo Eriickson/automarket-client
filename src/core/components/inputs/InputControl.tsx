@@ -17,7 +17,14 @@ interface InputControlProps {
   noMarginBottom?: boolean;
 }
 
-export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, isRequired, isDisabled, defaultValue }) => {
+export const InputControl: FC<InputControlProps> = ({
+  name,
+  label,
+  inputProps,
+  isRequired,
+  isDisabled,
+  defaultValue,
+}) => {
   const {
     register,
     formState: { errors },

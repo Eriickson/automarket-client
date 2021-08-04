@@ -8,9 +8,7 @@ import { SEO } from "@/components";
 const MePage: FC<MePageProps> = ({ profileMe }) => {
   const { setProfileMe } = useAction();
 
-  useEffect(() => {
-    setProfileMe(profileMe);
-  }, []);
+  setProfileMe(profileMe);
 
   return (
     <SEO desc="Automarket RD" title="eriickson01d | Automarket RD">

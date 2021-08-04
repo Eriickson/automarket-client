@@ -6,4 +6,4 @@ export * from "./Direction";
 export * from "./User";
 export * from "./Tabs";
 export * from "./Breadcrumb";
-export * from "./IProvidersProps";
+export * from "./ProvidersProps";

@@ -15,14 +15,11 @@ interface GetAuthSsrReturn {
 
 export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthParams): Promise<GetAuthSsrReturn> {
   let isAuth = false;
-  let session: ISession;
   try {
-    session = (await getSession(ctx)) as unknown as ISession;
-    console.log(session);
+    /* eslint-disable-next-line */
+    const { user } = (await getSession(ctx)) as unknown as any;
 
-    isAuth = Boolean(session);
-    console.log({ isAuth });
-
+    isAuth = Boolean(user);
     if (privateRouter && !isAuth) {
       ctx.res.writeHead(302, { Location: typeof privateRouter === "string" ? privateRouter : "/" });
       ctx.res.end();
@@ -35,18 +32,11 @@ export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthPara
       return { isAuth };
     }
 
-    const comodinSession: any = session;
     return {
-      isAuth,
-      session: {
-        user: {
-          token: comodinSession.user.token,
-          user: comodinSession.user.user,
-        },
-      },
+      isAuth: isAuth,
+      session: user.session || {},
     };
   } catch (err) {
-    console.log(err);
     isAuth = false;
     return {
       isAuth,

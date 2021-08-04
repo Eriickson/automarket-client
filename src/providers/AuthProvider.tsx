@@ -1,11 +1,15 @@
 import React, { FC } from "react";
-import { IAuth, ISession } from "@/shared";
+import { ISession } from "@/shared";
+import { useAction } from "@/store";
 
-interface AuthProviderProps {
-  isAuth: IAuth;
-  session: ISession;
+export interface AuthProviderProps {
+  isAuth: boolean;
+  session?: ISession;
 }
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children, isAuth }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({ children, isAuth, session = {} }) => {
+  const { setAuth } = useAction();
+  setAuth({ isAuth, user: session?.user });
+
   return <>{children}</>;
 };

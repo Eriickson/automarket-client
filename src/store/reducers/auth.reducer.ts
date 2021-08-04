@@ -1,7 +1,9 @@
+import { ISession } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   isAuth: boolean;
+  user?: ISession["user"];
 }
 
 const initialState = {
@@ -12,8 +14,9 @@ const authReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuth(state, action: PayloadAction<boolean>) {
-      state.isAuth = action.payload;
+    setAuth(state, action: PayloadAction<{ isAuth: boolean; user?: ISession["user"] }>) {
+      state.isAuth = action.payload.isAuth;
+      state.user = action.payload.user;
     },
   },
 });

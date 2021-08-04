@@ -6,4 +6,5 @@ const NewAgency: NextPage = () => {
   return <NewAgencyTemplate />;
 };
 
+export { newAgencyServerSide as getServerSideProps } from "@/servers";
 export default NewAgency;

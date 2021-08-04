@@ -9,6 +9,7 @@ export interface AuthProviderProps {
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children, isAuth, session = {} }) => {
   const { setAuth } = useAction();
+
   setAuth({ isAuth, user: session?.user });
 
   return <>{children}</>;

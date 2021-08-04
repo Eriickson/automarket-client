@@ -18,14 +18,14 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit }) => {
         <Box mb="5">
           <InputControl
             isRequired
-            defaultValue="erickson01d@gmail.com"
+            defaultValue="test01d"
             inputProps={{ placeholder: "Correo electrónico", size: "lg" }}
             label="Correo electrónico"
             name="identifier"
           />
           <InputControl
             isRequired
-            defaultValue="123456789e"
+            defaultValue="123456789t"
             inputProps={{ placeholder: "Contraseña", size: "lg" }}
             label="Contraseña"
             name="password"

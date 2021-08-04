@@ -1,22 +1,39 @@
 import { useSelector } from "@/store";
-import { Box } from "@chakra-ui/react";
+import { Avatar, Box, HStack, Link as ChakraLink, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
-import { Image } from "../images";
 import styled from "@emotion/styled";
+import { IconBellRinging, IconMessage2 } from "@tabler/icons";
+import Link from "next/link";
 
-const WraperSessionStartedStyled = styled.div`
-  width: 50px;
-  img {
-    border-radius: 100%;
-  }
-`;
+const WraperSessionStartedStyled = styled.div``;
 
 export const SessionStarted: FC = () => {
-  const { profilePicture } = useSelector(({ profile }) => profile.profileMe);
+  const { user } = useSelector(({ auth }) => auth);
 
   return (
     <WraperSessionStartedStyled>
-      <Image src={profilePicture} alt="" />
+      <Box display={"flex"}>
+        <Box mr={3}>
+          <Link href="/me">
+            <a>
+              <ChakraLink>
+                <Text fontWeight="semibold">{user?.name}</Text>
+              </ChakraLink>
+            </a>
+          </Link>
+          <HStack justifyContent="flex-end">
+            <Box _hover={{ color: "orange.500", transitionDuration: "150ms" }} cursor="pointer">
+              <IconBellRinging />
+            </Box>
+            <Box _hover={{ color: "blue.500", transitionDuration: "150ms" }} cursor="pointer">
+              <IconMessage2 />
+            </Box>
+          </HStack>
+        </Box>
+        <Link href="/me">
+          <Avatar cursor="pointer" rounded="none" />
+        </Link>
+      </Box>
     </WraperSessionStartedStyled>
   );
 };

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Container, HStack, Text, Divider } from "@chakra-ui/react";
+import { Box, Container, HStack, Text, Divider, SimpleGrid, GridItem, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import Headroom from "react-headroom";
 
@@ -43,33 +43,41 @@ export const MainHeader: FC = () => {
     <StyledMainHeaderWrapper>
       <Headroom>
         <Box bg="white" borderBottomWidth="1px" pb={breadcrumb.show ? 1.5 : [4, 6]} pt={[4, 6]} shadow="sm">
-          <Container alignItems="center" display="flex" justifyContent="space-between">
-            <Link href="/">
-              <a>
-                <Box cursor="pointer" w="56">
-                  <AutomarketRDLogo />
-                </Box>
-              </a>
-            </Link>
-            <HStack display={["none", null, null, "flex"]}>
-              {NavBarItems.map((item, i) => (
-                <Box key={i}>
-                  <Link href={item.url}>
-                    <Text
-                      _hover={{ color: "pri.500" }}
-                      cursor="pointer"
-                      fontWeight="medium"
-                      p="1"
-                      size="lg"
-                      transition="150ms"
-                    >
-                      <a>{item.label}</a>
-                    </Text>
-                  </Link>
-                </Box>
-              ))}
-            </HStack>
-            {isAuth ? <SessionStarted /> : <SessionLogin />}
+          <Container>
+            <SimpleGrid alignItems="center" columns={12}>
+              <GridItem colSpan={3}>
+                <Link href="/">
+                  <a>
+                    <Box cursor="pointer" w="56">
+                      <AutomarketRDLogo />
+                    </Box>
+                  </a>
+                </Link>
+              </GridItem>
+              <GridItem colSpan={6}>
+                <HStack justifyContent="center" display={["none", null, null, "flex"]}>
+                  {NavBarItems.map((item, i) => (
+                    <Box key={i}>
+                      <Link href={item.url}>
+                        <Text
+                          _hover={{ color: "pri.500" }}
+                          cursor="pointer"
+                          fontWeight="medium"
+                          p="1"
+                          size="lg"
+                          transition="150ms"
+                        >
+                          <a>{item.label}</a>
+                        </Text>
+                      </Link>
+                    </Box>
+                  ))}
+                </HStack>
+              </GridItem>
+              <GridItem colSpan={3}>
+                <Flex justifyContent="flex-end">{isAuth ? <SessionStarted /> : <SessionLogin />}</Flex>
+              </GridItem>
+            </SimpleGrid>
           </Container>
           {breadcrumb.show && (
             <>

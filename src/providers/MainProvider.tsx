@@ -10,7 +10,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { useStore } from "@/store";
 import styled from "@emotion/styled";
 import { AuthProvider } from "./AuthProvider";
-import { IAuth, ISession } from "@/shared";
+import { ProvidersProps } from "@/shared";
 
 const WrapperUIProviderStyled = styled.div`
   * {
@@ -18,19 +18,14 @@ const WrapperUIProviderStyled = styled.div`
   }
 `;
 
-interface MainProviderProps {
-  isAuth: IAuth;
-  session: ISession;
-}
-
-export const MainProvider: FC<MainProviderProps> = ({ children, ...props }) => {
+export const MainProvider: FC<ProvidersProps> = ({ children, authProviderProps }) => {
   const { client: apolloClient } = getApolloClient();
   const { store } = useStore();
 
   return (
     <ApolloProvider client={apolloClient}>
       <ReduxProvider store={store}>
-        <AuthProvider {...props}>
+        <AuthProvider {...authProviderProps}>
           <WrapperUIProviderStyled>
             <UIProvider>{children}</UIProvider>
           </WrapperUIProviderStyled>

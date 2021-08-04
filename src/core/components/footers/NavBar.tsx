@@ -5,19 +5,19 @@ import Link from "next/link";
 const Links = [
   {
     label: "Inicio",
-    href: "",
+    href: "/",
   },
   {
     label: "Buscar",
-    href: "",
+    href: "/",
   },
   {
     label: "Contáctanos",
-    href: "",
+    href: "/about-us/contacts",
   },
   {
     label: "FAQ's",
-    href: "",
+    href: "/about-us/faq",
   },
 ];
 

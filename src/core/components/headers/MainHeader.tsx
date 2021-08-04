@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import { Box, Container, Avatar, Button, HStack, Text, Divider } from "@chakra-ui/react";
-import { signIn } from "next-auth/client";
+import { Box, Container, HStack, Text, Divider } from "@chakra-ui/react";
 import Link from "next/link";
 import Headroom from "react-headroom";
 
@@ -9,6 +8,9 @@ import { MainMenu } from "./MainMenu";
 import styled from "@emotion/styled";
 import { Breadcrumb } from "..";
 import { useUIContext } from "@/context";
+import { SessionLogin } from "./SessionLogin";
+import { SessionStarted } from "./SessionStarted";
+import { useSelector } from "@/store";
 
 const StyledMainHeaderWrapper = styled.header`
   width: 100%;
@@ -34,6 +36,8 @@ const NavBarItems = [
 
 export const MainHeader: FC = () => {
   const { breadcrumb } = useUIContext();
+  const { isAuth } = useSelector(store => store.auth);
+  console.log(isAuth);
 
   return (
     <StyledMainHeaderWrapper>
@@ -65,28 +69,7 @@ export const MainHeader: FC = () => {
                 </Box>
               ))}
             </HStack>
-            <Box alignItems="center" display="flex">
-              <Link href="/login/signup">
-                <a>
-                  <Button colorScheme="pri" display={["none", "block"]}>
-                    Regístrate
-                  </Button>
-                </a>
-              </Link>
-              <Button
-                colorScheme="pri"
-                display={["none", null, "block"]}
-                ml="2.5"
-                variant="outline"
-                onClick={() => signIn()}
-              >
-                Iniciar Sesión
-              </Button>
-              <Avatar display="none" name="Kola Tioluwani" shadow="md" src="https://bit.ly/tioluwani-kolawole" />
-              <Box display={[null, null, "none"]} h="max-content" ml="2.5">
-                <MainMenu />
-              </Box>
-            </Box>
+            {isAuth ? <SessionStarted /> : <SessionLogin />}
           </Container>
           {breadcrumb.show && (
             <>

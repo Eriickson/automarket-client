@@ -8,11 +8,12 @@ import { getAuthSsr } from "@/auth";
 
 export interface MePageProps {
   profileMe: IUser;
+  isAuth: boolean;
 }
 
 export const meServerSide: GetServerSideProps = async ctx => {
   const { client } = getApolloClient();
-  const { session } = await getAuthSsr({ ctx, privateRouter: "/" });
+  const { session, isAuth } = await getAuthSsr({ ctx, privateRouter: "/" });
 
   try {
     const { data } = await client.query<gql.IGetProfileMePayload>({
@@ -24,6 +25,7 @@ export const meServerSide: GetServerSideProps = async ctx => {
 
     const props: MePageProps = {
       profileMe: data.getProfileMe.profileMe,
+      isAuth,
     };
 
     return {

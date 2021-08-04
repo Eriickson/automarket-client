@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Router from "next/router";
 
 import { ChakraProvider, StylesProvider } from "@chakra-ui/react";
@@ -28,7 +28,7 @@ import "react-medium-image-zoom/dist/styles.css";
 
 import "rc-slider/assets/index.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <StylesProvider value={{}}>
       <NextAuthProvider session={pageProps.session}>
@@ -43,6 +43,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </NextAuthProvider>
     </StylesProvider>
   );
-}
+};
 
 export default MyApp;

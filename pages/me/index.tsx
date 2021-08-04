@@ -1,14 +1,15 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 
 import { MeTemplate } from "@/templates";
 import { MePageProps } from "@/servers";
 import { useAction } from "@/store";
 import { SEO } from "@/components";
 
-const MePage: FC<MePageProps> = ({ profileMe }) => {
-  const { setProfileMe } = useAction();
+const MePage: FC<MePageProps> = ({ profileMe, isAuth }) => {
+  const { setProfileMe, setAuth } = useAction();
 
   setProfileMe(profileMe);
+  setAuth(isAuth);
 
   return (
     <SEO desc="Automarket RD" title="eriickson01d | Automarket RD">

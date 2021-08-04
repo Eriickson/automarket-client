@@ -9,6 +9,8 @@ import { getApolloClient } from "@/graphql";
 import { Provider as ReduxProvider } from "react-redux";
 import { useStore } from "@/store";
 import styled from "@emotion/styled";
+import { AuthProvider } from "./AuthProvider";
+import { IAuth, ISession } from "@/shared";
 
 const WrapperUIProviderStyled = styled.div`
   * {
@@ -16,16 +18,23 @@ const WrapperUIProviderStyled = styled.div`
   }
 `;
 
-export const MainProvider: FC = ({ children }) => {
+interface MainProviderProps {
+  isAuth: IAuth;
+  session: ISession;
+}
+
+export const MainProvider: FC<MainProviderProps> = ({ children, ...props }) => {
   const { client: apolloClient } = getApolloClient();
   const { store } = useStore();
 
   return (
     <ApolloProvider client={apolloClient}>
       <ReduxProvider store={store}>
-        <WrapperUIProviderStyled>
-          <UIProvider>{children}</UIProvider>
-        </WrapperUIProviderStyled>
+        <AuthProvider {...props}>
+          <WrapperUIProviderStyled>
+            <UIProvider>{children}</UIProvider>
+          </WrapperUIProviderStyled>
+        </AuthProvider>
       </ReduxProvider>
     </ApolloProvider>
   );

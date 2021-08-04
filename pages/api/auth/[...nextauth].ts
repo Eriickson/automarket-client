@@ -4,6 +4,7 @@ import Providers from "next-auth/providers";
 import { getApolloClient } from "@/graphql";
 import { SignInPayload, SignInVariables, SIGNIN_Q } from "src/graphql/gql";
 import jwt from "jsonwebtoken";
+import { ISession } from "@/shared";
 
 type SignInType = {
   identifier: string;
@@ -29,16 +30,18 @@ export default NextAuth({
           variables: { identifier, password },
         });
 
-        const payload = jwt.verify(data.signIn.token, "MY_SCRECT_KEY") as Record<string, string>;
-
-        const user = {
-          token: data.signIn.token,
-          user: { _id: payload._id, name: payload.name, lastname: payload.lastname, email: payload.email },
-          agency: {},
-          expireToken: moment().add(15, "minutes").format(),
+        const { iat, ...user } = jwt.verify(data.signIn.token, "MY_SCRECT_KEY") as ISession["user"] & {
+          iat: number;
         };
 
-        return user;
+        const session: ISession = {
+          token: data.signIn.token,
+          user,
+          updateAge: moment().add(15, "minutes").format(),
+          maxAge: moment().add(7, "days").format(),
+        };
+
+        return { session };
       },
     }),
   ],

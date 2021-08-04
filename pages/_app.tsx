@@ -35,7 +35,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <ChakraProvider resetCSS theme={defaultTheme}>
           <Global />
           <UIContextProvider>
-            <MainProvider>
+            <MainProvider {...pageProps}>
               <Component {...pageProps} />
             </MainProvider>
           </UIContextProvider>

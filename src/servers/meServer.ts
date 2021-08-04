@@ -3,12 +3,11 @@ import { getApolloClient } from "@/graphql";
 import { gql } from "@/graphql";
 
 // Packages
-import { IUser } from "@/shared";
+import { IProvidersProps, IUser } from "@/shared";
 import { getAuthSsr } from "@/auth";
 
-export interface MePageProps {
+export interface MePageProps extends IProvidersProps {
   profileMe: IUser;
-  isAuth: boolean;
 }
 
 export const meServerSide: GetServerSideProps = async ctx => {
@@ -25,7 +24,9 @@ export const meServerSide: GetServerSideProps = async ctx => {
 
     const props: MePageProps = {
       profileMe: data.getProfileMe.profileMe,
-      isAuth,
+      isAuth: {
+        isAuth,
+      },
     };
 
     return {

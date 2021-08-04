@@ -8,27 +8,20 @@ interface IAuthParams {
   publicRouter?: boolean | string;
 }
 
-interface IAuthSession {
-  user: {
-    token: string;
-    user: any;
-    agency: any;
-    expireToken: string;
-  };
-}
-
-interface IAuth {
+interface GetAuthSsrReturn {
   isAuth: boolean;
-  session?: IAuthSession;
+  session?: ISession;
 }
 
-export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthParams): Promise<IAuth> {
+export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthParams): Promise<GetAuthSsrReturn> {
   let isAuth = false;
   let session: ISession;
   try {
     session = (await getSession(ctx)) as unknown as ISession;
+    console.log(session);
 
     isAuth = Boolean(session);
+    console.log({ isAuth });
 
     if (privateRouter && !isAuth) {
       ctx.res.writeHead(302, { Location: typeof privateRouter === "string" ? privateRouter : "/" });
@@ -41,13 +34,12 @@ export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthPara
       ctx.res.end();
       return { isAuth };
     }
+
     const comodinSession: any = session;
     return {
       isAuth,
       session: {
         user: {
-          agency: {},
-          expireToken: comodinSession.user.expireToken,
           token: comodinSession.user.token,
           user: comodinSession.user.user,
         },

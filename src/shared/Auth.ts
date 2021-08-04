@@ -1,10 +1,15 @@
 export interface ISession {
-  expires: Date;
   user: {
+    _id: string;
     name: string;
     lastname: string;
     email: string;
-    image: string;
-    _id: string;
+    profilePicture: string;
   };
+  token: string;
+  updateAge: string;
+  maxAge: string;
+}
+export interface IAuth {
+  isAuth: boolean;
 }

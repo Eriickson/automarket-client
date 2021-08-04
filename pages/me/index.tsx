@@ -9,7 +9,7 @@ const MePage: FC<MePageProps> = ({ profileMe, isAuth }) => {
   const { setProfileMe, setAuth } = useAction();
 
   setProfileMe(profileMe);
-  setAuth(isAuth);
+  setAuth(isAuth.isAuth);
 
   return (
     <SEO desc="Automarket RD" title="eriickson01d | Automarket RD">

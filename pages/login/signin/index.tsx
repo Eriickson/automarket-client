@@ -15,9 +15,7 @@ const SignInPage: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { isAuth, session } = await getAuthSsr({ ctx, publicRouter: true });
-  console.log({ isAuth, session });
-
+  await getAuthSsr({ ctx, publicRouter: true });
   return {
     props: {},
   };

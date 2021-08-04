@@ -3,7 +3,7 @@ import { UIProvider } from ".";
 
 // Apollo
 import { ApolloProvider } from "@apollo/client/react";
-import { useApolloClient } from "@/graphql";
+import { getApolloClient } from "@/graphql";
 
 // Redux
 import { Provider as ReduxProvider } from "react-redux";
@@ -17,7 +17,7 @@ const WrapperUIProviderStyled = styled.div`
 `;
 
 export const MainProvider: FC = ({ children }) => {
-  const { client: apolloClient } = useApolloClient();
+  const { client: apolloClient } = getApolloClient();
   const { store } = useStore();
 
   return (

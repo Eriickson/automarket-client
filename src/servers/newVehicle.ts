@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { useApolloClient as getApolloClient } from "@/graphql";
+import { getApolloClient as getApolloClient } from "@/graphql";
 import combineQuery from "graphql-combine-query";
 
 import { gql } from "@/graphql";
@@ -106,7 +106,7 @@ export const newVehicleServerSide: GetServerSideProps = async () => {
     return {
       props,
     };
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(err);
   }
 };

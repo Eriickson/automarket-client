@@ -1,6 +1,9 @@
 import moment from "moment";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import { getApolloClient } from "@/graphql";
+import { SignInPayload, SignInVariables, SIGNIN_Q } from "src/graphql/gql";
+import jwt from "jsonwebtoken";
 
 type SignInType = {
   identifier: string;
@@ -17,29 +20,25 @@ export default NextAuth({
     Providers.Credentials({
       name: "Credentials",
       async authorize(credentials: SignInType) {
+        const { client } = getApolloClient();
         // Add logic here to look up the user from the credentials supplied
         const { identifier, password } = credentials;
 
+        const { data } = await client.query<SignInPayload, SignInVariables>({
+          query: SIGNIN_Q,
+          variables: { identifier, password },
+        });
+
+        const payload = jwt.verify(data.signIn.token, "MY_SCRECT_KEY") as Record<string, string>;
+
         const user = {
-          user: { id: 1, identifier: "erickson01d@gmail.com", password: "123456789e" },
-          agency: {
-            id: "f93cc98f-0d0e-47f8-a9c5-ac381393305a",
-            name: "Agencia de carros",
-            image: "image-de-la-agencia",
-          },
+          token: data.signIn.token,
+          user: { _id: payload._id, name: payload.name, lastname: payload.lastname, email: payload.email },
+          agency: {},
           expireToken: moment().add(15, "minutes").format(),
         };
 
-        if (user.user.identifier === identifier && user.user.password === password) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null or false then the credentials will be rejected
-          // You can also Reject this callback with an Error or with a URL:
-          // throw new Error('error message') // Redirect to error page
-          // throw '/path/to/redirect'        // Redirect to a URL
-          throw new Error("No inició Sesión");
-        }
+        return user;
       },
     }),
   ],
@@ -57,11 +56,9 @@ export default NextAuth({
       const now = moment(moment().format());
       const exp = moment(moment(token.user.expireToken).format());
       const diff = exp.diff(now) / 1000 / 60;
-      if (diff < 0) {
-        console.log("El token está vencido");
+      /*  if (diff < 0) {
       } else {
-        console.log("El token no se ha vencido");
-      }
+      } */
 
       return Promise.resolve(token);
     },

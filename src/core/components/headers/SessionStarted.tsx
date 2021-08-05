@@ -12,15 +12,17 @@ export const SessionStarted: FC = () => {
 
   return (
     <WraperSessionStartedStyled>
-      <Box display={"flex"}>
+      <Box alignItems="center" display="flex">
         <Box mr={3}>
-          <Link href="/me">
-            <a>
-              <ChakraLink>
-                <Text fontWeight="semibold">{user?.name}</Text>
-              </ChakraLink>
-            </a>
-          </Link>
+          <Box display={["none", null, "inline"]}>
+            <Link href="/me">
+              <a>
+                <ChakraLink>
+                  <Text fontWeight="semibold">{user?.name}</Text>
+                </ChakraLink>
+              </a>
+            </Link>
+          </Box>
           <HStack justifyContent="flex-end">
             <Box _hover={{ color: "orange.500", transitionDuration: "150ms" }} cursor="pointer">
               <IconBellRinging />

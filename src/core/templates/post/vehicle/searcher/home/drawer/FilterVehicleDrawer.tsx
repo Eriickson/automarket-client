@@ -1,6 +1,6 @@
-import { Button, useDisclosure } from "@chakra-ui/react";
-import { IconFilter } from "@tabler/icons";
 import React, { FC, useRef } from "react";
+
+// Packages
 import {
   Drawer,
   DrawerBody,
@@ -9,7 +9,12 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Button,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { IconFilter } from "@tabler/icons";
+
+// My Components
 import { SeacherVehicleAccordion } from "./SeacherVehicleAccordion/SeacherVehicleAccordion";
 
 export const FilterVehicleDrawer: FC = () => {
@@ -18,29 +23,29 @@ export const FilterVehicleDrawer: FC = () => {
   return (
     <>
       <Button
-        ref={btnRef}
-        onClick={onOpen}
-        size="sm"
         aria-label="Abrir el filtro"
         colorScheme="pri"
-        pl="1"
         leftIcon={<IconFilter />}
+        pl="1"
+        ref={btnRef}
+        size="sm"
+        onClick={onOpen}
       >
         Filtrar
       </Button>
-      <Drawer isOpen={isOpen} size="sm" placement="right" onClose={onClose} finalFocusRef={btnRef}>
+      <Drawer finalFocusRef={btnRef} isOpen={isOpen} placement="right" size="sm" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent px="0">
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Encuentra tu vehículo</DrawerHeader>
           <DrawerBody px="0">
             <SeacherVehicleAccordion />
           </DrawerBody>
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
+            <Button mr={3} variant="outline" onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme="blue">Aplicar Filtro</Button>
+            <Button colorScheme="pri">Aplicar Filtro</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

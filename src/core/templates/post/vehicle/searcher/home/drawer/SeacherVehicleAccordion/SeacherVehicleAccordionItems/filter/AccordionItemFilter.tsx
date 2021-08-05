@@ -1,11 +1,6 @@
-import { PrimaryCard } from "@/components";
-import React from "react";
+import React, { FC } from "react";
 import { AccordionItemFilterForm } from "./AccordionItemFilterForm";
 
-export const AccordionItemFilter = () => {
-  return (
-    <div>
-      <AccordionItemFilterForm />
-    </div>
-  );
+export const AccordionItemFilter: FC = () => {
+  return <AccordionItemFilterForm />;
 };

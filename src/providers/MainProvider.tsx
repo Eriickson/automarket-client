@@ -11,6 +11,7 @@ import { useStore } from "@/store";
 import styled from "@emotion/styled";
 import { AuthProvider } from "./AuthProvider";
 import { ProvidersProps } from "@/shared";
+import { SeoProvider } from "./SeoProvider";
 
 const WrapperUIProviderStyled = styled.div`
   * {
@@ -18,7 +19,7 @@ const WrapperUIProviderStyled = styled.div`
   }
 `;
 
-export const MainProvider: FC<ProvidersProps> = ({ children, authProviderProps }) => {
+export const MainProvider: FC<ProvidersProps> = ({ children, authProviderProps, seo }) => {
   const { client: apolloClient } = getApolloClient();
   const { store } = useStore();
 
@@ -26,9 +27,11 @@ export const MainProvider: FC<ProvidersProps> = ({ children, authProviderProps }
     <ApolloProvider client={apolloClient}>
       <ReduxProvider store={store}>
         <AuthProvider {...authProviderProps}>
-          <WrapperUIProviderStyled>
-            <UIProvider>{children}</UIProvider>
-          </WrapperUIProviderStyled>
+          <SeoProvider {...seo}>
+            <WrapperUIProviderStyled>
+              <UIProvider>{children}</UIProvider>
+            </WrapperUIProviderStyled>
+          </SeoProvider>
         </AuthProvider>
       </ReduxProvider>
     </ApolloProvider>

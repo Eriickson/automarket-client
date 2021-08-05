@@ -1,14 +1,23 @@
-import { InputControl, InputMask } from "@/components";
+import { InputMask } from "@/components";
 import { MainLayout } from "@/layouts";
-import React, { FC, useMemo } from "react";
+import { Button } from "@chakra-ui/react";
+import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const Mask: FC = () => {
   const methods = useForm();
+
+  function onSubmit(values: any) {
+    console.log(values);
+  }
+
   return (
     <MainLayout>
       <FormProvider {...methods}>
-        <InputMask />
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <InputMask mask="+1 (999) 999-9999" name="numberPhone" />
+          <Button type="submit">Enviar</Button>
+        </form>
       </FormProvider>
     </MainLayout>
   );

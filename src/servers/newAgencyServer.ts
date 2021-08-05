@@ -10,6 +10,7 @@ export const newAgencyServerSide: GetServerSideProps = async ctx => {
 
   const props: NewAgencyProps = {
     authProviderProps: { ...auth },
+    seo: { title: "Crea tu agencía", desc: "Completa todos los pasos para crear tu agencía" },
   };
 
   return { props };

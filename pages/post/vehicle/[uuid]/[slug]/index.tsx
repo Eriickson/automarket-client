@@ -3,8 +3,9 @@ import { NextPage } from "next";
 
 import { PostTemplate } from "@/templates";
 
-const PostPage: NextPage = () => {
+const VehiclePage: NextPage = () => {
   return <PostTemplate />;
 };
 
-export default PostPage;
+export { vehicleServerSide as getServerSideProps } from "@/servers";
+export default VehiclePage;

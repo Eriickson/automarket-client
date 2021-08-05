@@ -2,8 +2,9 @@ import React, { FC } from "react";
 
 import { SeacherAgenciesTemplate } from "@/templates";
 
-const AllAgencies: FC = () => {
+const SeacherAgenciesPage: FC = () => {
   return <SeacherAgenciesTemplate />;
 };
 
-export default AllAgencies;
+export { seacherAgenciesServerSide as getServerSideProps } from "@/servers";
+export default SeacherAgenciesPage;

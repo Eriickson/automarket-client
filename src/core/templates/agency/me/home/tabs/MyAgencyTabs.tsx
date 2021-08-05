@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Text, Box, HStack, IconButton } from "@chakra-ui/react";
-import { IconCar, IconHome, IconPlus, IconMapPin, IconPhone } from "@tabler/icons";
+import { IconCar, IconMapPin, IconPhone } from "@tabler/icons";
 import { VehiclesPanel, ContactsPanel, UbicationPanel } from "./panels";
 import { MenuNew } from "../menu/MenuNew";
 

@@ -2,6 +2,7 @@ import { PrimaryCard } from "@/components";
 import { MainLayout } from "@/layouts";
 import { GridItem, Img, SimpleGrid, VStack, Text, Box, Heading, Button } from "@chakra-ui/react";
 import React, { FC } from "react";
+import { StatisticsPanel } from "./StatisticsPanel";
 import { MyAgencyTabs } from "./tabs/MyAgencyTabs";
 
 export const MeAgencyTemplate: FC = () => {
@@ -19,6 +20,7 @@ export const MeAgencyTemplate: FC = () => {
                 <Text fontWeight="medium">Los más confiable en el negocio</Text>
               </Box>
             </PrimaryCard>
+            <StatisticsPanel />
             <PrimaryCard notBorderTop>
               <Heading fontSize={["md", null, "lg"]}>Contactos</Heading>
             </PrimaryCard>

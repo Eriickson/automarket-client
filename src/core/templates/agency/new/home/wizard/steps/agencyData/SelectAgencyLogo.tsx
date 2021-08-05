@@ -15,23 +15,22 @@ export const SelectAgencyLogo: FC = () => {
   const { agencyData } = useSelector(({ agency }) => agency.new);
   const [logoSelected, setLogoSelected] = useState<IGeneratedImage | null>();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { setValue, watch } = useFormContext();
+  const { setValue, getValues } = useFormContext();
+  const [logoSrc, setLogoSrc] = useState("");
 
   useEffect(() => {
     if (agencyData?.logo) {
-      console.log("hay logo");
-    }
-    /* 
-    if (agencyData.logo) {
       setValue("logo", agencyData.logo);
-    } */
-  }, []);
+      setLogoSrc(agencyData.logo.src || "");
+    }
+  }, [agencyData?.logo]);
+
   return (
     <Box>
       <LabelInput isRequired label="Logo de la agencia" />
-      <Avatar mb="2" size="2xl" src={watch("logo") ? watch("logo").src : ""} />
+      <Avatar mb="2" size="2xl" src={getValues("logo")?.src || logoSrc} />
       <UploadFiles
-        btn={() => <Button>{watch("logo") ? "Cambiar logo" : "Seleccionar logo"}</Button>}
+        btn={() => <Button>{getValues("logo") ? "Cambiar logo" : "Seleccionar logo"}</Button>}
         handleOnlyOneFile={file => {
           setLogoSelected(file);
           onOpen();

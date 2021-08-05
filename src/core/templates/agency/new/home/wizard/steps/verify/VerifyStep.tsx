@@ -2,6 +2,7 @@ import { useSelector } from "@/store";
 import { capitalizeString } from "@/utils";
 import { Box, Flex, Text, StackDivider, VStack, Img } from "@chakra-ui/react";
 import React, { FC } from "react";
+import Zoom from "react-medium-image-zoom";
 
 export const VerifyStep: FC = () => {
   const { agencyData, ubication } = useSelector(({ agency }) => agency.new);
@@ -13,7 +14,9 @@ export const VerifyStep: FC = () => {
             Logo
           </Text>
           <Text flex="1" fontWeight="semibold">
-            <Img src={agencyData.logo.src} />
+            <Zoom zoomMargin={150}>
+              <Img src={agencyData.logo.src} w="32" />
+            </Zoom>
           </Text>
         </Flex>
         <Flex justifyContent="flex-start">

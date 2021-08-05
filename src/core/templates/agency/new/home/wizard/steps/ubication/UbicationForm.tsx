@@ -34,7 +34,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
     <FormWizardProvider methods={methods} onSubmit={onSubmit}>
       <Box maxW="container.md" mx="auto">
         <SimpleGrid columns={12} gap={4}>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={[12, null, 4]}>
             <Select
               isRequired
               defaultValue={ubication?.province}
@@ -49,7 +49,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               }}
             />
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={[12, null, 4]}>
             <Select
               isRequired
               defaultValue={ubication?.municipality}
@@ -63,7 +63,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               }}
             />
           </GridItem>
-          <GridItem colSpan={4}>
+          <GridItem colSpan={[12, null, 4]}>
             <Select
               isRequired
               defaultValue={ubication?.sector}

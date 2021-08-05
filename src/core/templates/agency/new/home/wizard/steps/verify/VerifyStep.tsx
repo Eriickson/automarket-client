@@ -3,16 +3,24 @@ import React, { FC } from "react";
 // Packages
 import Zoom from "react-medium-image-zoom";
 import { IconPhone } from "@tabler/icons";
-import { Box, Flex, Text, StackDivider, VStack, Img, List, ListItem, ListIcon, Tag } from "@chakra-ui/react";
+import { Flex, Text, StackDivider, VStack, Img, List, ListItem, ListIcon, Tag } from "@chakra-ui/react";
 
 // My Elements
 import { useSelector } from "@/store";
 import { capitalizeString } from "@/utils";
+import { FormWizardProvider } from "@/components";
+import { useForm } from "react-hook-form";
 
 export const VerifyStep: FC = () => {
   const { agencyData, ubication, contacts } = useSelector(({ agency }) => agency.new);
+  const methods = useForm();
+
+  async function onSubmit() {
+    console.log(agencyData, ubication, contacts);
+  }
+
   return (
-    <Box>
+    <FormWizardProvider methods={methods} onSubmit={onSubmit}>
       <VStack alignItems="stretch" divider={<StackDivider borderColor="gray.200" />}>
         <Flex justifyContent="flex-start">
           <Text color="gray.400" flex="1" fontWeight="medium" mr="5" textAlign="end">
@@ -80,6 +88,6 @@ export const VerifyStep: FC = () => {
           </List>
         </Flex>
       </VStack>
-    </Box>
+    </FormWizardProvider>
   );
 };

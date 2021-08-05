@@ -20,6 +20,7 @@ export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthPara
     const { user } = (await getSession(ctx)) as unknown as any;
 
     isAuth = Boolean(user);
+
     if (privateRouter && !isAuth) {
       ctx.res.writeHead(302, { Location: typeof privateRouter === "string" ? privateRouter : "/" });
       ctx.res.end();

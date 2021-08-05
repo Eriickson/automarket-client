@@ -28,7 +28,7 @@ const agencyReducer = createSlice({
   initialState,
   reducers: {
     setNewAgencyInfo(state, action: PayloadAction<Partial<InitialState["new"]>>) {
-      state.new = { ...action.payload, ...state.new };
+      state.new = { ...state.new, ...action.payload };
     },
     setExampleSelect(state, action: PayloadAction<IOption>) {
       state.exampeSelect = action.payload;

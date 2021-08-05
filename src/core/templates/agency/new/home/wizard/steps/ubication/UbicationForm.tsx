@@ -23,6 +23,11 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
 
   useEffect(() => {
     getProvincesFetch();
+
+    if (ubication?.province) {
+      getMunicipalitiesByProvinceIdFetch({ provinceId: String(ubication.province.value) });
+      getSectorsByMunicipalityIdFetch({ municipalityId: String(ubication.municipality.value) });
+    }
   }, []);
 
   return (
@@ -38,6 +43,8 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               options={provinces}
               onChange={({ value }) => {
                 methods.setValue("municipality", null);
+                methods.setValue("sector", null);
+                methods.setValue("reference", null);
                 getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
               }}
             />
@@ -51,12 +58,20 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               options={municipalities}
               onChange={({ value }) => {
                 methods.setValue("sector", null);
+                methods.setValue("reference", null);
                 getSectorsByMunicipalityIdFetch({ municipalityId: String(value) });
               }}
             />
           </GridItem>
           <GridItem colSpan={4}>
-            <Select isRequired defaultValue={ubication?.sector} label="Sector" name="sector" options={sectors} />
+            <Select
+              isRequired
+              defaultValue={ubication?.sector}
+              label="Sector"
+              name="sector"
+              options={sectors}
+              onChange={() => methods.setValue("reference", null)}
+            />
           </GridItem>
           <GridItem colSpan={12}>
             <InputControl isRequired defaultValue={ubication?.reference} label="Referencia" name="reference" />

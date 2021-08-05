@@ -1,16 +1,7 @@
 import React, { FC } from "react";
-import {
-  Box,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Tag,
-  VStack,
-  StackDivider,
-  Button,
-  Flex,
-  IconButton,
-} from "@chakra-ui/react";
+
+// Packages
+import { Box, Stat, StatLabel, StatNumber, Tag, VStack, StackDivider, Flex, IconButton } from "@chakra-ui/react";
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { CloseIcon } from "@chakra-ui/icons";
 
@@ -33,11 +24,11 @@ export const ContactList: FC = () => {
               {numberPhone.hasWhatsapp && <Tag colorScheme="whatsapp">Whatsapp</Tag>}
             </Stat>
             <IconButton
-              variant="ghost"
-              size="sm"
-              colorScheme="danger"
               aria-label="Eliminar contact"
+              colorScheme="danger"
               icon={<CloseIcon />}
+              size="sm"
+              variant="ghost"
               onClick={() => remove(i)}
             >
               Remover

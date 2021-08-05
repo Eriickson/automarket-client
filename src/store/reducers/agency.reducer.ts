@@ -1,9 +1,10 @@
-import { IOption } from "@/shared";
+import { IGeneratedImage, IOption } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   new: {
     agencyData: {
+      logo: Partial<Omit<IGeneratedImage, "file">>;
       name: string;
       slogan: string;
       isProfessional: boolean;
@@ -26,8 +27,8 @@ const agencyReducer = createSlice({
   name: "agency",
   initialState,
   reducers: {
-    setNewAgencyInfo(state, action: PayloadAction<InitialState["new"]>) {
-      state.new = action.payload;
+    setNewAgencyInfo(state, action: PayloadAction<Partial<InitialState["new"]>>) {
+      state.new = { ...action.payload, ...state.new };
     },
     setExampleSelect(state, action: PayloadAction<IOption>) {
       state.exampeSelect = action.payload;

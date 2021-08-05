@@ -1,3 +1,4 @@
+import { IGeneratedImage } from "@/shared";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -5,6 +6,7 @@ export interface INewAgencyDataFormOnSubmit {
   name: string;
   slogan: string;
   isProfessional: boolean;
+  logo: IGeneratedImage;
 }
 
 const schema = yup.object().shape({

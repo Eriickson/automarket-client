@@ -1,12 +1,22 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { useWizard } from "@/components";
 import { UbicationForm } from "./UbicationForm";
+import { IUbicationNewAgencyOnSubmit } from "@/validations";
+import { useAction } from "@/store";
 
-export const UbicationStep = () => {
+export const UbicationStep: FC = () => {
   const { nextStep } = useWizard();
-  async function onSubmit(values: any) {
-    console.log({ values });
+  const { setNewAgencyInfo } = useAction();
+  async function onSubmit(values: IUbicationNewAgencyOnSubmit) {
+    setNewAgencyInfo({
+      ubication: {
+        province: values.province,
+        municipality: values.municipality,
+        sector: values.sector,
+        reference: values.reference,
+      },
+    });
     nextStep();
   }
 

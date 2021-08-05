@@ -9,4 +9,5 @@ const SearcherVehicle: FC = () => {
   );
 };
 
+export { seacherVehicleServerSide as getServerSideProps } from "@/servers";
 export default SearcherVehicle;

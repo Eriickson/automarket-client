@@ -13,7 +13,7 @@ const WizardContext = createContext<IWizardContext | null>(null) as React.Contex
 
 const WizardProvider: FC = ({ children }) => {
   const [stepList, setStepList] = useState<IWizardStep[]>([]);
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
   const [stepListLenght, setStepListLenght] = useState(0);
 
   function nextStep() {

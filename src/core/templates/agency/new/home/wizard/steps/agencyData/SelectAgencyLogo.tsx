@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 // Packages
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
@@ -9,11 +9,23 @@ import { IGeneratedImage } from "@/shared";
 
 // My Components
 import { Avatar, LabelInput, UploadFiles, CropImage } from "@/components";
+import { useSelector } from "@/store";
 
 export const SelectAgencyLogo: FC = () => {
+  const { agencyData } = useSelector(({ agency }) => agency.new);
   const [logoSelected, setLogoSelected] = useState<IGeneratedImage | null>();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { setValue, watch } = useFormContext();
+
+  useEffect(() => {
+    if (agencyData?.logo) {
+      console.log("hay logo");
+    }
+    /* 
+    if (agencyData.logo) {
+      setValue("logo", agencyData.logo);
+    } */
+  }, []);
   return (
     <Box>
       <LabelInput isRequired label="Logo de la agencia" />

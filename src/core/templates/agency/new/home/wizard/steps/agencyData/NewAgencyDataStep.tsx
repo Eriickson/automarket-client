@@ -13,9 +13,15 @@ export const NewAgencyDataStep: FC = () => {
   const { nextStep } = useWizard();
 
   async function onSubmit(values: INewAgencyDataFormOnSubmit) {
-    console.log(values);
-    // setNewAgencyInfo({ agencyData: values });
-    // nextStep();
+    setNewAgencyInfo({
+      agencyData: {
+        isProfessional: values.isProfessional,
+        name: values.name,
+        slogan: values.slogan,
+        logo: values.logo,
+      },
+    });
+    nextStep();
   }
 
   return <NewAgencyDataForm onSubmit={onSubmit} />;

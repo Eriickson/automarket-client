@@ -1,5 +1,8 @@
 import React, { FC } from "react";
 
+// NextJS
+import Router, { useRouter } from "next/router";
+
 // Packages
 import axios from "axios";
 import { getCsrfToken } from "next-auth/client";
@@ -10,14 +13,16 @@ import { SignInForm } from "./SignInForm";
 import { IFormSignInOnSubmit } from "@/validations";
 
 export const SignInTemplate: FC = () => {
+  const { query } = useRouter();
+
   async function onSubmit(values: IFormSignInOnSubmit) {
     const csrfToken = await getCsrfToken();
     try {
-      const { data } = await axios.post("/api/auth/callback/credentials", {
+      await axios.post("/api/auth/callback/credentials", {
         ...values,
         csrfToken,
       });
-      console.log(data);
+      query.callbackUrl && Router.push(String(query.callbackUrl));
     } catch (err) {
       console.log(err);
     }

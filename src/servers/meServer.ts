@@ -12,9 +12,9 @@ export interface MePageProps extends ProvidersProps {
 
 export const meServerSide: GetServerSideProps = async ctx => {
   const { client } = getApolloClient();
-  const auth = await getAuthSsr({ ctx, privateRouter: "/" });
-
   try {
+    const auth = await getAuthSsr({ ctx, privateRouter: "/" });
+
     const { data } = await client.query<gql.IGetProfileMePayload>({
       query: gql.GET_PROFILE_ME_Q,
       context: {

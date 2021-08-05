@@ -1,4 +1,3 @@
-import { ICropArea } from "@/shared";
 import { gql } from "@apollo/client";
 import { Picture } from "./registerUser";
 

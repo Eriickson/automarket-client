@@ -9,14 +9,47 @@ import { Flex, Text, StackDivider, VStack, Img, List, ListItem, ListIcon, Tag } 
 import { useSelector } from "@/store";
 import { capitalizeString } from "@/utils";
 import { FormWizardProvider } from "@/components";
+import { useCreateAgencyPayload } from "@/graphql";
 import { useForm } from "react-hook-form";
 
 export const VerifyStep: FC = () => {
   const { agencyData, ubication, contacts } = useSelector(({ agency }) => agency.new);
   const methods = useForm();
+  const { createAgency } = useCreateAgencyPayload();
 
   async function onSubmit() {
-    console.log(agencyData, ubication, contacts);
+    /* eslint-disable-next-line */
+    const { src, originalSrc, ...logo } = agencyData.logo;
+
+    const agency = {
+      ...agencyData,
+      logo,
+      ubication: {
+        direction: {
+          province: String(ubication.province.value),
+          municipality: String(ubication.municipality.value),
+          sector: String(ubication.sector.value),
+          reference: ubication.reference,
+        },
+      },
+      contacts: {
+        numberPhones: contacts.numbersPhone.map(numberPhone => ({
+          label: numberPhone.title,
+          value: numberPhone.value,
+          payload: {
+            hasWhatsapp: numberPhone.hasWhatsapp,
+          },
+        })),
+        emails: [{ label: "Mi label", value: "erickson01d@gmail.com" }],
+      },
+    };
+
+    try {
+      const { data } = await createAgency({ variables: { agency } });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

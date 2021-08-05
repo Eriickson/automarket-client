@@ -1,15 +1,19 @@
 import React, { FC, useEffect } from "react";
-import { InputControl, PrimaryCard, Select, LabelInput } from "@/components";
-import { Box, Divider, Button, Tag, TagLabel, TagLeftIcon, VStack, Text } from "@chakra-ui/react";
 
+// Packages
+import { Box, Divider, Button, Tag, TagLabel, TagLeftIcon, VStack, Text } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
-import { useSelector } from "@/store";
-import { FormSession } from "./FormSession";
+
+// My Elements
 import { IconInfoCircle } from "@tabler/icons";
+import { useSelector } from "@/store";
 import { RegisterUserFormResolver, RegisterUserOnSubmitFormType } from "@/validations";
 import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
-import { RadioGroup } from "@/components";
+
+// My Components
+import { InputControl, PrimaryCard, Select, LabelInput, RadioGroup } from "@/components";
 import { SelectProfileImage } from "./SelectProfileImage";
+import { FormSession } from "./FormSession";
 
 interface RegisterFormProps {
   onSubmit(values: RegisterUserOnSubmitFormType): void;
@@ -49,18 +53,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
               <Box>
                 <LabelInput label="Imagen de perfil" />
                 <SelectProfileImage />
-                {/* <SelectProfileImageProvider>
-                  <SelectProfileImage
-                    showAvatar
-                    onChange={value => {
-                      methods.setValue("profilePicture", {
-                        file: value.file,
-                        croppedArea: value.croppedAreaPixels,
-                        rotation: value.rotation,
-                      });
-                    }}
-                  />
-                </SelectProfileImageProvider> */}
                 <VStack align="flex-start" mt="3">
                   <Tag colorScheme="info">
                     <TagLeftIcon as={IconInfoCircle} boxSize="1rem" color="info.500" />

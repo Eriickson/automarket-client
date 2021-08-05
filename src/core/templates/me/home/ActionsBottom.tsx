@@ -1,14 +1,17 @@
 import React, { FC } from "react";
 
+// Packages
 import { signOut } from "next-auth/client";
 import { Button, HStack, Fade } from "@chakra-ui/react";
 
+// My Elements
 import { useAction, useSelector } from "@/store";
-import Router from "next/router";
+import { useUIContext } from "@/context";
 
 export const ActionsBottom: FC = () => {
   const { toggleEditing } = useAction();
   const { isEditing } = useSelector(({ profile }) => profile);
+  const { activateLoadingScreen } = useUIContext();
 
   return (
     <HStack justifyContent="space-between">
@@ -16,8 +19,8 @@ export const ActionsBottom: FC = () => {
         colorScheme="danger"
         variant="ghost"
         onClick={() => {
+          activateLoadingScreen("Cerrando sesión");
           signOut();
-          Router.push("/");
         }}
       >
         Cerrar Sesión

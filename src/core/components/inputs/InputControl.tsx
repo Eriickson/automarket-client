@@ -13,18 +13,10 @@ interface InputControlProps {
   isRequired?: boolean;
   inputProps?: InputProps;
   defaultValue?: string | number;
-  isDisabled?: boolean;
   noMarginBottom?: boolean;
 }
 
-export const InputControl: FC<InputControlProps> = ({
-  name,
-  label,
-  inputProps,
-  isRequired,
-  isDisabled,
-  defaultValue,
-}) => {
+export const InputControl: FC<InputControlProps> = ({ name, label, inputProps, isRequired, defaultValue }) => {
   const {
     register,
     formState: { errors },
@@ -50,7 +42,6 @@ export const InputControl: FC<InputControlProps> = ({
         borderColor={isError ? "red.500" : "gray.300"}
         color={isError && "red.500"}
         colorScheme="red"
-        isDisabled={isDisabled}
         px="3"
         rounded="sm"
         {...register(name)}

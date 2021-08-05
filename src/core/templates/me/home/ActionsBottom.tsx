@@ -4,6 +4,7 @@ import { signOut } from "next-auth/client";
 import { Button, HStack, Fade } from "@chakra-ui/react";
 
 import { useAction, useSelector } from "@/store";
+import Router from "next/router";
 
 export const ActionsBottom: FC = () => {
   const { toggleEditing } = useAction();
@@ -11,7 +12,14 @@ export const ActionsBottom: FC = () => {
 
   return (
     <HStack justifyContent="space-between">
-      <Button colorScheme="danger" variant="ghost" onClick={() => signOut()}>
+      <Button
+        colorScheme="danger"
+        variant="ghost"
+        onClick={() => {
+          signOut();
+          Router.push("/");
+        }}
+      >
         Cerrar Sesión
       </Button>
       {isEditing ? (

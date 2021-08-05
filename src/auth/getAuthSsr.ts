@@ -17,10 +17,9 @@ export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthPara
   let isAuth = false;
   try {
     /* eslint-disable-next-line */
-    const { user } = (await getSession(ctx)) as unknown as any;
+    const session = (await getSession(ctx)) as unknown as any;
 
-    isAuth = Boolean(user);
-
+    isAuth = Boolean(session?.user);
     if (privateRouter && !isAuth) {
       ctx.res.writeHead(302, { Location: typeof privateRouter === "string" ? privateRouter : "/" });
       ctx.res.end();
@@ -35,9 +34,11 @@ export async function getAuthSsr({ ctx, publicRouter, privateRouter }: IAuthPara
 
     return {
       isAuth: isAuth,
-      session: user.session || {},
+      session: session.user.session || {},
     };
   } catch (err) {
+    console.log(err);
+
     isAuth = false;
     return {
       isAuth,

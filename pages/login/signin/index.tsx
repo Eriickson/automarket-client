@@ -1,10 +1,9 @@
 import React from "react";
 
-import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 
 import { SignInTemplate } from "@/templates";
 import { SEO } from "@/components";
-import { getAuthSsr } from "@/auth";
 
 const SignInPage: NextPage = () => {
   return (
@@ -14,11 +13,5 @@ const SignInPage: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  await getAuthSsr({ ctx, publicRouter: true });
-  return {
-    props: {},
-  };
-};
-
+export { signinServerSide as getServerSideProps } from "@/servers";
 export default SignInPage;

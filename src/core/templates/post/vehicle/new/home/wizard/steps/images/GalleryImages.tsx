@@ -38,17 +38,18 @@ export const GalleryImages: FC = () => {
                 overflow="hidden"
                 position="relative"
               >
-                <Img
-                  filter="blur(5px)"
-                  h="full"
-                  src={`${image.src}`}
-                  transform="scale(1.1)"
-                  userSelect="none"
-                />
+                <Img filter="blur(5px)" h="full" src={`${image.src}`} transform="scale(1.1)" userSelect="none" />
                 <Box alignItems="center" display="flex" inset="0" pos="absolute">
-                  <Zoom>
-                    <Img src={`${image.src}`} />
-                  </Zoom>
+                  <Box display={["block", null, "none"]}>
+                    <Zoom zoomMargin={20}>
+                      <Img src={`${image.src}`} />
+                    </Zoom>
+                  </Box>{" "}
+                  <Box display={["none", null, "block"]}>
+                    <Zoom zoomMargin={100}>
+                      <Img src={`${image.src}`} />
+                    </Zoom>
+                  </Box>
                 </Box>
                 <HStack position="absolute" right="2" top="2">
                   <EditImageModal image={image} />

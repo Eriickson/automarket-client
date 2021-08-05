@@ -11,10 +11,11 @@ import { Button } from "@chakra-ui/react";
 import { getAuthSsr } from "@/auth";
 import { ProvidersProps } from "@/shared";
 
-const Authentication: FC<AuthenticationProps> = () => {
+const Authentication: FC<AuthenticationProps> = ({ authProviderProps }) => {
   return (
     <div>
-      Authentication
+      {authProviderProps.isAuth ? "Authentication" : ""}
+
       <Button colorScheme="danger" onClick={() => signOut()}>
         Cerrar sesión
       </Button>
@@ -26,7 +27,7 @@ const Authentication: FC<AuthenticationProps> = () => {
 interface AuthenticationProps extends ProvidersProps {}
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  const response = await getAuthSsr({ ctx });
+  const response = await getAuthSsr({ ctx, publicRouter: true });
 
   const props: AuthenticationProps = {
     authProviderProps: { isAuth: response.isAuth },

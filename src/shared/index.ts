@@ -7,3 +7,4 @@ export * from "./User";
 export * from "./Tabs";
 export * from "./Breadcrumb";
 export * from "./ProvidersProps";
+export * from "./Contact";

@@ -11,7 +11,7 @@ export const TabNewContact: FC<TabNewContactProps> = ({ onClose }) => {
     <Tabs>
       <TabList>
         <Tab>Número Telefónico</Tab>
-        <Tab>Correo electrónico</Tab>
+        {/* <Tab>Correo electrónico</Tab> */}
       </TabList>
       <TabPanels>
         <TabPanel>

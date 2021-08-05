@@ -1,11 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { useWizard } from "@/components";
 import { ContactForm } from "./ContactForm";
+import { useAction } from "@/store";
 
-export const ContactsStep = () => {
+export const ContactsStep: FC = () => {
   const { nextStep } = useWizard();
+  const { setNewAgencyInfo } = useAction();
   async function onSubmit(values: any) {
-    console.log({ values });
+    setNewAgencyInfo({ contacts: { numbersPhone: values.numberPhone } });
     nextStep();
   }
 

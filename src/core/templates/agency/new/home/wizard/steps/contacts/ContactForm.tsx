@@ -1,9 +1,11 @@
 import React, { FC } from "react";
-import { useForm } from "react-hook-form";
-import { Box, Stat, StatLabel, StatNumber, Tag, Divider, SimpleGrid, GridItem } from "@chakra-ui/react";
 
+// Packages
+import { useForm } from "react-hook-form";
+import { Box } from "@chakra-ui/react";
+
+// My Components
 import { FormWizardProvider } from "@/components";
-import { ModalNewContact } from "./ModalNewContact";
 import { AgencyNewContact } from "src/core/components/agency/ContactModal";
 
 interface ContactFormProps {

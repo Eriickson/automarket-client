@@ -1,4 +1,4 @@
-import { IGeneratedImage, IOption } from "@/shared";
+import { IGeneratedImage, INumberPhone, IOption } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
@@ -14,6 +14,9 @@ interface InitialState {
       municipality: IOption;
       sector: IOption;
       reference: string;
+    };
+    contacts: {
+      numbersPhone: INumberPhone[];
     };
   };
   exampeSelect: IOption;

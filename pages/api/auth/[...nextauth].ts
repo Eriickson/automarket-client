@@ -30,7 +30,8 @@ export default NextAuth({
           variables: { identifier, password },
         });
 
-        const { iat, ...user } = jwt.verify(data.signIn.token, "MY_SCRECT_KEY") as ISession["user"] & {
+        /* eslint-disable-next-line */
+        const { iat, user } = jwt.verify(data.signIn.token, "MY_SCRECT_KEY") as { user: ISession["user"] } & {
           iat: number;
         };
 

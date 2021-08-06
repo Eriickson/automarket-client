@@ -8,7 +8,11 @@ interface IUseApolloClient {
   client: ApolloClient<NormalizedCacheObject>;
 }
 
-export const getApolloClient = (): IUseApolloClient => {
+interface ApolloClientOptions {
+  authorization: boolean;
+}
+
+export const getApolloClient = (options?: Partial<ApolloClientOptions>): IUseApolloClient => {
   const link = ApolloLink.from([authLink(), errorLink, uploadLink]);
 
   const client = new ApolloClient({

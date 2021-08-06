@@ -5,6 +5,7 @@ interface IWizardContext {
   currentStep: number;
   stepList: IWizardStep[];
   stepListLenght: number;
+  changeStep(step: number): void;
   nextStep(): void;
   prevStep(): void;
   addStepList(steList: IWizardStep[]): void;
@@ -13,7 +14,7 @@ const WizardContext = createContext<IWizardContext | null>(null) as React.Contex
 
 const WizardProvider: FC = ({ children }) => {
   const [stepList, setStepList] = useState<IWizardStep[]>([]);
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
   const [stepListLenght, setStepListLenght] = useState(0);
 
   function nextStep() {
@@ -29,8 +30,14 @@ const WizardProvider: FC = ({ children }) => {
     setStepList(stepList);
   }
 
+  function changeStep(step: number) {
+    setCurrentStep(step);
+  }
+
   return (
-    <WizardContext.Provider value={{ currentStep, stepList, stepListLenght, nextStep, prevStep, addStepList }}>
+    <WizardContext.Provider
+      value={{ currentStep, stepList, stepListLenght, nextStep, prevStep, addStepList, changeStep }}
+    >
       {children}
     </WizardContext.Provider>
   );

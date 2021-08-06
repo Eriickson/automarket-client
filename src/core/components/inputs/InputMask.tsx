@@ -16,6 +16,7 @@ export const InputMask: FC<InputMaskProps> = ({ name, mask }) => {
       <Controller
         control={control}
         name={name}
+        rules={{ maxLength: 17 }}
         render={({ field }) => (
           /*  */
           <ReactInputMask {...field} mask={String(mask)} maskChar="">

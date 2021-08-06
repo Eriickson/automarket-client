@@ -3,3 +3,4 @@ export interface INumberPhone {
   hasWhatsapp: boolean;
   value: string;
 }
+export type ContactType = "PHONE_NUMBER" | "EMAIL";

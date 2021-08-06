@@ -7,6 +7,7 @@ import { Box } from "@chakra-ui/react";
 // My Components
 import { FormWizardProvider } from "@/components";
 import { AgencyNewContact } from "src/core/components/agency/ContactModal";
+import { PhoneNumbers } from "./PhoneNumbers";
 
 interface ContactFormProps {
   onSubmit(values: any): void;
@@ -18,7 +19,7 @@ export const ContactForm: FC<ContactFormProps> = ({ onSubmit }) => {
   return (
     <FormWizardProvider methods={methods} onSubmit={onSubmit}>
       <Box maxW="sm" mx="auto">
-        <AgencyNewContact />
+        <PhoneNumbers />
       </Box>
     </FormWizardProvider>
   );

@@ -2,24 +2,31 @@ import React, { FC } from "react";
 
 // Packages
 import Zoom from "react-medium-image-zoom";
-import { IconPhone } from "@tabler/icons";
-import { Flex, Text, StackDivider, VStack, Img, List, ListItem, ListIcon, Tag } from "@chakra-ui/react";
+import { IconEdit } from "@tabler/icons";
+import { Flex, Text, StackDivider, VStack, Img, IconButton } from "@chakra-ui/react";
+import { useSession } from "next-auth/client";
 
 // My Elements
 import { useSelector } from "@/store";
 import { capitalizeString } from "@/utils";
-import { FormWizardProvider } from "@/components";
+import { FormWizardProvider, useWizard } from "@/components";
 import { useCreateAgencyPayload } from "@/graphql";
 import { useForm } from "react-hook-form";
 
 export const VerifyStep: FC = () => {
-  const { agencyData, ubication, contacts } = useSelector(({ agency }) => agency.new);
+  const { agencyData, ubication } = useSelector(({ agency }) => agency.new);
   const methods = useForm();
   const { createAgency } = useCreateAgencyPayload();
+  const { changeStep } = useWizard();
+  const [session] = useSession();
 
   async function onSubmit() {
     /* eslint-disable-next-line */
     const { src, originalSrc, ...logo } = agencyData.logo;
+
+    /* eslint-disable-next-line */
+    const sessionX = session?.user as any;
+    const token = sessionX.session.token;
 
     const agency = {
       ...agencyData,
@@ -32,20 +39,23 @@ export const VerifyStep: FC = () => {
           reference: ubication.reference,
         },
       },
-      contacts: {
-        numberPhones: contacts.numbersPhone.map(numberPhone => ({
-          label: numberPhone.title,
-          value: numberPhone.value,
-          payload: {
-            hasWhatsapp: numberPhone.hasWhatsapp,
-          },
-        })),
-        emails: [{ label: "Mi label", value: "erickson01d@gmail.com" }],
-      },
+      // contacts: {
+      //   numberPhones: contacts.numbersPhone.map(numberPhone => ({
+      //     label: numberPhone.title,
+      //     value: numberPhone.value,
+      //     payload: {
+      //       hasWhatsapp: numberPhone.hasWhatsapp,
+      //     },
+      //   })),
+      //   emails: [{ label: "Mi label", value: "erickson01d@gmail.com" }],
+      // },
     };
 
     try {
-      const { data } = await createAgency({ variables: { agency } });
+      const { data } = await createAgency({
+        variables: { agency },
+        context: { headers: { authorization: `Bearer ${token}` } },
+      });
       console.log(data);
     } catch (err) {
       console.log(err);
@@ -72,6 +82,12 @@ export const VerifyStep: FC = () => {
           <Text flex="1" fontWeight="semibold">
             {agencyData.name}
           </Text>
+          <IconButton
+            aria-label="Editar nombre"
+            icon={<IconEdit size="1.25rem" />}
+            size="sm"
+            onClick={() => changeStep(0)}
+          />
         </Flex>
         <Flex justifyContent="flex-start">
           <Text color="gray.400" flex="1" fontWeight="medium" mr="5" textAlign="end">
@@ -102,7 +118,7 @@ export const VerifyStep: FC = () => {
             ].join(" / ")}
           </Text>
         </Flex>
-        <Flex justifyContent="flex-start">
+        {/* <Flex justifyContent="flex-start">
           <Text color="gray.400" flex="1" fontWeight="medium" mr="5" textAlign="end">
             Contactos
           </Text>
@@ -119,7 +135,7 @@ export const VerifyStep: FC = () => {
               </ListItem>
             ))}
           </List>
-        </Flex>
+        </Flex> */}
       </VStack>
     </FormWizardProvider>
   );

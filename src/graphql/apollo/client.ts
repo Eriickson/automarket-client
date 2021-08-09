@@ -21,6 +21,9 @@ export const getApolloClient = (options?: Partial<ApolloClientOptions>): IUseApo
     }),
     link,
     credentials: "include",
+    headers: {
+      ping: "pong",
+    },
   });
 
   return { client };

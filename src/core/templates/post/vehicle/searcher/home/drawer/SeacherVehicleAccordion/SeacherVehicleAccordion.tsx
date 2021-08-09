@@ -42,7 +42,7 @@ export const SeacherVehicleAccordion: FC = () => {
   return (
     <WraperSeacherVehicleAccordionStyled>
       <FormProvider {...methods}>
-        <Accordion>
+        <Accordion defaultIndex={[0]}>
           {accordionItems.map((item, i) => (
             <AccordionItem key={i} mb="2">
               <PrimaryCard>

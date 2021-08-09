@@ -5,7 +5,6 @@ import {
   GridItem,
   HStack,
   IconButton,
-  Img,
   SimpleGrid,
   Tag,
   TagLabel,
@@ -35,7 +34,7 @@ export const SeacherAgenciesTemplate: FC = () => {
               <PrimaryCard notBorderTop>
                 <Box alignItems="center" display="flex" flexDir="column" textAlign="center">
                   <Box maxW="40" mx="auto">
-                    <Img src="https://thumbs.dreamstime.com/b/car-sale-logo-template-design-vector-eps-82119214.jpg" />
+                    {/* <Img src="https://thumbs.dreamstime.com/b/car-sale-logo-template-design-vector-eps-82119214.jpg" /> */}
                   </Box>
                   <Text fontSize={["xl", null, "2xl"]} fontWeight="semibold">
                     Card Shop

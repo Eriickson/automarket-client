@@ -1,4 +1,6 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useEffect, useRef } from "react";
+
+import { useRouter } from "next/router";
 
 // Packages
 import {
@@ -20,6 +22,11 @@ import { SeacherVehicleAccordion } from "./SeacherVehicleAccordion/SeacherVehicl
 export const FilterVehicleDrawer: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
+  const { query } = useRouter();
+
+  useEffect(() => {
+    query.advancedSearch && query.advancedSearch == "true" && onOpen();
+  }, []);
   return (
     <>
       <Button
@@ -37,7 +44,7 @@ export const FilterVehicleDrawer: FC = () => {
         <DrawerOverlay />
         <DrawerContent px="0">
           <DrawerCloseButton />
-          <DrawerHeader>Encuentra tu vehículo</DrawerHeader>
+          <DrawerHeader mb="2">Encuentra tu vehículo</DrawerHeader>
           <DrawerBody px="0">
             <SeacherVehicleAccordion />
           </DrawerBody>

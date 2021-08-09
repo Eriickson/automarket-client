@@ -18,13 +18,17 @@ export const meServerSide: GetServerSideProps = async ctx => {
     const { data } = await client.query<gql.IGetProfileMePayload>({
       query: gql.GET_PROFILE_ME_Q,
       context: {
-        headers: { token: auth.session?.token },
+        headers: { authorization: `Bearer ${auth.session?.token}` },
       },
     });
 
     const props: MePageProps = {
       profileMe: data.getProfileMe.profileMe,
       authProviderProps: { ...auth },
+      seo: {
+        title: "Mi perfil",
+        desc: "",
+      },
     };
 
     return {

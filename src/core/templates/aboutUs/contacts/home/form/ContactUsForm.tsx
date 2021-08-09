@@ -49,7 +49,7 @@ export const ContactUsForm: FC = () => {
             <Textarea
               _focus={{ borderWidth: "2px", borderColor: "pri.500" }}
               minH="32"
-              placeholder="Describe tu me mensaje"
+              placeholder="Describe tu mensaje"
               px="3"
               resize="none"
               rounded="sm"

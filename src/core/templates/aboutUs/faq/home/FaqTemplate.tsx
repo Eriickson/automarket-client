@@ -19,7 +19,7 @@ export const FaqTemplate: FC = () => {
               ¿No encontró respuesta a su pregunta?
             </Heading>
             <Text color="gray.500" fontSize="sm" lineHeight="none" maxW="md" mb="8">
-              Póngase en contacto con nosotros para obtener más detalles para que así no se qude con ninguna duda
+              Póngase en contacto con nosotros para obtener más detalles para que así no se quede con ninguna duda
               pendiente
             </Text>
             <Link href="/about-us/contacts">

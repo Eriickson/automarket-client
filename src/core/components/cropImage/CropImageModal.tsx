@@ -135,13 +135,13 @@ export const CropImageModal: FC<CropImageModalProps> = ({ onSave, defaultValue, 
             onZoomChange={onZoomChange}
           />
           <Tag fontWeight="semibold" mr="1" mt="1">
-            X: {croppedArea.x}
+            X: {Math.round(croppedArea.x)}
             <Box mx="1"></Box>
-            Y: {croppedArea.y}
+            Y: {Math.round(croppedArea.y)}
             <Box mx="1"></Box>
-            W: {croppedArea.w}
+            W: {Math.round(croppedArea.w)}
             <Box mx="1"></Box>
-            H: {croppedArea.h}
+            H: {Math.round(croppedArea.h)}
           </Tag>
           <Tag fontWeight="semibold" mt="1">
             Dimensión: {aspectRatio}

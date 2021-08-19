@@ -1,6 +1,6 @@
 import { IconEdit } from "@tabler/icons";
 import React, { FC } from "react";
-import { IconButton, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, Flex } from "@chakra-ui/react";
 import { CropImage } from "@/components";
 import { IGeneratedImage } from "@/shared";
 import { useAction } from "@/store";
@@ -13,13 +13,18 @@ export const EditImageModal: FC<EditImageModalProps> = ({ image }) => {
   const { newVehicleUpdateImage } = useAction();
   return (
     <>
-      <IconButton
-        aria-label="abrir editor de imagen"
-        colorScheme="pri"
-        icon={<IconEdit size="1.25rem" />}
-        size="sm"
+      <Flex
+        alignItems="center"
+        color="gray.100"
+        cursor="pointer"
+        h="8"
+        justifyContent="center"
+        style={{ backgroundColor: "#000000A4" }}
+        w="8"
         onClick={onOpen}
-      />
+      >
+        <IconEdit size="1.25rem" />
+      </Flex>
       <CropImage
         image={image}
         isOpen={isOpen}

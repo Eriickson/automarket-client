@@ -4,5 +4,5 @@ export interface IDirection {
   province: IOption;
   municipality: IOption;
   sector?: IOption;
-  reference?: String;
+  reference?: string;
 }

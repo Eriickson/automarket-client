@@ -1,42 +1,30 @@
 import React, { FC } from "react";
-
-// NextJS
-import { GetServerSideProps } from "next";
+// import { GetServerSideProps, withSession } from "@automarket-rd/server";
 
 // Packages
-import { signOut } from "next-auth/client";
 import { Button } from "@chakra-ui/react";
+import { GetServerSideProps } from "@/shared";
+import { getAuth } from "@/auth";
 
-// My Elements
-import { getAuthSsr } from "@/auth";
-import { ProvidersProps } from "@/shared";
-
-const Authentication: FC<AuthenticationProps> = ({ authProviderProps }) => {
+const Authentication: FC<AuthenticationPageProps> = () => {
   return (
     <div>
-      {authProviderProps.isAuth ? "Authentication" : ""}
-
-      <Button colorScheme="danger" onClick={() => signOut()}>
-        Cerrar sesión
-      </Button>
+      <Button colorScheme="danger">Cerrar sesión</Button>
     </div>
   );
 };
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
-interface AuthenticationProps extends ProvidersProps {}
+interface AuthenticationPageProps {
+  ping: string;
+}
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const response = await getAuthSsr({ ctx, publicRouter: true });
+export const getServerSideProps: GetServerSideProps<AuthenticationPageProps> = async ctx => {
+  await getAuth(ctx);
 
-  const props: AuthenticationProps = {
-    authProviderProps: { isAuth: response.isAuth },
+  const props: AuthenticationPageProps = {
+    ping: "Poing",
   };
-
-  if (response.session) {
-    props.authProviderProps.session = response.session;
-  }
-
   return { props };
 };
 

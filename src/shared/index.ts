@@ -8,3 +8,4 @@ export * from "./Tabs";
 export * from "./Breadcrumb";
 export * from "./ProvidersProps";
 export * from "./Contact";
+export * from "./Server";

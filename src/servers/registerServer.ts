@@ -24,7 +24,7 @@ export const registerServerSide: GetServerSideProps = async ctx => {
   }
 
   try {
-    const payload = jwt.verify(String(token), "SECRECT_KEY_SIGNUP_TOKEN") as { email: string };
+    const payload = jwt.verify(String(token), "MY-SECRECT-KEY") as { email: string };
 
     email = payload.email;
   } catch (err) {

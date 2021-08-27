@@ -24,14 +24,14 @@ const SelectPage = () => {
               console.log(values);
             })}
           >
-            <InputControl name="input" inputProps={{ placeholder: "Seleccionar..." }} />
+            {/* <InputControl name="input" inputProps={{ placeholder: "Seleccionar..." }} /> */}
             <Select
               name="example-select"
-              defaultValue={exampeSelect}
+              // defaultValue={exampeSelect}
               options={[
-                { value: "1", label: "example1" },
-                { value: "2", label: "example2" },
-                { value: "3", label: "example3" },
+                { id: "1", label: "example1" },
+                { id: "2", label: "example2" },
+                { id: "3", label: "example3" },
               ]}
             />
             <Button type="submit" mt="3" colorScheme="pri" w="full">

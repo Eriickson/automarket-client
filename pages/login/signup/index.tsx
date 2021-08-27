@@ -13,5 +13,5 @@ const SignUpPage: NextPage = () => {
   );
 };
 
-export { signUpServerSide as getServerSideProps } from "@/servers";
+// export { signUpServerSide as getServerSideProps } from "@/servers";
 export default SignUpPage;

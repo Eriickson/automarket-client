@@ -10,36 +10,20 @@ import { useRegisterUser } from "@/graphql";
 import { RegisterUserVariables } from "src/graphql/gql/mutations";
 import { useUIContext } from "@/context";
 import { useEffect } from "react";
-import { api } from "@/utils";
-import { getCsrfToken } from "next-auth/client";
 
 export const RegisterTemplate: FC = () => {
   const { activateLoadingScreen, closeLoadingScreen, alertDialog, apolloServerError } = useUIContext();
-  const { registerUser, loading, error } = useRegisterUser();
+  const { registerUser, loading } = useRegisterUser();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
-    const csrfToken = await getCsrfToken();
-    // console.log("submit", csrfToken);
-
-    // try {
-    //   const { data } = await api.post("/auth/callback/credentials", {
-    //     identifier: "mi-identifier",
-    //     password: "mi-password",
-    //     csrfToken,
-    //   });
-    //   console.log({ data });
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // return;
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
     const { aspectRatio, cropArea, file, flip, id, point, originalFile, rotation, zoom } = profilePicture;
-    const newUser: RegisterUserVariables["user"] = {
+    const newUser: RegisterUserVariables["newUser"] = {
       name,
       lastname,
       direction: {
-        province: String(province.value),
-        municipality: String(municipality.value),
+        provinceId: String(province.id),
+        municipalityId: String(municipality.id),
       },
       birthday,
       sex,
@@ -52,16 +36,10 @@ export const RegisterTemplate: FC = () => {
         profilePicture: { aspectRatio, cropArea, file, flip, id, point, rotation, zoom, originalFile },
       });
 
-    console.log(newUser);
-
     try {
-      const response = await registerUser({
-        variables: {
-          user: newUser,
-        },
-      });
+      const response = await registerUser({ variables: { newUser } });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       // apolloServerError.onOpen(err.message, {
       //   priBtnLabel: "Aceptar",
       //   onClickPriBtn: apolloServerError.onClose,

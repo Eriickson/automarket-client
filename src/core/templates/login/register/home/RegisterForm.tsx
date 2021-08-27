@@ -83,9 +83,9 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
                     label="Provincia"
                     name="province"
                     options={provinces}
-                    onChange={({ value }) => {
-                      methods.setValue("municipality", { label: "Seleccionar...", value: "" });
-                      getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
+                    onChange={({ id }) => {
+                      methods.setValue("municipality", { label: "Seleccionar...", id });
+                      getMunicipalitiesByProvinceIdFetch({ provinceId: String(id) });
                     }}
                   />
                 </Box>

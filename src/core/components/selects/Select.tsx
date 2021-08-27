@@ -6,7 +6,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { css } from "@emotion/react";
 
 // My Elements
-import { IOption } from "@/shared";
+import { IOption, Option } from "@/shared";
 
 // My Components
 import { ErrorValidationForm } from "@/components";
@@ -43,10 +43,10 @@ const cssStyle = (isError: any) => css`
 // Types and Interfaces
 interface SelectProps {
   name: string;
-  defaultValue?: IOption;
+  defaultValue?: Option;
   placeholder?: string;
-  options: IOption[];
-  onChange?: (value: IOption) => void;
+  options: Option[];
+  onChange?: (value: Option) => void;
   isDisabled?: boolean;
   isSearchable?: boolean;
   isLoading?: boolean;
@@ -133,6 +133,7 @@ export const Select: FC<SelectProps> = ({
             >
               <ReactSelect
                 defaultValue={defaultValue}
+                getOptionValue={option => option.id}
                 isDisabled={isDisabled}
                 isLoading={isLoading}
                 isSearchable={isSearchable}

@@ -32,7 +32,7 @@ export const SignUpTemplate: FC = () => {
         },
       });
       closeLoadingScreen();
-    } catch (err) {
+    } catch (err: any) {
       closeLoadingScreen();
       apolloServerError.onOpen(err.message, {
         priBtnLabel: "Aceptar",

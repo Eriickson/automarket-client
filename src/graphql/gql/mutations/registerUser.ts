@@ -17,12 +17,12 @@ interface INewUser {
   username: string;
   password: string;
   direction: {
-    province: string;
-    municipality: string;
+    provinceId: string;
+    municipalityId: string;
   };
 }
 export interface RegisterUserVariables {
-  user: INewUser;
+  newUser: INewUser;
 }
 
 export interface RegisterUserPayload {
@@ -30,8 +30,8 @@ export interface RegisterUserPayload {
 }
 
 export const REGISTER_USER_M = gql`
-  mutation RegisterUser($user: UserInput!) {
-    registerUser(user: $user) {
+  mutation RegisterUser($newUser: RegisterUserInput!) {
+    registerUser(newUser: $newUser) {
       response
     }
   }

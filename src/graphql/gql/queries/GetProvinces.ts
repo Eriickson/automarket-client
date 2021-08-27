@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
 export interface IGetProvincesPayload {
   getProvinces: {
-    provinces: IOption[];
+    provinces: Option[];
   };
 }
 
@@ -11,7 +11,7 @@ export const GET_PROVINCES_Q = gql`
   query GetProvinces {
     getProvinces {
       provinces {
-        value
+        id
         label
       }
     }

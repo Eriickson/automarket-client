@@ -1,7 +1,8 @@
-import { Avatar, Box, Button, Link } from "@chakra-ui/react";
+import { Avatar, Box, Button } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import React, { FC } from "react";
 import { MainMenu } from "./MainMenu";
+import Link from "next/link";
 
 export const SessionLogin: FC = () => {
   return (

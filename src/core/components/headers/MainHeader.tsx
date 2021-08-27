@@ -37,7 +37,6 @@ const NavBarItems = [
 export const MainHeader: FC = () => {
   const { breadcrumb } = useUIContext();
   const { isAuth } = useSelector(store => store.auth);
-  console.log(isAuth);
 
   return (
     <StyledMainHeaderWrapper>

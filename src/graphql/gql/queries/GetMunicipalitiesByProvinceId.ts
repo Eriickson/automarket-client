@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
 export interface IGetMunicipalitiesByProvinceIdPayload {
   getMunicipalitiesByProvinceId: {
-    municipalities: IOption[];
+    municipalities: Option[];
   };
 }
 
@@ -12,10 +12,10 @@ export interface IGetMunicipalitiesByProvinceIdVariables {
 }
 
 export const GET_MUNICIPALITIY_BY_PROVINCE_ID = gql`
-  query GetMunicipalitiesByProvinceId($provinceId: ID!) {
+  query GetMunicipalitiesByProvinceId($provinceId: String!) {
     getMunicipalitiesByProvinceId(provinceId: $provinceId) {
       municipalities {
-        value
+        id
         label
       }
     }

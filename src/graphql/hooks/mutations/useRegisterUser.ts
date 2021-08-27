@@ -15,5 +15,5 @@ export const useRegisterUser = () => {
     },
   });
 
-  return { registerUser, ...options, error: error ? JSON.parse(error?.message) : "" };
+  return { registerUser, ...options, error: error };
 };

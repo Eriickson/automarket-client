@@ -2,14 +2,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 // My Elements
-import { IOption, IGeneratedImage } from "@/shared";
+import { Option, IGeneratedImage } from "@/shared";
 
 export type RegisterUserOnSubmitFormType = {
   profilePicture: IGeneratedImage;
   name: string;
   lastname: string;
-  province: IOption;
-  municipality: IOption;
+  province: Option;
+  municipality: Option;
   birthday: string;
   sex: string;
   username: string;
@@ -34,14 +34,14 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .nullable(),
   municipality: yup
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),

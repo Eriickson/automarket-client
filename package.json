@@ -21,6 +21,7 @@
     "@reduxjs/toolkit": "^1.6.0",
     "@tabler/icons": "^1.41.2",
     "@types/apollo-upload-client": "^14.1.0",
+    "apollo-link-token-refresh": "^0.3.2",
     "apollo-upload-client": "^16.0.0",
     "axios": "^0.21.1",
     "browser-image-size": "^1.1.0",

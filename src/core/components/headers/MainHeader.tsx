@@ -4,7 +4,7 @@ import Link from "next/link";
 import Headroom from "react-headroom";
 
 import { AutomarketRDLogo } from "../../../assets";
-import { MainMenu } from "./MainMenu";
+// import { MainMenu } from "./MainMenu";
 import styled from "@emotion/styled";
 import { Breadcrumb } from "..";
 import { useUIContext } from "@/context";
@@ -54,7 +54,7 @@ export const MainHeader: FC = () => {
                 </Link>
               </GridItem>
               <GridItem colSpan={6}>
-                <HStack justifyContent="center" display={["none", null, null, "flex"]}>
+                <HStack display={["none", null, null, "flex"]} justifyContent="center">
                   {NavBarItems.map((item, i) => (
                     <Box key={i}>
                       <Link href={item.url}>

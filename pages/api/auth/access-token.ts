@@ -3,16 +3,12 @@ import jwt from "jsonwebtoken";
 
 const accessToken: NextIronHandler = async (req, res) => {
   const accessToken = req.session.get("accessToken");
-  const refreshToken = req.session.get("refreshToken");
-
-  console.log({ accessToken, refreshToken });
 
   try {
     const payload = jwt.verify(accessToken, "SuperSecretKeyForSigningTokens");
-    res.status(200).json({ user: payload, accessToken, refreshToken });
+    res.status(200).json({ user: payload, accessToken, isAuth: !!payload });
   } catch (err) {
-    console.log(err);
-    res.status(401).json({ msg: "Unauthorized" });
+    res.json({ msg: "Unauthorized", isAuth: false });
   }
 };
 

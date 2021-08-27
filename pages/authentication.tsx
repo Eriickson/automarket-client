@@ -20,7 +20,7 @@ interface AuthenticationPageProps {
 }
 
 export const getServerSideProps: GetServerSideProps<AuthenticationPageProps> = async ctx => {
-  await getAuth(ctx);
+  await getAuth({ ctx, publicRouter: true });
 
   const props: AuthenticationPageProps = {
     ping: "Poing",

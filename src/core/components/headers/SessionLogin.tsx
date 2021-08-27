@@ -1,10 +1,12 @@
 import { Avatar, Box, Button } from "@chakra-ui/react";
-import { signIn } from "next-auth/client";
 import React, { FC } from "react";
 import { MainMenu } from "./MainMenu";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export const SessionLogin: FC = () => {
+  const router = useRouter();
+
   return (
     <Box alignItems="center" display="flex">
       <Link href="/login/signup">
@@ -14,7 +16,7 @@ export const SessionLogin: FC = () => {
           </Button>
         </a>
       </Link>
-      <Link href="/login/signin">
+      <Link href={{ pathname: "/login/signin", query: { callbackUrl: router.asPath } }}>
         <a>
           <Button colorScheme="pri" display={["none", null, "block"]} ml="2.5" variant="outline">
             Iniciar Sesión

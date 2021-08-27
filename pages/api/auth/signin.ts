@@ -25,8 +25,9 @@ const signin: NextIronHandler = async (req: NextIronRequest, res: NextApiRespons
 
     await req.session.save();
 
-    res.json({ loggin: true });
+    res.json({ successful: true });
   } catch (err) {
+    res.json({ successful: false });
     console.log(err);
   }
 };

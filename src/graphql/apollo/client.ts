@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, ApolloLink, NormalizedCacheObject } from "
 import errorLink from "./errorLink";
 import uploadLink from "./uploadLink";
 import authLink from "./authLink";
-// import wsLink from "./wsLink";
+import { refreshLink } from "./refreshLink";
 
 interface IUseApolloClient {
   client: ApolloClient<NormalizedCacheObject>;

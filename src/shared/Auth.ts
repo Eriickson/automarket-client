@@ -10,6 +10,17 @@ export interface ISession {
   updateAge: string;
   maxAge: string;
 }
+
+interface UserAuthPayload {
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
 export interface IAuth {
+  user: UserAuthPayload;
+  accessToken: string;
   isAuth: boolean;
 }

@@ -1,27 +1,41 @@
 import React, { FC } from "react";
 
 // NextJS
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 
 // Packages
 import axios from "axios";
 
 // My Components
 import { NewLoginLayout } from "@/layouts";
-import { SignInForm } from "./SignInForm";
 import { IFormSignInOnSubmit } from "@/validations";
 import { useUIContext } from "@/context";
+import { SignInForm } from "./SignInForm";
 
 export const SignInTemplate: FC = () => {
   const { query } = useRouter();
   const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
 
   async function onSubmit(values: IFormSignInOnSubmit) {
-    // activateLoadingScreen("Iniciando Sesión");
+    activateLoadingScreen("Iniciando Sesión");
 
-    const { data } = await axios.post("/api/auth/signin", values);
+    type Response = {
+      successful: boolean;
+    };
 
-    console.log(data);
+    try {
+      const { data } = await axios.post<Response>("/api/auth/signin", values);
+
+      if (data.successful) {
+        router.push(String(query.callbackUrl));
+      } else {
+        closeLoadingScreen();
+        console.log("Credenciales incorrectas");
+      }
+    } catch (err) {
+      console.log(err);
+      closeLoadingScreen();
+    }
   }
 
   return (

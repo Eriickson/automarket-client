@@ -1,8 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 import { getApolloClient } from "@/graphql";
 import { SigninPayload, SigninVariables, SIGNIN_M } from "src/graphql/gql/mutations";
+import { NextIronHandler, NextIronRequest, withSession } from "@/auth";
 
-async function signin(req: NextApiRequest, res: NextApiResponse) {
+const signin: NextIronHandler = async (req: NextIronRequest, res: NextApiResponse) => {
   const { client } = getApolloClient();
   const { identifier, password } = req.body;
   const credencials = { identifier: identifier, password: password };
@@ -15,11 +16,18 @@ async function signin(req: NextApiRequest, res: NextApiResponse) {
       },
     });
 
-    console.log(data?.signin);
-  } catch (err: any) {
-    console.log(err.message);
-  }
+    if (!data?.signin) return;
 
-  res.send("Recibido");
-}
-export default signin;
+    const { accessToken, refreshToken } = data.signin;
+
+    req.session.set("accessToken", accessToken);
+    req.session.set("refreshToken", refreshToken);
+
+    await req.session.save();
+
+    res.json({ loggin: true });
+  } catch (err) {
+    console.log(err);
+  }
+};
+export default withSession(signin, { cookieName: "tokens", password: "zVS3LKd3Ajxu9qmFssSYamYhG8uwQKnCYnQ2" });

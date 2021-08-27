@@ -4,7 +4,18 @@ import React, { FC } from "react";
 import Link from "next/link";
 
 // Packages
-import { Box, Text, GridItem, Img, SimpleGrid, Link as ChakraLink, Badge, Flex, Avatar, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  GridItem,
+  Img,
+  SimpleGrid,
+  Link as ChakraLink,
+  Badge,
+  Flex,
+  Avatar,
+  Heading,
+} from "@chakra-ui/react";
 
 // My Components
 import { PrimaryCard } from "@/components";

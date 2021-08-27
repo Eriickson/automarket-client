@@ -14,9 +14,14 @@ export const SessionLogin: FC = () => {
           </Button>
         </a>
       </Link>
-      <Button colorScheme="pri" display={["none", null, "block"]} ml="2.5" variant="outline" onClick={() => signIn()}>
-        Iniciar Sesión
-      </Button>
+      <Link href="/login/signin">
+        <a>
+          <Button colorScheme="pri" display={["none", null, "block"]} ml="2.5" variant="outline">
+            Iniciar Sesión
+          </Button>
+        </a>
+      </Link>
+
       <Avatar display="none" name="Kola Tioluwani" shadow="md" src="https://bit.ly/tioluwani-kolawole" />
       <Box display={[null, null, "none"]} h="max-content" ml="2.5">
         <MainMenu />

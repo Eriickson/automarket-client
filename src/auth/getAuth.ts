@@ -2,9 +2,11 @@ import axios from "axios";
 import { GetServerSidePropsContext } from "@/shared";
 
 export async function getAuth({ req }: GetServerSidePropsContext): Promise<void> {
-  const { data } = await axios.get("http://localhost:9000/api/user", {
-    headers: req.headers,
-  });
-
-  console.log(data);
+  try {
+    const { data } = await axios.get("http://localhost:9000/api/auth/access-token", {
+      headers: req.headers,
+    });
+  } catch (err: any) {
+    console.log(err.message);
+  }
 }

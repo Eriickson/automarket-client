@@ -1,6 +1,5 @@
 import { withSession } from "@/shared";
 import { NextApiResponse } from "next";
-import { NextIronRequest } from "./signin";
 
 async function refreshToken(req: NextIronRequest, res: NextApiResponse) {
   res.send("Hola a todo el mundo");

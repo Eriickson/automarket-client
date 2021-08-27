@@ -1,4 +1,3 @@
-import { getAuthSsr } from "@/auth";
 import { ProvidersProps } from "@/shared";
 import { GetServerSideProps } from "next";
 
@@ -6,11 +5,5 @@ import { GetServerSideProps } from "next";
 interface SigninProps extends ProvidersProps {}
 
 export const signinServerSide: GetServerSideProps = async ctx => {
-  const auth = await getAuthSsr({ ctx, publicRouter: true });
-
-  const props: SigninProps = {
-    authProviderProps: { ...auth },
-  };
-
-  return { props };
+  return { props: {} };
 };

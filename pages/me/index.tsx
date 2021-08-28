@@ -5,10 +5,10 @@ import { MePageProps } from "@/servers";
 import { useAction } from "@/store";
 import { SEO } from "@/components";
 
-const MePage: FC<MePageProps> = ({ profileMe }) => {
+const MePage: FC<MePageProps> = () => {
   const { setProfileMe } = useAction();
 
-  setProfileMe(profileMe);
+  // setProfileMe(myProfile);
 
   return (
     <SEO desc="Automarket RD" title="eriickson01d | Automarket RD">

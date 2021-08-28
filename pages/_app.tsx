@@ -27,8 +27,11 @@ import "swiper/components/effect-coverflow/effect-coverflow.min.css";
 import "react-medium-image-zoom/dist/styles.css";
 
 import "rc-slider/assets/index.css";
+import { GetServerSideProps } from "next";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+  console.log(pageProps);
+
   return (
     <StylesProvider value={{}}>
       <NextAuthProvider session={pageProps.session}>

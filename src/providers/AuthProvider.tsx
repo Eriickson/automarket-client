@@ -1,18 +1,15 @@
 import React, { FC } from "react";
-import { ISession } from "@/shared";
+import { IAuth } from "@/shared";
 import { useAction } from "@/store";
 
-export interface AuthProviderProps {
-  isAuth: boolean;
-  session?: ISession;
-  accessToken: string;
-  refreshToken: string;
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface AuthProviderProps extends IAuth {}
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children, isAuth, session = {} }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({ children, ...props }) => {
   const { setAuth } = useAction();
 
-  setAuth({ isAuth, user: session?.user });
+  setAuth(props);
+  console.log(props);
 
   return <>{children}</>;
 };

@@ -1,10 +1,8 @@
-import { ISession } from "@/shared";
+import { ISession, IAuth } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface InitialState {
-  isAuth: boolean;
-  user?: ISession["user"];
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+interface InitialState extends IAuth {}
 
 const initialState = {
   isAuth: false,
@@ -14,7 +12,7 @@ const authReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuth(state, action: PayloadAction<{ isAuth: boolean; user?: ISession["user"] }>) {
+    setAuth(state, action: PayloadAction<IAuth>) {
       state.isAuth = action.payload.isAuth;
       state.user = action.payload.user;
     },

@@ -16,7 +16,6 @@ export interface RegisterPageProps {
 
 export const registerServerSide: GetServerSideProps = async ctx => {
   const { token } = ctx.query;
-  console.log(token);
 
   let email = "";
   if (!token) {

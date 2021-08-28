@@ -1,15 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
-import { LoginLayout } from "@/layouts";
-
-import { RegisterForm } from "./RegisterForm";
-
+// My Elements
 import { RegisterUserOnSubmitFormType } from "@/validations";
-
 import { useRegisterUser } from "@/graphql";
 import { RegisterUserVariables } from "src/graphql/gql/mutations";
 import { useUIContext } from "@/context";
-import { useEffect } from "react";
+
+// My Components
+import { LoginLayout } from "@/layouts";
+import { RegisterForm } from "./RegisterForm";
 
 export const RegisterTemplate: FC = () => {
   const { activateLoadingScreen, closeLoadingScreen, alertDialog, apolloServerError } = useUIContext();
@@ -38,6 +37,7 @@ export const RegisterTemplate: FC = () => {
 
     try {
       const response = await registerUser({ variables: { newUser } });
+      console.log(response);
     } catch (err) {
       // console.log(err);
       // apolloServerError.onOpen(err.message, {

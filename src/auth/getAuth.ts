@@ -7,7 +7,7 @@ interface IAuthParams {
   publicRouter?: boolean | string;
 }
 
-export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams) {
+export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams): Promise<IAuth> {
   try {
     const { data } = await axios.get<IAuth>("http://localhost:9000/api/auth/access-token", {
       headers: ctx.req.headers,
@@ -24,7 +24,16 @@ export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams)
       ctx.res.end();
       return { isAuth };
     }
+
+    return {
+      isAuth,
+      accessToken: data.accessToken,
+      user: data.user,
+    };
   } catch (err: any) {
     console.log(err.response.data);
+    return {
+      isAuth: false,
+    };
   }
 }

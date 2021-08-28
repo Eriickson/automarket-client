@@ -1,44 +1,40 @@
-import { GetServerSideProps } from "next";
 import { getApolloClient } from "@/graphql";
 import { gql } from "@/graphql";
 
 // Packages
-import { ProvidersProps, IUser } from "@/shared";
-import { getAuthSsr } from "@/auth";
+import { ProvidersProps, IUser, GetServerSideProps } from "@/shared";
+import { getAuth, getAuthSsr } from "@/auth";
+import { GetMyProfilePayload, GET_MY_PROFILE_Q } from "src/graphql/gql";
 
+/* eslint-disable @typescript-eslint/no-empty-interface */
 export interface MePageProps extends ProvidersProps {
-  profileMe: IUser;
+  // myProfile: IUser;
 }
 
-export const meServerSide: GetServerSideProps = async ctx => {
+export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
+  const auth = await getAuth({ ctx });
   const { client } = getApolloClient();
-  try {
-    const auth = await getAuthSsr({ ctx, privateRouter: true });
 
-    const { data } = await client.query<gql.IGetProfileMePayload>({
-      query: gql.GET_PROFILE_ME_Q,
-      context: {
-        headers: { authorization: `Bearer ${auth.session?.token}` },
+  const { data } = await client.query<GetMyProfilePayload>({
+    query: GET_MY_PROFILE_Q,
+    context: {
+      headers: {
+        authorization: `Bearer ${auth.accessToken}`,
       },
-    });
+    },
+  });
 
-    const props: MePageProps = {
-      profileMe: data.getProfileMe.profileMe,
-      authProviderProps: { ...auth },
-      seo: {
-        title: "Mi perfil",
-        desc: "",
-      },
-    };
+  console.log(data.getMyProfile.birthday);
 
-    return {
-      props,
-    };
-  } catch (err) {
-    console.log(err);
-  }
+  const props: MePageProps = {
+    authProviderProps: auth,
+    seo: {
+      desc: "",
+      title: "",
+    },
+  };
 
   return {
-    props: {},
+    props,
   };
 };

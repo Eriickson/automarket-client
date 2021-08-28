@@ -20,7 +20,7 @@ interface UserAuthPayload {
   exp: number;
 }
 export interface IAuth {
-  user: UserAuthPayload;
-  accessToken: string;
+  user?: UserAuthPayload;
+  accessToken?: string;
   isAuth: boolean;
 }

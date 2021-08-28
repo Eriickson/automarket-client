@@ -27,7 +27,8 @@ export const SignInTemplate: FC = () => {
       const { data } = await axios.post<Response>("/api/auth/signin", values);
 
       if (data.successful) {
-        router.push(String(query.callbackUrl));
+        closeLoadingScreen();
+        // router.push(String(query.callbackUrl));
       } else {
         closeLoadingScreen();
         console.log("Credenciales incorrectas");

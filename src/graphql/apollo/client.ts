@@ -13,7 +13,7 @@ interface ApolloClientOptions {
 }
 
 export const getApolloClient = (options?: Partial<ApolloClientOptions>): IUseApolloClient => {
-  const link = ApolloLink.from([authLink(), errorLink, uploadLink]);
+  const link = ApolloLink.from([authLink(), /*  refreshLink,  */ errorLink, uploadLink]);
 
   const client = new ApolloClient({
     cache: new InMemoryCache({

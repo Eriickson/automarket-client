@@ -5,6 +5,8 @@ import { useAction } from "@/store";
 export interface AuthProviderProps {
   isAuth: boolean;
   session?: ISession;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children, isAuth, session = {} }) => {

@@ -1,8 +1,46 @@
-import { withSession } from "@/shared";
-import { NextApiResponse } from "next";
+import { NextIronHandler, withSession } from "@/auth";
+import jwt from "jsonwebtoken";
+import fetch from "isomorphic-unfetch";
 
-async function refreshToken(req: NextIronRequest, res: NextApiResponse) {
+const refreshToken: NextIronHandler = async (req, res) => {
+  const accessToken = req.session.get("accessToken");
+  const refreshUserToken = req.session.get("refreshToken");
+
+  const payload = jwt.decode(accessToken) as { exp: number; id: number };
+
+  if (accessToken && payload.exp * 1000 > Date.now() / 1000) {
+    const data = await fetch("http://localhost:7000/graphql", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "refresh-user-token": refreshUserToken,
+      },
+      body: JSON.stringify({
+        query: `
+          mutation {
+            refreshUserToken(input: {userId: "${payload.id}"}) {
+              accessToken
+              refreshToken
+            }
+          }
+        `,
+      }),
+    }).then(response => response.json());
+
+    if (data.errors) {
+      console.log(data.errors);
+
+      return res.status(401).json({ unauthorized: true });
+    }
+    console.log(data);
+
+    // req.session.set("accessToken", data.refreshUserToken.accessToken);
+    // req.session.set("refreshToken", data.refreshUserToken.refreshToken);
+
+    // await req.session.save();
+  }
+
   res.send("Hola a todo el mundo");
-}
+};
 
-// export default withSession(refreshToken)
+export default withSession(refreshToken, { cookieName: "tokens", password: "zVS3LKd3Ajxu9qmFssSYamYhG8uwQKnCYnQ2" });

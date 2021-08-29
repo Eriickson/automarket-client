@@ -3,21 +3,21 @@ import React, { FC } from "react";
 // My Elements
 import { RegisterUserOnSubmitFormType } from "@/validations";
 import { useRegisterUser } from "@/graphql";
-import { RegisterUserPayload, RegisterUserVariables, REGISTER_USER_M } from "src/graphql/gql/mutations";
 import { useUIContext } from "@/context";
 
 // My Components
 import { LoginLayout } from "@/layouts";
 import { RegisterForm } from "./RegisterForm";
-import { apolloClientCustom } from "src/config/apolloClientCustom";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
+import axios from "axios";
 
 export const RegisterTemplate: FC = () => {
-  const { activateLoadingScreen, closeLoadingScreen, alertDialog, apolloServerError } = useUIContext();
-  const { registerUser, loading } = useRegisterUser();
+  const { activateLoadingScreen } = useUIContext();
+  const { registerUser } = useRegisterUser();
   const { query } = useRouter();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
+    activateLoadingScreen("Registrando usuario");
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
     const { aspectRatio, cropArea, file, flip, id, point, originalFile, rotation, zoom } = profilePicture;
     const newUser = {
@@ -39,24 +39,25 @@ export const RegisterTemplate: FC = () => {
       });
 
     try {
-      const { data } = await apolloClientCustom.mutate<RegisterUserPayload, RegisterUserVariables>({
-        mutation: REGISTER_USER_M,
-        variables: { registerUserInput: newUser },
-        context: { headers: { token: query.token } },
+      const { data } = await registerUser({
+        variables: {
+          registerUserInput: newUser,
+        },
+        context: {
+          headers: {
+            token: query.token,
+          },
+        },
       });
-      if (data && data.successful) {
-        console.log("Se puede hacer algo");
+
+      if (data && data.registerUser.successful) {
+        await axios.post<Response>("/api/auth/signin", { identifier: username, password });
+        window.location.href = "/me";
       }
     } catch (err) {
-      // console.log(err);
-      // apolloServerError.onOpen(err.message, {
-      //   priBtnLabel: "Aceptar",
-      //   onClickPriBtn: apolloServerError.onClose,
-      // });
+      console.log(err);
     }
   }
-
-  // useEffect(() => (loading ? activateLoadingScreen("Creando cuenta") : closeLoadingScreen()), [loading]);
 
   return (
     <LoginLayout>

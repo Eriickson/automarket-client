@@ -5,7 +5,7 @@ import { NextPage } from "next";
 
 // My Components
 import { IndexTemplate } from "@/templates";
-import { AttendanceBanner, SEO } from "@/components";
+import { SEO } from "@/components";
 
 const IndexPage: NextPage = () => {
   return (

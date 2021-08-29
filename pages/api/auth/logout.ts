@@ -11,7 +11,6 @@ const signout: NextIronHandler = async (req: NextIronRequest, res: NextApiRespon
   const headers = {
     Authorization: `Bearer ${accessToken}`,
     "refresh-user-token": refreshUserToken,
-    hola: "Adios",
   };
 
   if (accessToken && refreshUserToken) {

@@ -26,8 +26,7 @@ export interface RegisterUserVariables {
 }
 
 export interface RegisterUserPayload {
-  response: string;
-  successful: boolean;
+  registerUser: { response: string; successful: boolean };
 }
 
 export const REGISTER_USER_M = gql`

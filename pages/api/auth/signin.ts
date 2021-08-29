@@ -28,7 +28,6 @@ const signin: NextIronHandler = async (req: NextIronRequest, res: NextApiRespons
     res.json({ successful: true });
   } catch (err) {
     res.json({ successful: false });
-    console.log(err);
   }
 };
 export default withSession(signin, { cookieName: "tokens", password: "zVS3LKd3Ajxu9qmFssSYamYhG8uwQKnCYnQ2" });

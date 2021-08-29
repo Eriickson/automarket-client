@@ -1,23 +1,26 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 
 // My Elements
 import { RegisterUserOnSubmitFormType } from "@/validations";
 import { useRegisterUser } from "@/graphql";
-import { RegisterUserVariables } from "src/graphql/gql/mutations";
+import { RegisterUserPayload, RegisterUserVariables, REGISTER_USER_M } from "src/graphql/gql/mutations";
 import { useUIContext } from "@/context";
 
 // My Components
 import { LoginLayout } from "@/layouts";
 import { RegisterForm } from "./RegisterForm";
+import { apolloClientCustom } from "src/config/apolloClientCustom";
+import { useRouter } from "next/router";
 
 export const RegisterTemplate: FC = () => {
   const { activateLoadingScreen, closeLoadingScreen, alertDialog, apolloServerError } = useUIContext();
   const { registerUser, loading } = useRegisterUser();
+  const { query } = useRouter();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
     const { aspectRatio, cropArea, file, flip, id, point, originalFile, rotation, zoom } = profilePicture;
-    const newUser: RegisterUserVariables["newUser"] = {
+    const newUser = {
       name,
       lastname,
       direction: {
@@ -36,8 +39,14 @@ export const RegisterTemplate: FC = () => {
       });
 
     try {
-      const response = await registerUser({ variables: { newUser } });
-      console.log(response);
+      const { data } = await apolloClientCustom.mutate<RegisterUserPayload, RegisterUserVariables>({
+        mutation: REGISTER_USER_M,
+        variables: { registerUserInput: newUser },
+        context: { headers: { token: query.token } },
+      });
+      if (data && data.successful) {
+        console.log("Se puede hacer algo");
+      }
     } catch (err) {
       // console.log(err);
       // apolloServerError.onOpen(err.message, {

@@ -29,6 +29,7 @@
     "deep-diff": "^1.0.2",
     "eslint-plugin-react": "^7.24.0",
     "file-saver": "^2.0.5",
+    "formidable": "^1.2.2",
     "framer-motion": "^4",
     "fs": "^0.0.1-security",
     "graphql-combine-query": "^1.2.3",
@@ -70,6 +71,7 @@
   "devDependencies": {
     "@types/deep-diff": "^1.0.0",
     "@types/file-saver": "^2.0.3",
+    "@types/formidable": "^1.2.3",
     "@types/jsonwebtoken": "^8.5.2",
     "@types/nprogress": "^0.2.0",
     "@types/numeral": "2.0.1",

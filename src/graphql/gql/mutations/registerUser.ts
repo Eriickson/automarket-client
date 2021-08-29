@@ -22,17 +22,19 @@ interface INewUser {
   };
 }
 export interface RegisterUserVariables {
-  newUser: INewUser;
+  registerUserInput: INewUser;
 }
 
 export interface RegisterUserPayload {
   response: string;
+  successful: boolean;
 }
 
 export const REGISTER_USER_M = gql`
-  mutation RegisterUser($newUser: RegisterUserInput!) {
-    registerUser(newUser: $newUser) {
+  mutation ($registerUserInput: RegisterUserInput!) {
+    registerUser(input: $registerUserInput) {
       response
+      successful
     }
   }
 `;

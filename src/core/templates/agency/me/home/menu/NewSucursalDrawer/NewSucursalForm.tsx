@@ -38,8 +38,8 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
             label="Provincia"
             name="province"
             options={provinces}
-            onChange={({ value }) => {
-              getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
+            onChange={({ id }) => {
+              getMunicipalitiesByProvinceIdFetch({ provinceId: String(id) });
               methods.setValue("municipality", null);
               methods.setValue("sector", null);
             }}
@@ -50,8 +50,8 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
             label="Municipio"
             name="municipality"
             options={municipalities}
-            onChange={({ value }) => {
-              getSectorsByMunicipalityIdFetch({ municipalityId: String(value) });
+            onChange={({ id }) => {
+              getSectorsByMunicipalityIdFetch({ municipalityId: String(id) });
               methods.setValue("sector", null);
             }}
           />

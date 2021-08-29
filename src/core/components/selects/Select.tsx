@@ -6,7 +6,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { css } from "@emotion/react";
 
 // My Elements
-import { IOption, Option } from "@/shared";
+import { Option } from "@/shared";
 
 // My Components
 import { ErrorValidationForm } from "@/components";

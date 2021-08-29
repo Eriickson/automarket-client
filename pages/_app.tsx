@@ -7,8 +7,6 @@ import { UIContextProvider } from "@/context";
 import { MainProvider } from "@/providers";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 
-import { Provider as NextAuthProvider } from "next-auth/client";
-
 // Bar-Progress
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -31,16 +29,14 @@ import "rc-slider/assets/index.css";
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <StylesProvider value={{}}>
-      <NextAuthProvider session={pageProps.session}>
-        <ChakraProvider resetCSS theme={defaultTheme}>
-          <Global />
-          <UIContextProvider>
-            <MainProvider {...pageProps}>
-              <Component {...pageProps} />
-            </MainProvider>
-          </UIContextProvider>
-        </ChakraProvider>
-      </NextAuthProvider>
+      <ChakraProvider resetCSS theme={defaultTheme}>
+        <Global />
+        <UIContextProvider>
+          <MainProvider {...pageProps}>
+            <Component {...pageProps} />
+          </MainProvider>
+        </UIContextProvider>
+      </ChakraProvider>
     </StylesProvider>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 // NextJS
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 // Packages
 import axios from "axios";
@@ -30,10 +30,8 @@ export const SignInTemplate: FC = () => {
         window.location.href = String(query.callbackUrl || "/");
       } else {
         closeLoadingScreen();
-        console.log("Credenciales incorrectas");
       }
     } catch (err) {
-      console.log(err);
       closeLoadingScreen();
     }
   }

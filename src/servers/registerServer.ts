@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 
 // My Elements
 import { redirectSSR } from "@/utils";
-import { envs } from "@/config";
 
 // My Components
 // import { SEOProps } from "@/components";

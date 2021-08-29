@@ -4,7 +4,6 @@ import React, { FC } from "react";
 import Zoom from "react-medium-image-zoom";
 import { IconEdit } from "@tabler/icons";
 import { Flex, Text, StackDivider, VStack, Img, IconButton } from "@chakra-ui/react";
-import { useSession } from "next-auth/client";
 
 // My Elements
 import { useSelector } from "@/store";
@@ -18,15 +17,13 @@ export const VerifyStep: FC = () => {
   const methods = useForm();
   const { createAgency } = useCreateAgencyPayload();
   const { changeStep } = useWizard();
-  const [session] = useSession();
 
   async function onSubmit() {
     /* eslint-disable-next-line */
     const { src, originalSrc, ...logo } = agencyData.logo;
 
     /* eslint-disable-next-line */
-    const sessionX = session?.user as any;
-    const token = sessionX.session.token;
+    const token = "";
 
     const agency = {
       ...agencyData,

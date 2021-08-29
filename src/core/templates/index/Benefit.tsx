@@ -1,8 +1,8 @@
 import React from "react";
+
+// Packages
 import { Swiper, SwiperSlide } from "swiper/react";
 import { chakra, Box, Text, Flex } from "@chakra-ui/react";
-
-// Styles and Icons
 import { IconAward, IconBolt, IconRefresh, IconStack, TablerIconProps } from "@tabler/icons";
 
 // My Components
@@ -14,12 +14,12 @@ const Benefit: React.FC = () => {
       <Box mb="3" textAlign="center">
         <Text display="flex" fontSize="3xl" fontWeight="semibold" justifyContent="center">
           Antes de
-          <Text color="pri.600" mx="1">
+          <Text color="pri.500" mx="1">
             publicar
           </Text>{" "}
           tu vehículo
         </Text>
-        <Text color="gray.400" fontWeight="medium" lineHeight="none" maxW="xl" mx="auto">
+        <Text color="gray.500" fontSize="sm" fontWeight="medium" lineHeight="none" maxW="xl" mx="auto">
           Entérate de algunas de las ventajas que nuestra página tiene para ofrecerte a ti y a tu agencía, entre las
           cuales están
         </Text>
@@ -29,7 +29,6 @@ const Benefit: React.FC = () => {
           <Swiper
             loop
             loopFillGroupWithBlank
-            style={{ zIndex: 0 }}
             autoplay={{
               delay: 5000,
             }}
@@ -43,6 +42,7 @@ const Benefit: React.FC = () => {
             slidesPerView={1}
             spaceBetween={10}
             speed={700}
+            style={{ zIndex: 0 }}
           >
             <SwiperSlide>
               <BenefitItem
@@ -80,7 +80,7 @@ const Benefit: React.FC = () => {
                 description={
                   <Text>
                     Nunca te abandonaremos, por esa razón siempre estamos trabajando en{" "}
-                    <chakra.span mx="1" color="pri.500" fontWeight="semibold">
+                    <chakra.span color="pri.500" fontWeight="semibold" mx="1">
                       grandes funcionalidades futuras
                     </chakra.span>{" "}
                     que harán tu experiencia cada vez mejor.
@@ -95,7 +95,7 @@ const Benefit: React.FC = () => {
                 description={
                   <Text>
                     Nuestra página está{" "}
-                    <chakra.span mx="1" color="pri.500" fontWeight="semibold">
+                    <chakra.span color="pri.500" fontWeight="semibold" mx="1">
                       dirigida para empresas o persona{" "}
                     </chakra.span>
                     que simplemente desean cambiar o adquir un vehículo. Cree su cuenta y luego su agencia online
@@ -120,7 +120,7 @@ interface BenefitItemProps {
 
 const BenefitItem: React.FC<BenefitItemProps> = ({ Icon, title, description }) => (
   <Flex className="flex">
-    <Box mt={1} bg="pri.500" color="white" display="grid" h={10} mb="2" placeItems="center" w={10}>
+    <Box bg="pri.500" color="white" display="grid" h={10} mb="2" mt={1} placeItems="center" w={10}>
       <Icon className="w-6 h-6" size="1.75rem" strokeWidth={1.5} />
     </Box>
     <Box flex="1" ml={[2, null, 3]}>

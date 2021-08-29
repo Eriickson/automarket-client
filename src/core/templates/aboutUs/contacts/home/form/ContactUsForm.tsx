@@ -1,29 +1,29 @@
 import { InputControl, LabelInput, Select } from "@/components";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 import { Box, Button, Flex, Textarea, VStack } from "@chakra-ui/react";
 import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { UploadAttachments } from "./UploadAttachments";
 
-const options: IOption[] = [
+const options: Option[] = [
   {
-    value: 1,
+    id: 1,
     label: "Solicitud de plan",
   },
   {
-    value: 2,
+    id: 2,
     label: "Dar una queja",
   },
   {
-    value: 3,
+    id: 3,
     label: "Retroalimentación",
   },
   {
-    value: 5,
+    id: 5,
     label: "Reportar fallo",
   },
   {
-    value: 0,
+    id: 0,
     label: "Otros",
   },
 ];

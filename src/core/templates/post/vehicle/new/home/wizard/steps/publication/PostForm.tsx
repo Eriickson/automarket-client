@@ -70,7 +70,7 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
               ))}
             </HStack>
             <HStack>
-              <InputControl noMarginBottom isDisabled={fields.length == 10} name="tag" />
+              {/* <InputControl noMarginBottom isDisabled={fields.length == 10} name="tag" /> */}
               <Button
                 isDisabled={fields.length == 10}
                 onClick={() => {

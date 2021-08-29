@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
 export interface IGetSectorsByMunicipalityIdPayload {
   getSectorsByMunicipalityId: {
-    sectors: IOption[];
+    sectors: Option[];
   };
 }
 

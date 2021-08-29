@@ -15,5 +15,4 @@ export const indexServerSide: GetServerSideProps<IndexProps> = async ctx => {
     },
   };
   return { props };
-  return { props };
 };

@@ -9,7 +9,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children, ...props }) => {
   const { setAuth } = useAction();
 
   setAuth(props);
-  console.log(props);
 
   return <>{children}</>;
 };

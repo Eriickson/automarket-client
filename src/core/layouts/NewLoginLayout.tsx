@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from "react";
 
 // NextJS
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 // Packages
 import { Text, Box, Button, Divider } from "@chakra-ui/react";
@@ -19,6 +20,8 @@ interface NewLoginLayoutProps {
 }
 
 export const NewLoginLayout: FC<NewLoginLayoutProps> = ({ title, children }) => {
+  const { asPath } = useRouter();
+
   return (
     <Box bg={["pri.500", null, "gray.100"]} display="flex" flexDir="column" minHeight="100vh">
       <Box alignItems="stretch" display="flex" flex="1">
@@ -38,7 +41,21 @@ export const NewLoginLayout: FC<NewLoginLayoutProps> = ({ title, children }) => 
               <Box w={[56, null, null, 44, 64]}>
                 <AutomarketRDLogo />
               </Box>
-              <Button colorScheme="pri">Inicia Sesión</Button>
+              {asPath.match("signin") ? (
+                <Link href="/login/signup">
+                  <a>
+                    <Button colorScheme="pri">Regístrate</Button>
+                  </a>
+                </Link>
+              ) : (
+                <Link href="/login/signin">
+                  <a>
+                    <Button colorScheme="pri" variant="outline">
+                      Inicia Sesión
+                    </Button>
+                  </a>
+                </Link>
+              )}
             </Box>
           </Box>
           <Box h="auto" maxW={[null, null, null, "max-content"]} pl={[3, null, 6, 10, 8]} pr={[3, null, 6, 0]}>

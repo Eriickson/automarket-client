@@ -1,15 +1,11 @@
+// My Elements
 import { getApolloClient } from "@/graphql";
-import { gql } from "@/graphql";
-
-// Packages
-import { ProvidersProps, IUser, GetServerSideProps } from "@/shared";
-import { getAuth, getAuthSsr } from "@/auth";
+import { ProvidersProps, GetServerSideProps, User } from "@/shared";
+import { getAuth } from "@/auth";
 import { GetMyProfilePayload, GET_MY_PROFILE_Q } from "src/graphql/gql";
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
-export interface MePageProps extends ProvidersProps {
-  // myProfile: IUser;
-}
+export interface MePageProps extends ProvidersProps, User {}
 
 export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
   const auth = await getAuth({ ctx });
@@ -24,14 +20,13 @@ export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
     },
   });
 
-  console.log(data.getMyProfile.birthday);
-
   const props: MePageProps = {
     authProviderProps: auth,
     seo: {
       desc: "",
       title: "",
     },
+    ...data.getMyProfile,
   };
 
   return {

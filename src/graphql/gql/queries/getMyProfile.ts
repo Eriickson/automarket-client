@@ -1,9 +1,8 @@
+import { User } from "@/shared";
 import gql from "graphql-tag";
 
 export interface GetMyProfilePayload {
-  getMyProfile: {
-    birthday: string;
-  };
+  getMyProfile: User;
 }
 
 export const GET_MY_PROFILE_Q = gql`

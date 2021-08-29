@@ -47,7 +47,7 @@ export const RegisterTemplate: FC = () => {
     }
   }
 
-  useEffect(() => (loading ? activateLoadingScreen("Creando cuenta") : closeLoadingScreen()), [loading]);
+  // useEffect(() => (loading ? activateLoadingScreen("Creando cuenta") : closeLoadingScreen()), [loading]);
 
   return (
     <LoginLayout>

@@ -35,13 +35,13 @@ const NavBarItems = [
 ];
 
 export const MainHeader: FC = () => {
-  const { breadcrumb } = useUIContext();
+  const { breadcrumbs } = useUIContext();
   const { isAuth } = useSelector(store => store.auth);
 
   return (
     <StyledMainHeaderWrapper>
       <Headroom>
-        <Box bg="white" borderBottomWidth="1px" pb={breadcrumb.show ? 1.5 : [4, 6]} pt={[4, 6]} shadow="sm">
+        <Box bg="white" borderBottomWidth="1px" pb={breadcrumbs.show ? 1.5 : [4, 6]} pt={[4, 6]} shadow="sm">
           <Container>
             <SimpleGrid alignItems="center" columns={12}>
               <GridItem colSpan={3}>
@@ -80,10 +80,10 @@ export const MainHeader: FC = () => {
               </GridItem>
             </SimpleGrid>
           </Container>
-          {breadcrumb.show && (
+          {breadcrumbs.show && (
             <>
               <Divider mb="1" mt="6" />
-              <Breadcrumb items={breadcrumb.items} />
+              <Breadcrumb />
             </>
           )}
         </Box>

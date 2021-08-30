@@ -1,7 +1,7 @@
 import { useDisclosure, useToast } from "@chakra-ui/react";
 import React, { createContext, useState, FC, useContext, useRef, MutableRefObject } from "react";
 import { IAlertDialogOption, IToastOptions, Toast } from "@/components";
-import { IApolloServerError, IBreadcrumb } from "@/shared";
+import { IApolloServerError, Breadcrumbs } from "@/shared";
 
 interface IUIContext {
   isLoadingScreenActive: boolean;
@@ -28,10 +28,10 @@ interface IUIContext {
     showToast(options: IToastOptions): void;
     options: IToastOptions;
   };
-  breadcrumb: {
-    items: IBreadcrumb[];
+  breadcrumbs: {
+    items: Breadcrumbs[];
     show: boolean;
-    setItems(items: IBreadcrumb[]): void;
+    setItems(items: Breadcrumbs[]): void;
     setShow(show: boolean): void;
   };
 }
@@ -64,7 +64,7 @@ const UIContextProvider: FC = ({ children }) => {
   const toast = useToast();
 
   // Breadcrumb
-  const [breadcrumbItems, setBreadcrumbItems] = useState<IBreadcrumb[]>([]);
+  const [breadcrumbItems, setBreadcrumbItems] = useState<Breadcrumbs[]>([]);
   const [showBreadcrumb, setShowBreadcrumb] = useState(true);
 
   function activateLoadingScreen(msg: string | null) {
@@ -138,7 +138,7 @@ const UIContextProvider: FC = ({ children }) => {
           showToast,
           options: toastOptions,
         },
-        breadcrumb: {
+        breadcrumbs: {
           items: breadcrumbItems,
           show: showBreadcrumb,
           setItems: setBreadcrumbItems,

@@ -19,26 +19,9 @@ export const VerifyStep: FC = () => {
   const { changeStep } = useWizard();
 
   async function onSubmit() {
-    /* eslint-disable-next-line */
-    const { aspectRatio, cropArea, file, flip, id, point, rotation, zoom, originalFile } = agencyData.logo;
-
-    /* eslint-disable-next-line */
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmJlMjk4NDU5ZDYyYTQ4NDAwMGNkYiIsIm5hbWUiOiJFcmlja3NvbiBNYW51ZWwiLCJsYXN0bmFtZSI6IkhvbGd1w61uIiwiZW1haWwiOiJlcmlja3NvbjAxZEBnbWFpbC5jb20iLCJwcm9maWxlUGljdHVyZSI6eyJmaWxlbmFtZSI6IjljN2M2NzdkLWMyNDktNDA1ZC1iNThkLTk3MTk0ZTkxOTcxOS5qcGciLCJjcmVhdGVkQXQiOiJTdW4gQXVnIDI5IDIwMjEgMTU6NDA6MDggR01ULTA0MDAgKGhvcmEgZGUgQm9saXZpYSkifSwiaWF0IjoxNjMwMjgxMjg3LCJleHAiOjE2MzAyODQ4ODd9.mMsnGmG4oDKQ1xb_U6TaR0DxBHsMYn27ArHOkQkAlVI";
-
     const newAgency = {
       ...agencyData,
-      logo: {
-        aspectRatio,
-        cropArea,
-        file,
-        flip,
-        id,
-        point,
-        rotation,
-        zoom,
-        originalFile,
-      },
+      logo: agencyData.logo,
       ubication: {
         direction: {
           provinceId: String(ubication.province.id),
@@ -52,7 +35,6 @@ export const VerifyStep: FC = () => {
     try {
       const { data } = await createAgency({
         variables: { createAgencyInput: newAgency },
-        context: { headers: { authorization: `Bearer ${token}` } },
       });
       console.log(data);
     } catch (err) {

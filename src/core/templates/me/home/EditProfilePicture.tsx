@@ -1,4 +1,5 @@
 import { UploadFiles, CropImage } from "@/components";
+import { useUpdateProfilePicture } from "@/graphql";
 import { IGeneratedImage } from "@/shared";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import React, { FC, useState } from "react";
@@ -7,7 +8,22 @@ export const EditProfilePicture: FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [imageSelected, setImageSelected] = useState<IGeneratedImage | undefined>();
   const [imageToCrop, setImageToCrop] = useState<IGeneratedImage | undefined>();
+  const { updateProfilePicture, loading, data } = useUpdateProfilePicture();
 
+  async function onChangeProfilePicture() {
+    if (!imageSelected) {
+      console.log("No hay imagen de perfil seleccionada");
+
+      return;
+    }
+
+    try {
+      const { data } = await updateProfilePicture({ variables: { input: { profilePicture: imageSelected } } });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <UploadFiles
@@ -34,8 +50,8 @@ export const EditProfilePicture: FC = () => {
           }}
           onClose={onClose}
           onSave={newImage => {
-            const image = { ...imageToCrop, ...newImage };
-            setImageSelected(image);
+            setImageSelected({ ...imageToCrop, ...newImage });
+            onChangeProfilePicture();
           }}
         />
       )}

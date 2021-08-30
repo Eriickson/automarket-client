@@ -8,15 +8,10 @@ export interface MePageProps extends ProvidersProps, User {}
 
 export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
   const auth = await getAuth({ ctx, privateRouter: true });
-  const { client } = getApolloClient();
+  const { client } = getApolloClient({ token: auth.accessToken });
 
   const { data } = await client.query<GetMyProfilePayload>({
     query: GET_MY_PROFILE_Q,
-    context: {
-      headers: {
-        authorization: `Bearer ${auth.accessToken}`,
-      },
-    },
   });
 
   const props: MePageProps = {

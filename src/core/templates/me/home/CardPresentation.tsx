@@ -9,41 +9,19 @@ import { Box, Button, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
 
 // My Elements
 import { useUIContext } from "@/context";
-import { useChangeProfilePicture } from "@/graphql";
+import { useUpdateProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
 
 // My Components
-import { Image, onChangeArgsPropType, PrimaryCard } from "@/components";
+import { Image, PrimaryCard } from "@/components";
 import { EditProfilePicture } from "./EditProfilePicture";
 import { SettingsMenu } from "./settings/SettingsMenu";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
-  const { changeProfilePicture, loading } = useChangeProfilePicture();
+  const { updateProfilePicture } = useUpdateProfilePicture();
   const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
   const { reload } = useRouter();
-
-  async function onChangeProfilePicture(newProfilePicture: onChangeArgsPropType) {
-    activateLoadingScreen("Cambiando imagen de perfil");
-    const { file, rotation, croppedAreaPixels } = newProfilePicture;
-
-    try {
-      await changeProfilePicture({
-        variables: {
-          newProfilePicture: {
-            file,
-            croppedArea: croppedAreaPixels,
-            rotation,
-          },
-          password: "123456789t",
-        },
-      });
-      reload();
-    } catch (err) {
-      console.log(err);
-      closeLoadingScreen();
-    }
-  }
 
   return (
     <>

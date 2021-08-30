@@ -4,12 +4,11 @@ import { NextIronHandler, NextIronRequest, withSession } from "@/auth";
 import { LOGOUT_USER_M } from "src/graphql/gql/mutations";
 
 const signout: NextIronHandler = async (req: NextIronRequest, res: NextApiResponse) => {
-  const { client } = getApolloClient();
   const accessToken = await req.session.get("accessToken");
   const refreshUserToken = await req.session.get("refreshToken");
 
+  const { client } = getApolloClient({ token: accessToken });
   const headers = {
-    Authorization: `Bearer ${accessToken}`,
     "refresh-user-token": refreshUserToken,
   };
 

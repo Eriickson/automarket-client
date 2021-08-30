@@ -1,4 +1,4 @@
-export * from "./changeProfilePicture";
+export * from "./updateProfilePicture";
 export * from "./registerUser";
 export * from "./sendEmailRegister";
 export * from "./updateUserProfile";

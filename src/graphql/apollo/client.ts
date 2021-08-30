@@ -9,11 +9,11 @@ interface IUseApolloClient {
 }
 
 interface ApolloClientOptions {
-  authorization: boolean;
+  token: string;
 }
 
 export const getApolloClient = (options?: Partial<ApolloClientOptions>): IUseApolloClient => {
-  const link = ApolloLink.from([authLink(), /*  refreshLink,  */ errorLink, uploadLink]);
+  const link = ApolloLink.from([authLink(String(options?.token)), /*  refreshLink,  */ errorLink, uploadLink]);
 
   const client = new ApolloClient({
     cache: new InMemoryCache({

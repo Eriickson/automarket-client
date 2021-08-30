@@ -9,17 +9,17 @@ export const SessionLogin: FC = () => {
 
   return (
     <Box alignItems="center" display="flex">
-      <Link href="/login/signup">
+      <Link href={{ pathname: "/login/signin", query: { callbackUrl: router.asPath } }}>
         <a>
-          <Button colorScheme="pri" display={["none", "block"]}>
-            Regístrate
+          <Button colorScheme="pri" display={["none", null, "block"]} variant="outline">
+            Iniciar Sesión
           </Button>
         </a>
       </Link>
-      <Link href={{ pathname: "/login/signin", query: { callbackUrl: router.asPath } }}>
+      <Link href="/login/signup">
         <a>
-          <Button colorScheme="pri" display={["none", null, "block"]} ml="2.5" variant="outline">
-            Iniciar Sesión
+          <Button colorScheme="pri" display={["none", "block"]} ml="2.5">
+            Regístrate
           </Button>
         </a>
       </Link>

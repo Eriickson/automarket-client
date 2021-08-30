@@ -10,8 +10,10 @@ import { LoginBannerBottom } from "./BannersBottom";
 import { RecientPosts } from "./recientPosts/RecientPosts";
 import { CoverMain } from "./coverMain/CoverMain";
 import Benefit from "./Benefit";
+import { useSelector } from "@/store";
 
 export const IndexTemplate: FC = () => {
+  const { isAuth } = useSelector(store => store.auth);
   return (
     <MainLayout>
       <VStack align="stretch">
@@ -19,7 +21,7 @@ export const IndexTemplate: FC = () => {
         <Searcher />
         <Benefit />
         <RecientPosts />
-        <LoginBannerBottom />
+        {!isAuth && <LoginBannerBottom />}
       </VStack>
     </MainLayout>
   );

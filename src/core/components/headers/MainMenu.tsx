@@ -1,16 +1,13 @@
 import React from "react";
+import { IconButton, useDisclosure, Button, Flex } from "@chakra-ui/react";
 import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  IconButton,
-  useDisclosure,
-  Button,
-  Box,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { AutomarketRDLogo } from "../../../assets";
@@ -25,53 +22,34 @@ export const MainMenu = () => {
   return (
     <>
       <IconButton
+        aria-label="Abrir el menu"
+        borderRadius="sm"
+        colorScheme="pri"
+        icon={<HamburgerIcon />}
         ref={btnRef}
         onClick={onOpen}
-        colorScheme="pri"
-        borderRadius="sm"
-        aria-label="Abrir el menu"
-        icon={<HamburgerIcon />}
       />
-      <Drawer
-        isOpen={isOpen}
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        size="full"
-        motionPreset="scale"
-        placement="right"
-      >
-        <DrawerOverlay />
-        <DrawerContent bg="gray.50" h={height}>
-          <DrawerHeader bg="white" shadow="sm" borderBottomWidth="1px">
-            <Box w="44">
-              <AutomarketRDLogo />
-            </Box>
-            <DrawerCloseButton />
-          </DrawerHeader>
-          <DrawerBody display="flex" flexDirection="column" justifyContent="center">
-            <Link href="/login/signin">
-              <Button w="full" colorScheme="pri" mb="4">
-                Iniciar Sesión
-              </Button>
-            </Link>
-            <Link href="/login/signup">
-              <Button w="full" colorScheme="pri" mb="4">
+      <Modal isCentered isOpen={isOpen} motionPreset="slideInBottom" onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent rounded="sm">
+          <ModalHeader>Menú</ModalHeader>
+          <ModalBody>
+            <Flex>
+              <Button flex="1" mr="2">
                 Regístrate
               </Button>
-            </Link>
-            <Link href="/search/vehicles">
-              <Button w="full" colorScheme="pri" mb="4">
-                Buscar
+              <Button colorScheme="pri" flex="1" variant="ghost">
+                Iniciar Sesión
               </Button>
-            </Link>
-          </DrawerBody>
-          <DrawerFooter padding="0">
-            <Button w="full" colorScheme="red" onClick={onClose}>
-              Cerrar Menú
+            </Flex>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="danger" mr={3} variant="ghost" width="full" onClick={onClose}>
+              Cerrar
             </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

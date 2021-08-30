@@ -7,7 +7,7 @@ import { Button, GridItem, SimpleGrid, Link as ChakraLink } from "@chakra-ui/rea
 import { useForm, FormProvider } from "react-hook-form";
 // My Components
 import { Select } from "@/components";
-import { useGetBrands, useGetModelsByBrandId } from "@/graphql";
+import { useGetBrands, useGetModels } from "@/graphql";
 import { useYear } from "@/hooks";
 
 interface SeacherFormProps {
@@ -17,7 +17,7 @@ interface SeacherFormProps {
 export const SeacherForm: FC<SeacherFormProps> = ({ onSubmit }) => {
   const methods = useForm();
   const { getBrandsFetch, brands, loading } = useGetBrands();
-  const { getModelsByBrandIdFetch, models, loadingModels } = useGetModelsByBrandId();
+  const { getModelsFetch, models, loadingModels } = useGetModels();
   const { years, yearsBetween } = useYear(methods.watch("minYear")?.id);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const SeacherForm: FC<SeacherFormProps> = ({ onSubmit }) => {
               name="brand"
               options={brands}
               onChange={({ id }) => {
-                getModelsByBrandIdFetch({ getModelsFilter: { brandId: String(id) } });
+                getModelsFetch({ getModelsFilter: { brandId: String(id) } });
                 methods.setValue("model", null);
               }}
             />

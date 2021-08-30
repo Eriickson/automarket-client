@@ -1,5 +1,5 @@
 export * from "./useGetBrands";
-export * from "./useGetModelsByBrandId";
+export * from "./useGetModels";
 export * from "./useGetProvinces";
 export * from "./useGetMunicipalitiesByProvinceId";
 export * from "./useGetSectorsByMunicipalityId";

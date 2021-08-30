@@ -1,10 +1,15 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Range, Select } from "@/components";
 import { Button, HStack, VStack } from "@chakra-ui/react";
+import { useGetBrands, useGetModels, useGetProvinces } from "@/graphql";
 
 type PriceLevelType = "$" | "$$" | "$$$";
 
 export const AccordionItemFilterForm: FC = () => {
+  const { getBrandsFetch, loading, brands } = useGetBrands();
+  const { getModelsFetch, loadingModels, models } = useGetModels();
+  const { getProvincesFetch, loading: loadingProvinces, provinces } = useGetProvinces();
+
   const [priceLevelSelected, setPriceLevelSelected] = useState<PriceLevelType>("$");
   const [priceLevel] = useState<Record<PriceLevelType, number[]>>({
     /* min, max, step */
@@ -13,12 +18,23 @@ export const AccordionItemFilterForm: FC = () => {
     $$$: [5_000_000, 15_000_000, 250_000],
   });
 
+  useEffect(() => {
+    getBrandsFetch();
+    getProvincesFetch();
+  }, []);
+
   return (
     <VStack alignItems="stretch">
-      <Select label="Marca" name="brand" options={[]} />
-      <Select label="Modelo" name="model" options={[]} />
+      <Select
+        isLoading={loading}
+        label="Marca"
+        name="brand"
+        options={brands}
+        onChange={({ id }) => getModelsFetch({ getModelsFilter: { brandId: String(id) } })}
+      />
+      <Select isLoading={loadingModels} label="Modelo" name="model" options={models} />
       <Select label="Tipo de modelo" name="typModel" options={[]} />
-      <Select label="Provincia" name="province" options={[]} />
+      <Select isLoading={loadingProvinces} label="Provincia" name="province" options={provinces} />
       <Range
         multiple
         defaultValue={[1960, new Date().getFullYear() + 1]}

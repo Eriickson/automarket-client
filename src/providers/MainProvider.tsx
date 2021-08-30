@@ -20,7 +20,7 @@ const WrapperUIProviderStyled = styled.div`
 `;
 
 export const MainProvider: FC<ProvidersProps> = ({ children, authProviderProps, seo }) => {
-  const { client: apolloClient } = getApolloClient({ token: String(authProviderProps.accessToken) });
+  const { client: apolloClient } = getApolloClient({ token: String(authProviderProps?.accessToken) });
   const { store } = useStore();
 
   return (

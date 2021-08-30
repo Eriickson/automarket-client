@@ -1,5 +1,5 @@
 import { PrimaryCard } from "@/components";
-import { Heading, HStack, Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/react";
+import { Heading, HStack, Stat, StatHelpText, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import numeral from "numeral";
 import React, { FC } from "react";
 
@@ -10,19 +10,35 @@ export const StatisticsPanel: FC = () => {
       <HStack>
         <Stat>
           <StatLabel>Publicaciones</StatLabel>
-          <StatNumber>2</StatNumber>
-          <StatHelpText>de 7</StatHelpText>
+          <StatNumber>
+            <Text alignItems="flex-end" display="flex">
+              2
+              <Text color="gray.500" fontSize="sm" mb="1" ml="1">
+                {" "}
+                de 7
+              </Text>
+            </Text>
+          </StatNumber>
+          {/* <StatHelpText>de 7</StatHelpText> */}
         </Stat>
         <Stat>
           <StatLabel>Sucursales</StatLabel>
-          <StatNumber>0</StatNumber>
-          <StatHelpText>2</StatHelpText>
+          <StatNumber>
+            <Text alignItems="flex-end" display="flex">
+              1
+              <Text color="gray.500" fontSize="sm" mb="1" ml="1">
+                de 2
+              </Text>
+            </Text>
+          </StatNumber>
         </Stat>
         <Stat>
-          <StatNumber></StatNumber>
           <StatLabel>Visitas/Mes</StatLabel>
-          <StatNumber>+{numeral(9_999).format("0,0")}</StatNumber>
-          <StatHelpText>en este mes</StatHelpText>
+          <StatNumber>
+            <Text alignItems="flex-end" display="flex">
+              +{numeral(9_999).format("0,0")}
+            </Text>
+          </StatNumber>
         </Stat>
       </HStack>
     </PrimaryCard>

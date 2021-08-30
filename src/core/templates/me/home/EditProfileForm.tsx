@@ -5,7 +5,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useSelector } from "@/store";
 import { EditProfileFormOnSubmit } from "@/validations";
 import { InputControl, LabelInput, Select, RadioGroup } from "@/components";
-import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
+import { useGetProvinces, useGetMunicipalities } from "@/graphql";
 
 interface EditProfileFormProps {
   onSubmit(values: EditProfileFormOnSubmit): void;
@@ -15,7 +15,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
   const { isEditing, profileMe } = useSelector(({ profile }) => profile);
 
   const { provinces, getProvincesFetch } = useGetProvinces();
-  const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
+  const { municipalities, getMunicipalitiesFetch } = useGetMunicipalities();
 
   const methods = useForm<EditProfileFormOnSubmit>();
 
@@ -25,13 +25,13 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
       municipality: profileMe.direction.municipality,
       sex: profileMe.sex,
     });
-    getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
+    getMunicipalitiesFetch({ filter: { provinceId: String(profileMe.direction.province.id) } });
   }, [isEditing]);
 
   useEffect(() => {
     getProvincesFetch();
     profileMe.direction.province &&
-      getMunicipalitiesByProvinceIdFetch({ provinceId: String(profileMe.direction.province.value) });
+      getMunicipalitiesFetch({ filter: { provinceId: String(profileMe.direction.province.id) } });
   }, [profileMe.direction.province]);
 
   return (
@@ -44,7 +44,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 isRequired
                 defaultValue={profileMe.name}
                 inputProps={{ placeholder: "Nombre", isDisabled: !isEditing }}
-                isDisabled={!isEditing}
+                // isDisabled={!isEditing}
                 label="Nombre"
                 name="name"
               />
@@ -54,7 +54,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 isRequired
                 defaultValue={profileMe.lastname}
                 inputProps={{ placeholder: "Apellido", isDisabled: !isEditing }}
-                isDisabled={!isEditing}
+                // isDisabled={!isEditing}
                 label="Apellido"
                 name="lastname"
               />
@@ -67,9 +67,9 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 name="province"
                 options={provinces}
                 placeholder="Provincia"
-                onChange={({ value }) => {
+                onChange={({ id }) => {
                   methods.setValue("municipality", null);
-                  getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
+                  getMunicipalitiesFetch({ filter: { provinceId: String(id) } });
                 }}
               />
             </GridItem>
@@ -89,7 +89,7 @@ export const EditProfileForm: FC<EditProfileFormProps> = ({ onSubmit }) => {
                 isRequired
                 defaultValue={profileMe.birthday}
                 inputProps={{ placeholder: "Fecha de Nacimiento", type: "date", isDisabled: !isEditing }}
-                isDisabled={!isEditing}
+                // isDisabled={!isEditing}
                 label="Fecha de Nacimiento"
                 name="birthday"
               />

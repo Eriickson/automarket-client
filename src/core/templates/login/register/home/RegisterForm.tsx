@@ -8,7 +8,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { IconInfoCircle } from "@tabler/icons";
 import { useSelector } from "@/store";
 import { RegisterUserFormResolver, RegisterUserOnSubmitFormType } from "@/validations";
-import { useGetProvinces, useGetMunicipalitiesByProvinceId } from "@/graphql";
+import { useGetProvinces, useGetMunicipalities } from "@/graphql";
 
 // My Components
 import { InputControl, PrimaryCard, Select, LabelInput, RadioGroup } from "@/components";
@@ -22,7 +22,7 @@ interface RegisterFormProps {
 export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
   const { email } = useSelector(({ login }) => login.register);
   const { provinces, getProvincesFetch } = useGetProvinces();
-  const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
+  const { municipalities, getMunicipalitiesFetch } = useGetMunicipalities();
   const methods = useForm<RegisterUserOnSubmitFormType>({
     resolver: RegisterUserFormResolver,
     defaultValues: {
@@ -85,7 +85,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ onSubmit }) => {
                     options={provinces}
                     onChange={({ id }) => {
                       methods.setValue("municipality", { label: "Seleccionar...", id });
-                      getMunicipalitiesByProvinceIdFetch({ getMunicipalitiesByProvinceId: String(id) });
+                      getMunicipalitiesFetch({ filter: { provinceId: String(id) } });
                     }}
                   />
                 </Box>

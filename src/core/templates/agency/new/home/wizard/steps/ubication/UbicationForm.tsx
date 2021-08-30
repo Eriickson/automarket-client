@@ -7,7 +7,7 @@ import { Box, SimpleGrid, GridItem } from "@chakra-ui/react";
 import { useSelector } from "@/store";
 
 import { Select, FormWizardProvider, InputControl } from "@/components";
-import { useGetProvinces, useGetMunicipalitiesByProvinceId, useGetSectorsByMunicipalityId } from "@/graphql";
+import { useGetProvinces, useGetMunicipalities, useGetSectorsByMunicipalityId } from "@/graphql";
 
 import { NewAgencyUbicationResolver, IUbicationNewAgencyOnSubmit } from "@/validations";
 interface UbicationFormProps {
@@ -17,7 +17,7 @@ interface UbicationFormProps {
 export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
   const { ubication } = useSelector(({ agency }) => agency.new);
   const { provinces, getProvincesFetch } = useGetProvinces();
-  const { municipalities, getMunicipalitiesByProvinceIdFetch } = useGetMunicipalitiesByProvinceId();
+  const { municipalities, getMunicipalitiesFetch } = useGetMunicipalities();
   const { sectors, getSectorsByMunicipalityIdFetch } = useGetSectorsByMunicipalityId();
   const methods = useForm({ resolver: NewAgencyUbicationResolver });
 
@@ -25,7 +25,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
     getProvincesFetch();
 
     if (ubication?.province) {
-      getMunicipalitiesByProvinceIdFetch({ getMunicipalitiesByProvinceId: String(ubication.province.id) });
+      getMunicipalitiesFetch({ filter: { provinceId: String(ubication.province.id) } });
       getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(ubication.municipality.id) });
     }
   }, []);
@@ -45,7 +45,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
                 methods.setValue("municipality", null);
                 methods.setValue("sector", null);
                 methods.setValue("reference", null);
-                getMunicipalitiesByProvinceIdFetch({ getMunicipalitiesByProvinceId: String(id) });
+                getMunicipalitiesFetch({ filter: { provinceId: String(id) } });
               }}
             />
           </GridItem>

@@ -2,7 +2,7 @@ export * from "./GetAccesories";
 export * from "./GetBrands";
 export * from "./GetModels";
 export * from "./GetProvinces";
-export * from "./GetMunicipalitiesByProvinceId";
+export * from "./getMunicipalities";
 export * from "./GetSectorsByMunicipalityId";
 export * from "./GetTypeModelByModelId";
 export * from "./GetVehicleCategories";

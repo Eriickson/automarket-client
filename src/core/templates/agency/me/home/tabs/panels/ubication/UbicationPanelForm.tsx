@@ -4,7 +4,7 @@ import { InputControl, Select } from "@/components";
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useSelector } from "@/store";
-import { useGetProvinces, useGetMunicipalitiesByProvinceId, useGetSectorsByMunicipalityId } from "@/graphql";
+import { useGetProvinces, useGetMunicipalities, useGetSectorsByMunicipalityId } from "@/graphql";
 
 interface UbicationPanelFormProps {
   onSubmit(values: any): void;
@@ -14,11 +14,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
   const { isEditing } = useSelector(({ meAgency }) => meAgency.tabs.ubication);
   const methods = useForm();
   const { getProvincesFetch, provinces, loading: loadingProvinces } = useGetProvinces();
-  const {
-    getMunicipalitiesByProvinceIdFetch,
-    municipalities,
-    loading: loadingMunicipalities,
-  } = useGetMunicipalitiesByProvinceId();
+  const { getMunicipalitiesFetch, municipalities, loading: loadingMunicipalities } = useGetMunicipalities();
   const { getSectorsByMunicipalityIdFetch, sectors, loading: loadingSectors } = useGetSectorsByMunicipalityId();
 
   useEffect(() => {
@@ -37,7 +33,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
               label="Provincia"
               name="province"
               options={provinces}
-              onChange={({ value }) => getMunicipalitiesByProvinceIdFetch({ provinceId: value.toString() })}
+              onChange={({ id }) => getMunicipalitiesFetch({ filter: { provinceId: String(id) } })}
             />
           </GridItem>
           <GridItem colSpan={[12, null, 4]}>
@@ -48,7 +44,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
               label="Municipio"
               name="municipality"
               options={municipalities}
-              onChange={({ value }) => getSectorsByMunicipalityIdFetch({ municipalityId: value.toString() })}
+              onChange={({ id }) => getSectorsByMunicipalityIdFetch({ municipalityId: id })}
             />
           </GridItem>
           <GridItem colSpan={[12, null, 4]}>

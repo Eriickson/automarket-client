@@ -3,7 +3,7 @@ import React, { FC, useEffect } from "react";
 import Link from "next/link";
 
 // Packages
-import { Button, GridItem, SimpleGrid, Text, Link as ChakraLink } from "@chakra-ui/react";
+import { Button, GridItem, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 // My Components
 import { Select } from "@/components";
@@ -18,7 +18,7 @@ export const SeacherForm: FC<SeacherFormProps> = ({ onSubmit }) => {
   const methods = useForm();
   const { getBrandsFetch, brands, loading } = useGetBrands();
   const { getModelsByBrandIdFetch, models, loadingModels } = useGetModelsByBrandId();
-  const { years, yearsBetween } = useYear(methods.watch("minYear")?.value);
+  const { years, yearsBetween } = useYear(methods.watch("minYear")?.id);
 
   useEffect(() => {
     getBrandsFetch();
@@ -34,8 +34,8 @@ export const SeacherForm: FC<SeacherFormProps> = ({ onSubmit }) => {
               label="Marca"
               name="brand"
               options={brands}
-              onChange={({ value }) => {
-                getModelsByBrandIdFetch({ brandId: String(value) });
+              onChange={({ id }) => {
+                getModelsByBrandIdFetch({ getModelsFilter: { brandId: String(id) } });
                 methods.setValue("model", null);
               }}
             />
@@ -48,9 +48,8 @@ export const SeacherForm: FC<SeacherFormProps> = ({ onSubmit }) => {
               label="Año Mín."
               name="minYear"
               options={years}
-              onChange={({ value }) => {
-                value > methods.getValues("maxYear")?.value &&
-                  methods.setValue("maxYear", { label: value.toString(), value });
+              onChange={({ id }) => {
+                id > methods.getValues("maxYear")?.id && methods.setValue("maxYear", { label: id.toString(), id });
               }}
             />
           </GridItem>

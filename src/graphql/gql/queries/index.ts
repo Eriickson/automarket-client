@@ -1,6 +1,6 @@
 export * from "./GetAccesories";
 export * from "./GetBrands";
-export * from "./GetModelsByBrandId";
+export * from "./GetModels";
 export * from "./GetProvinces";
 export * from "./GetMunicipalitiesByProvinceId";
 export * from "./GetSectorsByMunicipalityId";

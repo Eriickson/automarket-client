@@ -1,20 +1,19 @@
 import { useLazyQuery } from "@apollo/client";
-import { GET_MODELS_BY_BRAND_ID_Q, IGetModelsByBrandIdPayload, IGetModelsByBrandIdVariables } from "../../gql";
+import { GET_MODELS_Q, IGetModelsPayload, IGetModelsVariables } from "../../gql";
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 export const useGetModelsByBrandId = () => {
-  const [query, { data, loading: loadingModels, error }] = useLazyQuery<
-    IGetModelsByBrandIdPayload,
-    IGetModelsByBrandIdVariables
-  >(GET_MODELS_BY_BRAND_ID_Q);
+  const [query, { data, loading: loadingModels, error }] = useLazyQuery<IGetModelsPayload, IGetModelsVariables>(
+    GET_MODELS_Q,
+  );
 
-  function getModelsByBrandIdFetch(variables: IGetModelsByBrandIdVariables) {
+  function getModelsByBrandIdFetch(variables: IGetModelsVariables) {
     query({ variables });
   }
 
   return {
     getModelsByBrandIdFetch,
-    models: data ? data.getModelsByBrandId.models : [],
+    models: data ? data.getModels.models : [],
     loadingModels,
     error,
   };

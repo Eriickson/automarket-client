@@ -4,13 +4,12 @@ import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { IconBellRinging, IconMessage2 } from "@tabler/icons";
 import Link from "next/link";
+import { Image } from "@/components";
 
 const WraperSessionStartedStyled = styled.div``;
 
 export const SessionStarted: FC = () => {
   const { user } = useSelector(({ auth }) => auth);
-
-  console.log(user);
 
   return (
     <WraperSessionStartedStyled>
@@ -20,7 +19,7 @@ export const SessionStarted: FC = () => {
             <Link href="/me">
               <a>
                 <ChakraLink>
-                  <Text fontWeight="semibold">{user?.user?.name}</Text>
+                  <Text fontWeight="semibold">{user?.name}</Text>
                 </ChakraLink>
               </a>
             </Link>
@@ -35,7 +34,15 @@ export const SessionStarted: FC = () => {
           </HStack>
         </Box>
         <Link href="/me">
-          <Avatar cursor="pointer" rounded="none" />
+          <a>
+            {user?.profilePictureUrl ? (
+              <Box cursor="pointer" w="12">
+                <Image alt="" src={user?.profilePictureUrl} />
+              </Box>
+            ) : (
+              <Avatar cursor="pointer" rounded="none" />
+            )}
+          </a>
         </Link>
       </Box>
     </WraperSessionStartedStyled>

@@ -8,8 +8,6 @@ export interface SeoProviderProps {
 }
 
 export const SeoProvider: FC<SeoProviderProps> = ({ title, desc, children }) => {
-  console.log({ title, desc });
-
   return (
     <>
       <link href="/favicon.ico" rel="icon" type="image/x-icon" />

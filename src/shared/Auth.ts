@@ -12,13 +12,11 @@ export interface ISession {
 }
 
 interface UserAuthPayload {
-  user: {
-    id: string;
-    name: string;
-    lastname: string;
-    email: string;
-    profilePicture: string;
-  };
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  profilePictureUrl: string;
 }
 
 interface AgencyAuthPayload {

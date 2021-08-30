@@ -4,10 +4,10 @@ import { Box } from "@chakra-ui/react";
 
 const ImagePage: FC = () => {
   return (
-    <Box w="32">
+    <Box>
       <Image
         alt="Imagen de ejemplo"
-        src="http://localhost:7001/build/user/profile/x250/bdb45bad-f5f1-4ee9-ba67-1fde76dd550f.jpg"
+        src="http://localhost:7000/out/user/profile-picture/resolution/bbdf67db-82f4-412f-ae5b-2179d8195ccf.jpg"
       />
     </Box>
   );

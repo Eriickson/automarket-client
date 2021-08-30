@@ -1,4 +1,4 @@
-import { ISession, AuthPayload } from "@/shared";
+import { AuthPayload } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 /* eslint-disable @typescript-eslint/no-empty-interface */

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import NextImage, { ImageProps as ImagePropsNext } from "next/image";
 import styled from "@emotion/styled";
-import { useEffect } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -30,7 +29,7 @@ export const Image: React.FC<ImageProps> = ({ src, alt, resolution = "x250" }) =
     <Container>
       <NextImage
         alt={alt}
-        blurDataURL={src.replace(/x50/g, resolution)}
+        blurDataURL={src.replace(/resolution/g, "x50")}
         className="image"
         layout="fill"
         placeholder="blur"

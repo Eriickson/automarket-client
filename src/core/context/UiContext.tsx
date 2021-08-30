@@ -65,7 +65,7 @@ const UIContextProvider: FC = ({ children }) => {
 
   // Breadcrumb
   const [breadcrumbItems, setBreadcrumbItems] = useState<Breadcrumbs[]>([]);
-  const [showBreadcrumb, setShowBreadcrumb] = useState(true);
+  const [showBreadcrumb, setShowBreadcrumb] = useState(false);
 
   function activateLoadingScreen(msg: string | null) {
     setMsgLoadingScreen(msg);

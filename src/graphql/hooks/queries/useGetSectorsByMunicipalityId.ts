@@ -18,7 +18,7 @@ export const useGetSectorsByMunicipalityId = () => {
 
   return {
     getSectorsByMunicipalityIdFetch,
-    sectors: data ? data.getSectorsByMunicipalityId.sectors : [],
+    sectors: data ? data.getSectors.sectors : [],
     loading,
     error,
   };

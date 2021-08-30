@@ -1,4 +1,4 @@
-import { ApolloLink } from "@apollo/client";
+import { envs } from "@/config";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import fetch from "isomorphic-unfetch";
 
@@ -11,7 +11,7 @@ export const refreshLink: any = new TokenRefreshLink({
   },
   async fetchAccessToken() {
     console.log("fetchAccessToken");
-    const resonse = await fetch("http://localhost:9000/api/auth/refreshtoken", {
+    const resonse = await fetch(`${envs.BASE_URL}/api/auth/refreshtoken`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

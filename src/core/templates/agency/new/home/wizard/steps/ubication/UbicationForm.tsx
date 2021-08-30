@@ -25,8 +25,8 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
     getProvincesFetch();
 
     if (ubication?.province) {
-      getMunicipalitiesByProvinceIdFetch({ provinceId: String(ubication.province.value) });
-      getSectorsByMunicipalityIdFetch({ municipalityId: String(ubication.municipality.value) });
+      getMunicipalitiesByProvinceIdFetch({ getMunicipalitiesByProvinceId: String(ubication.province.id) });
+      getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(ubication.municipality.id) });
     }
   }, []);
 
@@ -41,11 +41,11 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               label="Provincia"
               name="province"
               options={provinces}
-              onChange={({ value }) => {
+              onChange={({ id }) => {
                 methods.setValue("municipality", null);
                 methods.setValue("sector", null);
                 methods.setValue("reference", null);
-                getMunicipalitiesByProvinceIdFetch({ provinceId: String(value) });
+                getMunicipalitiesByProvinceIdFetch({ getMunicipalitiesByProvinceId: String(id) });
               }}
             />
           </GridItem>
@@ -56,10 +56,10 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               label="Municipio"
               name="municipality"
               options={municipalities}
-              onChange={({ value }) => {
+              onChange={({ id }) => {
                 methods.setValue("sector", null);
                 methods.setValue("reference", null);
-                getSectorsByMunicipalityIdFetch({ municipalityId: String(value) });
+                getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(id) });
               }}
             />
           </GridItem>

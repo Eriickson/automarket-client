@@ -2,21 +2,23 @@ import { gql } from "@apollo/client";
 import { Option } from "@/shared";
 
 export interface IGetSectorsByMunicipalityIdPayload {
-  getSectorsByMunicipalityId: {
+  getSectors: {
     sectors: Option[];
   };
 }
 
 export interface IGetSectorsByMunicipalityIdVariables {
-  municipalityId: string;
+  getSectorsMunicipalityId: string;
 }
 
 export const GET_SECTORS_BY_MUNICIPALITY_ID = gql`
-  query GetSectorsByMunicipalityId($municipalityId: ID!) {
-    getSectorsByMunicipalityId(municipalityId: $municipalityId) {
+  query getSectors($getSectorsMunicipalityId: String!) {
+    getSectors(municipalityId: $getSectorsMunicipalityId) {
       sectors {
-        value
+        id
         label
+        createdAt
+        updatedAt
       }
     }
   }

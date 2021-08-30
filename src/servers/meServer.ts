@@ -8,7 +8,7 @@ import { GetMyProfilePayload, GET_MY_PROFILE_Q } from "src/graphql/gql";
 export interface MePageProps extends ProvidersProps, User {}
 
 export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
-  const auth = await getAuth({ ctx });
+  const auth = await getAuth({ ctx, privateRouter: true });
   const { client } = getApolloClient();
 
   const { data } = await client.query<GetMyProfilePayload>({
@@ -19,6 +19,8 @@ export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
       },
     },
   });
+
+  // console.log(auth);
 
   const props: MePageProps = {
     authProviderProps: auth,

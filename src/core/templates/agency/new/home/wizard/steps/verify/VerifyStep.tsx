@@ -20,37 +20,38 @@ export const VerifyStep: FC = () => {
 
   async function onSubmit() {
     /* eslint-disable-next-line */
-    const { src, originalSrc, ...logo } = agencyData.logo;
+    const { aspectRatio, cropArea, file, flip, id, point, rotation, zoom, originalFile } = agencyData.logo;
 
     /* eslint-disable-next-line */
-    const token = "";
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmJlMjk4NDU5ZDYyYTQ4NDAwMGNkYiIsIm5hbWUiOiJFcmlja3NvbiBNYW51ZWwiLCJsYXN0bmFtZSI6IkhvbGd1w61uIiwiZW1haWwiOiJlcmlja3NvbjAxZEBnbWFpbC5jb20iLCJwcm9maWxlUGljdHVyZSI6eyJmaWxlbmFtZSI6IjljN2M2NzdkLWMyNDktNDA1ZC1iNThkLTk3MTk0ZTkxOTcxOS5qcGciLCJjcmVhdGVkQXQiOiJTdW4gQXVnIDI5IDIwMjEgMTU6NDA6MDggR01ULTA0MDAgKGhvcmEgZGUgQm9saXZpYSkifSwiaWF0IjoxNjMwMjgxMjg3LCJleHAiOjE2MzAyODQ4ODd9.mMsnGmG4oDKQ1xb_U6TaR0DxBHsMYn27ArHOkQkAlVI";
 
-    const agency = {
+    const newAgency = {
       ...agencyData,
-      logo,
+      logo: {
+        aspectRatio,
+        cropArea,
+        file,
+        flip,
+        id,
+        point,
+        rotation,
+        zoom,
+        originalFile,
+      },
       ubication: {
         direction: {
-          province: String(ubication.province.value),
-          municipality: String(ubication.municipality.value),
-          sector: String(ubication.sector.value),
+          provinceId: String(ubication.province.id),
+          municipalityId: String(ubication.municipality.id),
+          sectorId: String(ubication.sector.id),
           reference: ubication.reference,
         },
       },
-      // contacts: {
-      //   numberPhones: contacts.numbersPhone.map(numberPhone => ({
-      //     label: numberPhone.title,
-      //     value: numberPhone.value,
-      //     payload: {
-      //       hasWhatsapp: numberPhone.hasWhatsapp,
-      //     },
-      //   })),
-      //   emails: [{ label: "Mi label", value: "erickson01d@gmail.com" }],
-      // },
     };
 
     try {
       const { data } = await createAgency({
-        variables: { agency },
+        variables: { createAgencyInput: newAgency },
         context: { headers: { authorization: `Bearer ${token}` } },
       });
       console.log(data);

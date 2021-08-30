@@ -12,15 +12,26 @@ export interface ISession {
 }
 
 interface UserAuthPayload {
+  user: {
+    id: string;
+    name: string;
+    lastname: string;
+    email: string;
+    profilePicture: string;
+  };
+}
+
+interface AgencyAuthPayload {
   id: string;
   name: string;
-  lastname: string;
-  email: string;
-  iat: number;
-  exp: number;
+  logo: string;
 }
-export interface IAuth {
+
+export interface AuthPayload {
   user?: UserAuthPayload;
+  agency?: AgencyAuthPayload;
+  iat?: number;
+  exp?: number;
   accessToken?: string;
   isAuth: boolean;
 }

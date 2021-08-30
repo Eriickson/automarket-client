@@ -10,6 +10,8 @@ const WraperSessionStartedStyled = styled.div``;
 export const SessionStarted: FC = () => {
   const { user } = useSelector(({ auth }) => auth);
 
+  console.log(user);
+
   return (
     <WraperSessionStartedStyled>
       <Box alignItems="center" display="flex">
@@ -18,7 +20,7 @@ export const SessionStarted: FC = () => {
             <Link href="/me">
               <a>
                 <ChakraLink>
-                  <Text fontWeight="semibold">{user?.name}</Text>
+                  <Text fontWeight="semibold">{user?.user?.name}</Text>
                 </ChakraLink>
               </a>
             </Link>

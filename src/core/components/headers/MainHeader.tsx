@@ -58,16 +58,18 @@ export const MainHeader: FC = () => {
                   {NavBarItems.map((item, i) => (
                     <Box key={i}>
                       <Link href={item.url}>
-                        <Text
-                          _hover={{ color: "pri.500" }}
-                          cursor="pointer"
-                          fontWeight="medium"
-                          p="1"
-                          size="lg"
-                          transition="150ms"
-                        >
-                          <a>{item.label}</a>
-                        </Text>
+                        <a>
+                          <Text
+                            _hover={{ color: "pri.500" }}
+                            cursor="pointer"
+                            fontWeight="medium"
+                            p="1"
+                            size="lg"
+                            transition="150ms"
+                          >
+                            {item.label}
+                          </Text>
+                        </a>
                       </Link>
                     </Box>
                   ))}

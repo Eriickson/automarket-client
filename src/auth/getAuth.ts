@@ -1,5 +1,6 @@
 import axios from "axios";
-import { GetServerSidePropsContext, IAuth } from "@/shared";
+import { GetServerSidePropsContext, AuthPayload } from "@/shared";
+import { envs } from "@/config";
 
 interface IAuthParams {
   ctx: GetServerSidePropsContext;
@@ -7,11 +8,14 @@ interface IAuthParams {
   publicRouter?: boolean | string;
 }
 
-export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams): Promise<IAuth> {
+export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams): Promise<AuthPayload> {
+  console.log(`${envs.BASE_URL}/api/auth/access-token`);
+
   try {
-    const { data } = await axios.get<IAuth>("http://localhost:9000/api/auth/access-token", {
+    const { data } = await axios.get<AuthPayload>(`${envs.BASE_URL}/api/auth/access-token`, {
       headers: ctx.req.headers,
     });
+
     const { isAuth } = data;
     if (privateRouter && !isAuth) {
       ctx.res.writeHead(302, { Location: typeof privateRouter === "string" ? privateRouter : "/" });
@@ -31,7 +35,7 @@ export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams)
       user: data.user,
     };
   } catch (err: any) {
-    console.log(err.response.data);
+    console.log({ Aqui: err.response.data });
     return {
       isAuth: false,
     };

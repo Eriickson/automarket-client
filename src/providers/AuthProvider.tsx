@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { IAuth } from "@/shared";
+import { AuthPayload } from "@/shared";
 import { useAction } from "@/store";
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
-export interface AuthProviderProps extends IAuth {}
+export interface AuthProviderProps extends AuthPayload {}
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children, ...props }) => {
   const { setAuth } = useAction();

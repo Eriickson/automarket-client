@@ -8,12 +8,12 @@ export interface IGetMunicipalitiesByProvinceIdPayload {
 }
 
 export interface IGetMunicipalitiesByProvinceIdVariables {
-  provinceId: string;
+  getMunicipalitiesByProvinceId: string;
 }
 
 export const GET_MUNICIPALITIY_BY_PROVINCE_ID = gql`
-  query GetMunicipalitiesByProvinceId($provinceId: String!) {
-    getMunicipalitiesByProvinceId(provinceId: $provinceId) {
+  query GetMunicipalitiesByProvinceId($getMunicipalitiesByProvinceId: String!) {
+    getMunicipalitiesByProvinceId(provinceId: $getMunicipalitiesByProvinceId) {
       municipalities {
         id
         label

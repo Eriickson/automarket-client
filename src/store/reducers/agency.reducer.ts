@@ -1,25 +1,25 @@
-import { IGeneratedImage, INumberPhone, IOption } from "@/shared";
+import { IGeneratedImage, INumberPhone, IOption, Option } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   new: {
     agencyData: {
-      logo: Partial<Omit<IGeneratedImage, "file">>;
+      logo: IGeneratedImage;
       name: string;
       slogan: string;
       isProfessional: boolean;
     };
     ubication: {
-      province: IOption;
-      municipality: IOption;
-      sector: IOption;
+      province: Option;
+      municipality: Option;
+      sector: Option;
       reference: string;
     };
     contacts: {
       numbersPhone: INumberPhone[];
     };
   };
-  exampeSelect: IOption;
+  exampeSelect: Option;
 }
 
 const initialState = {
@@ -33,7 +33,7 @@ const agencyReducer = createSlice({
     setNewAgencyInfo(state, action: PayloadAction<Partial<InitialState["new"]>>) {
       state.new = { ...state.new, ...action.payload };
     },
-    setExampleSelect(state, action: PayloadAction<IOption>) {
+    setExampleSelect(state, action: PayloadAction<Option>) {
       state.exampeSelect = action.payload;
     },
   },

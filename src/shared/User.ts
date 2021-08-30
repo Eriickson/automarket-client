@@ -2,7 +2,7 @@ import { Direction, IDirection } from ".";
 
 export interface IUser {
   _id: string;
-  profilePicture: string;
+  profilePictureUrl: string;
   name: string;
   lastname: string;
   birthday: string;
@@ -12,7 +12,7 @@ export interface IUser {
 }
 export interface User {
   _id: string;
-  profilePicture: string;
+  profilePictureUrl?: string;
   name: string;
   lastname: string;
   birthday: string;

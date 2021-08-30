@@ -25,6 +25,7 @@ export const GET_MY_PROFILE_Q = gql`
       name
       sex
       username
+      profilePictureUrl
     }
   }
 `;

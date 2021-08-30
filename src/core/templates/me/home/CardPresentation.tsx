@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 // Packages
-import { Box, Button, HStack, Text, Img, Flex } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
 
 // My Elements
 import { useUIContext } from "@/context";
@@ -13,7 +13,7 @@ import { useChangeProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
 
 // My Components
-import { onChangeArgsPropType, PrimaryCard } from "@/components";
+import { Image, onChangeArgsPropType, PrimaryCard } from "@/components";
 import { EditProfilePicture } from "./EditProfilePicture";
 import { SettingsMenu } from "./settings/SettingsMenu";
 
@@ -57,11 +57,13 @@ export const CardPresentation: FC = () => {
       <PrimaryCard>
         <HStack alignItems="flex-start" spacing="4">
           <Flex flex="1">
-            <Img
-              mr="4"
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-              w="36"
-            />
+            {profileMe?.profilePictureUrl ? (
+              <Box mr="4" w="24">
+                <Image alt="" src={profileMe?.profilePictureUrl} />
+              </Box>
+            ) : (
+              <Avatar cursor="pointer" mr="4" rounded="none" size="xl" />
+            )}
             <Box>
               <Box mb="3">
                 <Text fontSize="xl" fontWeight="semibold" lineHeight="none">
@@ -78,5 +80,3 @@ export const CardPresentation: FC = () => {
     </>
   );
 };
-
-/*   */

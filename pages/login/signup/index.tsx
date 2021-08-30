@@ -3,15 +3,11 @@ import React from "react";
 import { NextPage } from "next";
 
 import { SignUpTemplate } from "@/templates";
-import { SEO } from "@/components";
+import { SignUpProps } from "@/servers";
 
-const SignUpPage: NextPage = () => {
-  return (
-    <SEO desc="Automarket RD" title="Regístrate">
-      <SignUpTemplate />
-    </SEO>
-  );
+const SignUpPage: NextPage<SignUpProps> = () => {
+  return <SignUpTemplate />;
 };
 
-// export { signUpServerSide as getServerSideProps } from "@/servers";
+export { signUpServerSide as getServerSideProps } from "@/servers";
 export default SignUpPage;

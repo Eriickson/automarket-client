@@ -16,5 +16,5 @@ const IndexPage: NextPage = () => {
   );
 };
 
-// export { indexServerSide as getServerSideProps } from "@/servers";
+export { indexServerSide as getServerSideProps } from "@/servers";
 export default IndexPage;

@@ -22,7 +22,7 @@ export const SignInForm: FC<SignInFormProps> = ({ onSubmit }) => {
         <Box mb="5">
           <InputControl
             isRequired
-            defaultValue="erickson01d"
+            defaultValue="test01d"
             inputProps={{ placeholder: "Correo electrónico", size: "lg" }}
             label="Correo electrónico"
             name="identifier"

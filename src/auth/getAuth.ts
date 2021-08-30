@@ -9,8 +9,6 @@ interface IAuthParams {
 }
 
 export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams): Promise<AuthPayload> {
-  console.log(`${envs.BASE_URL}/api/auth/access-token`);
-
   try {
     const { data } = await axios.get<AuthPayload>(`${envs.BASE_URL}/api/auth/access-token`, {
       headers: ctx.req.headers,
@@ -29,13 +27,12 @@ export async function getAuth({ ctx, privateRouter, publicRouter }: IAuthParams)
       return { isAuth };
     }
 
-    return {
-      isAuth,
-      accessToken: data.accessToken,
-      user: data.user,
-    };
+    const response: AuthPayload = { isAuth };
+
+    isAuth && Object.assign(response, data);
+
+    return response;
   } catch (err: any) {
-    console.log({ Aqui: err.response.data });
     return {
       isAuth: false,
     };

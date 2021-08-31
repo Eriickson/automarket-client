@@ -8,7 +8,7 @@ import { MyAgencyTabs } from "./tabs/MyAgencyTabs";
 export const MeAgencyTemplate: FC = () => {
   return (
     <MainLayout>
-      <SimpleGrid columns={12} gap={3}>
+      <SimpleGrid columns={12} gap={2}>
         <GridItem colSpan={[12, null, 3]}>
           <VStack alignItems="stretch">
             <Box>

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, Tag, IconButton, Text, HStack, Box } from "@chakra-ui/react";
-import { IconEdit, IconInfoCircle } from "@tabler/icons";
+import { IconEdit } from "@tabler/icons";
 import { VehicleModalInfo } from "./modalInfo/VehicleModalInfo";
 import Link from "next/link";
 
@@ -22,15 +22,15 @@ export const VehiclesTable: FC = () => {
         <Tbody>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key => (
             <Tr key={key}>
-              <Td w="8" isNumeric minw="max-content">
+              <Td isNumeric minw="max-content" w="8">
                 <HStack>
                   <Link href="/post/vehicle/123456789/edit">
                     <a>
                       <IconButton
-                        size="sm"
-                        colorScheme="warning"
                         aria-label="Open modal info vehicle"
+                        colorScheme="warning"
                         icon={<IconEdit size="1.25rem" />}
+                        size="sm"
                       />
                     </a>
                   </Link>
@@ -38,27 +38,27 @@ export const VehiclesTable: FC = () => {
                 </HStack>
               </Td>
               <Td>
-                <Text w="max-content" fontWeight="medium">
+                <Text fontWeight="medium" w="max-content">
                   Toyota
                 </Text>
               </Td>
               <Td>
-                <Text w="max-content" fontWeight="medium">
+                <Text fontWeight="medium" w="max-content">
                   Corolla
                 </Text>
               </Td>
               <Td>
-                <Text w="max-content" fontWeight="medium">
+                <Text fontWeight="medium" w="max-content">
                   2021
                 </Text>
               </Td>
               <Td>
-                <Text w="max-content" fontWeight="medium">
+                <Text fontWeight="medium" w="max-content">
                   RD$ 250,000
                 </Text>
               </Td>
               <Td>
-                <Text w="max-content" fontWeight="medium">
+                <Text fontWeight="medium" w="max-content">
                   21 Jul. 2020
                 </Text>
               </Td>

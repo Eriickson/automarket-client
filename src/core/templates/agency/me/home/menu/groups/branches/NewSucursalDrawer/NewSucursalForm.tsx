@@ -47,7 +47,7 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
             name="municipality"
             options={municipalities}
             onChange={({ id }) => {
-              getSectorsByMunicipalityIdFetch({ municipalityId: String(id) });
+              getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(id) });
               methods.setValue("sector", null);
             }}
           />
@@ -65,7 +65,7 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
           />
           <InputControl isRequired label="Referencia" name="reference" />
           <HStack alignItems="flex-end">
-            <InputControl isRequired isDisabled={!isEditingName} label="Nombre distintivo" name="name" />
+            <InputControl isRequired /*  isDisabled={!isEditingName} */ label="Nombre distintivo" name="name" />
             <IconButton
               aria-label="Editar nombre"
               icon={

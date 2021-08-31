@@ -52,7 +52,7 @@ export const SearcherVehicleTemplate: FC = () => {
                         bg="blackAlpha.700"
                         bottom="0"
                         color="white"
-                        fontSize="md"
+                        fontSize="sm"
                         fontWeight="semibold"
                         pos="absolute"
                         right="0"

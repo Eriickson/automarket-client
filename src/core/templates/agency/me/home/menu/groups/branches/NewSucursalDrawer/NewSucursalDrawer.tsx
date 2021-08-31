@@ -11,7 +11,9 @@ import {
   useDisclosure,
   Heading,
   Text,
+  Box,
 } from "@chakra-ui/react";
+import { IconNewSection } from "@tabler/icons";
 import React, { FC } from "react";
 import { NewSucursalForm } from "./NewSucursalForm";
 
@@ -25,10 +27,29 @@ export const NewSucursalDrawer: FC = () => {
 
   return (
     <>
-      <MenuItem colorScheme="teal" ref={btnRef} onClick={onOpen}>
+      <MenuItem colorScheme="teal" py="1.5" ref={btnRef} onClick={onOpen}>
+        <Box
+          alignItems="center"
+          bgColor="pri.100"
+          color="pri.500"
+          display="flex"
+          h="6"
+          justifyContent="center"
+          mr="1.5"
+          w="6"
+        >
+          <IconNewSection size="1.25rem" strokeWidth={1.5} />
+        </Box>
         Nueva Sucursal
       </MenuItem>
-      <Drawer finalFocusRef={btnRef} isOpen={isOpen} placement="right" size="sm" onClose={onClose}>
+      <Drawer
+        closeOnOverlayClick={false}
+        finalFocusRef={btnRef}
+        isOpen={isOpen}
+        placement="right"
+        size="sm"
+        onClose={onClose}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />

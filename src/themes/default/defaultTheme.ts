@@ -32,5 +32,10 @@ export const defaultTheme = extendTheme({
         borderRadius: "sm",
       },
     },
+    ModalContent: {
+      baseStyle: {
+        borderRadius: "sm",
+      },
+    },
   },
 });

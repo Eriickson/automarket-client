@@ -10,7 +10,7 @@ export const VehiclesTable: FC = () => {
       <Table size="sm">
         <Thead>
           <Tr>
-            {/* <Th></Th> */}
+            <Th></Th>
             <Th>Marca</Th>
             <Th>Modelo</Th>
             <Th>Año</Th>
@@ -22,7 +22,7 @@ export const VehiclesTable: FC = () => {
         <Tbody>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key => (
             <Tr key={key}>
-              {/* <Td isNumeric minw="max-content" w="8">
+              <Td isNumeric minw="max-content" w="8">
                 <HStack>
                   <Link href="/post/vehicle/123456789/edit">
                     <a>
@@ -36,7 +36,7 @@ export const VehiclesTable: FC = () => {
                   </Link>
                   <VehicleModalInfo />
                 </HStack>
-              </Td> */}
+              </Td>
               <Td>
                 <Text fontWeight="medium" w="max-content">
                   Toyota

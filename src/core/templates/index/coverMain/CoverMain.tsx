@@ -8,13 +8,13 @@ export const CoverMain = () => {
     <Box bg="white" shadow="sm">
       <Img
         display={["none", null, "block"]}
+        src="https://nitter.hu/pic/profile_banners%2F1353650886594195459%2F1615688559%2F1500x500"
         width="full"
-        src="https://mobility-observatory.arval.com/sites/default/files/styles/1440x495/public/cvo/media/images/voiture.jpg?itok=zr9FHxBo"
       />
       <Img
         display={[null, null, "none"]}
-        width="full"
         src="https://www.jumpstartmag.com/wp-content/uploads/2021/02/Webp.net-compress-image-45.jpg"
+        width="full"
       />
     </Box>
   );

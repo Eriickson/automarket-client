@@ -17,9 +17,7 @@ export const MenuNew: FC = () => {
   return (
     <WraperMenuNewStyled>
       <Menu placement="bottom-end">
-        <MenuButton as={IconButton} colorScheme="pri">
-          <IconDotsVertical />
-        </MenuButton>
+        <MenuButton aria-label="Options" as={IconButton} colorScheme="pri" icon={<IconDotsVertical size="1.5rem" />} />
         <MenuList borderTop="2px solid" borderTopColor="pri.500" pt="0" rounded="sm">
           <MenuGroup title="Agencia">
             <EditAgencyInformation />

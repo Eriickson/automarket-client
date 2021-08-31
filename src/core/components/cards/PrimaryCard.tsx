@@ -4,9 +4,10 @@ import { Box } from "@chakra-ui/react";
 
 interface PrimaryCardProps {
   notBorderTop?: boolean;
+  noPadding?: boolean;
 }
 
-export const PrimaryCard: FC<PrimaryCardProps> = ({ notBorderTop, children }) => {
+export const PrimaryCard: FC<PrimaryCardProps> = ({ notBorderTop, children, noPadding }) => {
   return (
     <Box
       bg="white"
@@ -15,7 +16,7 @@ export const PrimaryCard: FC<PrimaryCardProps> = ({ notBorderTop, children }) =>
       borderTopWidth={!notBorderTop ? "2px !important" : ""}
       borderWidth="1px"
       h="full"
-      p="4"
+      p={!noPadding ? 4 : 0}
       shadow="sm"
     >
       {children}

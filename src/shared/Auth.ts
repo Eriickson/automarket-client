@@ -28,8 +28,8 @@ interface AgencyAuthPayload {
 export interface AuthPayload {
   user?: UserAuthPayload;
   agency?: AgencyAuthPayload;
-  iat: number;
-  exp: number;
+  iat?: number;
+  exp?: number;
   accessToken?: string;
   isAuth: boolean;
 }

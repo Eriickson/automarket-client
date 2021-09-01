@@ -17,3 +17,4 @@ export * from "./GetProfileMe";
 export * from "./getMyProfile";
 export * from "./VerifyUserPassword";
 export * from "./SignIn";
+export * from "./GetMyAgency";

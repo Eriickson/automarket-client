@@ -1,104 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useLazyQuery, useMutation, gql } from "@apollo/client";
-import { Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton, Button, Box, useToast } from "@chakra-ui/react";
-import { AlertDialog } from "@/components";
-import { useUIContext } from "@/context";
+import { useLazyQuery } from "@apollo/client";
+import { Button, useToast } from "@chakra-ui/react";
+import gql from "graphql-tag";
+import React, { FC, useEffect } from "react";
 
 const HANDLER_ERROR_Q = gql`
-  query HandlerError($errorType: String!) {
-    handlerError(errorType: $errorType) {
-      response
-    }
+  query HandlerError {
+    handlerError
   }
 `;
 
-const HANDLER_MUTATION_M = gql`
-  mutation HandlerMutation($errorType: String!) {
-    handlerErrorMutation(errorType: $errorType) {
-      response
-    }
-  }
-`;
-
-const HandlerErrorPage = () => {
-  const { alertDialog, activateLoadingScreen, closeLoadingScreen } = useUIContext();
-  const [handlerError, { data: dataQuery, loading: loadingQuery, error: errorQuery }] = useLazyQuery(HANDLER_ERROR_Q);
-  const [handlerErrorMutation, { data: dataMutation, loading: loadingMutation, error: errorMutation }] =
-    useMutation(HANDLER_MUTATION_M);
-  const [hasError, setHasError] = useState<string | null>(null);
+// type ErrorType = {};
+const HandlerError: FC = () => {
   const toast = useToast();
-
-  async function onClickQuery() {
-    try {
-      handlerError({
-        variables: {
-          errorType: "Error aquí",
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async function onClickMutation() {
-    activateLoadingScreen(null);
-    setTimeout(async () => {
-      try {
-        await handlerErrorMutation({
-          variables: {
-            errorType: "Error aquí",
-          },
-        });
-        // alertDialogState();
-      } catch (err) {
-        console.log(err);
-
-        const error = JSON.parse(err.message);
-        alertDialog.onOpen({
-          name: "error-apollo",
-          title: error.message,
-          desc: error.detail,
-          priBtnLabel: "Aceptar",
-          role: error.type,
-          onClickPriBtn() {
-            alertDialog.onClose();
-          },
-        });
-        closeLoadingScreen();
-      }
-    }, 3000);
-  }
+  const [handlerError, { error }] = useLazyQuery(HANDLER_ERROR_Q);
 
   useEffect(() => {
-    if (errorQuery) {
-      toast({
-        position: "top-right",
-        render: ({ onClose }) => (
-          <Alert status="error" w="max-content">
-            <AlertIcon />
-            <AlertTitle mr={2}>{JSON.parse(errorQuery.message).message}</AlertTitle>
-            <AlertDescription mr="6">{JSON.parse(errorQuery.message).detail}</AlertDescription>
-            <CloseButton
-              _focus={{ ring: 0, bgColor: "" }}
-              _hover={{ ring: 0, bgColor: "none" }}
-              position="absolute"
-              right="8px"
-              top="8px"
-              onClick={onClose}
-            />
-          </Alert>
-        ),
-      });
+    if (error) {
+      showError(error.graphQLErrors[0]);
     }
-  }, [errorQuery]);
+  }, [error]);
+
+  function showError(error: any) {
+    toast({
+      description: error.message,
+      status: error.status,
+      duration: 5000,
+      isClosable: true,
+      position: "top-right",
+    });
+  }
 
   return (
-    <Box m="10">
-      <Button mr="5" onClick={onClickQuery}>
-        onClickQuery
-      </Button>
-      <Button onClick={onClickMutation}>onClickMutation</Button>
-    </Box>
+    <div>
+      <Button onClick={() => handlerError()}>Llamar</Button>
+    </div>
   );
 };
 
-export default HandlerErrorPage;
+export default HandlerError;

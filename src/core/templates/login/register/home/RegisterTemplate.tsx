@@ -12,14 +12,13 @@ import router, { useRouter } from "next/router";
 import axios from "axios";
 
 export const RegisterTemplate: FC = () => {
-  const { activateLoadingScreen } = useUIContext();
+  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
   const { registerUser } = useRegisterUser();
   const { query } = useRouter();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
     activateLoadingScreen("Registrando usuario");
     const { profilePicture, name, lastname, province, municipality, birthday, sex, username, password } = values;
-    const { aspectRatio, cropArea, file, flip, id, point, originalFile, rotation, zoom } = profilePicture;
     const newUser = {
       name,
       lastname,
@@ -33,28 +32,19 @@ export const RegisterTemplate: FC = () => {
       password,
     };
 
-    profilePicture.file &&
-      Object.assign(newUser, {
-        profilePicture: { aspectRatio, cropArea, file, flip, id, point, rotation, zoom, originalFile },
-      });
+    profilePicture.file && Object.assign(newUser, { profilePicture });
+
+    console.log(newUser);
 
     try {
-      const { data } = await registerUser({
-        variables: {
-          registerUserInput: newUser,
-        },
-        context: {
-          headers: {
-            token: query.token,
-          },
-        },
-      });
+      const { data } = await registerUser({ variables: { registerUserInput: newUser } });
 
       if (data && data.registerUser.successful) {
         await axios.post<Response>("/api/auth/signin", { identifier: username, password });
         window.location.href = "/me";
       }
     } catch (err) {
+      closeLoadingScreen();
       console.log(err);
     }
   }

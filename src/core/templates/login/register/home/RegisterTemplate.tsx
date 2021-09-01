@@ -8,13 +8,11 @@ import { useUIContext } from "@/context";
 // My Components
 import { LoginLayout } from "@/layouts";
 import { RegisterForm } from "./RegisterForm";
-import router, { useRouter } from "next/router";
 import axios from "axios";
 
 export const RegisterTemplate: FC = () => {
   const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
   const { registerUser } = useRegisterUser();
-  const { query } = useRouter();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
     activateLoadingScreen("Registrando usuario");
@@ -34,8 +32,6 @@ export const RegisterTemplate: FC = () => {
 
     profilePicture.file && Object.assign(newUser, { profilePicture });
 
-    console.log(newUser);
-
     try {
       const { data } = await registerUser({ variables: { registerUserInput: newUser } });
 
@@ -45,7 +41,6 @@ export const RegisterTemplate: FC = () => {
       }
     } catch (err) {
       closeLoadingScreen();
-      console.log(err);
     }
   }
 

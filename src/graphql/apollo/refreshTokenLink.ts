@@ -1,22 +1,21 @@
 import { envs } from "@/config";
 import fetch from "isomorphic-unfetch";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
-export function refreshLink(token: string): any {
+/* eslint-disable-next-line */
+export function refreshTokenLink(token: string): any {
   return new TokenRefreshLink({
     accessTokenField: "accessToken",
     isTokenValidOrUndefined() {
-      console.log("isTokenValidOrUndefined");
-      // /* if (token && (jwt.decode(token) as any)?.exp * 1000 > Date.now()) {
-      //   console.log("El token no se ha vencido, por tanto no se tiene que actualizar");
-      //   return true;
-      // } */
+      /* eslint-disable-next-line */
+      if (token && (jwt.decode(token) as any)?.exp * 1000 > Date.now()) {
+        return true;
+      }
 
       return false;
     },
     async fetchAccessToken() {
-      console.log("fetchAccessToken");
       const resonse = await fetch(`${envs.BASE_URL}/api/auth/refreshtoken`, {
         method: "POST",
         headers: {
@@ -25,9 +24,7 @@ export function refreshLink(token: string): any {
       });
       return resonse.json();
     },
-    handleFetch(newToken) {
-      console.log("handleFetch");
-      console.log(newToken);
-    },
+    /* eslint-disable-next-line */
+    handleFetch() {},
   });
 }

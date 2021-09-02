@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, ApolloLink, NormalizedCacheObject } from "
 import errorLink from "./errorLink";
 import uploadLink from "./uploadLink";
 import authLink from "./authLink";
-import { refreshLink } from "./refreshLink";
+import { refreshTokenLink } from "./refreshTokenLink";
 
 interface IUseApolloClient {
   client: ApolloClient<NormalizedCacheObject>;
@@ -14,7 +14,7 @@ interface ApolloClientOptions {
 
 export const getApolloClient = (options?: Partial<ApolloClientOptions>): IUseApolloClient => {
   const link = ApolloLink.from([
-    // refreshLink(String(options?.token)),
+    refreshTokenLink(String(options?.token)),
     authLink(String(options?.token)),
     errorLink,
     uploadLink,

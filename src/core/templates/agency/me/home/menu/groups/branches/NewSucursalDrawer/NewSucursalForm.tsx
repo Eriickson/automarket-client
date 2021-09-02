@@ -1,5 +1,5 @@
 import { InputControl, Select, Agency } from "@/components";
-import { useGetMunicipalities, useGetProvinces, useGetSectorsByMunicipalityId } from "@/graphql";
+import { useGetMunicipalities, useGetProvinces, useGetSectors } from "@/graphql";
 import { capitalizeString } from "@/utils";
 import { Box, HStack, IconButton, VStack, Text, Divider } from "@chakra-ui/react";
 import { IconEdit } from "@tabler/icons";
@@ -15,7 +15,7 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const { provinces, loading: provinceIsLoading, getProvincesFetch } = useGetProvinces();
   const { municipalities, loading: municipalitiesIsLoading, getMunicipalitiesFetch } = useGetMunicipalities();
-  const { sectors, loading: sectorIsLoading, getSectorsByMunicipalityIdFetch } = useGetSectorsByMunicipalityId();
+  const { sectors, loading: sectorIsLoading, getSectors } = useGetSectors();
 
   useEffect(() => {
     getProvincesFetch();
@@ -47,7 +47,7 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
             name="municipality"
             options={municipalities}
             onChange={({ id }) => {
-              getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(id) });
+              getSectors({ filter: { municipalityId: String(id) } });
               methods.setValue("sector", null);
             }}
           />

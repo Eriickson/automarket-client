@@ -18,3 +18,4 @@ export * from "./getMyProfile";
 export * from "./VerifyUserPassword";
 export * from "./SignIn";
 export * from "./GetMyAgency";
+export * from "./VerifyAgencyName";

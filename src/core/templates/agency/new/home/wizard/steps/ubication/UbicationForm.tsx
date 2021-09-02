@@ -7,7 +7,7 @@ import { Box, SimpleGrid, GridItem } from "@chakra-ui/react";
 import { useSelector } from "@/store";
 
 import { Select, FormWizardProvider, InputControl } from "@/components";
-import { useGetProvinces, useGetMunicipalities, useGetSectorsByMunicipalityId } from "@/graphql";
+import { useGetProvinces, useGetMunicipalities, useGetSectors } from "@/graphql";
 
 import { NewAgencyUbicationResolver, IUbicationNewAgencyOnSubmit } from "@/validations";
 interface UbicationFormProps {
@@ -18,7 +18,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
   const { ubication } = useSelector(({ agency }) => agency.new);
   const { provinces, getProvincesFetch } = useGetProvinces();
   const { municipalities, getMunicipalitiesFetch } = useGetMunicipalities();
-  const { sectors, getSectorsByMunicipalityIdFetch } = useGetSectorsByMunicipalityId();
+  const { sectors, getSectors } = useGetSectors();
   const methods = useForm({ resolver: NewAgencyUbicationResolver });
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
 
     if (ubication?.province) {
       getMunicipalitiesFetch({ filter: { provinceId: String(ubication.province.id) } });
-      getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(ubication.municipality.id) });
+      getSectors({ filter: { municipalityId: String(ubication.municipality.id) } });
     }
   }, []);
 
@@ -59,7 +59,7 @@ export const UbicationForm: FC<UbicationFormProps> = ({ onSubmit }) => {
               onChange={({ id }) => {
                 methods.setValue("sector", null);
                 methods.setValue("reference", null);
-                getSectorsByMunicipalityIdFetch({ getSectorsMunicipalityId: String(id) });
+                getSectors({ filter: { municipalityId: String(id) } });
               }}
             />
           </GridItem>

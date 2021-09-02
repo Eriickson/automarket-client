@@ -4,7 +4,7 @@ import { InputControl, Select } from "@/components";
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useSelector } from "@/store";
-import { useGetProvinces, useGetMunicipalities, useGetSectorsByMunicipalityId } from "@/graphql";
+import { useGetProvinces, useGetMunicipalities, useGetSectors } from "@/graphql";
 
 interface UbicationPanelFormProps {
   onSubmit(values: any): void;
@@ -15,7 +15,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
   const methods = useForm();
   const { getProvincesFetch, provinces, loading: loadingProvinces } = useGetProvinces();
   const { getMunicipalitiesFetch, municipalities, loading: loadingMunicipalities } = useGetMunicipalities();
-  const { getSectorsByMunicipalityIdFetch, sectors, loading: loadingSectors } = useGetSectorsByMunicipalityId();
+  const { getSectors, sectors, loading: loadingSectors } = useGetSectors();
 
   useEffect(() => {
     getProvincesFetch();
@@ -44,7 +44,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
               label="Municipio"
               name="municipality"
               options={municipalities}
-              onChange={({ id }) => getSectorsByMunicipalityIdFetch({ municipalityId: id })}
+              onChange={({ id }) => getSectors({ filter: { municipalityId: String(id) } })}
             />
           </GridItem>
           <GridItem colSpan={[12, null, 4]}>
@@ -58,7 +58,7 @@ export const UbicationPanelForm: FC<UbicationPanelFormProps> = ({ onSubmit }) =>
             />
           </GridItem>
           <GridItem colSpan={12}>
-            <InputControl isRequired isDisabled={!isEditing} label="Referencia" name="reference" />
+            <InputControl isRequired /* isDisabled={!isEditing} */ label="Referencia" name="reference" />
           </GridItem>
         </SimpleGrid>
       </form>

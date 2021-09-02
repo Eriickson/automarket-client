@@ -8,7 +8,11 @@ export interface SigninVariables {
 }
 
 export interface SigninPayload {
-  signin: { accessToken: string; refreshToken: string };
+  signin: {
+    accessToken: string;
+    refreshToken: string;
+    maxAge: Date;
+  };
 }
 
 export const SIGNIN_M = gql`
@@ -16,6 +20,7 @@ export const SIGNIN_M = gql`
     signin(credencials: $credencials) {
       accessToken
       refreshToken
+      maxAge
     }
   }
 `;

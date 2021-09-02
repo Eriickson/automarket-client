@@ -14,7 +14,7 @@ interface ApolloClientOptions {
 
 export const getApolloClient = (options?: Partial<ApolloClientOptions>): IUseApolloClient => {
   const link = ApolloLink.from([
-    refreshTokenLink(String(options?.token)),
+    // refreshTokenLink(String(options?.token)),
     authLink(String(options?.token)),
     errorLink,
     uploadLink,

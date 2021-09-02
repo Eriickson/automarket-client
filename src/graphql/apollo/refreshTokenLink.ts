@@ -10,8 +10,12 @@ export function refreshTokenLink(token: string): any {
     isTokenValidOrUndefined() {
       /* eslint-disable-next-line */
       if (token && (jwt.decode(token) as any)?.exp * 1000 > Date.now()) {
+        console.log("El token no ha expirado");
+
         return true;
       }
+
+      console.log("Ya expiró");
 
       return false;
     },

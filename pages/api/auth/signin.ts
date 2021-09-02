@@ -18,10 +18,11 @@ const signin: NextIronHandler = async (req: NextIronRequest, res: NextApiRespons
 
     if (!data?.signin) return;
 
-    const { accessToken, refreshToken } = data.signin;
+    const { accessToken, refreshToken, maxAge } = data.signin;
 
     req.session.set("accessToken", accessToken);
     req.session.set("refreshToken", refreshToken);
+    req.session.set("maxAge", maxAge);
 
     await req.session.save();
 

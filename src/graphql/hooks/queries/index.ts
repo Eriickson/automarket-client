@@ -5,3 +5,4 @@ export * from "./useGetMunicipalities";
 export * from "./useGetSectorsByMunicipalityId";
 export * from "./useGetTypeModelByModelId";
 export * from "./useVerifyUserPassword";
+export * from "./useVerifyAgencyName";

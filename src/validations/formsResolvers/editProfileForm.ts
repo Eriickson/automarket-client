@@ -2,13 +2,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // My Elements
-import { IOption, SexEnum } from "@/shared";
+import { Option, SexEnum } from "@/shared";
 
 export interface EditProfileFormOnSubmit {
   name: string;
   lastname: string;
-  province: IOption;
-  municipality: IOption | null;
+  province: Option;
+  municipality: Option | null;
   birthday: string;
   sex: SexEnum;
 }

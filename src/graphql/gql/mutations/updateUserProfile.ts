@@ -3,29 +3,27 @@ import { gql } from "@apollo/client";
 import { SexEnum } from "@/shared";
 
 export interface UpdateUserProfileVariables {
-  newUserData: {
+  input: {
     name: string;
     lastname: string;
     birthday: string;
     sex: SexEnum;
-    username: string;
-    password: string;
     direction: {
-      province: string;
-      municipality: string;
+      provinceId: string;
+      municipalityId: string;
     };
   };
 }
 export interface UpdateUserProfilePayload {
   updateUserProfile: {
-    updated: boolean;
+    successful: boolean;
   };
 }
 
 export const UPDATE_USER_PROFILE_M = gql`
-  mutation UpdateUserProfile($newUserData: UserInput!) {
-    updateUserProfile(newUserData: $newUserData) {
-      updated
+  mutation UpdateUserProfile($input: UpdateUserProfileInput!) {
+    updateUserProfile(input: $input) {
+      successful
     }
   }
 `;

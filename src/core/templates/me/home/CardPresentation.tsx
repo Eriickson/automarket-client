@@ -15,7 +15,7 @@ import { useSelector } from "@/store";
 // My Components
 import { Image, PrimaryCard } from "@/components";
 import { EditProfilePicture } from "./EditProfilePicture";
-import { SettingsMenu } from "./settings/SettingsMenu";
+import { SettingsMenu } from "./settings/menu/SettingsMenu";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);

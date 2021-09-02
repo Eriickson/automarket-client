@@ -1,6 +1,6 @@
 import { useUIContext } from "@/context";
-import { SmallCloseIcon } from "@chakra-ui/icons";
-import { MenuItem } from "@chakra-ui/react";
+import { MenuItem, Box } from "@chakra-ui/react";
+import { IconUserOff } from "@tabler/icons";
 import React, { FC } from "react";
 
 export const DisableAccount: FC = () => {
@@ -23,7 +23,19 @@ export const DisableAccount: FC = () => {
   }
 
   return (
-    <MenuItem fontWeight="medium" icon={<SmallCloseIcon />} onClick={onDisable}>
+    <MenuItem py="1.5" onClick={onDisable}>
+      <Box
+        alignItems="center"
+        bgColor="pri.100"
+        color="pri.500"
+        display="flex"
+        h="6"
+        justifyContent="center"
+        mr="1.5"
+        w="6"
+      >
+        <IconUserOff size="1.25rem" strokeWidth={1.5} />
+      </Box>
       Desactivar Cuenta
     </MenuItem>
   );

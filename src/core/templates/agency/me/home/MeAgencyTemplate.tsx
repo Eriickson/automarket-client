@@ -16,11 +16,11 @@ export const MeAgencyTemplate: FC = () => {
       <Box>
         <SimpleGrid columns={12} gap={2}>
           <GridItem colSpan={[12, null, 3]}>
-            <StickyBox>
+            <StickyBox offsetTop={8}>
               <VStack alignItems="stretch">
-                <Box>
+                <PrimaryCard>
                   <Img shadow="sm" src="https://upload.wikimedia.org/wikipedia/en/6/68/TLS_Agency_logo.jpg" />
-                </Box>
+                </PrimaryCard>
                 <PrimaryCard notBorderTop>
                   <Box lineHeight="normal">
                     <Text fontSize="2xl" fontWeight="semibold">

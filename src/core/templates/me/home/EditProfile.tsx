@@ -1,46 +1,49 @@
-import React from "react";
+import React, { FC } from "react";
 
 // NextJS
-import { useRouter } from "next/router";
+import router from "next/router";
+
+// Packages
+import axios from "axios";
 
 // My elements
 import { useUpdateUserProfile } from "@/graphql";
-import { useSelector } from "@/store";
 import { useUIContext } from "@/context";
 import { EditProfileFormOnSubmit } from "@/validations";
 
 // My Components
 import { EditProfileForm } from "./EditProfileForm";
 
-export const EditProfile = () => {
-  const { profileMe } = useSelector(({ profile }) => profile);
-  const { reload } = useRouter();
+export const EditProfile: FC = () => {
   const { updateUserProfile } = useUpdateUserProfile();
-  const { activateLoadingScreen } = useUIContext();
+  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
 
   async function onSubmit(values: EditProfileFormOnSubmit) {
-    activateLoadingScreen("Actualizando información");
+    activateLoadingScreen("Guardando cambios");
     const { name, lastname, birthday, province, municipality, sex } = values;
-    const newUserData = {
-      name,
-      lastname,
-      direction: { province: String(province.value), municipality: String(municipality?.value) },
-      birthday,
-      sex,
-      username: "",
-      password: "",
-    };
 
     try {
-      await updateUserProfile({
+      const { data } = await updateUserProfile({
         variables: {
-          newUserData,
+          input: {
+            name,
+            lastname,
+            direction: { provinceId: String(province.id), municipalityId: String(municipality?.id) },
+            birthday,
+            sex,
+          },
         },
       });
 
-      reload();
+      if (data && data.updateUserProfile.successful) {
+        const { data } = await axios.post("/api/auth/refreshtoken");
+        if (data.successful) router.reload();
+      } else {
+        closeLoadingScreen();
+      }
     } catch (err) {
-      console.log({ err });
+      closeLoadingScreen();
+      console.log(err);
     }
   }
 

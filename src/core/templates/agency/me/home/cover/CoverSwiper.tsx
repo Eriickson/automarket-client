@@ -1,4 +1,6 @@
+import { PrimaryCard } from "@/components";
 import { Img } from "@chakra-ui/image";
+import { VStack } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -20,7 +22,8 @@ export const CoverSwiper = () => {
     },
   ]);
   return (
-    <div>
+    <VStack alignItems="stretch">
+      <PrimaryCard />
       <Swiper
         autoplay={{ pauseOnMouseEnter: true, delay: 2500 }}
         slidesPerView={1}
@@ -34,6 +37,6 @@ export const CoverSwiper = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </VStack>
   );
 };

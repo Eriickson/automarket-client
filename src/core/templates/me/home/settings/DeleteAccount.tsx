@@ -1,6 +1,6 @@
 import { useUIContext } from "@/context";
-import { DeleteIcon } from "@chakra-ui/icons";
-import { MenuItem } from "@chakra-ui/react";
+import { MenuItem, Box } from "@chakra-ui/react";
+import { IconTrash } from "@tabler/icons";
 import React, { FC } from "react";
 
 export const DeleteAccount: FC = () => {
@@ -23,7 +23,19 @@ export const DeleteAccount: FC = () => {
   }
 
   return (
-    <MenuItem fontWeight="medium" icon={<DeleteIcon />} onClick={onDelete}>
+    <MenuItem py="1.5" onClick={onDelete}>
+      <Box
+        alignItems="center"
+        bgColor="pri.100"
+        color="pri.500"
+        display="flex"
+        h="6"
+        justifyContent="center"
+        mr="1.5"
+        w="6"
+      >
+        <IconTrash size="1.25rem" strokeWidth={1.5} />
+      </Box>{" "}
       Eliminar Cuenta
     </MenuItem>
   );

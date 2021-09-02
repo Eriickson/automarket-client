@@ -11,5 +11,5 @@ const MeAgency: NextPage<MeAgencyProps> = ({ agency }) => {
   );
 };
 
-export { meAgencyServerSide as getServerSideProps } from "@/servers";
+// export { meAgencyServerSide as getServerSideProps } from "@/servers";
 export default MeAgency;

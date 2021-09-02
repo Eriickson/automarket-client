@@ -1,27 +1,42 @@
-import { UploadFiles, CropImage } from "@/components";
+import React, { FC, useState } from "react";
+
+// NextJS
+import router from "next/router";
+
+// Packages
+import axios from "axios";
+import { Button, useDisclosure } from "@chakra-ui/react";
+
+// My Elements
+import { useUIContext } from "@/context";
 import { useUpdateProfilePicture } from "@/graphql";
 import { IGeneratedImage } from "@/shared";
-import { Button, useDisclosure } from "@chakra-ui/react";
-import React, { FC, useState } from "react";
+
+// My Components
+import { UploadFiles, CropImage } from "@/components";
 
 export const EditProfilePicture: FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [imageSelected, setImageSelected] = useState<IGeneratedImage | undefined>();
+  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
   const [imageToCrop, setImageToCrop] = useState<IGeneratedImage | undefined>();
-  const { updateProfilePicture, loading, data } = useUpdateProfilePicture();
+  const { updateProfilePicture } = useUpdateProfilePicture();
 
-  async function onChangeProfilePicture() {
-    if (!imageSelected) {
-      console.log("No hay imagen de perfil seleccionada");
-
-      return;
-    }
+  async function onChangeProfilePicture(newProfilePicture: IGeneratedImage) {
+    activateLoadingScreen("Actualizando imagen");
 
     try {
-      const { data } = await updateProfilePicture({ variables: { input: { profilePicture: imageSelected } } });
-      console.log(data);
+      const { data } = await updateProfilePicture({ variables: { input: { profilePicture: newProfilePicture } } });
+
+      if (data && data.updateProfilePicture.successful) {
+        const { data } = await axios.post("/api/auth/refreshtoken");
+
+        if (data.successful) router.reload();
+      } else {
+        closeLoadingScreen();
+      }
     } catch (err) {
       console.log(err);
+      closeLoadingScreen();
     }
   }
   return (
@@ -50,8 +65,7 @@ export const EditProfilePicture: FC = () => {
           }}
           onClose={onClose}
           onSave={newImage => {
-            setImageSelected({ ...imageToCrop, ...newImage });
-            onChangeProfilePicture();
+            onChangeProfilePicture({ ...imageToCrop, ...newImage });
           }}
         />
       )}

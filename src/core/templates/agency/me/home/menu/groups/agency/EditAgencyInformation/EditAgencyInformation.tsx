@@ -14,10 +14,44 @@ import {
 } from "@chakra-ui/react";
 import { IconEdit } from "@tabler/icons";
 import React, { FC } from "react";
+import { EditAgencyInformationFormType } from "@/validations";
 import { EditAgencyInformationForm } from "./EditAgencyInformationForm";
+import { useSelector } from "@/store";
+import { useUpdateMyAgencyInformation } from "@/graphql";
+import router from "next/router";
+import { useUIContext } from "@/context";
 
 export const EditAgencyInformation: FC = () => {
+  const { updateMyAgencyInformationFetch } = useUpdateMyAgencyInformation();
+  const { name } = useSelector(store => store.agency.myAgency);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
+
+  async function onSubmit(values: EditAgencyInformationFormType) {
+    activateLoadingScreen("Guardando Cambios...");
+    const { slogan } = values;
+
+    try {
+      const { data } = await updateMyAgencyInformationFetch({
+        input: {
+          isNewName: values.name !== name.trim(),
+          name: values.name,
+          slogan,
+        },
+      });
+
+      if (data?.updateMyAgencyInformation.successful) {
+        router.reload();
+        return;
+      }
+      console.log(data);
+      closeLoadingScreen();
+    } catch (err) {
+      console.log(err);
+      closeLoadingScreen();
+    }
+  }
+
   return (
     <>
       <MenuItem py="1.5" onClick={onOpen}>
@@ -44,14 +78,14 @@ export const EditAgencyInformation: FC = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <EditAgencyInformationForm />
+            <EditAgencyInformationForm onSubmit={onSubmit} />
           </ModalBody>
 
           <ModalFooter>
             <Button variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme="pri" ml={3}>
+            <Button colorScheme="pri" form="edit-agency-information-form" ml={3} type="submit">
               Guardar Cambios
             </Button>
           </ModalFooter>

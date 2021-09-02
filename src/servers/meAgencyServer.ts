@@ -1,10 +1,10 @@
 import { getAuth } from "@/auth";
 import { getApolloClient } from "@/graphql";
-import { GetServerSideProps, ProvidersProps } from "@/shared";
-import { GET_MY_AGENCY_Q, Agency, GetMyAgencyPayload } from "src/graphql/gql/queries/GetMyAgency";
+import { GetServerSideProps, ProvidersProps, Agency } from "@/shared";
+import { GET_MY_AGENCY_Q, GetMyAgencyPayload } from "src/graphql/gql/queries/GetMyAgency";
 
 export interface MeAgencyProps extends ProvidersProps {
-  agency: Agency;
+  myAgency: Agency;
 }
 
 export const meAgencyServerSide: GetServerSideProps<MeAgencyProps> = async ctx => {
@@ -17,10 +17,10 @@ export const meAgencyServerSide: GetServerSideProps<MeAgencyProps> = async ctx =
   const props: MeAgencyProps = {
     authProviderProps: auth,
     seo: {
-      title: "Este es el título",
+      title: response.data.getMyAgency.name + " - automarket RD",
       desc: "Esta es la descripción",
     },
-    agency: response.data.getMyAgency,
+    myAgency: response.data.getMyAgency,
   };
   return { props };
 };

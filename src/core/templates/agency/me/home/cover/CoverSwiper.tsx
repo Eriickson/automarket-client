@@ -28,8 +28,8 @@ export const CoverSwiper = () => {
         autoplay={{ pauseOnMouseEnter: true, delay: 2500 }}
         slidesPerView={1}
         spaceBetween={50}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={swiper => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+        // onSwiper={swiper => console.log(swiper)}
       >
         {swiperSlide.map((item, i) => (
           <SwiperSlide key={i}>

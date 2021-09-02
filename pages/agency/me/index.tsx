@@ -2,8 +2,12 @@ import { MeAgencyTemplate } from "@/templates";
 import { NextPage } from "next";
 import React from "react";
 import { MeAgencyProps } from "@/servers";
+import { useAction } from "@/store";
 
-const MeAgency: NextPage<MeAgencyProps> = ({ agency }) => {
+const MeAgency: NextPage<MeAgencyProps> = ({ myAgency }) => {
+  const { setMyAgency } = useAction();
+  setMyAgency(myAgency);
+
   return (
     <div>
       <MeAgencyTemplate />
@@ -11,5 +15,5 @@ const MeAgency: NextPage<MeAgencyProps> = ({ agency }) => {
   );
 };
 
-// export { meAgencyServerSide as getServerSideProps } from "@/servers";
+export { meAgencyServerSide as getServerSideProps } from "@/servers";
 export default MeAgency;

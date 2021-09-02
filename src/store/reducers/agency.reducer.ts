@@ -1,4 +1,4 @@
-import { IGeneratedImage, INumberPhone, IOption, Option } from "@/shared";
+import { Agency, IGeneratedImage, INumberPhone, IOption, Option } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
@@ -20,6 +20,7 @@ interface InitialState {
     };
   };
   exampeSelect: Option;
+  myAgency: Agency;
 }
 
 const initialState = {
@@ -36,8 +37,11 @@ const agencyReducer = createSlice({
     setExampleSelect(state, action: PayloadAction<Option>) {
       state.exampeSelect = action.payload;
     },
+    setMyAgency(state, action: PayloadAction<Agency>) {
+      state.myAgency = action.payload;
+    },
   },
 });
 
-export const { setNewAgencyInfo, setExampleSelect } = agencyReducer.actions;
+export const { setNewAgencyInfo, setExampleSelect, setMyAgency } = agencyReducer.actions;
 export default agencyReducer.reducer;

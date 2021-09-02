@@ -1,16 +1,25 @@
+import React, { FC } from "react";
+
+// Packages
+import { GridItem, SimpleGrid, VStack, Text, Box, Flex } from "@chakra-ui/react";
+import StickyBox from "react-sticky-box";
+
+// My Elements
+import { useSelector } from "@/store";
 import { PrimaryCard } from "@/components";
 import { MainLayout } from "@/layouts";
-import StickyBox from "react-sticky-box";
-import { GridItem, Img, SimpleGrid, VStack, Text, Box, Heading, Flex } from "@chakra-ui/react";
-import React, { FC } from "react";
+
+// My Components
 import { ContactsList } from "./contacts/ContactsList";
 import { CoverSwiper } from "./cover/CoverSwiper";
 import { MenuNew } from "./menu/MenuNew";
 import { ContainerPanel } from "./panels/ContainerPanel";
 import { StatisticsPanel } from "./StatisticsPanel";
-import { MyAgencyTabs } from "./tabs/MyAgencyTabs";
+import { AgencyLogo } from "./logo/AgencyLogo";
 
 export const MeAgencyTemplate: FC = () => {
+  const { name, slogan } = useSelector(store => store.agency.myAgency);
+
   return (
     <MainLayout>
       <Box>
@@ -18,15 +27,13 @@ export const MeAgencyTemplate: FC = () => {
           <GridItem colSpan={[12, null, 3]}>
             <StickyBox offsetTop={8}>
               <VStack alignItems="stretch">
-                <PrimaryCard>
-                  <Img shadow="sm" src="https://upload.wikimedia.org/wikipedia/en/6/68/TLS_Agency_logo.jpg" />
-                </PrimaryCard>
+                <AgencyLogo />
                 <PrimaryCard notBorderTop>
                   <Box lineHeight="normal">
                     <Text fontSize="2xl" fontWeight="semibold">
-                      Erickson Auto import
+                      {name}
                     </Text>
-                    <Text fontWeight="medium">Los más confiable en el negocio</Text>
+                    <Text fontWeight="medium">{slogan}</Text>
                   </Box>
                 </PrimaryCard>
                 <StatisticsPanel />

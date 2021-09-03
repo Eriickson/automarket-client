@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useWizard } from "@/components";
 import { ContactForm } from "./ContactForm";
 import { useAction } from "@/store";
+import { ContactList } from "./ContactList";
 
 export const ContactsStep: FC = () => {
   const { nextStep } = useWizard();
@@ -11,5 +12,9 @@ export const ContactsStep: FC = () => {
     nextStep();
   }
 
-  return <ContactForm onSubmit={onSubmit} />;
+  return (
+    <>
+      <ContactForm onSubmit={onSubmit} />
+    </>
+  );
 };

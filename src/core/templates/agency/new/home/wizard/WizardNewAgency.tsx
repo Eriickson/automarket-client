@@ -24,14 +24,14 @@ export const WizardNewAgency: FC = () => {
     },
 
     // TODO: Agregar step de contactos en nueva publicación
-    // {
-    //   label: "Contactos",
-    //   nameForm: "agency-data",
-    //   desc: "Agrega las diferentes vías en que un cliente se puede comunicar con el personal de la agencia.",
-    //   title: "Vías de comunicación",
-    //   Icon: <IconPhoneCall />,
-    //   Component: <ContactsStep />,
-    // },
+    {
+      label: "Contactos",
+      nameForm: "agency-data",
+      desc: "Agrega las diferentes vías en que un cliente se puede comunicar con el personal de la agencia.",
+      title: "Vías de comunicación",
+      Icon: <IconPhoneCall />,
+      Component: <ContactsStep />,
+    },
     {
       label: "Verificar",
       nameForm: "agency-data",

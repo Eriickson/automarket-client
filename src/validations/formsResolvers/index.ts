@@ -10,3 +10,4 @@ export * from "./confirmPasswordForm";
 export * from "./newAgencyDataForm";
 export * from "./newAgencyUbication";
 export * from "./editAgencyInformationForm";
+export * from "./changeUserPassword";

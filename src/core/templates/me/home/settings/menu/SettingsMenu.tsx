@@ -7,7 +7,7 @@ import { SettingsIcon } from "@chakra-ui/icons";
 // My Components
 import { DisableAccount } from "../DisableAccount";
 import { DeleteAccount } from "../DeleteAccount";
-import { ChangePassword } from "../ChangePassword";
+import { ChangePassword } from "../changeUserPassword/ChangeUserPassword";
 import styled from "@emotion/styled";
 import { IconDotsVertical } from "@tabler/icons";
 

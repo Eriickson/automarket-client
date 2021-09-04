@@ -8,3 +8,4 @@ export * from "./refreshUserToken";
 export * from "./logoutUser";
 export * from "./updateMyAgencyInformation";
 export * from "./updateAgencyLogo";
+export * from "./ChangeUserPassword";

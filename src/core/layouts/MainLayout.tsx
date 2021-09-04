@@ -1,15 +1,16 @@
 import React, { FC } from "react";
 import { Box, Container } from "@chakra-ui/react";
-import { MainHeader, MainFooter } from "@/components";
+import { MainHeader, MainFooter, BannerBottom } from "@/components";
 import { TransitionPageFade } from "../animations";
 
 export const MainLayout: FC = ({ children }) => {
   return (
     <TransitionPageFade>
-      <Box minH="100vh" display="flex" flexDirection="column" justifyContent="space-between">
+      <Box display="flex" flexDirection="column" justifyContent="space-between" minH="100vh">
         <MainHeader />
-        <Box flex="1" pt="2" pb="5" display="flex" bgColor="gray.50">
+        <Box bgColor="gray.50" display="flex" flex="1" pb="5" pt="2">
           <Container>{children}</Container>
+          <BannerBottom />
         </Box>
         <MainFooter />
       </Box>

@@ -2,10 +2,9 @@ import React, { FC } from "react";
 
 // NextJS
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 // Packages
-import { Box, Button, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
+import { Box, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
 
 // My Elements
 import { useUIContext } from "@/context";
@@ -25,13 +24,6 @@ export const CardPresentation: FC = () => {
 
   return (
     <>
-      <Link href="/agency/new">
-        <a>
-          <Button colorScheme="sec" w="full">
-            Crea tu agencia
-          </Button>
-        </a>
-      </Link>
       <PrimaryCard>
         <HStack alignItems="flex-start" spacing="4">
           <Flex flex="1">

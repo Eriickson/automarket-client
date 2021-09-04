@@ -44,8 +44,8 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
             <Textarea
               _focus={{ borderWidth: "2px", borderColor: "pri.500" }}
               minH="32"
-              px="3"
               placeholder="Escribe algo..."
+              px="3"
               rounded="sm"
               shadow="sm"
             />
@@ -86,7 +86,7 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
           </Box>
           <Box>
             <LabelInput label="Disponibilidad" />
-            <Box overflow="auto" mt="2">
+            <Box mt="2" overflow="auto">
               <RadioGroup>
                 <Table size="sm">
                   <Thead>
@@ -102,10 +102,10 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
                         <Text w="max-content">Puñal/Santiago (SEDE)</Text>
                       </Td>
                       <Td>
-                        <Checkbox size="lg" mx="auto" />
+                        <Checkbox mx="auto" size="lg" />
                       </Td>
                       <Td>
-                        <Radio name="storaged" value="1" size="lg" mx="auto" />
+                        <Radio mx="auto" name="storaged" size="lg" value="1" />
                       </Td>
                     </Tr>
                     <Tr>
@@ -113,21 +113,10 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
                         <Text w="max-content">Hato Mayor/Santiago</Text>
                       </Td>
                       <Td>
-                        <Checkbox size="lg" mx="auto" />
+                        <Checkbox mx="auto" size="lg" />
                       </Td>
                       <Td>
-                        <Radio name="storaged" value="2" size="lg" mx="auto" />
-                      </Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
-                      </Td>
-                      <Td>
-                        <Checkbox size="lg" mx="auto" />
-                      </Td>
-                      <Td>
-                        <Radio name="storaged" value="3" size="lg" mx="auto" />
+                        <Radio mx="auto" name="storaged" size="lg" value="2" />
                       </Td>
                     </Tr>
                     <Tr>
@@ -135,10 +124,10 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
                         <Text w="max-content">Bella Vista/Santo Domingo</Text>
                       </Td>
                       <Td>
-                        <Checkbox size="lg" mx="auto" />
+                        <Checkbox mx="auto" size="lg" />
                       </Td>
                       <Td>
-                        <Radio name="storaged" value="4" size="lg" mx="auto" />
+                        <Radio mx="auto" name="storaged" size="lg" value="3" />
                       </Td>
                     </Tr>
                     <Tr>
@@ -146,10 +135,21 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
                         <Text w="max-content">Bella Vista/Santo Domingo</Text>
                       </Td>
                       <Td>
-                        <Checkbox size="lg" mx="auto" />
+                        <Checkbox mx="auto" size="lg" />
                       </Td>
                       <Td>
-                        <Radio name="storaged" value="5" size="lg" mx="auto" />
+                        <Radio mx="auto" name="storaged" size="lg" value="4" />
+                      </Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
+                      </Td>
+                      <Td>
+                        <Checkbox mx="auto" size="lg" />
+                      </Td>
+                      <Td>
+                        <Radio mx="auto" name="storaged" size="lg" value="5" />
                       </Td>
                     </Tr>
                   </Tbody>

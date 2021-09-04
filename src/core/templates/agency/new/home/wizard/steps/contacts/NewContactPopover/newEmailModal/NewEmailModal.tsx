@@ -16,24 +16,26 @@ import {
   Box,
 } from "@chakra-ui/react";
 import React, { useState, FC } from "react";
-import { useFormContext, useFieldArray } from "react-hook-form";
+import { useFieldArray, FormProvider, useForm } from "react-hook-form";
 
 export const NewEmailModal: FC = () => {
-  const { getValues, control, reset } = useFormContext();
+  const methods = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [service, setService] = useState("gmail");
-  const { append, fields } = useFieldArray({ name: "emails", control: control });
+  const { prepend, fields } = useFieldArray({ control: methods.control, name: "emails" });
 
   function generateNewEmmail() {
-    const [title, email] = getValues(["emailTitle", "titleNewEmail"]);
-    append({ email: { title, email, service } }, { focusName: "emailTitle" });
-    reset({ emailTitle: "", titleNewEmail: "" });
+    const [title, email] = methods.getValues(["emailTitle", "titleNewEmail"]);
+    const newEmail = { title, email, service };
+
+    prepend(newEmail, { focusName: "emailTitle" });
+    methods.reset({ emailTitle: "", titleNewEmail: "" });
   }
 
   console.log({ fields });
 
   return (
-    <>
+    <FormProvider {...methods}>
       <Button colorScheme="pri" onClick={onOpen}>
         Correo Electrónico
       </Button>
@@ -79,6 +81,6 @@ export const NewEmailModal: FC = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </FormProvider>
   );
 };

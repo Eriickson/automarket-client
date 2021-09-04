@@ -1,22 +1,15 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 
 // Packages
 import { Box, Flex, Text, IconButton, Stack, StackDivider } from "@chakra-ui/react";
 import { IconMail, IconPhone, IconTrash } from "@tabler/icons";
-import { useFieldArray, useForm, useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
 // My Components
 
 export const ContactList: FC = () => {
   const { control } = useFormContext();
-  const { getValues } = useForm();
   const { fields, remove } = useFieldArray({ name: "emails", control });
-
-  useEffect(() => {
-    console.log({ fields });
-  }, [fields]);
-
-  console.log(getValues());
 
   return (
     <Stack divider={<StackDivider />}>

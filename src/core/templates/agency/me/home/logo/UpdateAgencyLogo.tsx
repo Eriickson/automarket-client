@@ -17,8 +17,11 @@ export const UpdateAgencyLogo: FC = () => {
   const { updateAgencyLogoFetch } = useUpdateAgencyLogo();
 
   async function updateAgencyLogo(newLogo: IGeneratedImage) {
+    const input = { input: { newLogo } };
+    console.log(input);
+
     try {
-      const response = await updateAgencyLogoFetch({ input: { newLogo } });
+      const response = await updateAgencyLogoFetch(input);
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -44,7 +47,7 @@ export const UpdateAgencyLogo: FC = () => {
       />
       {logoSelected && (
         <CropImage
-          defaultValue={{ aspectRatio: "1:1" }}
+          defaultValue={{ aspectRatio: "4:3" }}
           image={logoSelected}
           isOpen={isOpen}
           name="agency-logo"

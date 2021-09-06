@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useWizard } from "./WizardContext";
-import { Box, Heading, Text, IconButton } from "@chakra-ui/react";
+import { chakra, Box, Heading, Text, IconButton } from "@chakra-ui/react";
 
 export const StepIndicatorSm: FC = () => {
   const { currentStep, stepList } = useWizard();
@@ -20,9 +20,9 @@ export const StepIndicatorSm: FC = () => {
         />
         <Box>
           <Text color="gray.500" display="flex" fontSize="sm" fontWeight="semibold" lineHeight="normal">
-            <Text color="pri.600" mr="1">
+            <chakra.span color="pri.600" mr="1">
               Paso {currentStep + 1}
-            </Text>
+            </chakra.span>
             / {stepList.length}
           </Text>
           <Heading fontSize="lg" fontWeight="800">

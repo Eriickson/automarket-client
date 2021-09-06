@@ -52,7 +52,7 @@ export const ChangePassword: FC = () => {
         </Box>
         Cambiar Contraseña
       </MenuItem>
-      <Modal isOpen={isOpen} size="sm" onClose={onClose}>
+      <Modal isCentered isOpen={isOpen} size="sm" onClose={onClose}>
         <ModalOverlay />
         <ModalContent rounded="sm">
           <ModalHeader>Cambia tu contraseña</ModalHeader>

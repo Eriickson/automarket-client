@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { useEffect, FC } from "react";
 
 // Packages
 import { Box, Flex, Text, IconButton, Stack, StackDivider } from "@chakra-ui/react";
@@ -9,7 +9,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 
 export const ContactList: FC = () => {
   const { control } = useFormContext();
-  const { fields, remove } = useFieldArray({ name: "emails", control });
+  const { prepend, fields } = useFieldArray({ control, name: "contacts.emails" });
 
   return (
     <Stack divider={<StackDivider />}>
@@ -45,7 +45,7 @@ export const ContactList: FC = () => {
             icon={<IconTrash size="1.25rem" />}
             size="sm"
             variant="ghost"
-            onClick={() => remove(i)}
+            // onClick={() => remove(i)}
           />
         </Flex>
       ))}

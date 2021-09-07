@@ -1,16 +1,3 @@
-export interface ISession {
-  user: {
-    _id: string;
-    name: string;
-    lastname: string;
-    email: string;
-    profilePicture: string;
-  };
-  token: string;
-  updateAge: string;
-  maxAge: string;
-}
-
 interface UserAuthPayload {
   id: string;
   name: string;
@@ -33,3 +20,5 @@ export interface AuthPayload {
   accessToken?: string;
   isAuth: boolean;
 }
+
+export type RolesAuth = "ALL" | "VISITANT" | "USER" | "AGENCY";

@@ -15,14 +15,29 @@ import {
   Checkbox,
   Box,
 } from "@chakra-ui/react";
-import React, { FC } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState, FC } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { Contact } from "../AddContacts";
 
-export const NewPhoneNumbers: FC = () => {
-  const [value, setValue] = React.useState("1");
+interface NewPhoneNumbersProps {
+  getNewPhoneNumber(newPhoneNumber: Contact): void;
+}
+
+export const NewPhoneNumbers: FC<NewPhoneNumbersProps> = ({ getNewPhoneNumber }) => {
+  const methods = useForm();
+  const [use, setUse] = useState(["calls"]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function generateNewPhoneNumber() {
+    const [label, value] = methods.getValues(["title", "value"]);
+
+    getNewPhoneNumber({ label, value, payload: { use } });
+    // methods.setFocus("title");
+    methods.reset(["title", "value"]);
+  }
+
   return (
-    <>
+    <FormProvider {...methods}>
       <Button colorScheme="pri" onClick={onOpen}>
         Número telefónico
       </Button>
@@ -39,19 +54,23 @@ export const NewPhoneNumbers: FC = () => {
               </Box>
               <Box>
                 <LabelInput label="Uso" />
-                <CheckboxGroup colorScheme="pri" defaultValue={["naruto", "kakashi"]}>
+                <CheckboxGroup
+                  colorScheme="pri"
+                  defaultValue={["calls"]}
+                  onChange={value => setUse(value.map(value => String(value)))}
+                >
                   <HStack>
-                    <Checkbox value="kakashi">
+                    <Checkbox value="calls">
                       <Badge colorScheme="green" ml="-1">
                         Llamadas
                       </Badge>
                     </Checkbox>
-                    <Checkbox value="naruto">
+                    <Checkbox value="whatsapp">
                       <Badge colorScheme="whatsapp" ml="-1">
                         Whatsapp
                       </Badge>
                     </Checkbox>
-                    <Checkbox value="sasuke">
+                    <Checkbox value="telegram">
                       <Badge colorScheme="telegram" ml="-1">
                         Telegram
                       </Badge>
@@ -65,10 +84,12 @@ export const NewPhoneNumbers: FC = () => {
             <Button colorScheme="danger" mr={3} variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme="pri">Guardar</Button>
+            <Button colorScheme="pri" onClick={generateNewPhoneNumber}>
+              Guardar
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </FormProvider>
   );
 };

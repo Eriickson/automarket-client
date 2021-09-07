@@ -21,3 +21,4 @@ export * from "./avatar";
 export * from "./agency";
 export * from "./attendanceBanner";
 export * from "./bannerBottom";
+export * from "./addContact";

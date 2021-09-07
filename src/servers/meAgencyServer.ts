@@ -1,4 +1,4 @@
-import { getAuth } from "@/auth";
+import { authorization } from "@/auth";
 import { getApolloClient } from "@/graphql";
 import { GetServerSideProps, ProvidersProps, Agency } from "@/shared";
 import { GET_MY_AGENCY_Q, GetMyAgencyPayload } from "src/graphql/gql/queries/GetMyAgency";
@@ -8,7 +8,7 @@ export interface MeAgencyProps extends ProvidersProps {
 }
 
 export const meAgencyServerSide: GetServerSideProps<MeAgencyProps> = async ctx => {
-  const auth = await getAuth({ ctx, privateRouter: true });
+  const auth = await authorization({ ctx, roles: ["AGENCY"] });
 
   const { client } = getApolloClient({ token: auth.accessToken });
 

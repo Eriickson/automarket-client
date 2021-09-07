@@ -5,15 +5,9 @@ import { NextPage } from "next";
 
 // My Components
 import { IndexTemplate } from "@/templates";
-import { SEO } from "@/components";
 
 const IndexPage: NextPage = () => {
-  return (
-    <SEO desc="Automarket RD" title="Inicio">
-      <IndexTemplate />
-      {/* <AttendanceBanner /> */}
-    </SEO>
-  );
+  return <IndexTemplate />;
 };
 
 export { indexServerSide as getServerSideProps } from "@/servers";

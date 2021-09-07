@@ -1,11 +1,11 @@
 import { PrimaryCard } from "@/components";
 import { Img } from "@chakra-ui/image";
 import { VStack } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-export const CoverSwiper = () => {
-  const [swiperSlide, setSwiperSlide] = useState([
+export const CoverSwiper: FC = () => {
+  const [swiperSlide] = useState([
     {
       imageUrl:
         "https://media-exp1.licdn.com/dms/image/C4E1BAQHApvoBrLTqGA/company-background_10000/0?e=2159024400&v=beta&t=7x5V55U5mxMIMNePSB-TiPt3OdigvrE5tgwrbBQkW-k",
@@ -24,13 +24,7 @@ export const CoverSwiper = () => {
   return (
     <VStack alignItems="stretch">
       <PrimaryCard />
-      <Swiper
-        autoplay={{ pauseOnMouseEnter: true, delay: 2500 }}
-        slidesPerView={1}
-        spaceBetween={50}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={swiper => console.log(swiper)}
-      >
+      <Swiper autoplay={{ pauseOnMouseEnter: true, delay: 2500 }} slidesPerView={1} spaceBetween={50}>
         {swiperSlide.map((item, i) => (
           <SwiperSlide key={i}>
             <Img src={item.imageUrl} />

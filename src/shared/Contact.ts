@@ -1,6 +1,6 @@
-export interface INumberPhone {
+export interface Contact {
   title: string;
-  hasWhatsapp: boolean;
   value: string;
+  payload: Record<string, string | string[]>;
 }
 export type ContactType = "PHONE_NUMBER" | "EMAIL";

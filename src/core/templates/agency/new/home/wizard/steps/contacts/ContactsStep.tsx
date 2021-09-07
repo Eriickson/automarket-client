@@ -7,7 +7,9 @@ export const ContactsStep: FC = () => {
   const { nextStep } = useWizard();
   const { setNewAgencyInfo } = useAction();
   async function onSubmit(values: any) {
-    setNewAgencyInfo({ contacts: { numbersPhone: values.numberPhone } });
+    console.log(values);
+
+    setNewAgencyInfo({ contacts: values });
     nextStep();
   }
 

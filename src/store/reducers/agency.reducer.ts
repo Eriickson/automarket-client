@@ -1,4 +1,4 @@
-import { Agency, IGeneratedImage, INumberPhone, IOption, Option } from "@/shared";
+import { Agency, IGeneratedImage, Contact, Option } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
@@ -16,7 +16,8 @@ interface InitialState {
       reference: string;
     };
     contacts: {
-      numbersPhone: INumberPhone[];
+      phoneNumbers: Contact[];
+      emails: Contact[];
     };
   };
   exampeSelect: Option;

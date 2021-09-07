@@ -1,16 +1,16 @@
-import { getAuth } from "@/auth";
+import { authorization } from "@/auth";
 import { GetServerSideProps, ProvidersProps } from "@/shared";
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface IndexProps extends ProvidersProps {}
 
 export const indexServerSide: GetServerSideProps<IndexProps> = async ctx => {
-  const auth = await getAuth({ ctx });
+  const auth = await authorization({ ctx, roles: ["ALL"] });
 
   const props: IndexProps = {
     authProviderProps: auth,
     seo: {
-      title: "Este es el título",
+      title: "Inicio - Automarket rd",
       desc: "Esta es la descripción",
     },
   };

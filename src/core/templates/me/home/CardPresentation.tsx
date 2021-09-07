@@ -2,9 +2,10 @@ import React, { FC } from "react";
 
 // NextJS
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // Packages
-import { Box, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
+import { Box, HStack, Text, Flex, Avatar, Link as ChakraLink, Button } from "@chakra-ui/react";
 
 // My Elements
 import { useUIContext } from "@/context";
@@ -41,7 +42,14 @@ export const CardPresentation: FC = () => {
                 </Text>
                 <Text fontWeight="medium">@{profileMe.username}</Text>
               </Box>
-              <EditProfilePicture />
+              <HStack>
+                <EditProfilePicture />
+                <Link href="agency/me">
+                  <ChakraLink>
+                    <Button colorScheme="pri">Ir a mi agencía</Button>
+                  </ChakraLink>
+                </Link>
+              </HStack>
             </Box>
           </Flex>
           <SettingsMenu />

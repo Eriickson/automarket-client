@@ -14,9 +14,14 @@ export const ChangePasswordForm: FC<ChangePasswordFormProps> = ({ onSubmit }) =>
     <FormProvider {...methods}>
       <form id="change-user-password" onSubmit={methods.handleSubmit(onSubmit)}>
         <VStack>
-          <InputControl label="Contraseña actual" name="currentPassword" />
-          <InputControl label="Nueva contraseña" name="newPassword" />
-          <InputControl label="Confirmar nueva contraseña" name="confirmNewPassword" />
+          <InputControl isRequired inputProps={{ type: "password" }} label="Contraseña actual" name="currentPassword" />
+          <InputControl isRequired inputProps={{ type: "password" }} label="Nueva contraseña" name="newPassword" />
+          <InputControl
+            isRequired
+            inputProps={{ type: "password" }}
+            label="Confirmar nueva contraseña"
+            name="confirmNewPassword"
+          />
         </VStack>
       </form>
     </FormProvider>

@@ -10,7 +10,7 @@ export const AccordionItemPostDateForm = () => {
         name="postDate"
         radioItems={[
           {
-            label: "Todo",
+            label: "Todas",
             value: "all",
           },
           {

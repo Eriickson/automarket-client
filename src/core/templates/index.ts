@@ -19,3 +19,5 @@ export * from "./post/vehicle/uuid/edit/home/VehicleEditTemplate";
 export * from "./post/vehicle/searcher/home/SearcherVehicleTemplate";
 
 export * from "./me/home/MeTemplate";
+
+export * from "./pricing/PricingTemplate";

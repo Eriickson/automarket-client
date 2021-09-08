@@ -1,9 +1,12 @@
 import { PrimaryCard } from "@/components";
+import { useSelector } from "@/store";
 import { Heading, HStack, Stat, StatHelpText, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import numeral from "numeral";
 import React, { FC } from "react";
 
 export const StatisticsPanel: FC = () => {
+  const { branches } = useSelector(({ agency }) => agency.myAgency);
+
   return (
     <PrimaryCard notBorderTop>
       <Heading fontSize={["md", null, "lg"]}>Estadísticas</Heading>
@@ -25,7 +28,7 @@ export const StatisticsPanel: FC = () => {
           <StatLabel>Sucursales</StatLabel>
           <StatNumber>
             <Text alignItems="flex-end" display="flex">
-              1
+              {branches.length}
               <Text color="gray.500" fontSize="sm" mb="1" ml="1">
                 de 2
               </Text>

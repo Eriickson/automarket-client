@@ -1,4 +1,5 @@
 import { InputControl, LabelInput, InputMask } from "@/components";
+import { Contact } from "@/shared";
 import {
   Modal,
   ModalOverlay,
@@ -17,8 +18,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Contact } from "../AddContacts";
-
 interface NewPhoneNumbersProps {
   getNewPhoneNumber(newPhoneNumber: Contact): void;
 }
@@ -31,8 +30,8 @@ export const NewPhoneNumbers: FC<NewPhoneNumbersProps> = ({ getNewPhoneNumber })
   function generateNewPhoneNumber() {
     const [label, value] = methods.getValues(["title", "value"]);
 
-    getNewPhoneNumber({ label, value, payload: { use } });
-    // methods.setFocus("title");
+    getNewPhoneNumber({ label, value });
+    methods.setFocus("title");
     methods.reset(["title", "value"]);
   }
 
@@ -52,7 +51,7 @@ export const NewPhoneNumbers: FC<NewPhoneNumbersProps> = ({ getNewPhoneNumber })
                 <LabelInput isRequired label="Número telefónico" />
                 <InputMask mask="+1 (999) 999-9999" name="value" />
               </Box>
-              <Box>
+              {/* <Box>
                 <LabelInput label="Uso" />
                 <CheckboxGroup
                   colorScheme="pri"
@@ -77,7 +76,7 @@ export const NewPhoneNumbers: FC<NewPhoneNumbersProps> = ({ getNewPhoneNumber })
                     </Checkbox>
                   </HStack>
                 </CheckboxGroup>
-              </Box>
+              </Box> */}
             </VStack>
           </ModalBody>
           <ModalFooter px="4">

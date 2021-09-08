@@ -1,4 +1,5 @@
 import { InputControl, LabelInput } from "@/components";
+import { Contact } from "@/shared";
 import {
   Modal,
   ModalOverlay,
@@ -17,7 +18,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Contact } from "../AddContacts";
 
 interface NewEmailModalProps {
   getNewEmail(newEmail: Contact): void;
@@ -32,7 +32,7 @@ export const NewEmailModal: FC<NewEmailModalProps> = ({ getNewEmail }) => {
 
   function generateNewEmmail() {
     const [label, value] = methods.getValues(["emailTitle", "titleNewEmail"]);
-    const newEmail: Contact = { label, value, payload: { service } };
+    const newEmail: Contact = { label, value };
 
     getNewEmail(newEmail);
 

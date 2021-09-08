@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useUIContext } from "@/context";
-import { ScreenLoader, AlertDialog, AlertApolloServerError, ConfirmPasswordModal } from "@/components";
+import { ScreenLoader, AlertDialog, AlertApolloServerError } from "@/components";
 
 export const UIProvider: FC = ({ children }) => {
   const { isLoadingScreenActive, closeLoadingScreen, msgLoadingScreen, alertDialog, apolloServerError } =
@@ -11,15 +11,15 @@ export const UIProvider: FC = ({ children }) => {
       {children}
       <ScreenLoader isOpen={isLoadingScreenActive} msg={msgLoadingScreen} onClose={closeLoadingScreen} />
       <AlertDialog
-        isOpen={alertDialog.isOpen}
         cancelRef={alertDialog.cancelRef}
+        isOpen={alertDialog.isOpen}
         onClose={alertDialog.onClose}
         {...alertDialog.options}
       />
       <AlertApolloServerError
+        cancelRef={apolloServerError.cancelRef}
         isOpen={apolloServerError.hasError}
         onClose={apolloServerError.onClose}
-        cancelRef={apolloServerError.cancelRef}
         {...apolloServerError.options}
       />
       {/* <ConfirmPasswordModal/> */}

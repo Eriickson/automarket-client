@@ -21,6 +21,7 @@ export const GET_MY_AGENCY_Q = gql`
         name
         uuid
         isSede
+        uuid
         ubication {
           direction {
             province {
@@ -37,7 +38,21 @@ export const GET_MY_AGENCY_Q = gql`
             }
           }
         }
-        uuid
+      }
+      selectedBranch {
+        id
+        name
+        isSede
+        contacts {
+          emails {
+            label
+            value
+          }
+          phoneNumbers {
+            label
+            value
+          }
+        }
       }
     }
   }

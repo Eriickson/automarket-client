@@ -3,7 +3,7 @@ import React, { FC } from "react";
 // Packages
 import Zoom from "react-medium-image-zoom";
 import { IconEdit } from "@tabler/icons";
-import { Flex, Text, StackDivider, VStack, Img, IconButton } from "@chakra-ui/react";
+import { Flex, Text, StackDivider, VStack, Img, IconButton, UnorderedList, ListIcon, ListItem } from "@chakra-ui/react";
 
 // My Elements
 import { useSelector } from "@/store";
@@ -11,9 +11,10 @@ import { capitalizeString } from "@/utils";
 import { FormWizardProvider, useWizard } from "@/components";
 import { useCreateAgencyPayload } from "@/graphql";
 import { useForm } from "react-hook-form";
+import { PhoneIcon } from "@chakra-ui/icons";
 
 export const VerifyStep: FC = () => {
-  const { agencyData, ubication } = useSelector(({ agency }) => agency.new);
+  const { agencyData, ubication, contacts } = useSelector(({ agency }) => agency.new);
   const methods = useForm();
   const { createAgency } = useCreateAgencyPayload();
   const { changeStep } = useWizard();
@@ -30,6 +31,7 @@ export const VerifyStep: FC = () => {
           reference: ubication.reference,
         },
       },
+      contacts,
     };
 
     try {
@@ -97,6 +99,23 @@ export const VerifyStep: FC = () => {
               ubication.province.label,
             ].join(" / ")}
           </Text>
+        </Flex>
+        <Flex justifyContent="flex-start">
+          <Text color="gray.400" flex="1" fontWeight="medium" mr="5" textAlign="end">
+            Contactos
+          </Text>
+          <UnorderedList flex="1" fontWeight="semibold">
+            {contacts.phoneNumbers.map((phoneNumber, i) => (
+              <ListItem key={i}>
+                {phoneNumber.label}: {phoneNumber.value}
+              </ListItem>
+            ))}
+            {contacts.emails.map((email, i) => (
+              <ListItem key={i}>
+                {email.label}: {email.value}
+              </ListItem>
+            ))}
+          </UnorderedList>
         </Flex>
         {/* <Flex justifyContent="flex-start">
           <Text color="gray.400" flex="1" fontWeight="medium" mr="5" textAlign="end">

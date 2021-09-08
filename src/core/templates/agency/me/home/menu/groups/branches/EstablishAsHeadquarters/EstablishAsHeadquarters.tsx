@@ -22,27 +22,14 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
-import { IconBuildingStore, IconMapPin } from "@tabler/icons";
+import { IconBuildingStore, IconMapPin, IconStar } from "@tabler/icons";
+import { useSelector } from "@/store";
 
 export const EstablishAsHeadquarters: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { branches, selectedBranch } = useSelector(({ agency }) => agency.myAgency);
 
   const [value, setValue] = useState("1");
-
-  const [branches, setBranches] = useState([
-    {
-      name: "Erickson Auto Import - Sucursal Puñal, Santiago",
-    },
-    {
-      name: "Lorem ipsum dolor sit amet",
-    },
-    {
-      name: "Lorem ipsum dolor sit amet",
-    },
-    {
-      name: "Lorem ipsum dolor sit amet",
-    },
-  ]);
 
   return (
     <>
@@ -67,31 +54,57 @@ export const EstablishAsHeadquarters: FC = () => {
           <ModalHeader>
             <Text>Establecer como Sede</Text>
             <Text color="gray.400" fontSize="sm" fontWeight="normal" lineHeight="normal" pr="6">
-              Selecciona una sucursal para la nueva sede
+              Selecciona una sucursal para ser la nueva sede
             </Text>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <RadioGroup value={value} onChange={setValue}>
               <List>
-                {branches.map((branch, i) => (
-                  <>
-                    <ListItem key={i}>
-                      <Radio alignItems="start" display="flex" py="3" size="lg" value={i} w="full">
-                        <Text fontSize="md" fontWeight="medium" mt="-1">
-                          {branch.name}
-                        </Text>
-                        <Flex alignItems="center" color="gray.500" mt="-1">
-                          <IconMapPin size="1rem" />
-                          <Text fontSize="sm" ml="0.5" mt="0.5">
-                            Canabacoa, Puñal, Santiago
+                {branches.map((branch, i) => {
+                  const { municipality, province, reference, sector } = branch.ubication.direction;
+                  return (
+                    <>
+                      <ListItem key={i}>
+                        <Radio
+                          alignItems="start"
+                          disabled={selectedBranch.id === branch.id}
+                          display="flex"
+                          py="3"
+                          size="lg"
+                          value={"0"}
+                          w="full"
+                        >
+                          <Text display="flex" fontSize="md" fontWeight="medium" mt="-1">
+                            {branch.name}{" "}
+                            {branch.isSede && (
+                              <Box
+                                alignItems="center"
+                                bgColor="pri.100"
+                                color="pri.500"
+                                display="flex"
+                                h="5"
+                                justifyContent="center"
+                                ml="3"
+                                w="5"
+                              >
+                                <IconStar width="1rem" />
+                              </Box>
+                            )}
                           </Text>
-                        </Flex>
-                      </Radio>
-                    </ListItem>
-                    <Divider />
-                  </>
-                ))}
+                          <Flex alignItems="center" color="gray.500" mt="-1">
+                            <IconMapPin size="1rem" />
+                            <Text fontSize="sm" ml="0.5" mt="0.5">
+                              {reference && `${reference}, `}
+                              {sector?.label}, {municipality.label}, {province.label}
+                            </Text>
+                          </Flex>
+                        </Radio>
+                      </ListItem>
+                      <Divider />
+                    </>
+                  );
+                })}
               </List>
             </RadioGroup>
           </ModalBody>

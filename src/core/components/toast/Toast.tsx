@@ -8,36 +8,39 @@ import {
   RenderProps,
   CloseButton,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 import { useUIContext } from "@/context";
 
 export interface IToastOptions {
   title: string;
   desc: string;
+  status: "success" | "info" | "warning" | "error" | undefined;
 }
 
-interface ToastProps extends RenderProps, IToastOptions {}
+type ToastProps = IToastOptions;
 
-export const Toast: FC<ToastProps> = ({ title, desc, onClose }) => {
-  const options = useUIContext();
-  console.log(options);
-
+export const Toast: FC<ToastProps> = ({ title, desc, status }) => {
   return (
-    <Alert alignItems="center" status="error" variant="left-accent">
+    <Alert alignItems="flex-start" status={status} variant="left-accent">
       <AlertIcon />
-      {/* <AlertTitle>{toast.options.title}</AlertTitle> */}
-      <AlertDescription>
-        <Text fontSize="sm" fontWeight="medium" pr="4">
-          {/* {toast.options.desc} */}
-        </Text>
-      </AlertDescription>
+      <Flex flexDir="column">
+        <AlertTitle lineHeight="6" userSelect="none">
+          {title}
+        </AlertTitle>
+        <AlertDescription>
+          <Text fontSize="sm" fontWeight="medium" lineHeight="4" pr="4" userSelect="none">
+            {desc}
+          </Text>
+        </AlertDescription>
+      </Flex>
       <CloseButton
         _focus={{
           ring: 0,
         }}
         borderRadius="sm"
         size="sm"
-        onClick={onClose}
+        // onClick={onClose}
       />
     </Alert>
   );

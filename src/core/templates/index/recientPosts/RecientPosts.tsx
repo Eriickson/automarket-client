@@ -52,7 +52,7 @@ export const RecientPosts: FC = () => {
                         RD$ 250,000
                       </Badge>
 
-                      <Img src={vehicle} />
+                      <Img src={vehicle} userSelect="none" />
                     </Box>
                     <Box p="2">
                       <Flex>

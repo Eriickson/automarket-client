@@ -26,7 +26,7 @@ interface IUIContext {
   };
   toast: {
     showToast(options: IToastOptions): void;
-    options: IToastOptions;
+    // options: IToastOptions;
   };
   breadcrumbs: {
     items: Breadcrumbs[];
@@ -60,7 +60,7 @@ const UIContextProvider: FC = ({ children }) => {
   const cancelRefAlertApolloServerError = useRef(null);
 
   // Toast
-  const [toastOptions, setToastOptions] = useState<IToastOptions>({ title: "", desc: "" });
+  // const [toastOptions, setToastOptions] = useState<IToastOptions>({ title: "", desc: "" });
   const toast = useToast();
 
   // Breadcrumb
@@ -104,8 +104,7 @@ const UIContextProvider: FC = ({ children }) => {
 
   // Toast
   function showToast(options: IToastOptions) {
-    setToastOptions(options);
-    toast({ render: Toast });
+    toast({ position: "top-right", render: () => <Toast {...options} /> });
   }
 
   return (
@@ -136,7 +135,7 @@ const UIContextProvider: FC = ({ children }) => {
         },
         toast: {
           showToast,
-          options: toastOptions,
+          // options: toastOptions,
         },
         breadcrumbs: {
           items: breadcrumbItems,

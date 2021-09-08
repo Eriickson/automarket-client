@@ -15,4 +15,5 @@ export interface Agency {
   isDisabled: boolean;
   logoUrl: string;
   branches: Branch[];
+  selectedBranch: Branch;
 }

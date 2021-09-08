@@ -7,12 +7,7 @@ import { IconMail, IconPhone, IconTrash } from "@tabler/icons";
 
 // My Components
 import { AddContacts } from "@/components";
-
-export type Contact = {
-  label: string;
-  value: string;
-  payload: Record<string, string | string[]>;
-};
+import { Contact } from "@/shared";
 
 export const NewContactPopover: FC = () => {
   const { control } = useFormContext();
@@ -27,7 +22,7 @@ export const NewContactPopover: FC = () => {
     remove: removePhoneNumber,
   } = useFieldArray({
     control,
-    name: "contacts.phoneNumber",
+    name: "contacts.phoneNumbers",
   });
   function getNewEmail(newEmail: Contact) {
     appendEmail(newEmail);
@@ -62,15 +57,6 @@ export const NewContactPopover: FC = () => {
                 <Text color="gray.600" fontSize="sm">
                   {Object.values(email)[1]}
                 </Text>
-                <HStack>
-                  {JSON.stringify(Object.values(email)[3], null, 4)}
-                  <Badge colorScheme="whatsapp" size="sm">
-                    Whatsapp
-                  </Badge>
-                  <Badge colorScheme="telegram" size="sm">
-                    Telegram
-                  </Badge>
-                </HStack>
               </Box>
             </Flex>
             <IconButton

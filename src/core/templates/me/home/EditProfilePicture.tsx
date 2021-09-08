@@ -35,7 +35,6 @@ export const EditProfilePicture: FC = () => {
         closeLoadingScreen();
       }
     } catch (err) {
-      console.log(err);
       closeLoadingScreen();
     }
   }

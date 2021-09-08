@@ -1,7 +1,7 @@
 // My Elements
 import { getApolloClient } from "@/graphql";
 import { ProvidersProps, GetServerSideProps, User } from "@/shared";
-import { authorization, getAuth } from "@/auth";
+import { authorization } from "@/auth";
 import { GetMyProfilePayload, GET_MY_PROFILE_Q } from "src/graphql/gql";
 
 export interface MePageProps extends ProvidersProps, User {}

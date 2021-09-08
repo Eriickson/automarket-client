@@ -8,6 +8,6 @@ export * from "./Tabs";
 export * from "./ProvidersProps";
 export * from "./Contact";
 export * from "./Server";
-// export * from "./breadcrumbs";
 export * from "./Agency";
 export * from "./Branch";
+export * from "./Breadcrumbs";

@@ -43,7 +43,6 @@ export const EditProfile: FC = () => {
       }
     } catch (err) {
       closeLoadingScreen();
-      console.log(err);
     }
   }
 

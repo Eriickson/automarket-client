@@ -2,14 +2,19 @@ import React, { FC } from "react";
 
 // Packages
 import { useForm } from "react-hook-form";
-import { Box, Stack, StackDivider } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+
+// My Elements
+import { Contact } from "@/shared";
 
 // My Components
 import { FormWizardProvider } from "@/components";
 import { NewContactPopover } from "./NewContactPopover/NewContactPopover";
-
+export interface Contacts {
+  contacts: { phoneNumbers: Contact[]; emails: Contact[] };
+}
 interface ContactFormProps {
-  onSubmit(values: any): void;
+  onSubmit(values: Contacts): void;
 }
 
 export const ContactForm: FC<ContactFormProps> = ({ onSubmit }) => {

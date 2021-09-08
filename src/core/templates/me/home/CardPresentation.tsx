@@ -1,15 +1,12 @@
 import React, { FC } from "react";
 
 // NextJS
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 // Packages
 import { Box, HStack, Text, Flex, Avatar, Link as ChakraLink, Button } from "@chakra-ui/react";
 
 // My Elements
-import { useUIContext } from "@/context";
-import { useUpdateProfilePicture } from "@/graphql";
 import { useSelector } from "@/store";
 
 // My Components
@@ -19,9 +16,7 @@ import { SettingsMenu } from "./settings/menu/SettingsMenu";
 
 export const CardPresentation: FC = () => {
   const { profileMe } = useSelector(({ profile }) => profile);
-  const { updateProfilePicture } = useUpdateProfilePicture();
-  const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
-  const { reload } = useRouter();
+  const { agency } = useSelector(({ auth }) => auth);
 
   return (
     <>
@@ -44,11 +39,13 @@ export const CardPresentation: FC = () => {
               </Box>
               <HStack>
                 <EditProfilePicture />
-                <Link href="agency/me">
-                  <ChakraLink>
-                    <Button colorScheme="pri">Ir a mi agencía</Button>
-                  </ChakraLink>
-                </Link>
+                {agency && (
+                  <Link href="agency/me">
+                    <ChakraLink>
+                      <Button colorScheme="pri">Ir a mi agencía</Button>
+                    </ChakraLink>
+                  </Link>
+                )}
               </HStack>
             </Box>
           </Flex>

@@ -6,12 +6,7 @@ import { Popover, PopoverTrigger, PopoverContent, PopoverBody, PopoverArrow, HSt
 // My Components
 import { NewEmailModal } from "./newEmailModal/NewEmailModal";
 import { NewPhoneNumbers } from "./newPhoneNumbers/NewPhoneNumbers";
-
-export type Contact = {
-  label: string;
-  value: string;
-  payload: Record<string, string | string[]>;
-};
+import { Contact } from "@/shared";
 
 interface AddContactsProps {
   getNewEmail(newEmail: Contact): void;
@@ -26,8 +21,8 @@ export const AddContacts: FC<AddContactsProps> = ({ getNewPhoneNumber, getNewEma
         <PopoverArrow />
         <PopoverBody px="2">
           <HStack>
-            <NewEmailModal getNewEmail={getNewEmail} />
             <NewPhoneNumbers getNewPhoneNumber={getNewPhoneNumber} />
+            <NewEmailModal getNewEmail={getNewEmail} />
           </HStack>
         </PopoverBody>
       </PopoverContent>

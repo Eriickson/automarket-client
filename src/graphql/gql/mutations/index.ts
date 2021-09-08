@@ -7,5 +7,6 @@ export * from "./signin";
 export * from "./refreshUserToken";
 export * from "./logoutUser";
 export * from "./updateMyAgencyInformation";
-export * from "./updateAgencyLogo";
+export * from "./UpdateAgencyLogo";
 export * from "./ChangeUserPassword";
+export * from "./ChangeToBranch";

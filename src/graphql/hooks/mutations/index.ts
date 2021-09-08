@@ -6,3 +6,4 @@ export * from "./useCreateAgency";
 export * from "./useUpdateMyAgencyInformation";
 export * from "./useUpdateAgencyLogo";
 export * from "./useChangeUserPassword";
+export * from "./useChangeToBranch";

@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { Fragment, useState, FC } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -13,23 +13,38 @@ import {
   Text,
   List,
   ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
   Divider,
   Radio,
   RadioGroup,
   Flex,
   Box,
 } from "@chakra-ui/react";
-import { IconMapPin, IconReplace, IconStar, IconUser } from "@tabler/icons";
+import { IconMapPin, IconReplace, IconStar } from "@tabler/icons";
 import { useSelector } from "@/store";
+import { useChangeToBranch } from "@/graphql";
+import axios from "axios";
+import router from "next/router";
 
 export const ChangeBranch: FC = () => {
   const { branches, selectedBranch } = useSelector(({ agency }) => agency.myAgency);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { changeToBranch, error, loading } = useChangeToBranch();
 
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("");
+
+  async function onChangeBranch() {
+    try {
+      const { data } = await changeToBranch({ variables: { input: { switchToBranch: value } } });
+      if (data?.changeToBranch) {
+        const response = data.changeToBranch;
+        await axios.post("/api/auth/update-token", response);
+
+        router.reload();
+      }
+    } catch (err) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -61,18 +76,19 @@ export const ChangeBranch: FC = () => {
           <ModalBody>
             <RadioGroup value={value} onChange={setValue}>
               <List>
-                {branches.map((branch, i) => {
+                {branches.map(branch => {
                   const { municipality, province, reference, sector } = branch.ubication.direction;
+                  const isDisabled = selectedBranch.id === branch.id;
                   return (
-                    <>
-                      <ListItem key={i}>
+                    <Fragment key={branch.id}>
+                      <ListItem>
                         <Radio
                           alignItems="start"
-                          disabled={branch.isSede}
                           display="flex"
+                          isDisabled={isDisabled}
                           py="3"
                           size="lg"
-                          value={"0"}
+                          value={branch.id}
                           w="full"
                         >
                           <Text display="flex" fontSize="md" fontWeight="medium" mt="-1">
@@ -102,7 +118,7 @@ export const ChangeBranch: FC = () => {
                         </Radio>
                       </ListItem>
                       <Divider />
-                    </>
+                    </Fragment>
                   );
                 })}
               </List>
@@ -113,7 +129,9 @@ export const ChangeBranch: FC = () => {
             <Button mr={3} variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme="pri">Establecer</Button>
+            <Button colorScheme="pri" isLoading={loading} loadingText="Estableciendo" onClick={onChangeBranch}>
+              Establecer
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

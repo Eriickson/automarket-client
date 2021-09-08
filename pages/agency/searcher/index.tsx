@@ -6,5 +6,5 @@ const SeacherAgenciesPage: FC = () => {
   return <SeacherAgenciesTemplate />;
 };
 
-export { seacherAgenciesServerSide as getServerSideProps } from "@/servers";
+// export { seacherAgenciesServerSide as getServerSideProps } from "@/servers";
 export default SeacherAgenciesPage;

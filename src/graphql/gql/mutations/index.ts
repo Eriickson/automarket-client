@@ -10,3 +10,4 @@ export * from "./updateMyAgencyInformation";
 export * from "./UpdateAgencyLogo";
 export * from "./ChangeUserPassword";
 export * from "./ChangeToBranch";
+export * from "./CreateBranch";

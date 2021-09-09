@@ -13,9 +13,6 @@ import {
   Text,
   List,
   ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
   Divider,
   Radio,
   RadioGroup,
@@ -29,7 +26,7 @@ export const EstablishAsHeadquarters: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { branches, selectedBranch } = useSelector(({ agency }) => agency.myAgency);
 
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("");
 
   return (
     <>
@@ -68,11 +65,11 @@ export const EstablishAsHeadquarters: FC = () => {
                       <ListItem key={i}>
                         <Radio
                           alignItems="start"
-                          disabled={selectedBranch.id === branch.id}
                           display="flex"
+                          isDisabled={branch.isSede}
                           py="3"
                           size="lg"
-                          value={"0"}
+                          value={branch.id}
                           w="full"
                         >
                           <Text display="flex" fontSize="md" fontWeight="medium" mt="-1">

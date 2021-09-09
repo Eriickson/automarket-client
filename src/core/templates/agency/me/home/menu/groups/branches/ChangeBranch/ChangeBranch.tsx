@@ -18,6 +18,7 @@ import {
   RadioGroup,
   Flex,
   Box,
+  chakra,
 } from "@chakra-ui/react";
 import { IconMapPin, IconReplace, IconStar } from "@tabler/icons";
 import { useSelector } from "@/store";
@@ -106,6 +107,11 @@ export const ChangeBranch: FC = () => {
                               >
                                 <IconStar width="1rem" />
                               </Box>
+                            )}{" "}
+                            {isDisabled && (
+                              <chakra.span fontWeight="semibold" ml="1">
+                                (Seleccionada)
+                              </chakra.span>
                             )}
                           </Text>
                           <Flex alignItems="center" color="gray.500" mt="-1">

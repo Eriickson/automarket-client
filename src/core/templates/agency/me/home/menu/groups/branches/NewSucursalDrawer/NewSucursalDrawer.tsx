@@ -1,3 +1,6 @@
+import { useUIContext } from "@/context";
+import { useCreateBranch } from "@/graphql";
+import { NewSucursalOnSubmitFormType } from "@/validations";
 import {
   Drawer,
   DrawerBody,
@@ -20,9 +23,36 @@ import { NewSucursalForm } from "./NewSucursalForm";
 export const NewSucursalDrawer: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef(null);
+  const { toast } = useUIContext();
+  const { createBranch } = useCreateBranch();
 
-  async function onSubmit(values: any) {
-    console.log(values);
+  async function onSubmit(values: NewSucursalOnSubmitFormType) {
+    if (values.contacts.emails.length + values.contacts.phoneNumbers.length < 3) {
+      toast.showToast({ title: "Advertencia", desc: "Debes de agregar almenos 3 contactos", status: "warning" });
+      return;
+    }
+
+    try {
+      const response = await createBranch({
+        variables: {
+          input: {
+            contacts: values.contacts,
+            name: values.name,
+            ubication: {
+              direction: {
+                municipalityId: String(values.municipality.id),
+                provinceId: String(values.province.id),
+                sectorId: String(values.sector.id),
+                reference: values.reference,
+              },
+            },
+          },
+        },
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

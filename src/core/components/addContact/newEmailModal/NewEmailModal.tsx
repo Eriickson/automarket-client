@@ -78,8 +78,8 @@ export const NewEmailModal: FC<NewEmailModalProps> = ({ getNewEmail }) => {
               </VStack>
             </ModalBody>
             <ModalFooter px="4">
-              <Button colorScheme="danger" mr={3} variant="ghost" onClick={onClose}>
-                Cancelar
+              <Button mr={3} variant="ghost" onClick={onClose}>
+                Cerrar
               </Button>
               <Button colorScheme="pri" onClick={generateNewEmmail}>
                 Guardar

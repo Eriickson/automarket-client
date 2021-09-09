@@ -1,17 +1,27 @@
-import { InputControl, Select, Agency } from "@/components";
-import { useGetMunicipalities, useGetProvinces, useGetSectors } from "@/graphql";
-import { capitalizeString } from "@/utils";
-import { Box, HStack, IconButton, VStack, Text, Divider } from "@chakra-ui/react";
-import { IconEdit } from "@tabler/icons";
 import React, { FC, useEffect, useState } from "react";
+
+// Packages
 import { FormProvider, useForm } from "react-hook-form";
+import { Box, HStack, IconButton, VStack, Text, Divider, Button, Flex, StackDivider, Stack } from "@chakra-ui/react";
+import { IconEdit, IconPhone, IconTrash } from "@tabler/icons";
+
+// My Elements
+import { useGetMunicipalities, useGetProvinces, useGetSectors } from "@/graphql";
+import { Contact } from "@/shared";
+import { capitalizeString } from "@/utils";
+
+// My Components
+import { InputControl, Select, AddContacts } from "@/components";
+import { NewSucursalFormResolver, NewSucursalOnSubmitFormType } from "@/validations";
 
 interface NewSucursalFormProps {
-  onSubmit(values: any): void;
+  onSubmit(values: NewSucursalOnSubmitFormType): void;
 }
 
 export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
-  const methods = useForm();
+  const methods = useForm({ resolver: NewSucursalFormResolver });
+  const [emails, setEmails] = useState<Contact[]>([]);
+  const [phoneNumbers, setPhoneNumbers] = useState<Contact[]>([]);
   const [isEditingName, setIsEditingName] = useState(false);
   const { provinces, loading: provinceIsLoading, getProvincesFetch } = useGetProvinces();
   const { municipalities, loading: municipalitiesIsLoading, getMunicipalitiesFetch } = useGetMunicipalities();
@@ -20,6 +30,11 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
   useEffect(() => {
     getProvincesFetch();
   }, []);
+
+  useEffect(() => {
+    methods.setValue("contacts.emails", emails);
+    methods.setValue("contacts.phoneNumbers", phoneNumbers);
+  }, [emails, phoneNumbers]);
 
   return (
     <FormProvider {...methods}>
@@ -61,11 +76,17 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
               if (isEditingName) return;
               const newName = `${capitalizeString(label)}/${methods.getValues("province").label}`;
               methods.setValue("name", newName);
+              methods.clearErrors("name");
             }}
           />
           <InputControl isRequired label="Referencia" name="reference" />
           <HStack alignItems="flex-end">
-            <InputControl isRequired /*  isDisabled={!isEditingName} */ label="Nombre distintivo" name="name" />
+            <InputControl
+              isRequired
+              // inputProps={{ isDisabled: !isEditingName }}
+              label="Nombre distintivo"
+              name="name"
+            />
             <IconButton
               aria-label="Editar nombre"
               icon={
@@ -86,8 +107,57 @@ export const NewSucursalForm: FC<NewSucursalFormProps> = ({ onSubmit }) => {
         <Text fontSize="lg" fontWeight="medium" mb="3">
           Contactos
         </Text>
+        <Stack divider={<StackDivider />}>
+          {phoneNumbers.map((phoneNumber, i) => (
+            <Flex alignItems="center" justifyContent="space-between" key={i}>
+              <Flex>
+                <Flex
+                  alignItems="center"
+                  bg="pri.50"
+                  border="2px solid"
+                  color="pri.400"
+                  h="10"
+                  justifyContent="center"
+                  mr="3"
+                  rounded="sm"
+                  w="10"
+                >
+                  <IconPhone />
+                </Flex>
+                <Box>
+                  <Text fontSize="lg" fontWeight="medium" letterSpacing="-0.5px" lineHeight="none">
+                    {phoneNumber.value}
+                  </Text>
+                  <Text color="gray.600" fontSize="sm">
+                    {phoneNumber.label}
+                  </Text>
+                </Box>
+              </Flex>
+              <IconButton
+                _focus={{ shadow: "none" }}
+                aria-label="Eliminar contacto"
+                colorScheme="danger"
+                icon={<IconTrash size="1.25rem" />}
+                size="sm"
+                variant="ghost"
+                onClick={() => setPhoneNumbers(phoneNumbers.filter(item => item.value !== phoneNumber.value))}
+              />
+            </Flex>
+          ))}
+        </Stack>
         <HStack alignItems="stretch">
-          <Agency.AgencyNewContact />
+          <AddContacts
+            getNewEmail={newEmail => {
+              setEmails([...emails, newEmail]);
+            }}
+            getNewPhoneNumber={newPhoneNumber => {
+              setPhoneNumbers([...phoneNumbers, newPhoneNumber]);
+            }}
+          >
+            <Button mt="2" w="full">
+              Nuevo contacto
+            </Button>
+          </AddContacts>
         </HStack>
       </form>
     </FormProvider>

@@ -16,9 +16,12 @@ import { MenuNew } from "./menu/MenuNew";
 import { ContainerPanel } from "./panels/ContainerPanel";
 import { StatisticsPanel } from "./StatisticsPanel";
 import { AgencyLogo } from "./logo/AgencyLogo";
+import { IconMapPin } from "@tabler/icons";
 
 export const MeAgencyTemplate: FC = () => {
-  const { name, slogan } = useSelector(store => store.agency.myAgency);
+  const { name, slogan, selectedBranch } = useSelector(store => store.agency.myAgency);
+
+  console.log(selectedBranch);
 
   return (
     <MainLayout>
@@ -46,7 +49,18 @@ export const MeAgencyTemplate: FC = () => {
               <CoverSwiper />
               <PrimaryCard notBorderTop>
                 <Flex alignItems="center" justifyContent="space-between">
-                  <Box fontWeight="semibold">Oficina: Erickson Auto import - Santiago, Puñal</Box>
+                  <Box fontWeight="semibold">
+                    Oficina: {selectedBranch.name}
+                    <Flex color="gray.500">
+                      <IconMapPin size="1.25rem" />{" "}
+                      <Text fontSize="sm" fontWeight="medium" ml="1">
+                        {selectedBranch.ubication?.direction.reference},{" "}
+                        {selectedBranch.ubication?.direction.sector?.label},{" "}
+                        {selectedBranch.ubication?.direction.municipality.label},{" "}
+                        {selectedBranch.ubication?.direction.province.label}
+                      </Text>
+                    </Flex>
+                  </Box>
                   <MenuNew />
                 </Flex>
               </PrimaryCard>

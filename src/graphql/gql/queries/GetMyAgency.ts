@@ -53,6 +53,23 @@ export const GET_MY_AGENCY_Q = gql`
             value
           }
         }
+        ubication {
+          direction {
+            province {
+              id
+              label
+            }
+            municipality {
+              id
+              label
+            }
+            sector {
+              id
+              label
+            }
+            reference
+          }
+        }
       }
     }
   }

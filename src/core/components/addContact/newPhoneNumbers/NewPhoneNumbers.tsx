@@ -80,7 +80,7 @@ export const NewPhoneNumbers: FC<NewPhoneNumbersProps> = ({ getNewPhoneNumber })
             </VStack>
           </ModalBody>
           <ModalFooter px="4">
-            <Button colorScheme="danger" mr={3} variant="ghost" onClick={onClose}>
+            <Button mr={3} variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
             <Button colorScheme="pri" onClick={generateNewPhoneNumber}>

@@ -1,6 +1,6 @@
 import { PrimaryCard } from "@/components";
 import { useSelector } from "@/store";
-import { Heading, HStack, Stat, StatHelpText, StatLabel, StatNumber, Text } from "@chakra-ui/react";
+import { Heading, HStack, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import numeral from "numeral";
 import React, { FC } from "react";
 
@@ -15,14 +15,12 @@ export const StatisticsPanel: FC = () => {
           <StatLabel>Publicaciones</StatLabel>
           <StatNumber>
             <Text alignItems="flex-end" display="flex">
-              2
+              0
               <Text color="gray.500" fontSize="sm" mb="1" ml="1">
-                {" "}
                 de 7
               </Text>
             </Text>
           </StatNumber>
-          {/* <StatHelpText>de 7</StatHelpText> */}
         </Stat>
         <Stat>
           <StatLabel>Sucursales</StatLabel>

@@ -13,6 +13,7 @@ import {
 import { PrimaryCard } from "@/components";
 import { IconBuildingStore, IconCar } from "@tabler/icons";
 import { VehiclesPanel } from "../tabs/panels";
+import { BranchesTable } from "./branches/BranchesTable";
 
 export const ContainerPanel: FC = () => {
   return (
@@ -51,9 +52,7 @@ export const ContainerPanel: FC = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.
+                <BranchesTable />
               </AccordionPanel>
             </AccordionItem>
           </PrimaryCard>

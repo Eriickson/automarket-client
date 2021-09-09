@@ -1,4 +1,7 @@
 import React, { useState, FC } from "react";
+
+// Packages
+import { IconBuildingStore, IconMapPin, IconStar } from "@tabler/icons";
 import {
   Modal,
   ModalOverlay,
@@ -19,12 +22,13 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
-import { IconBuildingStore, IconMapPin, IconStar } from "@tabler/icons";
+
+// My Elements
 import { useSelector } from "@/store";
 
 export const EstablishAsHeadquarters: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { branches, selectedBranch } = useSelector(({ agency }) => agency.myAgency);
+  const { branches } = useSelector(({ agency }) => agency.myAgency);
 
   const [value, setValue] = useState("");
 

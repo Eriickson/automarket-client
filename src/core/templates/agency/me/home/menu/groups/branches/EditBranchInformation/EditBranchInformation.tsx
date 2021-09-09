@@ -1,3 +1,7 @@
+import React, { FC } from "react";
+
+// Packages
+import { IconEdit } from "@tabler/icons";
 import {
   MenuItem,
   useDisclosure,
@@ -12,8 +16,6 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-import { IconEdit } from "@tabler/icons";
-import React, { FC } from "react";
 
 export const EditBranchInformation: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

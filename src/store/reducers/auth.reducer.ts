@@ -15,6 +15,7 @@ const authReducer = createSlice({
     setAuth(state, action: PayloadAction<AuthPayload>) {
       state.isAuth = action.payload.isAuth;
       state.user = action.payload.user;
+      state.agency = action.payload.agency;
     },
   },
 });

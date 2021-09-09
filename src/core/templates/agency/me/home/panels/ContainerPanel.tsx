@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+
+// Packages
 import {
   VStack,
   Box,
@@ -10,8 +12,10 @@ import {
   Text,
   chakra,
 } from "@chakra-ui/react";
-import { PrimaryCard } from "@/components";
 import { IconBuildingStore, IconCar } from "@tabler/icons";
+
+// My Components
+import { PrimaryCard } from "@/components";
 import { VehiclesPanel } from "../tabs/panels";
 import { BranchesTable } from "./branches/BranchesTable";
 

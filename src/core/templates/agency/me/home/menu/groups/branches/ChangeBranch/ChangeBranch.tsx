@@ -1,4 +1,9 @@
 import React, { Fragment, useState, FC } from "react";
+
+// NextJS
+import router from "next/router";
+
+// Packages
 import {
   Modal,
   ModalOverlay,
@@ -20,11 +25,12 @@ import {
   Box,
   chakra,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { IconMapPin, IconReplace, IconStar } from "@tabler/icons";
+
+// My Elements
 import { useSelector } from "@/store";
 import { useChangeToBranch } from "@/graphql";
-import axios from "axios";
-import router from "next/router";
 
 export const ChangeBranch: FC = () => {
   const { branches, selectedBranch } = useSelector(({ agency }) => agency.myAgency);

@@ -1,11 +1,16 @@
-import { IconButton, MenuGroup, MenuDivider } from "@chakra-ui/react";
-import { IconDotsVertical } from "@tabler/icons";
 import React, { FC } from "react";
-import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
-import { NewSucursalDrawer, EstablishAsHeadquarters, EditBranchInformation, ChangeBranch } from "./groups";
+
+// Packages
+import { Menu, MenuButton, MenuList, IconButton, MenuGroup, MenuDivider } from "@chakra-ui/react";
+import { IconDotsVertical } from "@tabler/icons";
+
+// My Elements
 import styled from "@emotion/styled";
-import { NewPost } from "./groups/posts/NewPost/NewPost";
+
+// My Components
+import { NewSucursalDrawer, EstablishAsHeadquarters, EditBranchInformation, ChangeBranch } from "./groups";
 import { EditAgencyInformation } from "./groups/agency/EditAgencyInformation/EditAgencyInformation";
+import { NewPost } from "./groups/posts/NewPost/NewPost";
 
 const WraperMenuNewStyled = styled.div`
   p {

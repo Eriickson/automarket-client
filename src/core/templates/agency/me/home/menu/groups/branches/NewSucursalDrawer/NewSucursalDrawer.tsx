@@ -1,6 +1,10 @@
-import { useUIContext } from "@/context";
-import { useCreateBranch } from "@/graphql";
-import { NewSucursalOnSubmitFormType } from "@/validations";
+import React, { FC } from "react";
+
+// NextJS
+import router from "next/router";
+
+// Packages
+import { IconNewSection } from "@tabler/icons";
 import {
   Drawer,
   DrawerBody,
@@ -16,14 +20,19 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
-import { IconNewSection } from "@tabler/icons";
-import React, { FC } from "react";
+
+// My Elements
+import { useUIContext } from "@/context";
+import { useCreateBranch } from "@/graphql";
+import { NewSucursalOnSubmitFormType } from "@/validations";
+
+// My Components
 import { NewSucursalForm } from "./NewSucursalForm";
 
 export const NewSucursalDrawer: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef(null);
-  const { toast } = useUIContext();
+  const { toast, activateLoadingScreen } = useUIContext();
   const { createBranch } = useCreateBranch();
 
   async function onSubmit(values: NewSucursalOnSubmitFormType) {
@@ -31,6 +40,7 @@ export const NewSucursalDrawer: FC = () => {
       toast.showToast({ title: "Advertencia", desc: "Debes de agregar almenos 3 contactos", status: "warning" });
       return;
     }
+    activateLoadingScreen("Creando sucursal");
 
     try {
       const response = await createBranch({
@@ -49,7 +59,10 @@ export const NewSucursalDrawer: FC = () => {
           },
         },
       });
-      console.log(response);
+      if (response.data?.createBranch.successful) {
+        router.reload();
+        return;
+      }
     } catch (err) {
       console.log(err);
     }

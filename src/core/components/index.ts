@@ -22,3 +22,4 @@ export * from "./agency";
 export * from "./attendanceBanner";
 export * from "./bannerBottom";
 export * from "./addContact";
+export * from "./apolloError";

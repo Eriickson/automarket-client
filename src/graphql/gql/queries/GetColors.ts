@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetColorsPayload {
+export interface GetColorsPayload {
   getColors: {
-    colors: IOption[];
+    colors: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_COLORS_Q = gql`
     getColors {
       colors {
         label
-        value
+        id
       }
     }
   }

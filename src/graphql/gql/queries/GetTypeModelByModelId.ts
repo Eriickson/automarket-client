@@ -1,13 +1,13 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetTypeModelByModelIdPayload {
+export interface GetTypeModelByModelIdPayload {
   getTypeModelByModelId: {
-    typesModel: IOption[];
+    typesModel: Option[];
   };
 }
 
-export interface IGetTypeModelByModelIdVariables {
+export interface GetTypeModelByModelIdVariables {
   modelId: string;
 }
 

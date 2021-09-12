@@ -25,12 +25,15 @@ import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 
 // My Components
 import { InputControl, LabelInput } from "@/components";
+import { useSelector } from "@/store";
 
 interface PostFormProps {
   onSubmit(values: any): void;
 }
 
 export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
+  const { branches } = useSelector(({ newVehicle }) => newVehicle.steps.information);
+  const { selectedBranch } = useSelector(({ auth }) => auth);
   const methods = useForm();
   const { append, fields, remove } = useFieldArray({ control: methods.control, name: "tags" });
 
@@ -97,61 +100,32 @@ export const PostForm: FC<PostFormProps> = ({ onSubmit }) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr>
-                      <Td>
-                        <Text w="max-content">Puñal/Santiago (SEDE)</Text>
-                      </Td>
-                      <Td>
-                        <Checkbox mx="auto" size="lg" />
-                      </Td>
-                      <Td>
-                        <Radio mx="auto" name="storaged" size="lg" value="1" />
-                      </Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Text w="max-content">Hato Mayor/Santiago</Text>
-                      </Td>
-                      <Td>
-                        <Checkbox mx="auto" size="lg" />
-                      </Td>
-                      <Td>
-                        <Radio mx="auto" name="storaged" size="lg" value="2" />
-                      </Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
-                      </Td>
-                      <Td>
-                        <Checkbox mx="auto" size="lg" />
-                      </Td>
-                      <Td>
-                        <Radio mx="auto" name="storaged" size="lg" value="3" />
-                      </Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
-                      </Td>
-                      <Td>
-                        <Checkbox mx="auto" size="lg" />
-                      </Td>
-                      <Td>
-                        <Radio mx="auto" name="storaged" size="lg" value="4" />
-                      </Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Text w="max-content">Bella Vista/Santo Domingo</Text>
-                      </Td>
-                      <Td>
-                        <Checkbox mx="auto" size="lg" />
-                      </Td>
-                      <Td>
-                        <Radio mx="auto" name="storaged" size="lg" value="5" />
-                      </Td>
-                    </Tr>
+                    {branches.map(branch => (
+                      <Tr key={branch.id}>
+                        <Td>
+                          <Text w="max-content">{branch.name}</Text>
+                        </Td>
+                        <Td>
+                          <Checkbox
+                            {...methods.register("availability")}
+                            defaultChecked
+                            mx="auto"
+                            size="lg"
+                            value={branch.id}
+                          />
+                        </Td>
+                        <Td>
+                          <Radio
+                            cursor="pointer"
+                            defaultChecked={selectedBranch?.id === branch.id}
+                            mx="auto"
+                            {...methods.register("storaged")}
+                            size="lg"
+                            value={branch.id}
+                          />
+                        </Td>
+                      </Tr>
+                    ))}
                   </Tbody>
                 </Table>
               </RadioGroup>

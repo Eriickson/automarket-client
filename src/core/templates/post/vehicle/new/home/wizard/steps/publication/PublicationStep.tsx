@@ -1,6 +1,10 @@
-import { useWizard } from "@/components";
-import { Box } from "@chakra-ui/react";
 import React, { FC } from "react";
+
+// Packages
+import { Box } from "@chakra-ui/react";
+
+// My Components
+import { useWizard } from "@/components";
 import { PostForm } from "./PostForm";
 
 export const PublicationStep: FC = () => {

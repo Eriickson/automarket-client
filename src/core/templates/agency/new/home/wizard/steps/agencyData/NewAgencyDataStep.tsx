@@ -6,12 +6,12 @@ import { useAction } from "@/store";
 import { useVerifyAgencyName } from "@/graphql";
 
 // My Components
-import { useWizard } from "@/components";
+import { ApolloErrorComponent, useWizard } from "@/components";
 import { NewAgencyDataForm } from "./NewAgencyDataForm";
 import { useUIContext } from "@/context";
 
 export const NewAgencyDataStep: FC = () => {
-  const { verifyAgencyNameFetch, data } = useVerifyAgencyName();
+  const { verifyAgencyNameFetch, data, error } = useVerifyAgencyName();
   const { setNewAgencyInfo } = useAction();
   const { nextStep } = useWizard();
   const { toast } = useUIContext();
@@ -39,8 +39,18 @@ export const NewAgencyDataStep: FC = () => {
   useEffect(() => {
     if (!data) return;
     if (!data.verifyAgencyName.registeredName) nextStep();
-    else console.log("Este nombre de agencia ya existe");
+    else
+      toast.showToast({
+        title: "Valor en uso",
+        desc: "Este nombre de la agencia ya está siendo utilizado por alguien más.",
+        status: "warning",
+      });
   }, [data]);
 
-  return <NewAgencyDataForm onSubmit={onSubmit} />;
+  return (
+    <>
+      <NewAgencyDataForm onSubmit={onSubmit} />
+      <ApolloErrorComponent error={error} />
+    </>
+  );
 };

@@ -19,7 +19,7 @@ const Benefit: React.FC = () => {
           </Text>{" "}
           tu vehículo
         </Text>
-        <Text color="gray.500" fontSize="sm" fontWeight="medium" lineHeight="none" maxW="xl" mx="auto">
+        <Text color="pri.500" fontSize="sm" fontWeight="medium" lineHeight="none" maxW="md" mx="auto">
           Entérate de algunas de las ventajas que nuestra página tiene para ofrecerte a ti y a tu agencía, entre las
           cuales están
         </Text>

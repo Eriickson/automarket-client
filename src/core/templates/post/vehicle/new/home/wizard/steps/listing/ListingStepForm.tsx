@@ -1,4 +1,4 @@
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 import { useSelector } from "@/store";
 import { Badge, Box, Checkbox, CheckboxGroup, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
 import React, { FC, useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 type FormPanelType = {
   title: string;
   name: string;
-  items: IOption[];
+  items: Option[];
   defaultValues?: string[];
 };
 
@@ -17,17 +17,19 @@ interface ListingStepFormProps {
 
 export const ListingStepForm: FC<ListingStepFormProps> = ({ onSubmit }) => {
   const methods = useForm();
-  const { accesories, features, includes } = useSelector(({ newVehicle }) => newVehicle.steps.information);
-  const [formPanels, setFormPanels] = useState<FormPanelType[]>();
+  const { accesories, features, additions } = useSelector(({ newVehicle }) => newVehicle.steps.information);
+  const [formPanels, setFormPanels] = useState<FormPanelType[]>([]);
 
   useEffect(() => {
     const formPanels: FormPanelType[] = [
       { title: "Accesorios", name: "accessories", items: accesories },
       { title: "Características", name: "features", items: features },
-      { title: "Añadidos", name: "includes", items: includes },
+      { title: "Añadidos", name: "additions", items: additions },
     ];
     setFormPanels(formPanels);
   }, []);
+
+  console.log({ formPanels });
 
   return (
     <FormProvider {...methods}>
@@ -46,15 +48,15 @@ export const ListingStepForm: FC<ListingStepFormProps> = ({ onSubmit }) => {
               >
                 <Text bg="white" fontWeight="semibold" mt="-4" px="1" w="max-content">
                   <Badge>
-                    {panel.title} ({methods.watch(panel.name)?.length || 0}/{panel.items.length}){" "}
+                    {panel.title} ({methods.watch(panel.name)?.length || 0}/{panel.items?.length}){" "}
                   </Badge>
                 </Text>
                 <Box ml={[0, null, "3"]} mt="3">
                   <CheckboxGroup colorScheme="pri" defaultValue={panel?.defaultValues}>
                     <SimpleGrid columns={12} rowGap={2}>
-                      {panel.items.map((item, i) => (
+                      {panel.items?.map((item, i) => (
                         <GridItem colSpan={[6, null, 4, 6, 4]} key={i}>
-                          <Checkbox fontWeight="medium" {...methods.register(panel.name)} value={String(item.value)}>
+                          <Checkbox fontWeight="medium" {...methods.register(panel.name)} value={String(item.id)}>
                             {item.label}
                           </Checkbox>
                         </GridItem>

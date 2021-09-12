@@ -3,6 +3,7 @@ import { Box, Flex, Text, Button, Link as ChakraLink } from "@chakra-ui/react";
 import Link from "next/link";
 import { IconSpeakerphone, IconX } from "@tabler/icons";
 import moment from "moment";
+import { useSelector } from "@/store";
 
 type BannerBottomType = {
   msg: string;
@@ -15,6 +16,7 @@ type BannerBottomType = {
 
 export const BannerBottom: FC = () => {
   const [payload, setPayload] = useState<BannerBottomType | null>();
+  const { agency, isAuth } = useSelector(({ auth }) => auth);
 
   useEffect(() => {
     const bannerBottomPayload = window.localStorage.getItem("bannerBottom");
@@ -42,11 +44,11 @@ export const BannerBottom: FC = () => {
 
   return (
     <>
-      {payload && !payload.hidden && (
+      {isAuth && payload && !payload.hidden && !agency && (
         <Box bottom={[0, null, 6]} left={0} pos="fixed" px={[null, null, "6"]} right={0} w="full" zIndex="10">
           <Flex
             alignItems="center"
-            bgColor="pri.600"
+            bgColor="pri.500"
             justifyContent="space-between"
             p={[1.5, null, "3"]}
             rounded={["none", null, "md"]}

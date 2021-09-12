@@ -1,5 +1,8 @@
 import React, { FC } from "react";
 
+// NextJS
+import Link from "next/link";
+
 // My Elements
 import { MenuItem, Box } from "@chakra-ui/react";
 import { IconNewSection } from "@tabler/icons";
@@ -20,7 +23,7 @@ export const NewPost: FC = () => {
         >
           <IconNewSection size="1.25rem" strokeWidth={1.5} />
         </Box>
-        Nueva publicación
+        <Link href="/post/vehicle/new">Nueva publicación</Link>
       </MenuItem>
     </div>
   );

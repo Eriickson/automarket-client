@@ -20,9 +20,10 @@ import { useSelector } from "@/store";
 import { useUpdateMyAgencyInformation } from "@/graphql";
 import router from "next/router";
 import { useUIContext } from "@/context";
+import { ApolloErrorComponent } from "@/components";
 
 export const EditAgencyInformation: FC = () => {
-  const { updateMyAgencyInformationFetch } = useUpdateMyAgencyInformation();
+  const { updateMyAgencyInformationFetch, error } = useUpdateMyAgencyInformation();
   const { name } = useSelector(store => store.agency.myAgency);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
@@ -44,10 +45,8 @@ export const EditAgencyInformation: FC = () => {
         router.reload();
         return;
       }
-      console.log(data);
       closeLoadingScreen();
     } catch (err) {
-      console.log(err);
       closeLoadingScreen();
     }
   }
@@ -91,6 +90,7 @@ export const EditAgencyInformation: FC = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <ApolloErrorComponent error={error} />
     </>
   );
 };

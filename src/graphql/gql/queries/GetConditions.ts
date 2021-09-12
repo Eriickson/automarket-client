@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetConditionsPayload {
+export interface GetConditionsPayload {
   getConditions: {
-    conditions: IOption[];
+    conditions: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_CONDITIONS_Q = gql`
     getConditions {
       conditions {
         label
-        value
+        id
       }
     }
   }

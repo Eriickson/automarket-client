@@ -31,7 +31,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required("Campo requerido")
     .nullable(),
@@ -39,7 +39,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -47,14 +47,14 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string(),
-      value: yup.string(),
+      id: yup.string(),
     })
     .nullable(),
   year: yup
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -62,7 +62,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -70,7 +70,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -78,7 +78,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -86,7 +86,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -94,7 +94,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -102,7 +102,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -110,7 +110,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),
@@ -118,7 +118,7 @@ const schema = yup.object().shape({
     .object()
     .shape({
       label: yup.string().required("Campo requerido"),
-      value: yup.string().required("Campo requerido"),
+      id: yup.string().required("Campo requerido"),
     })
     .required()
     .nullable(),

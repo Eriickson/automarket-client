@@ -1,18 +1,18 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetIncludesPayload {
-  getIncludes: {
-    includes: IOption[];
+export interface GetIncludesPayload {
+  getAdditions: {
+    additions: Option[];
   };
 }
 
-export const GET_INCLUDES_Q = gql`
-  query GetIncludes {
-    getIncludes {
-      includes {
+export const GET_ADDITIONS_Q = gql`
+  query GetAdditions {
+    getAdditions {
+      additions {
         label
-        value
+        id
       }
     }
   }

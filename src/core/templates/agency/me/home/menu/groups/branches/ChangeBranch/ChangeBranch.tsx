@@ -55,7 +55,7 @@ export const ChangeBranch: FC = () => {
 
   return (
     <>
-      <MenuItem display="flex" h="full" py="1.5" onClick={onOpen}>
+      <MenuItem /* isDisabled _active={{ bgColor: "transparent" }} */ display="flex" h="full" py="1.5" onClick={onOpen}>
         <Box
           alignItems="center"
           bgColor="pri.100"
@@ -81,7 +81,7 @@ export const ChangeBranch: FC = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <RadioGroup value={value} onChange={setValue}>
+            <RadioGroup colorScheme="pri" value={value} onChange={setValue}>
               <List>
                 {branches.map(branch => {
                   const { municipality, province, reference, sector } = branch.ubication.direction;

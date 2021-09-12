@@ -60,7 +60,7 @@ export const EstablishAsHeadquarters: FC = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <RadioGroup value={value} onChange={setValue}>
+            <RadioGroup colorScheme="pri" value={value} onChange={setValue}>
               <List>
                 {branches.map((branch, i) => {
                   const { municipality, province, reference, sector } = branch.ubication.direction;

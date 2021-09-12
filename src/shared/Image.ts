@@ -1,4 +1,4 @@
-export interface IGetCroppedImg {
+export interface GetCroppedImg {
   src: string;
   cropArea: ICropArea;
   flip?: IFlip;

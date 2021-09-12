@@ -22,17 +22,14 @@ export const ViewImageModal: FC = () => {
       <Modal isCentered isOpen={isOpen} size="2xl" onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Lista de imágenes agregadas</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ViewImageCarousel />
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button onClick={onClose}>Cerrar</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetVehicleCategoriesPayload {
+export interface GetVehicleCategoriesPayload {
   getVehicleCategories: {
-    vehicleCategories: IOption[];
+    vehicleCategories: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_VEHICLE_CATEGORIES_Q = gql`
     getVehicleCategories {
       vehicleCategories {
         label
-        value
+        id
       }
     }
   }

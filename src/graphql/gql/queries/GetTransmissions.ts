@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetTransmissionsPayload {
+export interface GetTransmissionsPayload {
   getTransmissions: {
-    transmissions: IOption[];
+    transmissions: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_TRANSMISSIONS_Q = gql`
     getTransmissions {
       transmissions {
         label
-        value
+        id
       }
     }
   }

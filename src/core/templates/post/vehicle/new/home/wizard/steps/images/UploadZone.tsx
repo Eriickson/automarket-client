@@ -19,14 +19,14 @@ export const UploadZone: FC = () => {
   }
 
   return (
-    <Box mb="2">
+    <Box alignItems="center" display="flex" justifyContent="center">
       <UploadZoneComponent
         btn={({ isLoading }) => (
           <>
             <Box
               alignItems="center"
               border="2px"
-              borderColor="pri.500"
+              borderColor="gray.400"
               borderStyle="dashed"
               cursor="pointer"
               display={["none", null, "flex"]}
@@ -36,6 +36,7 @@ export const UploadZone: FC = () => {
               m="3"
               minH="52"
               p="3"
+              w="full"
             >
               <Box pos="relative">
                 <IconPhoto size="5rem" strokeWidth="1.5" />

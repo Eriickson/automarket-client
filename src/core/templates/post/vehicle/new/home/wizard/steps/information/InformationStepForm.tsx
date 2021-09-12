@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { FormProvider } from "react-hook-form";
 import { useSelector } from "@/store";
-import { useGetModelsByBrandId, useGetTypeModelByModelId } from "@/graphql";
+import { useGetModels, useGetTypeModelByModelId } from "@/graphql";
 import { useCylinders, useYear } from "@/hooks";
 import { newVehicleInformationFormResolver, NewVehicleInformationFormOnSubmit } from "@/validations";
 
@@ -16,12 +16,14 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
   const { brands, vehicleCategories, fuels, colors, conditions, tractions, transmissions } = useSelector(
     ({ newVehicle }) => newVehicle.steps.information,
   );
-  const { getModelsByBrandIdFetch, models, loadingModels } = useGetModelsByBrandId();
+  const { getModelsFetch, models, loadingModels } = useGetModels();
   const { getTypeModelByModelId, typeModels, loadingTypeModels } = useGetTypeModelByModelId();
   const { cylinders } = useCylinders();
   const { years } = useYear();
 
   const methods = useForm({ resolver: newVehicleInformationFormResolver });
+
+  console.log(methods.formState.errors);
 
   return (
     <FormProvider {...methods}>
@@ -34,10 +36,10 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
                 label="Marca"
                 name="brand"
                 options={brands}
-                onChange={({ value }) => {
+                onChange={({ id }) => {
                   methods.setValue("model", null);
                   methods.setValue("typeModel", null);
-                  getModelsByBrandIdFetch({ brandId: value.toString() });
+                  getModelsFetch({ filter: { brandId: id.toString() } });
                 }}
               />
             </GridItem>
@@ -48,7 +50,7 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
                 label="Modelo"
                 name="model"
                 options={models}
-                onChange={({ value }) => getTypeModelByModelId({ modelId: value.toString() })}
+                onChange={({ id }) => getTypeModelByModelId({ modelId: id.toString() })}
               />
             </GridItem>
             <GridItem colSpan={[12, null, 6]}>
@@ -101,14 +103,14 @@ export const InformationStepForm: FC<InformationStepFormProps> = ({ onSubmit }) 
               <HStack alignItems="center">
                 <RadioGroup
                   defaultValue="DOP"
-                  name="currency"
+                  name="mileageUnit"
                   radioItems={[
                     { label: "Mi", value: "MI" },
                     { label: "Km", value: "KM" },
                   ]}
                   size="md"
                 />
-                <InputControl isRequired name="amount" />
+                <InputControl isRequired name="mileageValue" />
               </HStack>
             </GridItem>
             <GridItem colSpan={[12, null, 6]}>

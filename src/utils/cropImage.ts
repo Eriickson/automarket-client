@@ -1,4 +1,4 @@
-import { IGetCroppedImg } from "@/shared";
+import { GetCroppedImg } from "@/shared";
 
 const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise<HTMLImageElement>((resolve, reject) => {
@@ -23,7 +23,7 @@ export async function getCroppedImg({
   rotation = 0,
   cropArea,
   flip = { h: false, v: false },
-}: IGetCroppedImg): Promise<getCroppedImgReturn> {
+}: GetCroppedImg): Promise<getCroppedImgReturn> {
   const image = await createImage(src);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");

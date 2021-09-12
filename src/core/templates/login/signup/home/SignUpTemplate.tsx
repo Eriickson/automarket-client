@@ -11,10 +11,11 @@ import { IFormSignUpOnSubmit } from "@/validations";
 // My Components
 import { SignUpForm } from "./SignUpForm";
 import { NewLoginLayout } from "@/layouts";
+import { ApolloErrorComponent } from "@/components";
 
 export const SignUpTemplate: FC = () => {
-  const { activateLoadingScreen, closeLoadingScreen, alertDialog, apolloServerError } = useUIContext();
-  const { sendEmailRegister } = useSendEmailRegister();
+  const { activateLoadingScreen, closeLoadingScreen, alertDialog } = useUIContext();
+  const { sendEmailRegister, error } = useSendEmailRegister();
 
   async function onSubmit(values: IFormSignUpOnSubmit) {
     activateLoadingScreen(null);
@@ -34,21 +35,13 @@ export const SignUpTemplate: FC = () => {
       closeLoadingScreen();
     } catch (err: any) {
       closeLoadingScreen();
-      apolloServerError.onOpen(err.message, {
-        priBtnLabel: "Aceptar",
-        secBtnLabel: "Restablecer contraseña",
-        onClickPriBtn: apolloServerError.onClose,
-        onClickSecBtn: async () => {
-          await Router.push("/login/reset-password", { query: { email: values.email } });
-          apolloServerError.onClose();
-        },
-      });
     }
   }
 
   return (
     <NewLoginLayout title="Regístrate">
       <SignUpForm onSubmit={onSubmit} />
+      <ApolloErrorComponent error={error} />
     </NewLoginLayout>
   );
 };

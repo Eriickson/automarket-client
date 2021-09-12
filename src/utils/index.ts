@@ -6,3 +6,4 @@ export * from "./redirectSSR";
 export * from "./projectCropAreaPixelsOnOriginalImage";
 export * from "./generateFileByUrlBlob";
 export * from "./capitalizeString";
+export * from "./parseError";

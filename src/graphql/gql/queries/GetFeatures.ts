@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetFeaturesPayload {
+export interface GetFeaturesPayload {
   getFeatures: {
-    features: IOption[];
+    features: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_FEATURES_Q = gql`
     getFeatures {
       features {
         label
-        value
+        id
       }
     }
   }

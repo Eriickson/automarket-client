@@ -1,21 +1,22 @@
-import { IGeneratedImage, IOption } from "@/shared";
+import { Branch, IGeneratedImage, Option } from "@/shared";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInformationStep {
-  accesories: IOption[];
-  brands: IOption[];
-  conditions: IOption[];
-  vehicleCategories: IOption[];
-  colors: IOption[];
-  fuels: IOption[];
-  tractions: IOption[];
-  transmissions: IOption[];
-  features: IOption[];
-  includes: IOption[];
+  accesories: Option[];
+  brands: Option[];
+  conditions: Option[];
+  vehicleCategories: Option[];
+  colors: Option[];
+  fuels: Option[];
+  tractions: Option[];
+  transmissions: Option[];
+  features: Option[];
+  additions: Option[];
+  branches: Branch[];
 }
 
 interface IListing {
-  features: IOption;
+  features: Option;
 }
 
 interface IImagesStep {

@@ -9,10 +9,11 @@ import { useUIContext } from "@/context";
 import { LoginLayout } from "@/layouts";
 import { RegisterForm } from "./RegisterForm";
 import axios from "axios";
+import { ApolloErrorComponent } from "@/components";
 
 export const RegisterTemplate: FC = () => {
   const { activateLoadingScreen, closeLoadingScreen } = useUIContext();
-  const { registerUser } = useRegisterUser();
+  const { registerUser, error } = useRegisterUser();
 
   async function onSubmit(values: RegisterUserOnSubmitFormType) {
     activateLoadingScreen("Registrando usuario");
@@ -47,6 +48,7 @@ export const RegisterTemplate: FC = () => {
   return (
     <LoginLayout>
       <RegisterForm onSubmit={onSubmit} />
+      <ApolloErrorComponent error={error} />
     </LoginLayout>
   );
 };

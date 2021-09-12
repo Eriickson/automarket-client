@@ -10,42 +10,42 @@ export const LoginBannerBottom: FC = () => {
   return (
     <Box
       bg="white"
-      borderWidth="1px"
       borderColor="gray.100"
-      shadow="sm"
-      p="12"
-      borderTopWidth="2px"
       borderTopColor="pri.500"
+      borderTopWidth="2px"
+      borderWidth="1px"
+      p="12"
+      shadow="sm"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box alignItems="center" display="flex" justifyContent="space-between">
         <Box>
           <Heading display="flex">
-            <Text color="pri.600" mr="1.5">
+            <Text color="pri.500" mr="1.5">
               Ingresa
             </Text>
             a nuestra página
           </Heading>
-          <Text fontSize="lg" color="gray.500">
+          <Text color="gray.500" fontSize="lg">
             Regístrate y crea tu agencía en línea completamente gratis para promocionar tus vehículos.
           </Text>
         </Box>
         <Box display="flex">
           <Link href="/login/signin">
             <Button
-              size="lg"
-              colorScheme="pri"
-              variant="ghost"
-              shadow="sm"
-              borderWidth="1px"
               borderColor="gray.100"
-              mr="2.5"
+              borderWidth="1px"
+              colorScheme="pri"
               display={["none", null, "block"]}
+              mr="2.5"
+              shadow="sm"
+              size="lg"
+              variant="ghost"
             >
               Iniciar Sesión
             </Button>
           </Link>
           <Link href="/login/signup">
-            <Button size="lg" colorScheme="pri" display={["none", "block"]}>
+            <Button colorScheme="pri" display={["none", "block"]} size="lg">
               Regístrate
             </Button>
           </Link>

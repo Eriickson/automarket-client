@@ -1,3 +1,5 @@
+import { Branch } from ".";
+
 interface UserAuthPayload {
   id: string;
   name: string;
@@ -15,6 +17,7 @@ interface AgencyAuthPayload {
 export interface AuthPayload {
   user?: UserAuthPayload;
   agency?: AgencyAuthPayload;
+  selectedBranch?: Branch;
   iat?: number;
   exp?: number;
   accessToken?: string;

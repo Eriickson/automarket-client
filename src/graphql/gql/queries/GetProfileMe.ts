@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { IUser } from "@/shared";
 
-export interface IGetProfileMePayload {
+export interface GetProfileMePayload {
   getProfileMe: {
     profileMe: IUser;
   };

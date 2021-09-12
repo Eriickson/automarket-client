@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { Option } from "@/shared";
 
-export interface IGetProvincesPayload {
+export interface GetProvincesPayload {
   getProvinces: {
     provinces: Option[];
   };

@@ -1,14 +1,14 @@
 import { useLazyQuery } from "@apollo/client";
-import { GET_TYPE_MODEL_BY_MODEL_ID, IGetTypeModelByModelIdPayload, IGetTypeModelByModelIdVariables } from "../../gql";
+import { GET_TYPE_MODEL_BY_MODEL_ID, GetTypeModelByModelIdPayload, GetTypeModelByModelIdVariables } from "../../gql";
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types*/
 export const useGetTypeModelByModelId = () => {
   const [query, { data, loading: loadingTypeModels, error }] = useLazyQuery<
-    IGetTypeModelByModelIdPayload,
-    IGetTypeModelByModelIdVariables
+    GetTypeModelByModelIdPayload,
+    GetTypeModelByModelIdVariables
   >(GET_TYPE_MODEL_BY_MODEL_ID);
 
-  function getTypeModelByModelId(variables: IGetTypeModelByModelIdVariables) {
+  function getTypeModelByModelId(variables: GetTypeModelByModelIdVariables) {
     query({ variables });
   }
 

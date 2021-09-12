@@ -4,9 +4,9 @@ import { NewVehicleTemplate } from "@/templates";
 import { NewVehicleProps } from "@/servers";
 import { useAction } from "@/store";
 
-const NewVehiclePage: NextPage<NewVehicleProps> = ({ information }) => {
+const NewVehiclePage: NextPage<NewVehicleProps> = ({ information, branches }) => {
   const { setNewVehicleInitialState } = useAction();
-  setNewVehicleInitialState(information);
+  setNewVehicleInitialState({ ...information, branches });
 
   return (
     <div>

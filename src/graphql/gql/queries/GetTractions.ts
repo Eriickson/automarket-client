@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetTractionsPayload {
+export interface GetTractionsPayload {
   getTractions: {
-    tractions: IOption[];
+    tractions: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_TRACTIONS_Q = gql`
     getTractions {
       tractions {
         label
-        value
+        id
       }
     }
   }

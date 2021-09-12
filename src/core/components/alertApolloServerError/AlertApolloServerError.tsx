@@ -26,17 +26,17 @@ export const AlertApolloServerError: FC<AlertApolloServerErrorProps> = ({
 }) => {
   return (
     <AlertDialog
+      cancelRef={cancelRef}
+      desc={detail}
+      isOpen={isOpen}
+      name={error}
       priBtnLabel={priBtnLabel}
+      role={type}
       secBtnLabel={secBtnLabel}
       title={message}
-      desc={detail}
-      role={type}
-      name={error}
-      isOpen={isOpen}
-      cancelRef={cancelRef}
-      onClose={onClose}
       onClickPriBtn={onClickPriBtn}
       onClickSecBtn={onClickSecBtn}
+      onClose={onClose}
     />
   );
 };

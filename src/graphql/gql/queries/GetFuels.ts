@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
-import { IOption } from "@/shared";
+import { Option } from "@/shared";
 
-export interface IGetFuelsPayload {
+export interface GetFuelsPayload {
   getFuels: {
-    fuels: IOption[];
+    fuels: Option[];
   };
 }
 
@@ -12,7 +12,7 @@ export const GET_FUELS_Q = gql`
     getFuels {
       fuels {
         label
-        value
+        id
       }
     }
   }

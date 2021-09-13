@@ -7,4 +7,5 @@ export * from "./seacherVehicleServer";
 export * from "./vehicleServer";
 export * from "./signUpServer";
 export * from "./signinServer";
+export * from "./plansServer";
 export * from "./meAgencyServer";

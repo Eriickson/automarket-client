@@ -1,4 +1,5 @@
 import { Branch, IGeneratedImage, Option } from "@/shared";
+import { NewVehicleInformationFormOnSubmit } from "@/validations";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IInformationStep {
@@ -27,6 +28,7 @@ interface IStep {
   information: IInformationStep;
   images: IImagesStep;
   // listing: IListing;
+  newVehicleData: NewVehicleInformationFormOnSubmit;
 }
 
 interface InitialState {
@@ -59,9 +61,10 @@ const newVehicle = createSlice({
     },
     newVehicleUpdateImage(state, { payload }: PayloadAction<IGeneratedImage>) {
       const newImages = state.steps.images.images.map(image => (image.id === payload.id ? payload : image));
-      console.log(newImages);
-
       state.steps.images.images = newImages;
+    },
+    setNewVehicleData(state, { payload }: PayloadAction<NewVehicleInformationFormOnSubmit>) {
+      state.steps.newVehicleData = payload;
     },
   },
 });
@@ -72,5 +75,6 @@ export const {
   newVehicleUpdateImage,
   newVehiclesResetImages,
   newVehicleRemoveImage,
+  setNewVehicleData,
 } = newVehicle.actions;
 export default newVehicle.reducer;

@@ -23,6 +23,7 @@ export async function authorization({ ctx, roles, redirect = "/" }: Authorizatio
   if (!roles.includes("ALL"))
     valid.forEach(item => {
       if (roles.includes(item)) permission = true;
+      else permission = false;
     });
   else permission = true;
 

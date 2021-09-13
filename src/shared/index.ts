@@ -11,3 +11,4 @@ export * from "./Server";
 export * from "./Agency";
 export * from "./Branch";
 export * from "./Breadcrumbs";
+export * from "./Plan";

@@ -20,4 +20,5 @@ export * from "./post/vehicle/searcher/home/SearcherVehicleTemplate";
 
 export * from "./me/home/MeTemplate";
 
-export * from "./pricing/PricingTemplate";
+export * from "./pricing/plans/home/PricingTemplate";
+export * from "./pricing/plans/planName/home/PlanNameTemplate";

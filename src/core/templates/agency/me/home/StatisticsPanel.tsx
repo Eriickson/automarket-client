@@ -6,6 +6,7 @@ import React, { FC } from "react";
 
 export const StatisticsPanel: FC = () => {
   const { branches } = useSelector(({ agency }) => agency.myAgency);
+  const { plan } = useSelector(({ auth }) => auth);
 
   return (
     <PrimaryCard notBorderTop>
@@ -17,7 +18,7 @@ export const StatisticsPanel: FC = () => {
             <Text alignItems="flex-end" display="flex">
               0
               <Text color="gray.500" fontSize="sm" mb="1" ml="1">
-                de 7
+                de {plan?.benefits.posts}
               </Text>
             </Text>
           </StatNumber>
@@ -28,7 +29,7 @@ export const StatisticsPanel: FC = () => {
             <Text alignItems="flex-end" display="flex">
               {branches.length}
               <Text color="gray.500" fontSize="sm" mb="1" ml="1">
-                de 2
+                de {plan?.benefits.branches}
               </Text>
             </Text>
           </StatNumber>

@@ -11,6 +11,7 @@ export const GET_PLANS_Q = gql`
   query GetPlans {
     getPlans {
       plans {
+        id
         name
         description
         pricing

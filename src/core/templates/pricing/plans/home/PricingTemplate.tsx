@@ -1,26 +1,9 @@
 import React, { FC, useState } from "react";
 
 import { MainLayout } from "@/layouts";
-import {
-  Box,
-  chakra,
-  Button,
-  Flex,
-  Text,
-  SimpleGrid,
-  GridItem,
-  VStack,
-  List,
-  ListItem,
-  ListIcon,
-} from "@chakra-ui/react";
-import { PrimaryCard } from "@/components";
-import numeral from "numeral";
-import { CheckCircleIcon } from "@chakra-ui/icons";
-import { useQuery } from "@apollo/client";
-import { GetPlansPayload, GET_PLANS_Q } from "src/graphql/gql";
+import { chakra, Button, Flex, Text } from "@chakra-ui/react";
 import { useSelector } from "@/store";
-import Link from "next/link";
+import { PlanList } from "./PlanList";
 
 export const PricingTemplate: FC = () => {
   const { plans } = useSelector(store => store.pricing);
@@ -31,7 +14,7 @@ export const PricingTemplate: FC = () => {
     <MainLayout>
       <Flex alignItems="center" flexDir="column" textAlign="center">
         <Text fontSize="5xl" fontWeight="semibold">
-          Plan de precios flexible para cada negocio
+          Planes con precios flexibles para cada negocio
         </Text>
         <Text color="gray.600" fontWeight="medium" lineHeight="none" maxW="xl">
           Inicie una prueba de 14 días y comience a convertir sus conocimientos en un negocio comunitario en línea.
@@ -57,90 +40,7 @@ export const PricingTemplate: FC = () => {
           </chakra.span>
         </Button>
       </Flex>
-      <SimpleGrid columns={10} gap={2}>
-        {plans
-          .filter(({ name }) => name !== "free")
-          .map(plan => (
-            <GridItem colSpan={[2]} key={plan.id}>
-              <PrimaryCard>
-                <VStack alignItems="stretch" spacing={5}>
-                  <Box>
-                    <Text fontFamily="mono" fontSize="2xl" fontWeight="semibold" textTransform="capitalize">
-                      {plan.name}
-                    </Text>
-                    <Text color="gray.500" fontSize="sm" lineHeight="normal">
-                      {plan.description}
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Text>
-                      <chakra.span fontSize="3xl" fontWeight="bold" letterSpacing="-1px">
-                        $
-                        {numeral(
-                          duration === "yearly" ? plan.pricing - plan.pricing * (percentage / 100) : plan.pricing,
-                        ).format("0,0.00")}
-                      </chakra.span>
-                      /mes
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Text color="gray.500" fontWeight="medium">
-                      Que está incluido en este plan?
-                    </Text>
-                    <List fontSize="sm">
-                      <ListItem fontWeight="medium">
-                        <ListIcon as={CheckCircleIcon} color="pri.500" />
-                        Hasta{" "}
-                        <chakra.span color="pri.600" textDecoration="underline">
-                          {plan.benefits.posts} Publicaciones
-                        </chakra.span>
-                      </ListItem>
-                      <ListItem fontWeight="medium">
-                        <ListIcon as={CheckCircleIcon} color="pri.500" />
-                        Tendrás hasta
-                        <chakra.span color="pri.600" textDecoration="underline">
-                          {" "}
-                          {plan.benefits.branches} sucursales
-                        </chakra.span>
-                      </ListItem>
-                      <ListItem>
-                        <ListIcon as={CheckCircleIcon} color="pri.500" />
-                        <chakra.span fontWeight="medium">
-                          Sube{" "}
-                          <chakra.span color="pri.600" textDecoration="underline">
-                            {plan.benefits.images} imágenes
-                          </chakra.span>{" "}
-                          por publicación
-                        </chakra.span>
-                      </ListItem>
-                      <ListItem>
-                        <ListIcon as={CheckCircleIcon} color="pri.500" />
-                        <chakra.span fontWeight="medium">
-                          Posibilidad de tener{" "}
-                          <chakra.span color="pri.600" textDecoration="underline">
-                            {plan.benefits.imageCoverProfile} portadas
-                          </chakra.span>
-                        </chakra.span>
-                      </ListItem>
-                      <ListItem>
-                        <ListIcon as={CheckCircleIcon} color="pri.500" />
-                        <chakra.span fontWeight="medium">Futuras características venideras</chakra.span>
-                      </ListItem>
-                    </List>
-                  </Box>
-
-                  <Link href={`/pricing/plans/${plan.name.toLowerCase()}`}>
-                    <a>
-                      <Button colorScheme="pri" textTransform="capitalize" w="full">
-                        Comprar {plan.name}
-                      </Button>
-                    </a>
-                  </Link>
-                </VStack>
-              </PrimaryCard>
-            </GridItem>
-          ))}
-      </SimpleGrid>
+      <PlanList duration={duration} percentage={percentage} plans={plans} />
     </MainLayout>
   );
 };

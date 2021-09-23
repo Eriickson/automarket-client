@@ -7,7 +7,6 @@ import { useSelector } from "@/store";
 
 export const ContactsList = () => {
   const { selectedBranch } = useSelector(({ agency }) => agency.myAgency);
-  console.log(selectedBranch);
 
   return (
     <PrimaryCard notBorderTop>

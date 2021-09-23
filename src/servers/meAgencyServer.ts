@@ -13,7 +13,7 @@ export const meAgencyServerSide: GetServerSideProps<MeAgencyProps> = async ctx =
   const { client } = getApolloClient({ token: auth.accessToken });
 
   const response = await client.query<GetMyAgencyPayload>({ query: GET_MY_AGENCY_Q });
-  console.log(response);
+  console.log({ auth });
 
   const props: MeAgencyProps = {
     authProviderProps: auth,

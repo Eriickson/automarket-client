@@ -26,7 +26,7 @@ const refreshToken: NextIronHandler = async (req, res) => {
   }).then(response => response.json());
 
   if (data.errors) {
-    console.log(data.errors);
+    // console.log(data.errors);
 
     return res.status(401).json({ unauthorized: true });
   }

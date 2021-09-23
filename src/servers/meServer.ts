@@ -20,7 +20,7 @@ export const meServerSide: GetServerSideProps<MePageProps> = async ctx => {
       desc: "",
       title: "",
     },
-    ...data.getMyProfile,
+    ...data.getMyProfile.profile,
   };
 
   return {

@@ -17,6 +17,7 @@ const authReducer = createSlice({
       state.user = action.payload.user;
       state.agency = action.payload.agency;
       state.selectedBranch = action.payload.selectedBranch;
+      state.plan = action.payload.plan;
     },
   },
 });

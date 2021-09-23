@@ -21,8 +21,6 @@ import { IconMapPin } from "@tabler/icons";
 export const MeAgencyTemplate: FC = () => {
   const { name, slogan, selectedBranch } = useSelector(store => store.agency.myAgency);
 
-  console.log(selectedBranch);
-
   return (
     <MainLayout>
       <Box>

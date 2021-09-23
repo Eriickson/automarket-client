@@ -34,14 +34,14 @@ export const Toast: FC<ToastProps> = ({ title, desc, status }) => {
           </Text>
         </AlertDescription>
       </Flex>
-      <CloseButton
+      {/* <CloseButton
         _focus={{
           ring: 0,
         }}
         borderRadius="sm"
         size="sm"
         // onClick={onClose}
-      />
+      /> */}
     </Alert>
   );
 };

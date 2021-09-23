@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import { MainLayout } from "@/layouts";
 import {
@@ -24,6 +24,8 @@ import Link from "next/link";
 
 export const PricingTemplate: FC = () => {
   const { plans } = useSelector(store => store.pricing);
+  const [duration, setDuration] = useState<"yearly" | "monthly">("monthly");
+  const [percentage] = useState(10);
 
   return (
     <MainLayout>
@@ -35,26 +37,35 @@ export const PricingTemplate: FC = () => {
           Inicie una prueba de 14 días y comience a convertir sus conocimientos en un negocio comunitario en línea.
         </Text>
       </Flex>
-      <Flex border="2px solid" borderColor="gray.100" mb="4" mx="auto" my="6" w="max-content">
-        <Button _focus={{ shadow: "none" }} colorScheme="pri" px="10">
+      <Flex mb="4" mx="auto" my="6" w="max-content">
+        <Button
+          _focus={{ shadow: "none" }}
+          colorScheme={duration === "monthly" ? "pri" : "gray"}
+          px="10"
+          onClick={() => setDuration("monthly")}
+        >
           Mensual
         </Button>
-        <Button _focus={{ shadow: "none" }}>
+        <Button
+          _focus={{ shadow: "none" }}
+          colorScheme={duration === "yearly" ? "pri" : "gray"}
+          onClick={() => setDuration("yearly")}
+        >
           Anual
           <chakra.span fontWeight="normal" pl="1">
-            (ahorra 20%)
+            (ahorra ${percentage}%)
           </chakra.span>
         </Button>
       </Flex>
       <SimpleGrid columns={10} gap={2}>
         {plans
-          .filter(({ name }) => name !== "Free")
+          .filter(({ name }) => name !== "free")
           .map(plan => (
             <GridItem colSpan={[2]} key={plan.id}>
               <PrimaryCard>
                 <VStack alignItems="stretch" spacing={5}>
                   <Box>
-                    <Text fontFamily="mono" fontSize="2xl" fontWeight="semibold">
+                    <Text fontFamily="mono" fontSize="2xl" fontWeight="semibold" textTransform="capitalize">
                       {plan.name}
                     </Text>
                     <Text color="gray.500" fontSize="sm" lineHeight="normal">
@@ -64,7 +75,10 @@ export const PricingTemplate: FC = () => {
                   <Box>
                     <Text>
                       <chakra.span fontSize="3xl" fontWeight="bold" letterSpacing="-1px">
-                        ${numeral(plan.pricing).format("0,0.00")}
+                        $
+                        {numeral(
+                          duration === "yearly" ? plan.pricing - plan.pricing * (percentage / 100) : plan.pricing,
+                        ).format("0,0.00")}
                       </chakra.span>
                       /mes
                     </Text>
@@ -117,7 +131,7 @@ export const PricingTemplate: FC = () => {
 
                   <Link href={`/pricing/plans/${plan.name.toLowerCase()}`}>
                     <a>
-                      <Button colorScheme="pri" w="full">
+                      <Button colorScheme="pri" textTransform="capitalize" w="full">
                         Comprar {plan.name}
                       </Button>
                     </a>

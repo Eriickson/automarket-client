@@ -9,3 +9,4 @@ export * from "./signUpServer";
 export * from "./signinServer";
 export * from "./plansServer";
 export * from "./meAgencyServer";
+export * from "./PlanNameServer";

@@ -29,6 +29,10 @@ const NavBarItems = [
     label: "Buscar",
   },
   {
+    url: "/pricing/plans",
+    label: "Precios",
+  },
+  {
     url: "/agency/searcher",
     label: "Agencías",
   },

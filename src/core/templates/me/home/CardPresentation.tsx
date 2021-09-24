@@ -39,10 +39,16 @@ export const CardPresentation: FC = () => {
               </Box>
               <HStack>
                 <EditProfilePicture />
-                {agency && (
+                {agency ? (
                   <Link href="agency/me">
                     <ChakraLink>
                       <Button colorScheme="pri">Ir a mi agencía</Button>
+                    </ChakraLink>
+                  </Link>
+                ) : (
+                  <Link href="agency/new">
+                    <ChakraLink>
+                      <Button colorScheme="pri">Crea tu agencia</Button>
                     </ChakraLink>
                   </Link>
                 )}

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Plan } from "@/shared";
+import Link from "next/link";
 
 import {
   Modal,
@@ -12,12 +13,14 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
+import { useSelector } from "@/store";
 
 interface PurchasePlanModalProps {
   plan: Plan;
 }
 
 export const PurchasePlanModal: FC<PurchasePlanModalProps> = ({ plan }) => {
+  const { agency, isAuth } = useSelector(({ auth }) => auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   async function purchasePlan() {
@@ -26,9 +29,15 @@ export const PurchasePlanModal: FC<PurchasePlanModalProps> = ({ plan }) => {
 
   return (
     <>
-      <Button colorScheme="pri" textTransform="capitalize" w="full" onClick={onOpen}>
-        Comprar {plan.name}
-      </Button>
+      {isAuth ? (
+        <Button colorScheme="pri" textTransform="capitalize" w="full" onClick={onOpen}>
+          Comprar {plan.name}
+        </Button>
+      ) : (
+        <Link href="/login/signin">
+          <Button colorScheme="pri">Iniciar Sesión</Button>
+        </Link>
+      )}
       <Modal isCentered closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent rounded="sm">
@@ -40,9 +49,15 @@ export const PurchasePlanModal: FC<PurchasePlanModalProps> = ({ plan }) => {
             <Button mr={3} variant="ghost" onClick={onClose}>
               Cancelar
             </Button>
-            <Button colorScheme="pri" onClick={purchasePlan}>
-              Realizar compra
-            </Button>
+            {agency ? (
+              <Button colorScheme="pri" onClick={purchasePlan}>
+                Realizar compra
+              </Button>
+            ) : (
+              <Link href="/agency/new">
+                <Button colorScheme="pri">Crea tu agencia</Button>
+              </Link>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>

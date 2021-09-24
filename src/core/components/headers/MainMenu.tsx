@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useWindowSize } from "@/hooks";
 import {
   IconAlignJustified,
+  IconDeviceFloppy,
   IconHeadset,
   IconHome,
   IconInfoCircle,
@@ -65,6 +66,12 @@ export const MainMenu: FC = () => {
       title: "Busca publicaciones",
       subtitle: "",
       Icon: IconSearch,
+      href: "/post/vehicle/searcher",
+    },
+    {
+      title: "Publicaciones Guardadas",
+      subtitle: "",
+      Icon: IconDeviceFloppy,
       href: "/post/vehicle/searcher",
     },
     {

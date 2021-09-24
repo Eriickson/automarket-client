@@ -45,7 +45,7 @@ export const MainHeader: FC = () => {
   return (
     <StyledMainHeaderWrapper>
       <Headroom>
-        <Box bg="white" borderBottomWidth="1px" pb={breadcrumbs.show ? 1.5 : [2, 4]} pt={[2, 4]} shadow="sm">
+        <Box bg="white" borderBottomWidth="1px" pb={breadcrumbs.show ? 1.5 : 4} pt={4} shadow="sm">
           <Container>
             <SimpleGrid alignItems="center" columns={12}>
               <GridItem colSpan={3}>

@@ -8,7 +8,7 @@ export interface MeAgencyProps extends ProvidersProps {
 }
 
 export const meAgencyServerSide: GetServerSideProps<MeAgencyProps> = async ctx => {
-  const auth = await authorization({ ctx, roles: ["AGENCY"] });
+  const auth = await authorization({ ctx, roles: ["AGENCY"], redirect: "/me" });
 
   const { client } = getApolloClient({ token: auth.accessToken });
 

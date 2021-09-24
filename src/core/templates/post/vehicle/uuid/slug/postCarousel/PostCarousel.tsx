@@ -39,19 +39,20 @@ export const PostCarousel: FC = () => {
                 alt="x"
                 rounded="sm"
                 src="https://uhdwallpapers.org/uploads/converted/19/01/13/mercedes-benz-cla-250-amg-1920x1080_578865-mm-90.jpg"
+                userSelect="none"
               />
             </SwiperSlide>
           ))}
         </Swiper>
         <Tag
           bgColor="gray.600"
-          color="white"
-          zIndex="10"
-          size="lg"
-          fontWeight="semibold"
-          position="absolute"
           bottom="3"
+          color="white"
+          fontWeight="semibold"
           left="3"
+          position="absolute"
+          size="lg"
+          zIndex="10"
         >
           9/10
         </Tag>
@@ -65,7 +66,7 @@ export const PostCarousel: FC = () => {
               slidesPerView: 4,
             },
             796: {
-              slidesPerView: 6,
+              slidesPerView: 5,
             },
           }}
           loop={true}
@@ -82,6 +83,7 @@ export const PostCarousel: FC = () => {
                 cursor="pointer"
                 rounded="sm"
                 src="https://uhdwallpapers.org/uploads/converted/19/01/13/mercedes-benz-cla-250-amg-1920x1080_578865-mm-90.jpg"
+                userSelect="none"
               />
             </SwiperSlide>
           ))}

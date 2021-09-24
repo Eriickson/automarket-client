@@ -7,5 +7,5 @@ const VehiclePage: NextPage = () => {
   return <PostTemplate />;
 };
 
-export { vehicleServerSide as getServerSideProps } from "@/servers";
+// export { vehiclePostServerSide as getServerSideProps } from "@/servers";
 export default VehiclePage;

@@ -1,4 +1,3 @@
-import { PrimaryCard } from "@/components";
 import { Avatar, Badge, Box, Flex, Heading, Img, Link as ChakraLink } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -10,7 +9,18 @@ export const MorePost: FC = () => {
       <Heading fontSize={["md", null, "lg"]} mb="3">
         Más publicaciones
       </Heading>
-      <Swiper slidesPerView={6} spaceBetween={10}>
+      <Swiper
+        breakpoints={{
+          645: {
+            slidesPerView: 4,
+          },
+          796: {
+            slidesPerView: 5,
+          },
+        }}
+        slidesPerView={2}
+        spaceBetween={10}
+      >
         {Array(10)
           .fill(0)
           .map((item, i) => (

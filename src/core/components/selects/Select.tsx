@@ -84,8 +84,8 @@ export const Select: FC<SelectProps> = ({
     : {
         classes: isFocus ? "ring-pri-500 border-pri-500" : "border-gray-300",
         placeholderColor: "#a0aec0",
-        borderMenu: "2px solid #0056FF",
-        bgColorItem: "#0056FF",
+        borderMenu: "2px solid #1e86ff",
+        bgColorItem: "#1e86ff",
         isDisabled,
       };
 
